@@ -34,7 +34,6 @@ setup(
     packages=find_packages(),
     install_requires=[
         'Django',
-        'django-filter',
     ],
     include_package_data=True,
     classifiers=[
