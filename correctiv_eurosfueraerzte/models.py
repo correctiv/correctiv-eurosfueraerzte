@@ -7,12 +7,19 @@ from djorm_pgfulltext.models import SearchManager
 from djorm_pgfulltext.fields import VectorField
 
 
+class PharmaCompanyManager(models.Manager):
+    def get_by_natural_key(self, slug):
+        return self.get(slug=slug)
+
+
 @python_2_unicode_compatible
 class PharmaCompany(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
 
     web = models.CharField(max_length=1024, blank=True)
+
+    objects = PharmaCompanyManager()
 
     class Meta:
         verbose_name = _('Pharma Company')
@@ -33,6 +40,9 @@ class PharmaCompany(models.Model):
 
 
 class DrugManager(SearchManager):
+    def get_by_natural_key(self, slug):
+        return self.get(slug=slug)
+
     def search(self, queryset, query):
         if query:
             queryset = queryset.filter(search_index__ft_startswith=query)
@@ -114,6 +124,10 @@ class Drug(models.Model):
 
 
 class ObservationalStudyManager(models.Manager):
+    def get_by_natural_key(self, drug_slug, registration_date, start_date):
+        return self.get(drug_slug=drug_slug,
+                    registration_date=registration_date, start_date=start_date)
+
     def get_by_fee_per_patient(self):
         return self.get_queryset().filter(fee_per_patient__isnull=False
             ).order_by('-fee_per_patient')
