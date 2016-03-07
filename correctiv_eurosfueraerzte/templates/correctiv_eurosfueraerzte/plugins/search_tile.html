@@ -1,0 +1,24 @@
+{% load i18n %}
+
+<li class="entry-list-item -featured">
+  <div class="entry-list-item__content" style="background-color: rgb(92, 169, 232)">
+    <div class="entry-list-item__headline-group">
+      <form method="get" action="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}">
+        <h4 class="entry-list-item__small-title">
+          {% trans "Is your medicine pushed by big pharma?" %}
+        </h4>
+        <div class="form-group">
+          <label for="eurosfueraerzte-q">
+            {% trans "Search for your medicine" %}
+          </label>
+          <div class="input-group">
+            <input id="eurosfueraerzte-q" name="q" type="text" class="form-control" placeholder="{% trans "e.g. Lucentis" %}">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="submit">{% trans "Search" %}</button>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</li>

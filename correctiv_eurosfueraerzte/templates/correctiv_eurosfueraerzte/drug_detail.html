@@ -1,0 +1,86 @@
+{% extends "correctiv_eurosfueraerzte/base.html" %}
+
+{% load i18n %}
+{% load number_utils %}
+
+{% block content %}
+  <h2>{{ object.name }}</h2>
+
+  <dl>
+    {% if object.active_ingredient %}
+      <dt>{% trans "Active ingredient" %}</dt>
+      <dd>{{ object.active_ingredient }}</dd>
+    {% endif %}
+    {% if object.medical_indication %}
+      <dt>{% trans "Medical indication" %}</dt>
+      <dd>{{ object.medical_indication }}</dd>
+    {% endif %}
+    {% if object.pharma_company %}
+      <dt>{% trans "Pharma Company" %}</dt>
+      <dd>{{ object.pharma_company }}</dd>
+    {% endif %}
+      <dt>{% trans "Total Number of Patients" %}</dt>
+      <dd>{% blocktrans with count=aggs.sum_patients %}{{ count }} patients{% endblocktrans %}</dd>
+      <dt>{% trans "Total Number of Doctors" %}</dt>
+      <dd>{% blocktrans with count=aggs.sum_doctors %}{{ count }} doctors{% endblocktrans %}</dd>
+      <dt>{% trans "Average fee per patients" %}</dt>
+      <dd>{% blocktrans with avg=aggs.average_fee|intcomma_floatformat:2 %}{{ avg }}&nbsp;€{% endblocktrans %}</dd>
+  </dl>
+
+  <h3>
+    {% blocktrans with name=object.name %}Observational Studies including {{ name }}{% endblocktrans %}
+  </h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>{% trans "Drug" %}</th>
+        <th class="text-right">{% trans "No. of doctors" %}</th>
+        <th class="text-right">{% trans "No. of patients" %}</th>
+        <th class="text-right">{% trans "Payment per patient" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+  {% with studies=object.observationalstudy_set.all %}
+    {% for study in studies %}
+      <tr>
+        <td>
+          <a href="{{ study.get_absolute_url }}">
+            {{ study.drug_title }}
+          </a>
+        </td>
+        <td class="text-right">
+          {% if study.doc_count %}
+            {{ study.doc_count }}
+          {% else %}
+            <span class="text-muted">
+              {% trans "n/a" %}
+            </span>
+          {% endif %}
+        </td>
+        <td class="text-right">
+          {% if study.patient_count %}
+            {{ study.patient_count }}
+          {% else %}
+            <span class="text-muted">
+              {% trans "n/a" %}
+            </span>
+          {% endif %}
+        </td>
+        <td class="text-right">
+          {% if study.fee_per_patient %}
+            {{ study.fee_per_patient|intcomma_floatformat:2 }}&nbsp;€
+          {% else %}
+            <span class="text-muted">
+              {% trans "n/a" %}
+            </span>
+          {% endif %}
+        </td>
+        <td>
+          {{ study.fee_description }}
+        </td>
+      </tr>
+    {% endfor %}
+  {% endwith %}
+    <tbody>
+  </table>
+{% endblock %}

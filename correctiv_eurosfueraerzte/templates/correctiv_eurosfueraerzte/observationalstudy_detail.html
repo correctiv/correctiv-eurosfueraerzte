@@ -1,0 +1,82 @@
+{% extends "correctiv_eurosfueraerzte/base.html" %}
+
+{% load i18n %}
+{% load number_utils %}
+
+{% block content %}
+<h2>
+  {% blocktrans with title=object.drug_title %}Observational Study “{{ title }}”{% endblocktrans %}
+</h2>
+
+<h3>{% trans "Drugs involved" %}</h3>
+<ul>
+  {% for drug in object.drugs.all %}
+    <li>
+      <a href="{{ drug.get_absolute_url }}">
+        {{ drug.name }}
+      </a>
+      {% if drug.pharma_company %}
+        -
+        <a href="{{ drug.pharma_company.get_absolute_url }}">
+          {{ drug.pharma_company.name }}
+        </a>
+      {% endif %}
+    </li>
+  {% empty %}
+    <li>{% trans "No drugs registered with this study" %}</li>
+  {% endfor %}
+</ul>
+
+<dl>
+  <dt>{% trans "Registered on" %}</dt>
+  <dd>
+    {{ object.registration_date|date:"SHORT_DATE_FORMAT" }}
+  </dd>
+
+  <dt>{% trans "Start date" %}</dt>
+  <dd>
+    {{ object.start_date|date:"SHORT_DATE_FORMAT" }}
+  </dd>
+
+  <dt>{% trans "End date" %}</dt>
+  <dd>
+    {{ object.end_date|date:"SHORT_DATE_FORMAT" }}
+  </dd>
+
+  <dt>{% trans "Executing company" %}</dt>
+  <dd>
+    {{ object.company }}
+  </dd>
+
+  <dt>{% trans "Sponsor" %}</dt>
+  <dd>
+    {{ object.sponsor }}
+  </dd>
+
+  <dt>{% trans "Number of Docs" %}</dt>
+  <dd>
+    {{ object.doc_count }}
+  </dd>
+
+  <dt>{% trans "Number of Patients" %}</dt>
+  <dd>
+    {{ object.patient_count }}
+  </dd>
+
+  <dt>{% trans "Payment per Patient" %}</dt>
+  <dd>
+    {{ object.fee_per_patient }}&nbsp;€
+  </dd>
+
+  <dt>{% trans "Fee details" %}</dt>
+  <dd>
+    {{ object.fee_description }}
+  </dd>
+
+  <dt>{% trans "Study description" %}</dt>
+  <dd>
+    <p>{{ object.description|linebreaks }}</p>
+  </dd>
+</dl>
+
+{% endblock %}

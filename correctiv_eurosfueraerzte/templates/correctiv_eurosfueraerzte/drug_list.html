@@ -1,0 +1,40 @@
+{% extends "correctiv_eurosfueraerzte/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+
+{% if object_list %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>{% trans "Name" %}</th>
+        <th>{% trans "Company" %}</th>
+        <th class="text-right">{% trans "Number of studies" %}</th>
+      </tr>
+    </thead>
+  {% for object in object_list %}
+    <tr>
+      <td>
+        <a href="{{ object.get_absolute_url }}">
+          {{ object.name }}
+        </a>
+      </td>
+      <td>
+        <a href="{{ object.pharma_company.get_absolute_url }}">
+          {{ object.pharma_company.name }}
+        </a>
+      </td>
+      <td class="text-right">
+        {{ object.study_count }}
+      </td>
+    </tr>
+  {% endfor %}
+  </table>
+{% else %}
+  <p>{% trans "Your search did not give any results" %}</p>
+{% endif %}
+{% if page_obj.has_other_pages %}
+  {% include "pagination.html" with page_obj=page_obj getvars="&"|add:getvars %}
+{% endif %}
+{% endblock %}

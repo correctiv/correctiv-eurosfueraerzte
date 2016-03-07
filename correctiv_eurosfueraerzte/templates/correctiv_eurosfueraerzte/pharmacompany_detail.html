@@ -1,0 +1,23 @@
+{% extends "correctiv_eurosfueraerzte/base.html" %}
+
+{% load i18n %}
+{% load number_utils %}
+
+{% block content %}
+<h2>
+  {% blocktrans with name=object.name %}Pharma Company „{{ name }}“{% endblocktrans %}
+</h2>
+
+<p>{% blocktrans with name=object.name %}„{{ name }}“ is responsible for the following products.{% endblocktrans %}</p>
+
+<ul>
+  {% for drug in object.drug_set.all %}
+    <li>
+      <a href="{{ drug.get_absolute_url }}">
+        {{ drug.name }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

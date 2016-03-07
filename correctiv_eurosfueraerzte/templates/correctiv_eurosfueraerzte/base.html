@@ -1,0 +1,33 @@
+{% extends CMS_TEMPLATE %}
+
+{% load i18n %}
+
+
+{% block main %}
+{% block top_search %}
+  <h1>{% trans "Search „Euros for Doctors“ Database" %}</h1>
+  <div class="pull-right">
+    <a href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
+      {% trans "back to the main page" %}
+    </a>
+  </div>
+  <form action="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}" method="get">
+    <div class="form-group">
+      <label for="id_q">
+        {% trans "Search for your medicine" %}
+      </label>
+      <div class="input-group">
+        {{ form.q }}
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
+        </span>
+      </div>
+    </div>
+  </form>
+
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+{% endblock %}

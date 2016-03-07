@@ -1,0 +1,36 @@
+{% extends "correctiv_eurosfueraerzte/base.html" %}
+
+{% load i18n %}
+{% load humanize %}
+{% load number_utils %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    <h3>{% trans "Top drugs by study patients" %}</h3>
+    <ol>
+      {% for drug in top_drugs %}
+        <li>
+          <a href="{{ drug.get_absolute_url }}">
+            {{ drug.name }}
+          </a>
+          – {% blocktrans with count=drug.sum_patients|intcomma %}{{ count }} patients{% endblocktrans %}
+        </li>
+      {% endfor %}
+    </ol>
+  </div>
+  <div class="col-md-6">
+    <h3>{% trans "Top studies by fees per patient" %}</h3>
+    <ol>
+      {% for study in highest_paid_studies %}
+        <li>
+          <a href="{{ study.get_absolute_url }}">
+            {{ study.drug_title }}
+          </a>
+          – {% blocktrans with fee=study.fee_per_patient|intcomma_floatformat:2 %}{{ fee }}&nbsp;€{% endblocktrans %}
+        </li>
+      {% endfor %}
+    </ol>
+  </div>
+</div>
+{% endblock %}
