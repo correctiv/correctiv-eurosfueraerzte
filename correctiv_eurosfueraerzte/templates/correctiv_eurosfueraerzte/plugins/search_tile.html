@@ -1,24 +1,29 @@
-{% load i18n %}
+{% load i18n static sekizai_tags %}
 
 <li class="entry-list-item -featured">
-  <div class="entry-list-item__content" style="background-color: rgb(92, 169, 232)">
-    <div class="entry-list-item__headline-group">
-      <form method="get" action="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}">
-        <h4 class="entry-list-item__small-title">
+  <div class="entry-list-item__content search-tile">
+
+      <h2 class="search-tile__logo">
+        {% trans "Euros for Doctors" %}
+      </h2>
+
+      <form method="get" class="search-tile__form" action="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}">
+        <p class="search-tile__claim">
           {% trans "Is your medicine pushed by big pharma?" %}
-        </h4>
+        </p>
         <div class="form-group">
-          <label for="eurosfueraerzte-q">
-            {% trans "Search for your medicine" %}
-          </label>
           <div class="input-group">
-            <input id="eurosfueraerzte-q" name="q" type="text" class="form-control" placeholder="{% trans "e.g. Lucentis" %}">
+            <input id="eurosfueraerzte-q" name="q" type="text" class="form-control" placeholder="{% trans "Medikament" %}">
             <span class="input-group-btn">
               <button class="btn btn-primary" type="submit">{% trans "Search" %}</button>
             </span>
           </div>
         </div>
       </form>
-    </div>
+
   </div>
 </li>
+
+{% addtoblock "css" %}
+  <link rel="stylesheet" href="{% static 'eurosfueraerzte/css/search_tile.css' %}" type="text/css" />
+{% endaddtoblock %}

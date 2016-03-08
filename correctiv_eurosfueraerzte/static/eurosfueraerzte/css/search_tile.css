@@ -1,0 +1,21 @@
+.search-tile {
+  color: black;
+  background-color: #a8d9ed;
+  position: relative;
+  padding: 0;
+}
+
+.search-tile__logo {
+  background: #8ec6dd url('/static/eurosfueraerzte/img/euros-fuer-aerzte_logo.svg');
+  background-repeat: no-repeat;
+  background-position: 22px bottom;
+  height: 140px;
+  width: 100%;
+  text-indent: -100%;
+  margin: 0;
+  padding: 0;
+}
+
+.search-tile__form {
+  padding: 22px;
+}
