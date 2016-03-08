@@ -5,7 +5,9 @@
 {% load humanize %}
 
 {% block content %}
-  <h2>{{ object.name }}</h2>
+  <h2>
+    {{ object.name }}
+  </h2>
 
   <dl>
     {% if object.active_ingredient %}
@@ -18,13 +20,17 @@
     {% endif %}
     {% if object.pharma_company %}
       <dt>{% trans "Pharma Company" %}</dt>
-      <dd>{{ object.pharma_company }}</dd>
+      <dd>
+        <a href="{{ object.pharma_company.get_absolute_url }}">
+          {{ object.pharma_company }}
+        </a>
+      </dd>
     {% endif %}
-      <dt>{% trans "Total Number of Patients" %}</dt>
-      <dd>{% blocktrans with count=aggs.sum_patients|intcomma %}{{ count }} patients{% endblocktrans %}</dd>
-      <dt>{% trans "Total Number of Doctors" %}</dt>
+      <dt>{% trans "Total Number of Doctors" %}<sup class="text-muted">1</sup></dt>
       <dd>{% blocktrans with count=aggs.sum_doctors|intcomma %}{{ count }} doctors{% endblocktrans %}</dd>
-      <dt>{% trans "Total minimum fees planned" %}</dt>
+      <dt>{% trans "Total Number of Patients" %}<sup class="text-muted">2</sup></dt>
+      <dd>{% blocktrans with count=aggs.sum_patients|intcomma %}{{ count }} patients{% endblocktrans %}</dd>
+      <dt>{% trans "Total minimum fees planned" %}<sup class="text-muted">3</sup></dt>
       <dd>{% blocktrans with fee=aggs.total_fee|intcomma_floatformat:2 %}{{ fee }}&nbsp;€{% endblocktrans %}</dd>
   </dl>
 
@@ -34,10 +40,10 @@
   <table class="table">
     <thead>
       <tr>
-        <th>{% trans "Title" %}</th>
-        <th class="text-right">{% trans "No. of doctors" %}</th>
-        <th class="text-right">{% trans "No. of patients" %}</th>
-        <th class="text-right">{% trans "Payment per patient" %}</th>
+        <th>{% trans "Drug" %}</th>
+        <th class="text-right">{% trans "No. of doctors" %}<sup class="text-muted">1</sup></th>
+        <th class="text-right">{% trans "No. of patients" %}<sup class="text-muted">2</sup></th>
+        <th class="text-right">{% trans "Payment per patient" %}<sup class="text-muted">3</sup></th>
       </tr>
     </thead>
     <tbody>
@@ -84,4 +90,5 @@
   {% endwith %}
     <tbody>
   </table>
+
 {% endblock %}

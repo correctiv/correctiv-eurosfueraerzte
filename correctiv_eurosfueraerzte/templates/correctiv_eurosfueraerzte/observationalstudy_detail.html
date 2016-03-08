@@ -8,7 +8,7 @@
   {% blocktrans with title=object.drug_title %}Observational Study “{{ title }}”{% endblocktrans %}
 </h2>
 
-<h3>{% trans "Drugs involved" %}</h3>
+<h3>{% trans "Observed Drugs" %}</h3>
 <ul>
   {% for drug in object.drugs.all %}
     <li>
@@ -26,6 +26,9 @@
     <li>{% trans "No drugs registered with this study" %}</li>
   {% endfor %}
 </ul>
+
+<h3>{% trans "Title of the Observational Study" %}</h3>
+<p>{{ object.description|linebreaks }}</p>
 
 <dl>
   <dt>{% trans "Registered on" %}</dt>
@@ -53,7 +56,7 @@
     {{ object.sponsor }}
   </dd>
 
-  <dt>{% trans "Number of Docs" %}</dt>
+  <dt>{% trans "Number of Docs" %}<sup class="text-muted">1</sup></dt>
   <dd>
     {% if object.doc_count %}
       {{ object.doc_count }}
@@ -62,7 +65,7 @@
     {% endif %}
   </dd>
 
-  <dt>{% trans "Number of Patients" %}</dt>
+  <dt>{% trans "Number of Patients" %}<sup class="text-muted">2</sup></dt>
   <dd>
     {% if object.patient_count %}
       {{ object.patient_count }}
@@ -71,7 +74,7 @@
     {% endif %}
   </dd>
 
-  <dt>{% trans "Payment per Patient" %}</dt>
+  <dt>{% trans "Payment per Patient" %}<sup class="text-muted">3</sup></dt>
   <dd>
     {% if object.fee_per_patient %}
       {{ object.fee_per_patient }}&nbsp;€
@@ -85,10 +88,6 @@
     {{ object.fee_description }}
   </dd>
 
-  <dt>{% trans "Study description" %}</dt>
-  <dd>
-    <p>{{ object.description|linebreaks }}</p>
-  </dd>
 </dl>
-
+{% include "correctiv_eurosfueraerzte/_disclaimer.html" %}
 {% endblock %}
