@@ -7,7 +7,7 @@ from djorm_pgfulltext.models import SearchManager
 from djorm_pgfulltext.fields import VectorField
 
 
-class PharmaCompanyManager(models.Manager):
+class PharmaCompanyManager(SearchManager):
     def get_by_natural_key(self, slug):
         return self.get(slug=slug)
 
@@ -19,7 +19,16 @@ class PharmaCompany(models.Model):
 
     web = models.CharField(max_length=1024, blank=True)
 
-    objects = PharmaCompanyManager()
+    search_index = VectorField()
+
+    objects = PharmaCompanyManager(
+        fields=[
+            ('name', 'A'),
+        ],
+        config='pg_catalog.german',
+        search_field='search_index',
+        auto_update_search_field=True
+    )
 
     class Meta:
         verbose_name = _('Pharma Company')
@@ -45,7 +54,10 @@ class DrugManager(SearchManager):
 
     def search(self, qs, query):
         if query:
-            qs = qs.filter(search_index__ft_startswith=query)
+            qs = qs.filter(
+                models.Q(search_index__ft_startswith=query) |
+                models.Q(pharma_company__search_index__ft_startswith=query)
+            )
         qs = self.add_annotations(qs)
         return qs
 
