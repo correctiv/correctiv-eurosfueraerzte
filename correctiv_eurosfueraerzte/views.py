@@ -1,6 +1,8 @@
+import json
+
 from django.views.generic import TemplateView, ListView
 from django.views.generic.detail import DetailView
-from django.http import QueryDict
+from django.http import HttpResponse, QueryDict
 from django.shortcuts import redirect
 
 from .models import Drug, ObservationalStudy, PharmaCompany
@@ -37,11 +39,20 @@ class SearchView(ListView):
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
         context['form'] = self.form
-        no_page_query = QueryDict(self.request.GET.urlencode().encode('utf-8'), mutable=True)
+        no_page_query = QueryDict(self.request.GET.urlencode().encode('utf-8'),
+                                  mutable=True)
         no_page_query.pop('page', None)
         context['getvars'] = no_page_query.urlencode()
-
         return context
+
+    def render_to_response(self, context, **response_kwargs):
+        if 'application/json' in self.request.META['HTTP_ACCEPT']:
+            autocomplete_list = [{'name': o.name, 'url': o.get_absolute_url()}
+                                          for o in context['object_list'][:20]]
+            return HttpResponse(json.dumps(autocomplete_list),
+                                content_type='application/json')
+        return super(SearchView, self).render_to_response(context,
+                                                          **response_kwargs)
 
 
 class DrugDetailView(SearchMixin, DetailView):
