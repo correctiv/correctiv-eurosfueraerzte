@@ -27,11 +27,29 @@
       </dd>
     {% endif %}
       <dt>{% trans "Total Number of Doctors" %}<sup class="text-muted">1</sup></dt>
-      <dd>{% blocktrans with count=aggs.sum_doctors|intcomma %}{{ count }} doctors{% endblocktrans %}</dd>
+      <dd>
+        {% if aggs.sum_doctors %}
+          {% blocktrans with count=aggs.sum_doctors|intcomma %}{{ count }} doctors{% endblocktrans %}
+        {% else %}
+          <span class="text-muted">{% trans "n/a" %}</span>
+        {% endif %}
+      </dd>
       <dt>{% trans "Total Number of Patients" %}<sup class="text-muted">2</sup></dt>
-      <dd>{% blocktrans with count=aggs.sum_patients|intcomma %}{{ count }} patients{% endblocktrans %}</dd>
+      <dd>
+        {% if aggs.sum_patients %}
+          {% blocktrans with count=aggs.sum_patients|intcomma %}{{ count }} patients{% endblocktrans %}
+        {% else %}
+          <span class="text-muted">{% trans "n/a" %}</span>
+        {% endif %}
+      </dd>
       <dt>{% trans "Total minimum fees planned" %}<sup class="text-muted">3</sup></dt>
-      <dd>{% blocktrans with fee=aggs.total_fee|intcomma_floatformat:2 %}{{ fee }}&nbsp;€{% endblocktrans %}</dd>
+      <dd>
+        {% if aggs.total_fee %}
+          {% blocktrans with fee=aggs.total_fee|intcomma_floatformat:2 %}{{ fee }}&nbsp;€{% endblocktrans %}
+        {% else %}
+          <span class="text-muted">{% trans "n/a" %}</span>
+        {% endif %}
+      </dd>
   </dl>
 
   <h3>
@@ -57,16 +75,14 @@
         </td>
         <td class="text-right">
           {% if study.doc_count %}
-            {{ study.doc_count }}
+            {{ study.doc_count|intcomma }}
           {% else %}
-            <span class="text-muted">
-              {% trans "n/a" %}
-            </span>
+            <span class="text-muted">{% trans "n/a" %}</span>
           {% endif %}
         </td>
         <td class="text-right">
           {% if study.patient_count %}
-            {{ study.patient_count }}
+            {{ study.patient_count|intcomma }}
           {% else %}
             <span class="text-muted">
               {% trans "n/a" %}
