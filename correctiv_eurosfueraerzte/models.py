@@ -159,7 +159,7 @@ class ObservationalStudyManager(models.Manager):
 
 @python_2_unicode_compatible
 class ObservationalStudy(models.Model):
-    drugs = models.ManyToManyField(Drug, verbose_name=_('drugs'))
+    drugs = models.ManyToManyField(Drug, blank=True, verbose_name=_('drugs'))
 
     drug_title = models.CharField(max_length=1024, blank=True)
     drug_slug = models.SlugField(max_length=1024, blank=True)
