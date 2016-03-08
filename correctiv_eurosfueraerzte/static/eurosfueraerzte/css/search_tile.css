@@ -6,7 +6,7 @@
 }
 
 .search-tile__logo {
-  background: #8ec6dd url('/static/eurosfueraerzte/img/euros-fuer-aerzte_logo.svg');
+  background: #8ec6dd url('../img/euros-fuer-aerzte_logo.svg');
   background-repeat: no-repeat;
   background-position: 22px bottom;
   height: 140px;
@@ -18,4 +18,21 @@
 
 .search-tile__form {
   padding: 22px;
+}
+
+.search-tile__help {
+  display: block;
+  margin: 0;
+  padding: 10px 0 0 0;
+  font-style: italic;
+}
+
+.search-tile__link {
+  text-decoration: underline;
+}
+
+@media (min-width: 1200px) {
+  .search-tile {
+    min-height: 380px;
+  }
 }

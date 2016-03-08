@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-08 16:09+0100\n"
-"PO-Revision-Date: 2016-03-08 16:09+0100\n"
+"POT-Creation-Date: 2016-03-08 20:37+0100\n"
+"PO-Revision-Date: 2016-03-08 20:39+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.8.7\n"
 
 #: admin.py:24
 msgid "Successfully replaced objects."
@@ -27,6 +27,7 @@ msgid "Replace selected with..."
 msgstr "Ersetze Objekte mit..."
 
 #: apps.py:7 cms_app.py:7 cms_plugins.py:11
+#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:7
 msgid "Euros for Doctors"
 msgstr "Euros für Ärzte"
 
@@ -35,13 +36,13 @@ msgid "Search Tile"
 msgstr "Such-Kachel"
 
 #: forms.py:10 templates/correctiv_eurosfueraerzte/base.html:22
-#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:17
+#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:18
 msgid "Search"
 msgstr "Suche"
 
-#: forms.py:15 templates/correctiv_eurosfueraerzte/plugins/search_tile.html:15
-msgid "e.g. Lucentis"
-msgstr "z.B. Lucentis"
+#: forms.py:15
+msgid "e.g. Avastin"
+msgstr "z.B. Avastin"
 
 #: models.py:34 templates/correctiv_eurosfueraerzte/drug_detail.html:22
 msgid "Pharma Company"
@@ -139,7 +140,6 @@ msgid "back to the main page"
 msgstr "zurück zur Hauptseite"
 
 #: templates/correctiv_eurosfueraerzte/base.html:17
-#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:12
 msgid "Search for your medicine"
 msgstr "Suche nach deinem Medikament"
 
@@ -305,9 +305,23 @@ msgstr "„%(name)s“ ist verantwortlich für die folgenden Medikamente."
 msgid "Number of Observational Studies"
 msgstr "Anzahl der Anwendungsbeobachtungen"
 
-#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:8
+#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:12
 msgid "Is your medicine pushed by big pharma?"
-msgstr "Wird dein Medikament von Pharmakonzernen in den Markt gedrückt?"
+msgstr ""
+"Finde heraus, für welche Medikamente Dein Arzt Geld von der Pharma&shy;"
+"industrie bekommen kann!"
+
+#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:16
+msgid "Drug name"
+msgstr "Medikament"
+
+#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:23
+msgid "Example:"
+msgstr "Beispiel:"
+
+#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:25
+msgid "Avastin"
+msgstr "Avastin"
 
 #: urls.py:10
 msgid "^search/$"
@@ -324,6 +338,9 @@ msgstr "^awb/(?P<year>\\d{4,})/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$"
 #: urls.py:16
 msgid "^company/(?P<slug>[\\w-]+)/$"
 msgstr "^unternehmen/(?P<slug>[\\w-]+)/$"
+
+#~ msgid "e.g. Lucentis"
+#~ msgstr "z.B. Lucentis"
 
 #~ msgid "Average fee per patients"
 #~ msgstr "Durchschnittliches Honorar pro Patient"

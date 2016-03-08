@@ -12,7 +12,7 @@ class SearchForm(forms.Form):
             attrs={
                 'type': 'search',
                 'class': 'form-control',
-                'placeholder': _('e.g. Lucentis')
+                'placeholder': _('e.g. Avastin')
             }))
 
     def search(self, queryset):
