@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-08 15:46+0100\n"
-"PO-Revision-Date: 2016-03-08 15:52+0100\n"
+"POT-Creation-Date: 2016-03-08 16:09+0100\n"
+"PO-Revision-Date: 2016-03-08 16:09+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -132,7 +132,7 @@ msgstr "Ersetze ausgewählte Objekte mit diesem Objekt"
 
 #: templates/correctiv_eurosfueraerzte/base.html:8
 msgid "Search „Euros for Doctors“ Database"
-msgstr "Suchen Sie in der „Euros für Ärzte“-Datenbank"
+msgstr "Suche in der „Euros für Ärzte“-Datenbank"
 
 #: templates/correctiv_eurosfueraerzte/base.html:11
 msgid "back to the main page"
@@ -155,60 +155,63 @@ msgstr "Indikation"
 msgid "Total Number of Doctors"
 msgstr "Gesamtzahl Ärzte"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:30
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:32
 #, python-format
 msgid "%(count)s doctors"
 msgstr "%(count)s Ärzte"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:31
-msgid "Total Number of Patients"
-msgstr "Gesamtanzahl Patienten"
-
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:32
-#: templates/correctiv_eurosfueraerzte/index.html:17
-#, python-format
-msgid "%(count)s patients"
-msgstr "%(count)s Patienten"
-
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:33
-msgid "Total minimum fees planned"
-msgstr "Geplante Gesamtausgaben"
-
 #: templates/correctiv_eurosfueraerzte/drug_detail.html:34
-#: templates/correctiv_eurosfueraerzte/index.html:30
-#, python-format
-msgid "%(fee)s&nbsp;€"
-msgstr "%(fee)s&nbsp;€"
-
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:38
-#, python-format
-msgid "Observational Studies including %(name)s"
-msgstr "Anwendungsbeobachtungen zu %(name)s"
-
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:43
-msgid "Drug"
-msgstr "Medikament"
-
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:44
-msgid "No. of doctors"
-msgstr "Anzahl Ärzte"
-
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:45
-msgid "No. of patients"
-msgstr "Anzahl Patienten"
-
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:46
-msgid "Payment per patient"
-msgstr "Honorar pro Patient"
-
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:63
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:72
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:81
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:42
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:50
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:80
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:88
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:97
 #: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:64
 #: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:73
 #: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:82
 msgid "n/a"
 msgstr "k.A."
+
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:37
+msgid "Total Number of Patients"
+msgstr "Gesamtanzahl Patienten"
+
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:40
+#: templates/correctiv_eurosfueraerzte/index.html:17
+#, python-format
+msgid "%(count)s patients"
+msgstr "%(count)s Patienten"
+
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:45
+msgid "Total minimum fees planned"
+msgstr "Geplante Gesamtausgaben"
+
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:48
+#: templates/correctiv_eurosfueraerzte/index.html:30
+#, python-format
+msgid "%(fee)s&nbsp;€"
+msgstr "%(fee)s&nbsp;€"
+
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:56
+#, python-format
+msgid "Observational Studies including %(name)s"
+msgstr "Anwendungsbeobachtungen zu %(name)s"
+
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:61
+msgid "Drug"
+msgstr "Medikament"
+
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:62
+msgid "No. of doctors"
+msgstr "Anzahl Ärzte"
+
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:63
+msgid "No. of patients"
+msgstr "Anzahl Patienten"
+
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:64
+msgid "Payment per patient"
+msgstr "Honorar pro Patient"
 
 #: templates/correctiv_eurosfueraerzte/drug_list.html:11
 #: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:16
