@@ -17,7 +17,7 @@
   <a href="../../">{% trans "Home" %}</a> &rsaquo;
   <a href="../">{{ app_label|capfirst }}</a> &rsaquo;
   <a href="./">{{ opts.verbose_name_plural|capfirst }}</a> &rsaquo;
-  {% trans 'Replace all selected drugs with this drug' %}
+  {% trans 'Replace all selected objects with this object' %}
 </div>
 {% endblock %}
 
@@ -25,9 +25,9 @@
 <form action="" method="post">{% csrf_token %}
   <div>
     <p>
-      {% blocktrans %}Replace all selected drugs with this drug:{% endblocktrans %}
+      {% blocktrans %}Replace all selected objects with this object:{% endblocktrans %}
       <br/>
-      <input name="drug_id" value="" type="text"/>
+      <input name="object_id" value="" type="text"/>
     </p>
 
     <ul>
@@ -39,8 +39,8 @@
       {% endfor %}
     </ul>
 
-    <input type="hidden" name="action" value="replace_drugs" />
-    <input type="submit" value="{% trans "Replace selected drugs with this drug" %}" />
+    <input type="hidden" name="action" value="replace_objects" />
+    <input type="submit" value="{% trans "Replace selected objects with this object" %}" />
 
   </div>
 </form>

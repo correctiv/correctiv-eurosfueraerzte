@@ -9,30 +9,19 @@ from django.contrib.admin import helpers
 from .models import PharmaCompany, Drug, ObservationalStudy
 
 
-class PharmaCompanyAdmin(admin.ModelAdmin):
-    search_fields = ('name',)
-
-
-class DrugAdmin(admin.ModelAdmin):
-    search_fields = ('name', 'active_ingredient',)
-    raw_id_fields = ('pharma_company',)
-    list_display = ('name', 'active_ingredient', 'pharma_company')
-
-    actions = ['replace_drugs']
-
-    def replace_drugs(self, request, queryset):
+class ReplacementMixin(object):
+    def replace_objects(self, request, queryset):
         opts = self.model._meta
         # Check that the user has change permission for the actual model
         if not self.has_change_permission(request):
             raise PermissionDenied
 
         # User has already chosen
-        if request.POST.get('drug_id'):
-            real_drug = Drug.objects.get(pk=request.POST.get('drug_id'))
-            for study in ObservationalStudy.objects.filter(drugs__in=queryset):
-                study.drugs.add(real_drug)
+        if request.POST.get('object_id'):
+            real_drug = self.model.objects.get(pk=request.POST.get('object_id'))
+            self.handle_replacement(real_drug, queryset)
             queryset.delete()
-            self.message_user(request, _("Successfully replaced drugs."))
+            self.message_user(request, _("Successfully replaced objects."))
             return None
 
         db = router.db_for_write(self.model)
@@ -52,18 +41,36 @@ class DrugAdmin(admin.ModelAdmin):
             'queryset': queryset,
             'media': self.media,
             'action_checkbox_name': helpers.ACTION_CHECKBOX_NAME,
-            'drug_widget': mark_safe(admin.widgets.ForeignKeyRawIdWidget(
-                    FakeRel, self.admin_site, using=db).render(
-                            'drug_id', None,
-                            {'id': 'id_drug_id'})
-                            .replace('../../..', '../..')),
             'applabel': opts.app_label
         }
 
         # Display the confirmation page
-        return TemplateResponse(request, 'correctiv_eurosfueraerzte/admin/replace_drugs.html',
-            context, current_app=self.admin_site.name)
-    replace_drugs.short_description = _('Replace drugs with...')
+        return TemplateResponse(request,
+                'correctiv_eurosfueraerzte/admin/replace_objects.html',
+                context, current_app=self.admin_site.name)
+    replace_objects.short_description = _('Replace selected with...')
+
+class PharmaCompanyAdmin(ReplacementMixin, admin.ModelAdmin):
+    search_fields = ('name',)
+
+    actions = ['replace_objects']
+
+    def handle_replacement(self, real_object, queryset):
+        Drug.objects.filter(pharma_company__in=queryset).update(
+                            pharma_company=real_object)
+
+
+
+class DrugAdmin(ReplacementMixin, admin.ModelAdmin):
+    search_fields = ('name', 'active_ingredient',)
+    raw_id_fields = ('pharma_company',)
+    list_display = ('name', 'active_ingredient', 'pharma_company')
+
+    actions = ['replace_objects']
+
+    def handle_replacement(self, real_object, queryset):
+        for study in ObservationalStudy.objects.filter(drugs__in=queryset):
+            study.drugs.add(real_object)
 
 
 class ObservationalStudyAdmin(admin.ModelAdmin):
