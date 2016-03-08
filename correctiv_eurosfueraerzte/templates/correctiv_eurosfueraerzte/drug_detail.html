@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load number_utils %}
+{% load humanize %}
 
 {% block content %}
   <h2>{{ object.name }}</h2>
@@ -20,11 +21,11 @@
       <dd>{{ object.pharma_company }}</dd>
     {% endif %}
       <dt>{% trans "Total Number of Patients" %}</dt>
-      <dd>{% blocktrans with count=aggs.sum_patients %}{{ count }} patients{% endblocktrans %}</dd>
+      <dd>{% blocktrans with count=aggs.sum_patients|intcomma %}{{ count }} patients{% endblocktrans %}</dd>
       <dt>{% trans "Total Number of Doctors" %}</dt>
-      <dd>{% blocktrans with count=aggs.sum_doctors %}{{ count }} doctors{% endblocktrans %}</dd>
-      <dt>{% trans "Average fee per patients" %}</dt>
-      <dd>{% blocktrans with avg=aggs.average_fee|intcomma_floatformat:2 %}{{ avg }}&nbsp;€{% endblocktrans %}</dd>
+      <dd>{% blocktrans with count=aggs.sum_doctors|intcomma %}{{ count }} doctors{% endblocktrans %}</dd>
+      <dt>{% trans "Total minimum fees planned" %}</dt>
+      <dd>{% blocktrans with fee=aggs.total_fee|intcomma_floatformat:2 %}{{ fee }}&nbsp;€{% endblocktrans %}</dd>
   </dl>
 
   <h3>
@@ -33,7 +34,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th>{% trans "Drug" %}</th>
+        <th>{% trans "Title" %}</th>
         <th class="text-right">{% trans "No. of doctors" %}</th>
         <th class="text-right">{% trans "No. of patients" %}</th>
         <th class="text-right">{% trans "Payment per patient" %}</th>

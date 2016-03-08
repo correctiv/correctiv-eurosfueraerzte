@@ -43,11 +43,19 @@ class DrugManager(SearchManager):
     def get_by_natural_key(self, slug):
         return self.get(slug=slug)
 
-    def search(self, queryset, query):
+    def search(self, qs, query):
         if query:
-            queryset = queryset.filter(search_index__ft_startswith=query)
-        queryset = queryset.annotate(study_count=models.Count('observationalstudy'))
-        return queryset
+            qs = qs.filter(search_index__ft_startswith=query)
+        qs = self.add_annotations(qs)
+        return qs
+
+    def get_for_company(self, company):
+        qs = self.get_queryset().filter(pharma_company=company)
+        qs = self.add_annotations(qs)
+        return qs
+
+    def add_annotations(self, queryset):
+        return queryset.annotate(study_count=models.Count('observationalstudy'))
 
     def get_by_patient_sum(self):
         return self.get_queryset().filter(
@@ -113,14 +121,18 @@ class Drug(models.Model):
         return ('eurosfueraerzte:eurosfueraerzte-drugdetail', (), {'slug': self.slug})
 
     def get_aggregates(self):
-        return Drug.objects.filter(pk=self.pk).aggregate(
+        aggs = Drug.objects.filter(pk=self.pk).aggregate(
             sum_patients=models.Sum(
                 'observationalstudy__patient_count'),
             sum_doctors=models.Sum(
                 'observationalstudy__doc_count'),
-            average_fee=models.Avg(
-                'observationalstudy__fee_per_patient')
+            total_fee=models.Sum(
+                models.F('observationalstudy__patient_count') *
+                models.F('observationalstudy__fee_per_patient'),
+                output_field=models.DecimalField(decimal_places=2, max_digits=19)
+            )
         )
+        return aggs
 
 
 class ObservationalStudyManager(models.Manager):

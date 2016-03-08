@@ -66,3 +66,8 @@ class ObservationalStudyDetailView(SearchMixin, DetailView):
 
 class CompanyDetailView(SearchMixin, DetailView):
     model = PharmaCompany
+
+    def get_context_data(self, **kwargs):
+        context = super(CompanyDetailView, self).get_context_data(**kwargs)
+        context['drug_list'] = Drug.objects.get_for_company(self.object)
+        return context

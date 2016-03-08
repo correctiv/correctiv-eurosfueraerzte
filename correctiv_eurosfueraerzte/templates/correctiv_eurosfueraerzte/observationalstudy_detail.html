@@ -55,17 +55,29 @@
 
   <dt>{% trans "Number of Docs" %}</dt>
   <dd>
-    {{ object.doc_count }}
+    {% if object.doc_count %}
+      {{ object.doc_count }}
+    {% else %}
+      <span class="text-muted">{% trans "n/a" %}</span>
+    {% endif %}
   </dd>
 
   <dt>{% trans "Number of Patients" %}</dt>
   <dd>
-    {{ object.patient_count }}
+    {% if object.patient_count %}
+      {{ object.patient_count }}
+    {% else %}
+      <span class="text-muted">{% trans "n/a" %}</span>
+    {% endif %}
   </dd>
 
   <dt>{% trans "Payment per Patient" %}</dt>
   <dd>
-    {{ object.fee_per_patient }}&nbsp;€
+    {% if object.fee_per_patient %}
+      {{ object.fee_per_patient }}&nbsp;€
+    {% else %}
+      <span class="text-muted">{% trans "n/a" %}</span>
+    {% endif %}
   </dd>
 
   <dt>{% trans "Fee details" %}</dt>

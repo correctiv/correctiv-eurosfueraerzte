@@ -10,14 +10,27 @@
 
 <p>{% blocktrans with name=object.name %}„{{ name }}“ is responsible for the following products.{% endblocktrans %}</p>
 
-<ul>
-  {% for drug in object.drug_set.all %}
-    <li>
-      <a href="{{ drug.get_absolute_url }}">
-        {{ drug.name }}
-      </a>
-    </li>
+<table class="table">
+  <thead>
+    <tr>
+      <th>{% trans "Name" %}</th>
+      <th>{% trans "Number of Studies" %}</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for drug in drug_list %}
+    <tr>
+      <td>
+        <a href="{{ drug.get_absolute_url }}">
+          {{ drug.name }}
+        </a>
+      </td>
+      <td>
+        {{ drug.study_count }}
+      </td>
+    </tr>
   {% endfor %}
-</ul>
+  </tbody>
+</table>
 
 {% endblock %}
