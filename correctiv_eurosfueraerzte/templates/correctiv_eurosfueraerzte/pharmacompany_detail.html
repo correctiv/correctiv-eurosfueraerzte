@@ -3,6 +3,12 @@
 {% load i18n %}
 {% load number_utils %}
 
+{% block title %}{% blocktrans with name=object.name %}Pharma company {{ name }}{% endblocktrans %}{% endblock %}
+
+{% block additional_meta %}
+<meta name="description" content="{% blocktrans with name=object.name %}Details on which drugs where pushed by {{ name }} through observational studies.{% endblocktrans %}">
+{% endblock %}
+
 {% block content %}
 <h2>
   {% blocktrans with name=object.name %}Pharma Company „{{ name }}“{% endblocktrans %}
@@ -32,5 +38,5 @@
   {% endfor %}
   </tbody>
 </table>
-{% include "correctiv_eurosfueraerzte/_disclaimer.html" %}
+
 {% endblock %}

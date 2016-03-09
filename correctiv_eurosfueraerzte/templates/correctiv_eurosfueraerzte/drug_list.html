@@ -2,8 +2,14 @@
 
 {% load i18n %}
 
-{% block content %}
 
+{% block title %}{% blocktrans with query=query %}Search for „{{ query }}” in Euros for Doctors Database{% endblocktrans %}{% endblock %}
+
+{% block additional_meta %}
+<meta name="description" content="{% blocktrans %}The database about which drugs where pushed by pharma companies.{% endblocktrans %}">
+{% endblock %}
+
+{% block content %}
 {% if object_list %}
   <table class="table">
     <thead>

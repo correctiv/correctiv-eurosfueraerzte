@@ -3,6 +3,13 @@
 {% load i18n static %}
 {% load sekizai_tags %}
 
+
+{% block title %}{% blocktrans %}Database „Euros for Doctors“{% endblocktrans %}{% endblock %}
+
+{% block additional_meta %}
+<meta name="description" content="{% blocktrans %}The database about which drugs where pushed by pharma companies.{% endblocktrans %}">
+{% endblock %}
+
 {% block main %}
 {% block top_search %}
   <h1>{% trans "Database Search" %}</h1>

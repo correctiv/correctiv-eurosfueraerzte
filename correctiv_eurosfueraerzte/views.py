@@ -4,6 +4,7 @@ from django.views.generic import TemplateView, ListView
 from django.views.generic.detail import DetailView
 from django.http import HttpResponse, QueryDict
 from django.shortcuts import redirect
+from django.utils.translation import ugettext_lazy as _
 
 from .models import Drug, ObservationalStudy, PharmaCompany
 from .forms import SearchForm
@@ -40,6 +41,7 @@ class SearchView(ListView):
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
         context['form'] = self.form
+        context['query'] = self.request.GET.get('q', '')
         no_page_query = QueryDict(self.request.GET.urlencode().encode('utf-8'),
                                   mutable=True)
         no_page_query.pop('page', None)
@@ -62,6 +64,8 @@ class DrugDetailView(SearchMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(DrugDetailView, self).get_context_data(**kwargs)
         context['aggs'] = self.object.get_aggregates()
+        context['title'] = _('Drug %(name)s') % {'name': self.object.name}
+        context['description'] = _('Details on how much money doctors got to prescribe %(name)s.') % {'name': self.object.name}
         return context
 
 
@@ -75,6 +79,15 @@ class ObservationalStudyDetailView(SearchMixin, DetailView):
             return redirect(object_url)
         return response
 
+    def get_context_data(self, **kwargs):
+        context = super(ObservationalStudyDetailView, self).get_context_data(**kwargs)
+        context['title'] = _('Observational Study  %(title)s') % {
+            'title': self.object.drug_title
+        }
+        context['description'] = _('Details on the observational study %(title)s.') % {
+            'title': self.object.drug_title}
+        return context
+
 
 class CompanyDetailView(SearchMixin, DetailView):
     model = PharmaCompany
@@ -82,4 +95,9 @@ class CompanyDetailView(SearchMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(CompanyDetailView, self).get_context_data(**kwargs)
         context['drug_list'] = Drug.objects.get_for_company(self.object)
+        context['title'] = _('Pharma company  %(name)s') % {
+            'name': self.object.name
+        }
+        context['description'] = _('Details on which drugs where pushed by %(name)s through observational studies.') % {
+            'name': self.object.name}
         return context

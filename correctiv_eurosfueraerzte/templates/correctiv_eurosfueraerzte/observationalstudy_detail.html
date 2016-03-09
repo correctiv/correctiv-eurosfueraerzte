@@ -3,6 +3,12 @@
 {% load i18n %}
 {% load number_utils %}
 
+{% block title %}{{ title }}{% endblock %}
+
+{% block additional_meta %}
+<meta name="description" content="{% blocktrans with title=object.title date=object.registration_date|date:"SHORT_DATE_FORMAT" %}Details on the observational study {{ title }} registered on {{ date}}.{% endblocktrans %}">
+{% endblock %}
+
 {% block content %}
 <h2>
   {% blocktrans with title=object.drug_title %}Observational Study “{{ title }}”{% endblocktrans %}

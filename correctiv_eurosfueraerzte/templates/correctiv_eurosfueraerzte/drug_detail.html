@@ -4,6 +4,12 @@
 {% load number_utils %}
 {% load humanize %}
 
+{% block title %}{{ title }}{% endblock %}
+
+{% block additional_meta %}
+<meta name="description" content="{{ description }}">
+{% endblock %}
+
 {% block content %}
   <h2>
     {{ object.name }}
