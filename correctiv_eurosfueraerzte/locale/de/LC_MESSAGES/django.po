@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 17:52+0100\n"
-"PO-Revision-Date: 2016-03-09 17:52+0100\n"
+"POT-Creation-Date: 2016-03-09 18:39+0100\n"
+"PO-Revision-Date: 2016-03-09 18:39+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -44,47 +44,47 @@ msgstr "Suche"
 msgid "e.g. Avastin"
 msgstr "z.B. Avastin"
 
-#: models.py:51 templates/correctiv_eurosfueraerzte/drug_detail.html:28
+#: models.py:59 templates/correctiv_eurosfueraerzte/drug_detail.html:28
 msgid "Pharma Company"
 msgstr "Pharmaunternehmen"
 
-#: models.py:52
+#: models.py:60
 msgid "Pharma Companies"
 msgstr "Pharmaunternehmen"
 
-#: models.py:113
+#: models.py:127
 msgid "active ingredient"
 msgstr "Wirkstoff"
 
-#: models.py:115
+#: models.py:129
 msgid "medical indication"
 msgstr "Indikation"
 
-#: models.py:121
+#: models.py:135
 msgid "pharma company"
 msgstr "Pharmaunternehmen"
 
-#: models.py:138 models.py:139
+#: models.py:152 models.py:153
 msgid "Drugs"
 msgstr "Medikamente"
 
-#: models.py:181
+#: models.py:195
 msgid "drugs"
 msgstr "Medikamente"
 
-#: models.py:191
+#: models.py:205
 msgid "executing company"
 msgstr "Ausführende Firma"
 
-#: models.py:193
+#: models.py:207
 msgid "sponsor"
 msgstr "Auftraggeber"
 
-#: models.py:207
+#: models.py:221
 msgid "observational study"
 msgstr "Anwendungsbeobachtung"
 
-#: models.py:208
+#: models.py:222
 msgid "observational studies"
 msgstr "Anwendungsbeobachtungen"
 
@@ -320,7 +320,7 @@ msgid "Pharma company %(name)s"
 msgstr "Pharmaunternehmen %(name)s"
 
 #: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:9
-#: views.py:101
+#: views.py:104
 #, python-format
 msgid ""
 "Details on which drugs where pushed by %(name)s through observational "
@@ -366,39 +366,44 @@ msgid "^search/$"
 msgstr "^suche/$"
 
 #: urls.py:13
+#| msgid "^search/$"
+msgid "^search/json/$"
+msgstr "^suche/json/$"
+
+#: urls.py:15
 msgid "^drug/(?P<slug>[\\w-]+)/$"
 msgstr "^medikament/(?P<slug>[\\w-]+)/$"
 
-#: urls.py:15
+#: urls.py:17
 msgid "^study/(?P<year>\\d{4,})/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$"
 msgstr "^awb/(?P<year>\\d{4,})/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$"
 
-#: urls.py:18
+#: urls.py:20
 msgid "^company/(?P<slug>[\\w-]+)/$"
 msgstr "^unternehmen/(?P<slug>[\\w-]+)/$"
 
-#: views.py:67
+#: views.py:70
 #, python-format
 msgid "Drug %(name)s"
 msgstr "Medikament %(name)s"
 
-#: views.py:68
+#: views.py:71
 #, python-format
 msgid "Details on how much money doctors got to prescribe %(name)s."
 msgstr ""
 "Details wieviel Geld Ärzte bekommen haben, um %(name)s zu verschreiben."
 
-#: views.py:84
+#: views.py:87
 #, python-format
 msgid "Observational Study  %(title)s"
 msgstr "Anwendungsbeobachtung %(title)s"
 
-#: views.py:87
+#: views.py:90
 #, python-format
 msgid "Details on the observational study %(title)s."
 msgstr "Details über die Anwendungsbeobachtung %(title)s."
 
-#: views.py:98
+#: views.py:101
 #, python-format
 msgid "Pharma company  %(name)s"
 msgstr "Pharmaunternehmen %(name)s"
