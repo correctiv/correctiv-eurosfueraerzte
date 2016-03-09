@@ -3,9 +3,11 @@
 <li class="entry-list-item -featured">
   <div class="search-tile">
 
-      <h2 class="search-tile__logo">
-        {% trans "Euros for Doctors" %}
-      </h2>
+      <a href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
+        <h2 class="search-tile__logo">
+          {% trans "Euros for Doctors" %}
+        </h2>
+      </a>
 
       <form method="get" class="search-tile__form" action="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}">
         <p class="search-tile__claim">
