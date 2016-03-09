@@ -21,6 +21,7 @@ class IndexView(SearchMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
+        context['is_index'] = True
         context['top_drugs'] = Drug.objects.get_by_patient_sum()[:10]
         context['highest_paid_studies'] = ObservationalStudy.objects.get_by_fee_per_patient()[:10]
         return context
