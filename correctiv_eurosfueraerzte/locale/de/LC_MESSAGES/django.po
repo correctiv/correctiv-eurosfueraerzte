@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 15:51+0100\n"
-"PO-Revision-Date: 2016-03-09 15:51+0100\n"
+"POT-Creation-Date: 2016-03-09 16:52+0100\n"
+"PO-Revision-Date: 2016-03-09 16:53+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -35,7 +35,7 @@ msgstr "Euros für Ärzte"
 msgid "Search Tile"
 msgstr "Such-Kachel"
 
-#: forms.py:10 templates/correctiv_eurosfueraerzte/base.html:22
+#: forms.py:10 templates/correctiv_eurosfueraerzte/base.html:24
 #: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:18
 msgid "Search"
 msgstr "Suche"
@@ -44,47 +44,47 @@ msgstr "Suche"
 msgid "e.g. Avastin"
 msgstr "z.B. Avastin"
 
-#: models.py:56 templates/correctiv_eurosfueraerzte/drug_detail.html:22
+#: models.py:51 templates/correctiv_eurosfueraerzte/drug_detail.html:22
 msgid "Pharma Company"
 msgstr "Pharmaunternehmen"
 
-#: models.py:57
+#: models.py:52
 msgid "Pharma Companies"
 msgstr "Pharmaunternehmen"
 
-#: models.py:118
+#: models.py:113
 msgid "active ingredient"
 msgstr "Wirkstoff"
 
-#: models.py:120
+#: models.py:115
 msgid "medical indication"
 msgstr "Indikation"
 
-#: models.py:126
+#: models.py:121
 msgid "pharma company"
 msgstr "Pharmaunternehmen"
 
-#: models.py:143 models.py:144
+#: models.py:138 models.py:139
 msgid "Drugs"
 msgstr "Medikamente"
 
-#: models.py:186
+#: models.py:181
 msgid "drugs"
 msgstr "Medikamente"
 
-#: models.py:196
+#: models.py:191
 msgid "executing company"
 msgstr "Ausführende Firma"
 
-#: models.py:198
+#: models.py:193
 msgid "sponsor"
 msgstr "Auftraggeber"
 
-#: models.py:212
+#: models.py:207
 msgid "observational study"
 msgstr "Anwendungsbeobachtung"
 
-#: models.py:213
+#: models.py:208
 msgid "observational studies"
 msgstr "Anwendungsbeobachtungen"
 
@@ -132,14 +132,14 @@ msgid "Replace selected objects with this object"
 msgstr "Ersetze ausgewählte Objekte mit diesem Objekt"
 
 #: templates/correctiv_eurosfueraerzte/base.html:8
-msgid "Search „Euros for Doctors“ Database"
-msgstr "Suche in der „Euros für Ärzte“-Datenbank"
+msgid "Database Search"
+msgstr "Datenbank-Suche"
 
-#: templates/correctiv_eurosfueraerzte/base.html:11
+#: templates/correctiv_eurosfueraerzte/base.html:13
 msgid "back to the index"
 msgstr "zurück zur Startseite"
 
-#: templates/correctiv_eurosfueraerzte/base.html:17
+#: templates/correctiv_eurosfueraerzte/base.html:19
 msgid "Search for your medicine"
 msgstr "Suche nach deinem Medikament"
 
@@ -338,6 +338,9 @@ msgstr "^awb/(?P<year>\\d{4,})/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$"
 #: urls.py:18
 msgid "^company/(?P<slug>[\\w-]+)/$"
 msgstr "^unternehmen/(?P<slug>[\\w-]+)/$"
+
+#~ msgid "Search „Euros for Doctors“ Database"
+#~ msgstr "Suche in der „Euros für Ärzte“-Datenbank"
 
 #~ msgid "e.g. Lucentis"
 #~ msgstr "z.B. Lucentis"
