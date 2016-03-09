@@ -69,6 +69,7 @@
               item.replace(re, "<mark>$1</mark>") + '</div>';
       },
       onSelect: function(e, term, item){
+        e.preventDefault();
         document.location.href = $(item).data('url');
       }
     });
