@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 16:52+0100\n"
-"PO-Revision-Date: 2016-03-09 16:53+0100\n"
+"POT-Creation-Date: 2016-03-09 17:52+0100\n"
+"PO-Revision-Date: 2016-03-09 17:52+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -27,7 +27,7 @@ msgid "Replace selected with..."
 msgstr "Ersetze Objekte mit..."
 
 #: apps.py:7 cms_app.py:7 cms_plugins.py:11
-#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:7
+#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:8
 msgid "Euros for Doctors"
 msgstr "Euros für Ärzte"
 
@@ -35,8 +35,8 @@ msgstr "Euros für Ärzte"
 msgid "Search Tile"
 msgstr "Such-Kachel"
 
-#: forms.py:10 templates/correctiv_eurosfueraerzte/base.html:24
-#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:18
+#: forms.py:10 templates/correctiv_eurosfueraerzte/base.html:33
+#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:20
 msgid "Search"
 msgstr "Suche"
 
@@ -44,7 +44,7 @@ msgstr "Suche"
 msgid "e.g. Avastin"
 msgstr "z.B. Avastin"
 
-#: models.py:51 templates/correctiv_eurosfueraerzte/drug_detail.html:22
+#: models.py:51 templates/correctiv_eurosfueraerzte/drug_detail.html:28
 msgid "Pharma Company"
 msgstr "Pharmaunternehmen"
 
@@ -131,102 +131,118 @@ msgstr "Ersetze alle ausgewählte Objekte mit diesem Objekt:"
 msgid "Replace selected objects with this object"
 msgstr "Ersetze ausgewählte Objekte mit diesem Objekt"
 
-#: templates/correctiv_eurosfueraerzte/base.html:8
+#: templates/correctiv_eurosfueraerzte/base.html:7
+msgid "Database „Euros for Doctors“"
+msgstr "Datenbank „Euros für Ärzte“"
+
+#: templates/correctiv_eurosfueraerzte/base.html:10
+#: templates/correctiv_eurosfueraerzte/drug_list.html:9
+msgid "The database about which drugs where pushed by pharma companies."
+msgstr ""
+"Datenbank darüber, welche Medikamente durch Pharmakonzerne in den Markt "
+"gedrückt wurden."
+
+#: templates/correctiv_eurosfueraerzte/base.html:15
 msgid "Database Search"
 msgstr "Datenbank-Suche"
 
-#: templates/correctiv_eurosfueraerzte/base.html:13
+#: templates/correctiv_eurosfueraerzte/base.html:21
 msgid "back to the index"
 msgstr "zurück zur Startseite"
 
-#: templates/correctiv_eurosfueraerzte/base.html:19
+#: templates/correctiv_eurosfueraerzte/base.html:28
 msgid "Search for your medicine"
-msgstr "Suche nach deinem Medikament"
+msgstr "Suche nach Deinem Medikament"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:14
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:20
 msgid "Active ingredient"
 msgstr "Wirkstoff"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:18
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:24
 msgid "Medical indication"
 msgstr "Indikation"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:29
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:35
 msgid "Total Number of Doctors"
 msgstr "Gesamtzahl Ärzte"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:32
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:38
 #, python-format
 msgid "%(count)s doctors"
 msgstr "%(count)s Ärzte"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:34
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:42
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:50
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:80
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:88
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:97
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:64
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:73
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:82
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:40
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:48
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:56
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:86
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:94
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:103
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:70
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:79
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:88
 msgid "n/a"
 msgstr "k.A."
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:37
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:43
 msgid "Total Number of Patients"
 msgstr "Gesamtanzahl Patienten"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:40
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:46
 #: templates/correctiv_eurosfueraerzte/index.html:17
 #, python-format
 msgid "%(count)s patients"
 msgstr "%(count)s Patienten"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:45
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:51
 msgid "Total minimum fees planned"
 msgstr "Geplante Gesamtausgaben"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:48
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:54
 #: templates/correctiv_eurosfueraerzte/index.html:30
 #, python-format
 msgid "%(fee)s&nbsp;€"
 msgstr "%(fee)s&nbsp;€"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:56
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:62
 #, python-format
 msgid "Observational Studies including %(name)s"
 msgstr "Anwendungsbeobachtungen zu %(name)s"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:61
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:67
 msgid "Drug"
 msgstr "Medikament"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:62
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:68
 msgid "No. of doctors"
 msgstr "Anzahl Ärzte"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:63
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:69
 msgid "No. of patients"
 msgstr "Anzahl Patienten"
 
-#: templates/correctiv_eurosfueraerzte/drug_detail.html:64
+#: templates/correctiv_eurosfueraerzte/drug_detail.html:70
 msgid "Payment per patient"
 msgstr "Honorar pro Patient"
 
-#: templates/correctiv_eurosfueraerzte/drug_list.html:11
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:16
+#: templates/correctiv_eurosfueraerzte/drug_list.html:6
+#, python-format
+msgid "Search for „%(query)s” in Euros for Doctors Database"
+msgstr "Suche nach „%(query)s“ in der „Euros für Ärzte“-Datenbank"
+
+#: templates/correctiv_eurosfueraerzte/drug_list.html:17
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:22
 msgid "Name"
 msgstr "Name"
 
-#: templates/correctiv_eurosfueraerzte/drug_list.html:12
+#: templates/correctiv_eurosfueraerzte/drug_list.html:18
 msgid "Company"
 msgstr "Pharmaunternehmen"
 
-#: templates/correctiv_eurosfueraerzte/drug_list.html:13
+#: templates/correctiv_eurosfueraerzte/drug_list.html:19
 msgid "Number of studies"
 msgstr "Anzahl der AWBs"
 
-#: templates/correctiv_eurosfueraerzte/drug_list.html:35
+#: templates/correctiv_eurosfueraerzte/drug_list.html:41
 msgid "Your search did not give any results"
 msgstr "Deine Suche brachte keine Ergebnisse."
 
@@ -238,88 +254,110 @@ msgstr "Top-Präparate nach Patienten"
 msgid "Top studies by fees per patient"
 msgstr "Top-AWBs nach Honorar pro Patient"
 
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:8
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:9
+#, python-format
+msgid "Details on the observational study %(title)s registered on %(date)s."
+msgstr ""
+"Details über die Anwendungsbeobachtung %(title)s, die am %(date)s "
+"registriert wurde."
+
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:14
 #, python-format
 msgid "Observational Study “%(title)s”"
 msgstr "Anwendungsbeobachtung „%(title)s”"
 
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:11
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:17
 msgid "Observed Drugs"
 msgstr "Beobachtete Präparate"
 
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:26
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:32
 msgid "No drugs registered with this study"
 msgstr "Keine Medikamente zu dieser Anwendungsbeobachtung"
 
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:30
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:36
 msgid "Title of the Observational Study"
 msgstr "Titel der Anwendungsbeobachtung"
 
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:34
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:40
 msgid "Registered on"
 msgstr "Datum der Erstanzeige"
 
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:39
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:45
 msgid "Start date"
 msgstr "Startdatum"
 
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:44
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:50
 msgid "End date"
 msgstr "Enddatum"
 
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:49
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:55
 msgid "Executing company"
 msgstr "Ausführende Firma"
 
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:54
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:60
 msgid "Sponsor"
 msgstr "Auftraggeber"
 
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:59
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:65
 msgid "Number of Docs"
 msgstr "Anzahl der Ärzte"
 
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:68
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:74
 msgid "Number of Patients"
 msgstr "Anzahl der Patienten"
 
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:77
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:83
 msgid "Payment per Patient"
 msgstr "Honorar pro Patient"
 
-#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:86
+#: templates/correctiv_eurosfueraerzte/observationalstudy_detail.html:92
 msgid "Fee details"
 msgstr "Details zum Honorar"
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:8
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:6
+#, python-format
+msgid "Pharma company %(name)s"
+msgstr "Pharmaunternehmen %(name)s"
+
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:9
+#: views.py:101
+#, python-format
+msgid ""
+"Details on which drugs where pushed by %(name)s through observational "
+"studies."
+msgstr ""
+"Details darüber welche Medikamente von %(name)s durch "
+"Anwendungsbeobachtungen in den Markt gedrückt werden."
+
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:14
 #, python-format
 msgid "Pharma Company „%(name)s“"
-msgstr "Pharma-Unternehmen „%(name)s“"
+msgstr "Pharmaunternehmen „%(name)s“"
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:11
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:17
 #, python-format
 msgid "„%(name)s“ is responsible for the following products."
 msgstr "„%(name)s“ ist verantwortlich für die folgenden Medikamente."
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:17
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:23
 msgid "Number of Observational Studies"
 msgstr "Anzahl der Anwendungsbeobachtungen"
 
-#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:12
+#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:14
 msgid "Is your medicine pushed by big pharma?"
 msgstr ""
 "Finde heraus, für welche Medikamente Dein Arzt Geld von der Pharma&shy;"
 "industrie bekommen kann!"
 
-#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:16
+#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:18
 msgid "Drug name"
 msgstr "Medikament"
 
-#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:23
+#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:25
 msgid "Example:"
 msgstr "Beispiel:"
 
-#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:25
+#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:27
 msgid "Avastin"
 msgstr "Avastin"
 
@@ -339,8 +377,31 @@ msgstr "^awb/(?P<year>\\d{4,})/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$"
 msgid "^company/(?P<slug>[\\w-]+)/$"
 msgstr "^unternehmen/(?P<slug>[\\w-]+)/$"
 
-#~ msgid "Search „Euros for Doctors“ Database"
-#~ msgstr "Suche in der „Euros für Ärzte“-Datenbank"
+#: views.py:67
+#, python-format
+msgid "Drug %(name)s"
+msgstr "Medikament %(name)s"
+
+#: views.py:68
+#, python-format
+msgid "Details on how much money doctors got to prescribe %(name)s."
+msgstr ""
+"Details wieviel Geld Ärzte bekommen haben, um %(name)s zu verschreiben."
+
+#: views.py:84
+#, python-format
+msgid "Observational Study  %(title)s"
+msgstr "Anwendungsbeobachtung %(title)s"
+
+#: views.py:87
+#, python-format
+msgid "Details on the observational study %(title)s."
+msgstr "Details über die Anwendungsbeobachtung %(title)s."
+
+#: views.py:98
+#, python-format
+msgid "Pharma company  %(name)s"
+msgstr "Pharmaunternehmen %(name)s"
 
 #~ msgid "e.g. Lucentis"
 #~ msgstr "z.B. Lucentis"
