@@ -46,7 +46,7 @@ class SearchView(ListView):
         return context
 
     def render_to_response(self, context, **response_kwargs):
-        if 'application/json' in self.request.META['HTTP_ACCEPT']:
+        if self.request.META.get('HTTP_ACCEPT', '').startswith('application/json'):
             autocomplete_list = [{'name': o.name, 'url': o.get_absolute_url()}
                                           for o in context['object_list'][:20]]
             return HttpResponse(json.dumps(autocomplete_list),
