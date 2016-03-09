@@ -201,7 +201,7 @@ class ObservationalStudy(models.Model):
     def get_absolute_url(self):
         return ('eurosfueraerzte:eurosfueraerzte-studydetail', (), {
             'pk': self.pk,
-            'year': self.start_date.year,
+            'year': self.registration_date.year,
             'slug': self.drug_slug
         })
 
