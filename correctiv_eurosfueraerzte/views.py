@@ -35,7 +35,10 @@ class SearchView(ListView):
     def get_queryset(self):
         qs = super(SearchView, self).get_queryset()
         self.form = SearchForm(self.request.GET)
-        result = self.form.search(qs)
+        if self.kwargs.get('json'):
+            result = self.form.autocomplete(qs)
+        else:
+            result = self.form.search(qs)
         return result
 
     def get_context_data(self, **kwargs):
@@ -49,7 +52,7 @@ class SearchView(ListView):
         return context
 
     def render_to_response(self, context, **response_kwargs):
-        if self.request.META.get('HTTP_ACCEPT', '').startswith('application/json'):
+        if self.kwargs.get('json'):
             autocomplete_list = [{'name': o.name, 'url': o.get_absolute_url()}
                                           for o in context['object_list'][:20]]
             return HttpResponse(json.dumps(autocomplete_list),

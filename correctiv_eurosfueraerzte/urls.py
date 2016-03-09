@@ -10,6 +10,8 @@ from .views import (IndexView, SearchView, DrugDetailView,
 urlpatterns = [
     url(r'^$', c(IndexView.as_view()), name='eurosfueraerzte-index'),
     url(_(r'^search/$'), SearchView.as_view(), name='eurosfueraerzte-search'),
+    url(_(r'^search/json/$'), SearchView.as_view(),
+        {'json': True}, name='eurosfueraerzte-search_json'),
     url(_(r'^drug/(?P<slug>[\w-]+)/$'), DrugDetailView.as_view(),
         name='eurosfueraerzte-drugdetail'),
     url(_(r'^study/(?P<year>\d{4,})/(?P<pk>\d+)/(?P<slug>[\w-]+)/$'),

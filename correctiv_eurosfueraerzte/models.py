@@ -4,7 +4,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from djorm_pgfulltext.models import SearchManager
-from djorm_pgfulltext.fields import VectorField, FullTextLookup
+from djorm_pgfulltext.fields import VectorField, FullTextLookup, startswith
 
 
 class FullTextLookupCustom(FullTextLookup):
@@ -21,7 +21,15 @@ class FullTextLookupCustom(FullTextLookup):
 
         return cmd, rest
 
+
+class FullTextLookupCustomStartsWith(FullTextLookupCustom):
+    lookup_name = 'ft_search_startswith'
+
+    def transform(self, *args):
+        return startswith(*args)
+
 VectorField.register_lookup(FullTextLookupCustom)
+VectorField.register_lookup(FullTextLookupCustomStartsWith)
 
 
 class PharmaCompanyManager(SearchManager):
@@ -78,6 +86,12 @@ class DrugManager(SearchManager):
                 ))
             )
         qs = self.add_annotations(qs)
+        return qs
+
+    def autocomplete(self, qs, query):
+        if query:
+            query = startswith(query)
+            qs = qs.search(' & '.join(query), raw=True)
         return qs
 
     def get_for_company(self, company):

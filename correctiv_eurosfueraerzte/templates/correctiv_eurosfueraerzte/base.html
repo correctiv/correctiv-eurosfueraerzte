@@ -54,7 +54,7 @@
 {% addtoblock "js" %}
   <script type="text/javascript">
   (function(){
-    var searchUrl = '{% url 'eurosfueraerzte:eurosfueraerzte-search' %}';
+    var searchUrl = '{% url 'eurosfueraerzte:eurosfueraerzte-search_json' %}';
     var xhr;
     $("#id_q").autoComplete({
       source: function(term, response){
