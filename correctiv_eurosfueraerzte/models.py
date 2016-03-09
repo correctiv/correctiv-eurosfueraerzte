@@ -4,7 +4,24 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from djorm_pgfulltext.models import SearchManager
-from djorm_pgfulltext.fields import VectorField
+from djorm_pgfulltext.fields import VectorField, FullTextLookup
+
+
+class FullTextLookupCustom(FullTextLookup):
+    lookup_name = 'ft_search'
+
+    def as_sql(self, qn, connection):
+        lhs, lhs_params = qn.compile(self.lhs)
+        rhs, rhs_params = self.process_rhs(qn, connection)
+
+        catalog, rhs_params = rhs_params
+
+        cmd = "%s @@ plainto_tsquery('%s', %%s)" % (lhs, catalog)
+        rest = (" & ".join(self.transform.__call__(rhs_params)),)
+
+        return cmd, rest
+
+VectorField.register_lookup(FullTextLookupCustom)
 
 
 class PharmaCompanyManager(SearchManager):
@@ -55,8 +72,10 @@ class DrugManager(SearchManager):
     def search(self, qs, query):
         if query:
             qs = qs.filter(
-                models.Q(search_index__ft_startswith=query) |
-                models.Q(pharma_company__search_index__ft_startswith=query)
+                models.Q(search_index__ft_search=(self.config, query)) |
+                models.Q(pharma_company__search_index__ft_search=(
+                    self.config, query
+                ))
             )
         qs = self.add_annotations(qs)
         return qs
