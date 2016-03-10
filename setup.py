@@ -34,6 +34,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'Django',
+        'djorm-ext-pgfulltext>=0.9.3',
     ],
     include_package_data=True,
     classifiers=[
