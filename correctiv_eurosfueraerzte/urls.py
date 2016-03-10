@@ -1,7 +1,11 @@
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
-from correctiv_community.helpers.cache_utils import cache_page_anonymous as c
+try:
+    # Optional caching decorator
+    from correctiv_community.helpers.cache_utils import cache_page_anonymous as c
+except ImportError:
+    c = lambda x: x
 
 from .views import (IndexView, SearchView, DrugDetailView,
                     ObservationalStudyDetailView, CompanyDetailView)
