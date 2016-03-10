@@ -7,7 +7,7 @@ def update_sitemap(sitemap_dict):
     sitemap_dict.update({
         'eurosfueraerzte-drugs': DrugSitemap,
         'eurosfueraerzte-observationalstudy': ObservationalStudySitemap,
-        'eurosfueraerzte-pharmacompnay': PharmaCompanySitemap
+        'eurosfueraerzte-pharmacompany': PharmaCompanySitemap
     })
     return sitemap_dict
 
