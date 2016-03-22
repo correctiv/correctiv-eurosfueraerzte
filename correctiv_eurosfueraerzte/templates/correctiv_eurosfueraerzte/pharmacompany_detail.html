@@ -16,27 +16,29 @@
 
 <p>{% blocktrans with name=object.name %}„{{ name }}“ is responsible for the following products.{% endblocktrans %}</p>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>{% trans "Name" %}</th>
-      <th>{% trans "Number of Observational Studies" %}</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for drug in drug_list %}
-    <tr>
-      <td>
-        <a href="{{ drug.get_absolute_url }}">
-          {{ drug.name }}
-        </a>
-      </td>
-      <td>
-        {{ drug.study_count }}
-      </td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>{% trans "Name" %}</th>
+        <th>{% trans "Number of Observational Studies" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for drug in drug_list %}
+      <tr>
+        <td>
+          <a href="{{ drug.get_absolute_url }}">
+            {{ drug.name }}
+          </a>
+        </td>
+        <td>
+          {{ drug.study_count }}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 {% endblock %}
