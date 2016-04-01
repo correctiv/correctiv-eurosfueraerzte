@@ -1,36 +1,34 @@
 {% load i18n static sekizai_tags %}
 
-<li class="entry-list-item -featured">
-  <div class="search-tile">
+<div class="search-tile">
 
-      <a href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
-        <h2 class="search-tile__logo">
-          {% trans "Euros for Doctors" %}
-        </h2>
+  <a href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
+    <h2 class="search-tile__logo">
+      {% trans "Euros for Doctors" %}
+    </h2>
+  </a>
+
+  <form method="get" class="search-tile__form" action="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}">
+    <p class="search-tile__claim">
+      {% trans "Is your medicine pushed by big pharma?" %}
+    </p>
+
+    <div class="input-group">
+      <input id="eurosfueraerzte-q" name="q" type="text" class="form-control" placeholder="{% trans "Drug name" %}">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="submit">{% trans "Search" %}</button>
+      </span>
+    </div>
+
+    <small class="search-tile__help">
+      {% trans "Example:" %}
+      <a class="search-tile__link" href="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}?q=Avastin">
+        {% trans "Avastin" %}
       </a>
+    </small>
+  </form>
 
-      <form method="get" class="search-tile__form" action="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}">
-        <p class="search-tile__claim">
-          {% trans "Is your medicine pushed by big pharma?" %}
-        </p>
-
-        <div class="input-group">
-          <input id="eurosfueraerzte-q" name="q" type="text" class="form-control" placeholder="{% trans "Drug name" %}">
-          <span class="input-group-btn">
-            <button class="btn btn-primary" type="submit">{% trans "Search" %}</button>
-          </span>
-        </div>
-
-        <small class="search-tile__help">
-          {% trans "Example:" %}
-          <a class="search-tile__link" href="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}?q=Avastin">
-            {% trans "Avastin" %}
-          </a>
-        </small>
-      </form>
-
-  </div>
-</li>
+</div>
 
 {% addtoblock "css" %}
   <link rel="stylesheet" href="{% static 'eurosfueraerzte/css/search_tile.css' %}" type="text/css" />
