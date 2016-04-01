@@ -6,6 +6,7 @@
 }
 
 .search-tile__logo {
+  overflow: hidden;
   background: #8ec6dd url('../img/euros-fuer-aerzte_logo.svg');
   background-repeat: no-repeat;
   background-position: 22px bottom;
