@@ -14,7 +14,13 @@
   {% blocktrans with name=object.name %}Pharma Company „{{ name }}“{% endblocktrans %}
 </h2>
 
-<p>{% blocktrans with name=object.name %}„{{ name }}“ is responsible for the following products.{% endblocktrans %}</p>
+<h3>{% blocktrans with name=object.name %}Payments to doctors by „{{ name }}“{% endblocktrans %}</h3>
+
+{# TODO: Direct payments total with link to search #}
+
+{# TODO: Aggregate payments list #}
+
+<h3>{% blocktrans with name=object.name %}„{{ name }}“ is responsible for the following products.{% endblocktrans %}</h3>
 
 <div class="table-responsive">
   <table class="table">

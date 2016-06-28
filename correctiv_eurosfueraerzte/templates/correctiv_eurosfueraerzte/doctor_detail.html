@@ -1,0 +1,56 @@
+{% extends "correctiv_eurosfueraerzte/base_doctors.html" %}
+
+{% load i18n %}
+{% load number_utils %}
+{% load humanize %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block additional_meta %}
+  <meta name="description" content="{{ description }}">
+{% endblock %}
+
+{% block content %}
+  <h2>
+    {{ object.get_full_name }}
+  </h2>
+
+  {# Total #}
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{% trans "Company" %}</th>
+          <th>{% trans "Payment type" %}</th>
+          <th>{% trans "Year" %}</th>
+          <th class="text-right">{% trans "Amount" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% with payments=object.pharmapayment_set.all %}
+      {% for payment in payments %}
+        <tr>
+          <td>
+            {% if payment.pharma_company %}
+              <a href="{{ payment.pharma_company.get_absolute_url }}">
+                {{ payment.pharma_company.name }}
+              </a>
+            {% endif %}
+          </td>
+          <td>
+            {{ payment.get_label_display }}
+          </td>
+          <td>
+            {{ payment.date.year }}
+          </td>
+          <td class="text-right">
+            {{ payment.amount|intcomma_floatformat:2 }}&nbsp;€
+          </td>
+        </tr>
+      {% endfor %}
+    {% endwith %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

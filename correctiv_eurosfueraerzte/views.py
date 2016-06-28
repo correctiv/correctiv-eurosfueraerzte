@@ -6,14 +6,15 @@ from django.http import HttpResponse, QueryDict
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Drug, ObservationalStudy, PharmaCompany
-from .forms import SearchForm
+from .models import Drug, ObservationalStudy, PharmaCompany, Doctor
+from .forms import SearchForm, DoctorSearchForm
 
 
 class SearchMixin(object):
     def get_context_data(self, **kwargs):
         context = super(SearchMixin, self).get_context_data(**kwargs)
         context['form'] = SearchForm()
+        context['doctor_form'] = DoctorSearchForm()
         return context
 
 
@@ -30,11 +31,12 @@ class IndexView(SearchMixin, TemplateView):
 
 class SearchView(ListView):
     model = Drug
+    search_form = SearchForm
     paginate_by = 20
 
     def get_queryset(self):
         qs = super(SearchView, self).get_queryset()
-        self.form = SearchForm(self.request.GET)
+        self.form = self.search_form(self.request.GET)
         if self.kwargs.get('json'):
             result = self.form.autocomplete(qs)
         else:
@@ -53,12 +55,32 @@ class SearchView(ListView):
 
     def render_to_response(self, context, **response_kwargs):
         if self.kwargs.get('json'):
-            autocomplete_list = [{'name': o.name, 'url': o.get_absolute_url()}
-                                          for o in context['object_list'][:20]]
+            autocomplete_list = [
+                {'name': o.name,
+                 'url': o.get_absolute_url()}
+                for o in context['object_list'][:20]]
             return HttpResponse(json.dumps(autocomplete_list),
                                 content_type='application/json')
         return super(SearchView, self).render_to_response(context,
                                                           **response_kwargs)
+
+
+class DoctorSearchView(SearchView):
+    model = Doctor
+    search_form = DoctorSearchForm
+
+
+class DoctorDetailView(SearchMixin, DetailView):
+    model = Doctor
+
+    def get_context_data(self, **kwargs):
+        context = super(DoctorDetailView, self).get_context_data(**kwargs)
+        context['aggs'] = self.object.get_aggregates()
+        context['title'] = _('Payments to %(name)s') % {'name': self.object.get_full_name()}
+        context['description'] = _('Details on how much money %(name)s got from pharma companies.') % {
+            'name': self.object.get_full_name()
+        }
+        return context
 
 
 class DrugDetailView(SearchMixin, DetailView):
@@ -101,6 +123,6 @@ class CompanyDetailView(SearchMixin, DetailView):
         context['title'] = _('Pharma company  %(name)s') % {
             'name': self.object.name
         }
-        context['description'] = _('Details on which drugs where pushed by %(name)s through observational studies.') % {
+        context['description'] = _('Details on how money from %(name)s goes to doctors and observational studies.') % {
             'name': self.object.name}
         return context

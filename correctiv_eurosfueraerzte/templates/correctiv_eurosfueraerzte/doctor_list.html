@@ -1,4 +1,4 @@
-{% extends "correctiv_eurosfueraerzte/base_drugs.html" %}
+{% extends "correctiv_eurosfueraerzte/base_doctors.html" %}
 
 {% load i18n %}
 
@@ -6,7 +6,7 @@
 {% block title %}{% blocktrans with query=query %}Search for „{{ query }}” in Euros for Doctors Database{% endblocktrans %}{% endblock %}
 
 {% block additional_meta %}
-<meta name="description" content="{% blocktrans %}The database about which drugs where pushed by pharma companies.{% endblocktrans %}">
+<meta name="description" content="{% blocktrans %}The database about money flows from pharma companies to doctors.{% endblocktrans %}">
 {% endblock %}
 
 {% block content %}
@@ -15,25 +15,24 @@
     <table class="table">
       <thead>
         <tr>
-          <th>{% trans "Name" %}</th>
-          <th>{% trans "Company" %}</th>
-          <th class="text-right">{% trans "Number of studies" %}</th>
+          <th>{% trans "Doctor Name" %}</th>
+          <th>{% trans "Address" %}</th>
+          <th class="text-right">{% trans "Total amount" %}</th>
         </tr>
       </thead>
     {% for object in object_list %}
       <tr>
         <td>
           <a href="{{ object.get_absolute_url }}">
-            {{ object.name }}
+            {{ object.get_full_name }}
           </a>
         </td>
         <td>
-          <a href="{{ object.pharma_company.get_absolute_url }}">
-            {{ object.pharma_company.name }}
-          </a>
+          {{ object.address }}<br/>
+          {{ object.postcode }} {{ object.location }}
         </td>
         <td class="text-right">
-          {{ object.study_count }}
+          {{ object.payments_total }}&nbsp;€
         </td>
       </tr>
     {% endfor %}

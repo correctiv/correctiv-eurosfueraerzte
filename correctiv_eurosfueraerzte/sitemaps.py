@@ -1,6 +1,6 @@
 from django.contrib.sitemaps import Sitemap
 
-from .models import Drug, ObservationalStudy, PharmaCompany
+from .models import Drug, ObservationalStudy, PharmaCompany, Doctor
 
 
 def update_sitemap(sitemap_dict):
@@ -43,3 +43,14 @@ class ObservationalStudySitemap(Sitemap):
         Return published entries.
         """
         return ObservationalStudy.objects.all()
+
+
+class DoctorSitemap(Sitemap):
+    priority = 0.25
+    changefreq = 'yearly'
+
+    def items(self):
+        """
+        Return published entries.
+        """
+        return Doctor.objects.all()

@@ -5,6 +5,40 @@
 {% load number_utils %}
 
 {% block content %}
+
+<header class="page__section-header ">
+  <h2 class="page__section-headline">
+    {% trans "Has your doctor received money from pharma companies?" %}
+  </h2>
+</header>
+
+{% include "correctiv_eurosfueraerzte/_doctor_search.html" %}
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>{% trans "Top paying companies" %}</h3>
+    <ol>
+      <li>Bayer Ipsum</li>
+      <li>Lorem Sanophis</li>
+    </ol>
+  </div>
+  <div class="col-md-6">
+    <h3>{% trans "Known top money-receiving doctors" %}</h3>
+    <ol>
+      <li>Lorem Müller</li>
+      <li>Peter Ipsum</li>
+    </ol>
+  </div>
+</div>
+
+<header class="page__section-header ">
+  <h2 class="page__section-headline">
+    {% trans "Was your medicine pushed by pharma companies?" %}
+  </h2>
+</header>
+
+{% include "correctiv_eurosfueraerzte/_drug_search.html" %}
+
 <div class="row">
   <div class="col-md-6">
     <h3>{% trans "Top drugs by study patients" %}</h3>

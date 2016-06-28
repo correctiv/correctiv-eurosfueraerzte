@@ -1,0 +1,26 @@
+{% load i18n %}
+
+<div class="row">
+  <div class="col-md-8">
+    {% if not is_index %}
+      <div class="pull-right">
+        <a href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
+          {% trans "back to the index" %}
+        </a>
+      </div>
+    {% endif %}
+    <form action="{% url 'eurosfueraerzte:eurosfueraerzte-doctorsearch' %}" method="get">
+      <div class="form-group">
+        <label for="id_q_doctors">
+          {% trans "Search for your doctor" %}
+        </label>
+        <div class="input-group">
+          {{ doctor_form.q }}
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

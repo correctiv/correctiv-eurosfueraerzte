@@ -11,34 +11,13 @@
 {% endblock %}
 
 {% block main %}
-{% block top_search %}
-  <h1>{% trans "Database Search" %}</h1>
-  <div class="row">
-    <div class="col-md-8">
-      {% if not is_index %}
-        <div class="pull-right">
-          <a href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
-            {% trans "back to the index" %}
-          </a>
-        </div>
-      {% endif %}
-      <form action="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}" method="get">
-        <div class="form-group">
-          <label for="id_q">
-            {% trans "Search for your medicine" %}
-          </label>
-          <div class="input-group">
-            {{ form.q }}
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
-            </span>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
+<h1>
+  <a href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
+    {% trans "“Euros for Doctors” Database" %}
+  </a>
+</h1>
 
-{% endblock %}
+{% block before_content %}{% endblock %}
 
 {% block content %}
 {% endblock %}
@@ -54,25 +33,28 @@
 {% addtoblock "js" %}
   <script type="text/javascript">
   (function(){
-    var searchUrl = '{% url 'eurosfueraerzte:eurosfueraerzte-search_json' %}';
-    var xhr;
-    $("#id_q").autoComplete({
-      source: function(term, response){
-        try { xhr.abort(); } catch(e){}
-        xhr = $.getJSON(searchUrl, { q: term }, function(data){ response(data); });
-      },
-      renderItem: function (itemObj, search){
-        item = itemObj.name;
-        search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-        var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
-        return '<div class="autocomplete-suggestion" data-url="' +itemObj.url + '" data-val="' + item + '">' +
-              item.replace(re, "<mark>$1</mark>") + '</div>';
-      },
-      onSelect: function(e, term, item){
-        e.preventDefault();
-        document.location.href = $(item).data('url');
-      }
-    });
+      var makeAutocomplete = function(elem, url) {
+      var xhr;
+      elem.autoComplete({
+        source: function(term, response){
+          try { xhr.abort(); } catch(e){}
+          xhr = $.getJSON(searchUrl, { q: term }, function(data){ response(data); });
+        },
+        renderItem: function (itemObj, search){
+          item = itemObj.name;
+          search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+          var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+          return '<div class="autocomplete-suggestion" data-url="' +itemObj.url + '" data-val="' + item + '">' +
+                item.replace(re, "<mark>$1</mark>") + '</div>';
+        },
+        onSelect: function(e, term, item){
+          e.preventDefault();
+          document.location.href = $(item).data('url');
+        }
+      });
+    };
+    var searchUrl = "{% url 'eurosfueraerzte:eurosfueraerzte-search_json' %}";
+    makeAutocomplete($("#id_q"), searchUrl);
   }());
   </script>
 {% endaddtoblock %}
