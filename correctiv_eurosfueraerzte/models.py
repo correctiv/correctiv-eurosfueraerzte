@@ -353,6 +353,11 @@ class PaymentRecipient(models.Model):
     def __str__(self):
         return self.name
 
+    def natural_key(self):
+        return (self.slug,)
+    natural_key.dependencies = []
+
+
 
 @python_2_unicode_compatible
 class Doctor(PaymentRecipient):
