@@ -15,7 +15,6 @@ Templates are made to work within our `correctiv.org` environment:
 
 - a `CMS_TEMPLATE` variable is used as a base template location
 - `django-sekizai` is used to add css / js
-- a `number_utils` template tag is used
 
 You might need to overwrite them, if you want to run this project in a different
 environment.

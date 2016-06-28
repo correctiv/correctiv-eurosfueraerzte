@@ -1,0 +1,48 @@
+{% load sekizai_tags %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}"{% block html-attribtues %}{% endblock %}>
+  <head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}SET A TITLE{% endblock %} – {{ site.name }}</title>
+  {% block head-icons %}{% endblock %}
+  {% block head-links %}{% endblock %}
+  {% block head-alternate %}{% endblock %}
+  {% block head-css %}{% endblock %}
+  {% render_block "css" %}
+  {% block head-meta %}
+    {% block additional_meta %}{% endblock %}
+  {% endblock %}
+  <meta name="google-site-verification" content="9ZHuOShp6W0YXJiAl_Sc2GdrghvJUV7UDhjggqfORa8" />
+  {% block head-social-meta %}{% endblock %}
+</head>
+
+<body {% block body-attributes %}{% endblock %} class='{% block body-class %}{% endblock %}'>
+
+      {% block body-sheath %}
+      <main>
+        {% block body %}
+
+        {% block pre_main_container %}{% endblock %}
+
+          {% block main_wrapper %}
+
+          <div class="page__container">
+            {% block main %}{% endblock %}
+          </div>
+
+          {% endblock main_wrapper %}
+
+          {% block post_main_container %}{% endblock %}
+
+        {% endblock %}
+      </main>
+      {% endblock %}
+
+    <script>
+      {% block javascript-variables %}{% endblock %}
+    </script>
+    {% block javascript-libraries %}{% endblock %}
+    {% render_block "js" %}
+    {% block javascript-asynchronous %}{% endblock %}
+  </body>
+</html>
