@@ -83,6 +83,7 @@ _default_db = dj_database_url.config(
 
 if 'postgresql' in _default_db['ENGINE']:
     _default_db['CONN_MAX_AGE'] = 600
+    _default_db['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
 DATABASES = {
     'default': _default_db,

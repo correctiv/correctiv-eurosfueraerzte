@@ -9,3 +9,4 @@ django-sekizai==0.9.0
 -e git+https://github.com/stefanw/djorm-ext-pgfulltext.git#egg=djorm-ext-pgfulltext
 psycopg2==2.6.1
 django-leaflet==0.18.1
+gunicorn
