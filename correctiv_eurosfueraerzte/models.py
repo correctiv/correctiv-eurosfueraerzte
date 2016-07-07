@@ -43,6 +43,8 @@ class PharmaCompany(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
 
+    sub_names = models.TextField(blank=True)
+
     web = models.CharField(max_length=1024, blank=True)
     payments_url = models.CharField(max_length=1024, blank=True)
 
@@ -51,6 +53,7 @@ class PharmaCompany(models.Model):
     objects = PharmaCompanyManager(
         fields=[
             ('name', 'A'),
+            ('sub_names', 'B')
         ],
         config='pg_catalog.german',
         search_field='search_index',
@@ -301,7 +304,10 @@ MANAGER_KWARGS = dict(
     fields=[
         ('first_name', 'A'),
         ('name', 'A'),
+        ('name_detail', 'B'),
+        ('related_names', 'B'),
         ('location', 'B'),
+        ('postcode', 'B'),
         ('address', 'C'),
         ('orientations', 'C'),
     ],
@@ -322,6 +328,9 @@ class PaymentRecipient(models.Model):
         (0, _('Doctors (HCP)')),
         (1, _('Organisation (HCO)')),
     ))
+
+    name_detail = models.CharField(max_length=255, blank=True)
+    related_names = models.TextField(blank=True)
 
     address = models.CharField(max_length=512, blank=True)
     postcode = models.CharField(max_length=10, blank=True)
@@ -356,7 +365,6 @@ class PaymentRecipient(models.Model):
     def natural_key(self):
         return (self.slug,)
     natural_key.dependencies = []
-
 
 
 @python_2_unicode_compatible
@@ -440,7 +448,8 @@ class PharmaPayment(models.Model):
     recipient_kind = models.SmallIntegerField(choices=(
             (0, _('Doctors (HCP)')),
             (1, _('Organisation (HCO)')),
-        ), null=True, blank=True)
+            ), null=True, blank=True)
+    recipient_detail = models.CharField(max_length=512, blank=True)
     recipient_count = models.IntegerField(null=True, blank=True)
 
     note = models.TextField(blank=True)

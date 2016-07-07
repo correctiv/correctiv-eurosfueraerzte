@@ -20,10 +20,12 @@ urlpatterns = [
         {'json': True}, name='eurosfueraerzte-search_json'),
     url(_(r'^doctorsearch/$'), DoctorSearchView.as_view(),
         name='eurosfueraerzte-doctorsearch'),
+
     url(_(r'^doctor/(?P<slug>[\w-]+)/$'), DoctorDetailView.as_view(),
         name='eurosfueraerzte-doctordetail'),
     url(_(r'^organisation/(?P<slug>[\w-]+)/$'), DoctorDetailView.as_view(),
         name='eurosfueraerzte-organisationdetail'),
+
     url(_(r'^drug/(?P<slug>[\w-]+)/$'), DrugDetailView.as_view(),
         name='eurosfueraerzte-drugdetail'),
     url(_(r'^study/(?P<year>\d{4,})/(?P<pk>\d+)/(?P<slug>[\w-]+)/$'),
