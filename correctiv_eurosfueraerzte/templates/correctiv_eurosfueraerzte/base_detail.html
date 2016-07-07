@@ -1,0 +1,48 @@
+{% extends "correctiv_eurosfueraerzte/base.html" %}
+
+{% load i18n %}
+{% load number_utils %}
+{% load humanize %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block additional_meta %}
+  <meta name="description" content="{{ description }}">
+{% endblock %}
+
+{% block before_content %}
+  <header class="efa__header--split">
+    <div class="container">
+      <div class="efa__header__main">
+        <div class="efa__header__content">
+
+          <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
+            {% trans "Euros for Doctors" %}
+          </a>
+
+          <h1 class="efa__header__title">
+            {% block header_title %}{{ title }}{% endblock %}
+          </h1>
+
+          {% block header_content %}{% endblock %}
+
+        </div>
+      </div>
+      <div class="efa__header__sidebar{% block header_sidebar_modifier %}{% endblock %}">
+        <div class="efa__header__about">
+
+          <h2 class="efa__header__title--light">
+            {% block header_sidebar_title %}{% endblock %}
+          </h2>
+
+          {% block header_sidebar_about %}{% endblock %}
+
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

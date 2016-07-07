@@ -1,4 +1,4 @@
-{% extends "correctiv_eurosfueraerzte/base_doctors.html" %}
+{% extends "correctiv_eurosfueraerzte/base_detail.html" %}
 
 {% load i18n %}
 {% load number_utils %}
@@ -10,34 +10,26 @@
   <meta name="description" content="{{ description }}">
 {% endblock %}
 
-{% block before_content %}
-  <header class="efa__header--split">
-    <div class="container">
-      <div class="efa__header__main">
-        <div class="efa__header__content">
-          <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
-            {% trans "Euros for Doctors" %}
-          </a>
-          <h2 class="efa__header__title">
-            {{ object.get_full_name }}
-          </h2>
-          {% if object.orientation %}
-            <span class="efa__header__meta">{{ object.orientation }}</span>
-          {% endif %}
-          <a class="efa__header__back-link" href="#">{{ object.location }}</a>
-        </div>
-      </div>
-      <div class="efa__header__sidebar--pharma">
-        <div class="efa__header__about">
-          <h1 class="efa__header__title--light">
-            {% trans "Euros for Doctors" %}
-          </h1>
-          <p>Die Pharamaunternehmen veröffentlichen erstmals Gelder die sie an Ärzte und Einrichtungen, Lorem Ipsum mehr Text.</p>
-          <a class="efa__header__more-link" href="#">zum Hintergrundartikel</a>
-        </div>
-      </div>
-    </div>
-  </header>
+{% block header_title %}
+  {{ object.get_full_name }}
+{% endblock %}
+
+{% block header_content %}
+  {% if object.orientation %}
+    <span class="efa__header__meta">{{ object.orientation }}</span>
+  {% endif %}
+  <a class="efa__header__back-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-doctorsearch' %}?q={{ object.location }}">
+    {{ object.location }}
+  </a>
+{% endblock %}
+
+{% block header_sidebar_title %}
+  {% trans "Euros for Doctors" %}
+{% endblock %}
+
+{% block header_sidebar_about %}
+  <p>{% trans "Die 54 größten Pharma-Unternehmen in Deutschland veröffentlichen im Jahr 2016 erstmals alle Geldzahlungen, die sie im vergangenen Jahr an Ärzte und Kliniken geleistet haben." %}</p>
+  <a class="efa__header__more-link" href="#">background article</a>
 {% endblock %}
 
 {% block content %}

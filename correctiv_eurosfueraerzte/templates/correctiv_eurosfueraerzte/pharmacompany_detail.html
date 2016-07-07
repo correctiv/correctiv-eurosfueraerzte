@@ -1,4 +1,4 @@
-{% extends "correctiv_eurosfueraerzte/base.html" %}
+{% extends "correctiv_eurosfueraerzte/base_detail.html" %}
 
 {% load i18n %}
 {% load number_utils %}
@@ -9,12 +9,51 @@
 <meta name="description" content="{% blocktrans with name=object.name %}Details on which drugs where pushed by {{ name }} through observational studies.{% endblocktrans %}">
 {% endblock %}
 
-{% block content %}
-<h2>
-  {% blocktrans with name=object.name %}Pharma Company „{{ name }}“{% endblocktrans %}
-</h2>
+{% block header_title %}{{ object.name }}{% endblock %}
 
-<h3>{% blocktrans with name=object.name %}Payments to doctors by „{{ name }}“{% endblocktrans %}</h3>
+{% block header_content %}
+  <a class="efa__header__back-link" href="#">{% trans "Show all pharma companies" %}</a>
+{% endblock %}
+
+{% block header_sidebar_title %}
+  XX Mio. €
+  {# TODO: payments total #}
+{% endblock %}
+
+{% block header_sidebar_modifier %}{% endblock %}
+
+{% block header_sidebar_about %}
+  <p>{% blocktrans with name=object.name %}Gesamtsumme, die die {{ name }} im vergangenen Jahr an Ärzte und Einrichtungen gezahlt hat.{% endblocktrans %}</p>
+  <a class="efa__header__more-link" href="#">read the background article</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="page__row">
+    <div class="page__section -narrow">
+      <p>Die Zahlungen an Ärzte für Tagungsgebühren, Reisekosten, Beratungs&shy;honorare und Spesen werden personenbezogen veröffentlicht – wenn der jeweilige Arzt zustimmt. Für den Rest wird die Summe zusammengefasst angegeben. Grundsätzlich nur zusammengefasst werden die Zahlungen im Rahmen von Studien und Anwendungsbeobachtungen veröffentlicht.</p>
+    </div>
+
+    <div class="page__sidebar">
+      <div class="well">
+        <p>Die Informationen auf dieser Seite stammen von den 54 Mitgliedsfirmen der „Freiwilligen Selbstkontrolle für die Arzneimittelindustrie e.V.“, die diese Angaben auf ihren jeweiligen Webseiten veröffentlicht haben.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page__row">
+    <div class="page__section -narrow">
+      <header class="page__section-header ">
+        <h3 class="page__section-headline">{% trans "Observational Studies" %}</h3>
+      </header>
+
+      <p>{% blocktrans with name=object.name %}Die {{ name }} hat den Behörden folgende Anwendungsbeobachtungen (AWB) gemeldet. Bei AWBs erhalten Ärzte Geld dafür, dass sie beobachten, wie gut ein Patient ein bestimmtes Präparat verträgt. Viele Wissenschaftler halten AWBs aber für ein Marketinginstrument, weil sie methodisch in der Regel zu schlecht sind, um daraus medizinische Erkenntnisse zu gewinnen.{% endblocktrans %}</p>
+    </div>
+
+    <div class="page__sidebar">
+
+    </div>
+  </div>
 
 {# TODO: Direct payments total with link to search #}
 
