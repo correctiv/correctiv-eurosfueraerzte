@@ -47,6 +47,8 @@ class PharmaCompanyAdmin(ReplacementMixin, admin.ModelAdmin):
     def handle_replacement(self, real_object, queryset):
         Drug.objects.filter(pharma_company__in=queryset).update(
                             pharma_company=real_object)
+        PharmaPayment.objects.filter(pharma_company__in=queryset).update(
+                            pharma_company=real_object)
 
 
 class DrugAdmin(ReplacementMixin, admin.ModelAdmin):
@@ -75,13 +77,15 @@ class PharmaPaymentInlineAdmin(admin.TabularInline):
     model = PharmaPayment
 
 
-class PaymentRecipientAdmin(LeafletGeoAdmin):
+class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
     list_filter = ('kind',)
-    # fieldsets = (
-    #     (_('name'), {
-    #         'fields': ()
-    #     }
-    # ))
+    search_fields = ('first_name', 'name', 'address', 'postcode', 'location')
+
+    actions = ['replace_objects']
+
+    def handle_replacement(self, real_object, queryset):
+        PharmaPayment.objects.filter(recipient__in=queryset).update(
+                            recipient=real_object)
 
 
 class DoctorAdmin(LeafletGeoAdmin):
