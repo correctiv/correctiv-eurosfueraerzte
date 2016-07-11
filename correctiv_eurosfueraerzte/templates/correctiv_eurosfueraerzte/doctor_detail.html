@@ -54,8 +54,12 @@
       </thead>
       <tfoot>
        <tr>
-           <td colspan="2" class="text-right">{% trans "Total" %}</td>
-           <td class="text-right">{{ aggs.payments_total }} €</td>
+           <td colspan="2" class="text-right">
+             {% trans "Total" %}
+           </td>
+           <td class="text-right">
+             {{ aggs.payments_total|intcomma_floatformat:2 }}&nbsp;€
+           </td>
        </tr>
      </tfoot>
       <tbody>
@@ -92,7 +96,7 @@
       <a href="{{ same_object.get_absolute_url }}">
         {{ same_object.get_full_name }}
       </a>
-      {{ same_object.payments_total }} EUR
+      {{ same_object.payments_total|intcomma_floatformat:2 }}&nbsp;€
     </li>
   {% endfor %}
   </ul>
@@ -106,7 +110,7 @@
       <a href="{{ nearby_object.get_absolute_url }}">
         {{ nearby_object.get_full_name }}
       </a>
-      ({{ nearby_object.distance }}, {{ nearby_object.payments_total }} EUR)
+      ({{ nearby_object.distance }}, {{ nearby_object.payments_total|intcomma_floatformat:2 }}&nbsp;€)
     </li>
   {% endfor %}
   </ul>
