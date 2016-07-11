@@ -4,15 +4,16 @@
 {% load humanize %}
 {% load number_utils %}
 
-{% block content %}
+{% block before_content %}
+  {% include "correctiv_eurosfueraerzte/_doctor_search.html" %}
+{% endblock %}
 
+{% block content %}
 <header class="page__section-header ">
   <h2 class="page__section-headline">
     {% trans "Has your doctor received money from pharma companies?" %}
   </h2>
 </header>
-
-{% include "correctiv_eurosfueraerzte/_doctor_search.html" %}
 
 <div class="row">
   <div class="col-md-6">

@@ -1,26 +1,35 @@
 {% load i18n %}
 
-<div class="row">
-  <div class="col-md-8">
-    {% if not is_index %}
-      <div class="pull-right">
-        <a href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
-          {% trans "back to the index" %}
+<section class="efa__search">
+  <div class="page__container">
+    <form class="efa__search__form" action="{% url 'eurosfueraerzte:eurosfueraerzte-doctorsearch' %}" method="get">
+        <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
+          {% trans "Euros for Doctors" %}
         </a>
-      </div>
-    {% endif %}
-    <form action="{% url 'eurosfueraerzte:eurosfueraerzte-doctorsearch' %}" method="get">
-      <div class="form-group">
-        <label for="id_q_doctors">
-          {% trans "Search for your doctor" %}
-        </label>
+
+        <h1 class="efa__search__title">
+          {% trans "Find your doctor" %}
+        </h1>
+
+        <p class="efa__search__lead">
+          {% trans "Wie viel Geld hat Dein Arzt im vergangenen Jahr von der Pharmaindustrie bekommen?" %}
+        </p>
+
         <div class="input-group">
           {{ doctor_form.q }}
           <span class="input-group-btn">
             <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
           </span>
         </div>
-      </div>
+
+        <div class="efa__search__examples">
+          Beispiele:
+          <a href="{% url 'eurosfueraerzte:eurosfueraerzte-doctorsearch' %}?q=45147">45147</a>
+          {% trans "or" %}
+          <a href="{% url 'eurosfueraerzte:eurosfueraerzte-doctorsearch' %}?q=Dinslaken">Dinslaken</a>
+          {% trans "or" %}
+          <a href="{% url 'eurosfueraerzte:eurosfueraerzte-doctorsearch' %}?q=müller">Müller</a>
+        </div>
     </form>
   </div>
-</div>
+</section>
