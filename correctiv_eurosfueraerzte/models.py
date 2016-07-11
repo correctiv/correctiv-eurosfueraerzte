@@ -50,19 +50,21 @@ class PharmaCompanyManager(SearchManager):
             'labels': [
                 {
                     'total': val_row.sum(),
-                    # 'top5': (
-                    #     PaymentRecipient.objects.filter(
-                    #         kind=kind
-                    #     ).
-                    #     obj.pharmapayment_set.all()
-                    #     .filter(
-                    #         recipient_kind=kind, label=label,
-                    #         recipient__isnull=False
-                    #     )
-                    #     .values('recipient')
-                    #     .annotate(amount=models.Sum('amount'))
-                    #     .order_by('-amount')[:5]
-                    # ),
+                    'top5': (
+                        PaymentRecipient.objects.filter(
+                            kind=kind
+                        ).extra(select={
+                          "amount": """
+                          SELECT COALESCE(SUM(correctiv_eurosfueraerzte_pharmapayment.amount), 0.0) AS amount FROM
+                          correctiv_eurosfueraerzte_pharmapayment
+                          WHERE
+                          correctiv_eurosfueraerzte_paymentrecipient.id = correctiv_eurosfueraerzte_pharmapayment.recipient_id AND
+                          correctiv_eurosfueraerzte_pharmapayment.pharma_company_id = %s AND
+                          correctiv_eurosfueraerzte_pharmapayment.label = %s AND
+                          correctiv_eurosfueraerzte_pharmapayment.recipient_kind = %s
+                          """}, select_params=(obj.id, label, kind))
+                        .order_by('-amount')[:5]
+                    ),
                     'label': PharmaPayment.PAYMENT_LABELS_DICT[label],
                     'individual_percent': (val_row.get(True, 0) or 0) / val_row.sum() * 100,
                     'aggregated_percent': (val_row.get(False, 0) or 0) / val_row.sum() * 100,

@@ -25,7 +25,12 @@
 
   <ol>
   {% for recipient in label.top5 %}
-    <li>{{ recipient }} - {{ recipient.payments_total|intcomma_floatformat:2 }}</li>
+    <li>
+      <a href="{{ recipient.get_absolute_url }}">
+        {{ recipient.get_full_name }}
+      </a>
+       - {{ recipient.amount|intcomma_floatformat:2 }}&nbsp;€
+    </li>
   {% endfor %}
   </ol>
 </div>
