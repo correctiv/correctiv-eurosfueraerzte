@@ -451,6 +451,8 @@ class PaymentRecipient(models.Model):
     get_full_name.short_description = _('Name')
 
     def get_nearby(self, **kwargs):
+        if self.geo is None:
+            return PaymentRecipient.objects.none()
         return PaymentRecipient.objects.get_by_distance_to_point(
                 self.geo, **kwargs)
 
