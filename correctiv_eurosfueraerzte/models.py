@@ -382,7 +382,11 @@ class PaymentRecipient(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('eurosfueraerzte:eurosfueraerzte-doctordetail', (), {
+        if self.kind == 0:
+            urlname = 'eurosfueraerzte:eurosfueraerzte-doctordetail'
+        else:
+            urlname = 'eurosfueraerzte:eurosfueraerzte-organisationdetail'
+        return (urlname, (), {
             'slug': self.slug
         })
 

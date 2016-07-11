@@ -6,7 +6,8 @@ from django.http import HttpResponse, QueryDict
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Drug, ObservationalStudy, PharmaCompany, Doctor
+from .models import (Drug, ObservationalStudy, PharmaCompany,
+                     Doctor, HealthCareOrganisation)
 from .forms import SearchForm, DoctorSearchForm
 
 
@@ -70,11 +71,9 @@ class DoctorSearchView(SearchView):
     search_form = DoctorSearchForm
 
 
-class DoctorDetailView(SearchMixin, DetailView):
-    model = Doctor
-
+class RecipientDetailView(SearchMixin, DetailView):
     def get_context_data(self, **kwargs):
-        context = super(DoctorDetailView, self).get_context_data(**kwargs)
+        context = super(RecipientDetailView, self).get_context_data(**kwargs)
         context['aggs'] = self.object.get_aggregates()
         context['same_address_objects'] = self.object.get_nearby(only_same=True).exclude(pk=self.object.pk)[:10]
         context['nearby_objects'] = self.object.get_nearby(include_same=False)[:10]
@@ -83,6 +82,14 @@ class DoctorDetailView(SearchMixin, DetailView):
             'name': self.object.get_full_name()
         }
         return context
+
+
+class DoctorDetailView(RecipientDetailView):
+    model = Doctor
+
+
+class OrganisationDetailView(RecipientDetailView):
+    model = HealthCareOrganisation
 
 
 class DrugDetailView(SearchMixin, DetailView):
