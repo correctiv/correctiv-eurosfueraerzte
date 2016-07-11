@@ -78,7 +78,7 @@ class DoctorDetailView(SearchMixin, DetailView):
         context['aggs'] = self.object.get_aggregates()
         context['same_address_objects'] = self.object.get_nearby(only_same=True).exclude(pk=self.object.pk)[:10]
         context['nearby_objects'] = self.object.get_nearby(include_same=False)[:10]
-        context['title'] = _('Payments to %(name)s') % {'name': self.object.get_full_name()}
+        context['title'] = _('%(name)s and money from the pharma industry') % {'name': self.object.get_full_name()}
         context['description'] = _('Details on how much money %(name)s got from pharma companies.') % {
             'name': self.object.get_full_name()
         }
