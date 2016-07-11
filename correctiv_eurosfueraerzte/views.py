@@ -7,15 +7,15 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 
 from .models import (Drug, ObservationalStudy, PharmaCompany,
-                     Doctor, HealthCareOrganisation)
-from .forms import SearchForm, DoctorSearchForm
+                     PaymentRecipient, Doctor, HealthCareOrganisation)
+from .forms import SearchForm, PaymentRecipientSearchForm
 
 
 class SearchMixin(object):
     def get_context_data(self, **kwargs):
         context = super(SearchMixin, self).get_context_data(**kwargs)
         context['form'] = SearchForm()
-        context['doctor_form'] = DoctorSearchForm()
+        context['recipient_form'] = PaymentRecipientSearchForm()
         return context
 
 
@@ -66,9 +66,9 @@ class SearchView(ListView):
                                                           **response_kwargs)
 
 
-class DoctorSearchView(SearchView):
-    model = Doctor
-    search_form = DoctorSearchForm
+class RecipientSearchView(SearchView):
+    model = PaymentRecipient
+    search_form = PaymentRecipientSearchForm
 
 
 class RecipientDetailView(SearchMixin, DetailView):

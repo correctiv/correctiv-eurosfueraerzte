@@ -21,7 +21,7 @@
   {% if object.orientation %}
     <span class="efa__header__meta">{{ object.orientation }}</span>
   {% endif %}
-  <a class="efa__header__back-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-doctorsearch' %}?q={{ object.location }}">
+  <a class="efa__header__back-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q={{ object.location }}">
     {% if object.address %}
       {{ object.address }}<br/>
     {% endif %}
