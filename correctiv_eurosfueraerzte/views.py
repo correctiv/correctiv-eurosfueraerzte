@@ -72,6 +72,8 @@ class DoctorSearchView(SearchView):
 
 
 class RecipientDetailView(SearchMixin, DetailView):
+    template_name = 'correctiv_eurosfueraerzte/paymentrecipient_detail.html'
+
     def get_context_data(self, **kwargs):
         context = super(RecipientDetailView, self).get_context_data(**kwargs)
         context['aggs'] = self.object.get_aggregates()
