@@ -48,27 +48,19 @@
   </div>
 
   <div class="page__row">
-    <div class="page__section -narrow">
-      <header class="page__section-header ">
-        <h3 class="page__section-headline">{% trans "Payments to doctors" %}</h3>
-      </header>
-      {% for label in payments.hcp.labels %}
-        {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label %}
-      {% endfor %}
-    </div>
-</div>
-
-
-<div class="page__row">
-  <div class="page__section -narrow">
-    <header class="page__section-header ">
-      <h3 class="page__section-headline">{% trans "Payments to organisations" %}</h3>
-    </header>
-    {% for label in payments.hco.labels %}
+    {% for label in payments.hcp.labels %}
       {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label %}
     {% endfor %}
   </div>
-</div>
+
+
+  <div class="page__block">
+    <div class="page__row">
+      {% for label in payments.hco.labels %}
+        {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label %}
+      {% endfor %}
+    </div>
+  </div>
 
   <div class="page__row">
     <div class="page__section -narrow">

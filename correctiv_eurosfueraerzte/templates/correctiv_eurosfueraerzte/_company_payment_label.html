@@ -3,19 +3,26 @@
 {% load number_utils %}
 
 
-<div>
-  <h4>{{ label.label }}</h4>
+<div class="efa__detail-vis">
 
-  <div class="progress">
-    <div class="progress-bar progress-bar-success" style="width: {{ label.vis_individual_percent|unlocalize }}%">
-      <span class="sr-only">{{ label.individual_percent }}% Individual</span>
-    </div>
-    <div class="progress-bar progress-bar-warning" style="width: {{ label.vis_aggregated_percent|unlocalize }}%">
-      <span class="sr-only">{{ label.aggregated_percent }}% Aggregated</span>
-    </div>
+  <header class="page__section-header ">
+    <h2 class="page__section-headline">
+      {{ label.label }}
+    </h2>
+  </header>
+
+  <h3 class="efa__detail-vis__sum">{{ label.total|intcomma }}&nbsp;€</h3>
+
+  <div class="efa__detail-vis__bar-chart">
+    <span class="efa__detail-vis__bar--individual" style="width: {{ label.individual_percent|unlocalize }}%"></span>
+    <span class="efa__detail-vis__bar--aggregated" style="width: {{ label.aggregated_percent|unlocalize }}%"></span>
   </div>
 
-  <p>{{ label.total|intcomma }}&nbsp;€</p>
+  <ul class="efa__detail-vis__labels">
+    <li class="efa__detail-vis__label--individual">{{ label.individual_percent }}% Individual</li>
+    <li class="efa__detail-vis__label--aggregated">{{ label.aggregated_percent }}% Aggregated</li>
+  </ul>
+
   {% blocktrans with percent=label.individual_percent|floatformat:0 %}
     {{ percent }}&nbsp;% amount to known recipients
   {% endblocktrans %}
@@ -27,9 +34,9 @@
   {% for recipient in label.top5 %}
     <li>
       <a href="{{ recipient.get_absolute_url }}">
-        {{ recipient.get_full_name }}
+        <span class="efa__detail-vis__value">{{ recipient.amount|intcomma_floatformat:2 }}&nbsp;€</span>
+        <span class="efa__detail-vis__name">{{ recipient.get_full_name }}</span>
       </a>
-       - {{ recipient.amount|intcomma_floatformat:2 }}&nbsp;€
     </li>
   {% endfor %}
   </ol>
