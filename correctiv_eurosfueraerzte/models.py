@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.postgres.fields import HStoreField
+from django.contrib.gis.measure import D
 
 from djorm_pgfulltext.models import SearchManager
 from djorm_pgfulltext.fields import VectorField, FullTextLookup, startswith
