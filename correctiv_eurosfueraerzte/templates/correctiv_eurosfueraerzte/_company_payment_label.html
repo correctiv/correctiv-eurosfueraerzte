@@ -1,0 +1,31 @@
+{% load i18n l10n %}
+{% load humanize %}
+{% load number_utils %}
+
+
+<div>
+  <h4>{{ label.label }}</h4>
+
+  <div class="progress">
+    <div class="progress-bar progress-bar-success" style="width: {{ label.vis_individual_percent|unlocalize }}%">
+      <span class="sr-only">{{ label.individual_percent }}% Individual</span>
+    </div>
+    <div class="progress-bar progress-bar-warning" style="width: {{ label.vis_aggregated_percent|unlocalize }}%">
+      <span class="sr-only">{{ label.aggregated_percent }}% Aggregated</span>
+    </div>
+  </div>
+
+  <p>{{ label.total|intcomma }}&nbsp;€</p>
+  {% blocktrans with percent=label.individual_percent|floatformat:0 %}
+    {{ percent }}&nbsp;% amount to known recipients
+  {% endblocktrans %}
+  {% blocktrans with percent=label.aggregated_percent|floatformat:0 %}
+    {{ percent }}&nbsp;% amount to unknown recipients
+  {% endblocktrans %}
+
+  <ol>
+  {% for recipient in label.top5 %}
+    <li>{{ recipient }} - {{ recipient.payments_total|intcomma_floatformat:2 }}</li>
+  {% endfor %}
+  </ol>
+</div>

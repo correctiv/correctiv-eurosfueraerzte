@@ -8,6 +8,7 @@ from django.contrib.gis.measure import D
 
 from djorm_pgfulltext.models import SearchManager
 from djorm_pgfulltext.fields import VectorField, FullTextLookup, startswith
+import pandas as pd
 
 
 class FullTextLookupCustom(FullTextLookup):
@@ -38,6 +39,55 @@ VectorField.register_lookup(FullTextLookupCustomStartsWith)
 class PharmaCompanyManager(SearchManager):
     def get_by_natural_key(self, slug):
         return self.get(slug=slug)
+
+    def _get_type_aggregation(self, obj, df, kind):
+        type_df = df[df['recipient_kind'] == kind]
+
+        label_amounts = type_df.groupby(['individual_recipient', 'label'])['amount'].sum().unstack().iteritems()
+
+        return {
+            'total': type_df['amount'].sum(),
+            'labels': [
+                {
+                    'total': val_row.sum(),
+                    # 'top5': (
+                    #     PaymentRecipient.objects.filter(
+                    #         kind=kind
+                    #     ).
+                    #     obj.pharmapayment_set.all()
+                    #     .filter(
+                    #         recipient_kind=kind, label=label,
+                    #         recipient__isnull=False
+                    #     )
+                    #     .values('recipient')
+                    #     .annotate(amount=models.Sum('amount'))
+                    #     .order_by('-amount')[:5]
+                    # ),
+                    'label': PharmaPayment.PAYMENT_LABELS_DICT[label],
+                    'individual_percent': (val_row.get(True, 0) or 0) / val_row.sum() * 100,
+                    'aggregated_percent': (val_row.get(False, 0) or 0) / val_row.sum() * 100,
+                }
+                for label, val_row in label_amounts
+                if val_row.sum()
+            ]
+        }
+
+    def get_aggregated_payments(self, obj):
+        p = obj.pharmapayment_set.all()
+        result = (p.annotate(individual_recipient=models.Case(
+                models.When(recipient__isnull=False, then=True), default=False, output_field=models.BooleanField())
+            ).values('recipient_kind', 'label', 'individual_recipient')
+            .annotate(amount=models.Sum('amount'))
+        )
+
+        df = pd.DataFrame(list(result))
+
+        return {
+            'total': df['amount'].sum(),
+            'rnd': df[df['label'] == 'research_development']['amount'].sum(),
+            'hcp': self._get_type_aggregation(obj, df, 0),
+            'hco': self._get_type_aggregation(obj, df, 1),
+        }
 
 
 @python_2_unicode_compatible
@@ -462,6 +512,8 @@ class PharmaPayment(models.Model):
 
         ('research_development', _('Research & development'))
     )
+    PAYMENT_LABELS_DICT = dict(PAYMENT_LABELS)
+
     pharma_company = models.ForeignKey(PharmaCompany, null=True, blank=True)
     recipient = models.ForeignKey(PaymentRecipient, null=True, blank=True)
     date = models.DateField()

@@ -138,6 +138,9 @@ class CompanyDetailView(SearchMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(CompanyDetailView, self).get_context_data(**kwargs)
         context['drug_list'] = Drug.objects.get_for_company(self.object)
+
+        context['payments'] = PharmaCompany.objects.get_aggregated_payments(self.object)
+
         context['title'] = _('Pharma company  %(name)s') % {
             'name': self.object.name
         }

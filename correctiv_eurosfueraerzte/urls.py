@@ -32,7 +32,7 @@ urlpatterns = [
         ObservationalStudyDetailView.as_view(),
         name='eurosfueraerzte-studydetail'),
     url(_(r'^company/(?P<slug>[\w-]+)/$'),
-        CompanyDetailView.as_view(),
+        c(CompanyDetailView.as_view()),
         name='eurosfueraerzte-companydetail'),
     url(r'^api/', include(api_urls)),
 ]
