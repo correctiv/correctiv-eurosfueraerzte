@@ -12,9 +12,9 @@
 
 {% block header_title %}
   {% if object.title %}
-    <small>{{ object.title }}</small><br/>
+    <span class="efa__header__academic-title">{{ object.title }}</span>
   {% endif %}
-  {{ object.get_full_name }}
+  <span class="efa__header__name">{{ object.get_full_name }}</span>
 {% endblock %}
 
 {% block header_content %}
