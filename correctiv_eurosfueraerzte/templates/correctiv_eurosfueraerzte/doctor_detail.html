@@ -11,6 +11,9 @@
 {% endblock %}
 
 {% block header_title %}
+  {% if object.title %}
+    <small>{{ object.title }}</small><br/>
+  {% endif %}
   {{ object.get_full_name }}
 {% endblock %}
 
@@ -19,6 +22,9 @@
     <span class="efa__header__meta">{{ object.orientation }}</span>
   {% endif %}
   <a class="efa__header__back-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-doctorsearch' %}?q={{ object.location }}">
+    {% if object.address %}
+      {{ object.address }}<br/>
+    {% endif %}
     {{ object.location }}
   </a>
 {% endblock %}
@@ -42,10 +48,16 @@
         <tr>
           <th>{% trans "Company" %}</th>
           <th>{% trans "Payment type" %}</th>
-          <th>{% trans "Year" %}</th>
+          {# <th>{% trans "Year" %}</th>#}
           <th class="text-right">{% trans "Amount" %}</th>
         </tr>
       </thead>
+      <tfoot>
+       <tr>
+           <td colspan="2" class="text-right">{% trans "Total" %}</td>
+           <td class="text-right">{{ aggs.payments_total }} €</td>
+       </tr>
+     </tfoot>
       <tbody>
     {% with payments=object.pharmapayment_set.all %}
       {% for payment in payments %}
@@ -60,9 +72,7 @@
           <td>
             {{ payment.get_label_display }}
           </td>
-          <td>
-            {{ payment.date.year }}
-          </td>
+          {# <td> {{ payment.date.year }} </td>#}
           <td class="text-right">
             {{ payment.amount|intcomma_floatformat:2 }}&nbsp;€
           </td>
@@ -72,4 +82,34 @@
       </tbody>
     </table>
   </div>
+
+
+{% if same_address_objects %}
+  <h3>{% trans "More organisations and doctors at similar address" %}</h3>
+  <ul>
+  {% for same_object in same_address_objects %}
+    <li>
+      <a href="{{ same_object.get_absolute_url }}">
+        {{ same_object.get_full_name }}
+      </a>
+      {{ same_object.payments_total }} EUR
+    </li>
+  {% endfor %}
+  </ul>
+{% endif %}
+
+{% if nearby_objects %}
+  <h3>{% trans "Nearby doctors and organisations" %}</h3>
+  <ul>
+  {% for nearby_object in nearby_objects %}
+    <li>
+      <a href="{{ nearby_object.get_absolute_url }}">
+        {{ nearby_object.get_full_name }}
+      </a>
+      ({{ nearby_object.distance }}, {{ nearby_object.payments_total }} EUR)
+    </li>
+  {% endfor %}
+  </ul>
+{% endif %}
+
 {% endblock %}

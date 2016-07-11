@@ -1,4 +1,5 @@
 from django.contrib.gis.db import models
+from django.contrib.gis.db.models.functions import Distance
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -300,6 +301,19 @@ class PaymentRecipientManager(SearchManager):
             # )
         )
 
+    def get_by_distance_to_point(self, point, distance=None, include_same=True, only_same=False):
+        qs = self.get_queryset()
+        if distance is not None:
+            qs = qs.filter(geo__distance_lte=(point, D(m=distance)))
+        qs = qs.annotate(distance=Distance('geo', point)).order_by('distance')
+        if not include_same:
+            qs = qs.filter(distance__gt=0.0)
+        if only_same:
+            qs = qs.filter(distance=0.0)
+        qs = self.add_annotations(qs)
+        return qs
+
+
 MANAGER_KWARGS = dict(
     fields=[
         ('first_name', 'A'),
@@ -366,6 +380,31 @@ class PaymentRecipient(models.Model):
         return (self.slug,)
     natural_key.dependencies = []
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('eurosfueraerzte:eurosfueraerzte-doctordetail', (), {
+            'slug': self.slug
+        })
+
+    def get_full_name(self):
+        if self.kind == 0:
+            gen = (getattr(self, x) for x in ('first_name', 'name'))
+            gen = (x for x in gen if x)
+            return ' '.join(gen)
+        else:
+            return self.name
+    get_full_name.short_description = _('Name')
+
+    def get_nearby(self, **kwargs):
+        return PaymentRecipient.objects.get_by_distance_to_point(
+                self.geo, **kwargs)
+
+    def get_aggregates(self):
+        aggs = self.pharmapayment_set.all().aggregate(
+            payments_total=models.Sum('amount')
+        )
+        return aggs
+
 
 @python_2_unicode_compatible
 class Doctor(PaymentRecipient):
@@ -380,27 +419,9 @@ class Doctor(PaymentRecipient):
     def __str__(self):
         return self.get_full_name()
 
-    @models.permalink
-    def get_absolute_url(self):
-        return ('eurosfueraerzte:eurosfueraerzte-doctordetail', (), {
-            'slug': self.slug
-        })
-
     @property
     def last_name(self):
         return self.name
-
-    def get_full_name(self):
-        gen = (getattr(self, x) for x in ('title', 'first_name', 'name'))
-        gen = (x for x in gen if x)
-        return ' '.join(gen)
-    get_full_name.short_description = _('Name')
-
-    def get_aggregates(self):
-        aggs = self.pharmapayment_set.all().aggregate(
-            sum_amount=models.Sum('amount')
-        )
-        return aggs
 
 
 @python_2_unicode_compatible
