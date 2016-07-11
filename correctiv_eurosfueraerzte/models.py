@@ -306,7 +306,7 @@ class PaymentRecipientManager(SearchManager):
         qs = self.get_queryset()
         if distance is not None:
             qs = qs.filter(geo__distance_lte=(point, D(m=distance)))
-        qs = qs.annotate(distance=Distance('geo', point)).order_by('distance')
+        qs = qs.annotate(distance=Distance('geo', point))
         if not include_same:
             qs = qs.filter(distance__gt=0.0)
         if only_same:

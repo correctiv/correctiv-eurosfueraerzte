@@ -75,8 +75,15 @@ class RecipientDetailView(SearchMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(RecipientDetailView, self).get_context_data(**kwargs)
         context['aggs'] = self.object.get_aggregates()
-        context['same_address_objects'] = self.object.get_nearby(only_same=True).exclude(pk=self.object.pk)[:10]
-        context['nearby_objects'] = self.object.get_nearby(include_same=False)[:10]
+        context['same_address_objects'] = (self.object
+                .get_nearby(only_same=True)
+                .exclude(pk=self.object.pk)
+                .order_by('-payments_total')[:10]
+        )
+        context['nearby_objects'] = (self.object
+                .get_nearby(include_same=False)
+                .order_by('distance')[:10]
+        )
         context['title'] = _('%(name)s and money from the pharma industry') % {'name': self.object.get_full_name()}
         context['description'] = _('Details on how much money %(name)s got from pharma companies.') % {
             'name': self.object.get_full_name()
