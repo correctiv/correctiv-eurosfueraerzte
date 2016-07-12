@@ -34,5 +34,5 @@ urlpatterns = [
     url(_(r'^company/(?P<slug>[\w-]+)/$'),
         c(CompanyDetailView.as_view()),
         name='eurosfueraerzte-companydetail'),
-    url(r'^api/', include(api_urls)),
+    # url(r'^api/', include(api_urls)),
 ]

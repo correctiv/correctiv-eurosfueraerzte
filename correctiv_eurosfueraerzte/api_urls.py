@@ -13,5 +13,5 @@ router.register(r'recipients', api_views.PaymentRecipientViewSet,
 # The API URLs are now determined automatically by the router.
 # Additionally, we include the login URLs for the browsable API.
 urlpatterns = [
-    url(r'^', include(router.urls))
+    url(r'^eurosfueraerzte/', include(router.urls))
 ]
