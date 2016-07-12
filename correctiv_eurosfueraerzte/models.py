@@ -77,6 +77,12 @@ class PharmaCompanyManager(SearchManager):
             ]
         }
 
+    def get_by_payment_sum(self):
+        qs = PharmaCompany.objects.all()
+        qs = qs.annotate(amount=models.Sum('pharmapayment__amount'))
+        qs = qs.filter(amount__isnull=False)
+        return qs.order_by('-amount')
+
     def get_aggregated_payments(self, obj):
         p = obj.pharmapayment_set.all()
         result = (p.annotate(individual_recipient=models.Case(

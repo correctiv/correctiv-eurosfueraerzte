@@ -19,8 +19,14 @@
   <div class="col-md-6">
     <h3>{% trans "Top paying companies" %}</h3>
     <ol>
-      <li>Bayer Ipsum</li>
-      <li>Lorem Sanophis</li>
+      {% for company in top_companies %}
+      <li>
+        <a href="{{ company.get_absolute_url }}">
+          {{ company.name }}
+        </a>
+        – {{ company.amount|intcomma_floatformat:0 }}&nbsp;€
+      </li>
+      {% endfor %}
     </ol>
   </div>
   <div class="col-md-6">
