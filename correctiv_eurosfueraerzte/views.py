@@ -28,6 +28,7 @@ class IndexView(SearchMixin, TemplateView):
         context['top_drugs'] = Drug.objects.get_by_patient_sum()[:5]
         context['highest_paid_studies'] = ObservationalStudy.objects.get_by_fee_per_patient()[:5]
         context['top_companies'] = PharmaCompany.objects.get_by_payment_sum()[:5]
+        context['top_doctors'] = PaymentRecipient.objects.get_top_doctors()[:5]
         return context
 
 

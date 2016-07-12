@@ -364,6 +364,12 @@ class PaymentRecipientManager(SearchManager):
             # )
         )
 
+    def get_top_doctors(self):
+        return (super(PaymentRecipientManager, self).get_queryset()
+                .filter(kind=0)
+                .order_by('-total')
+        )
+
     def get_by_distance_to_point(self, point, distance=None, include_same=True, only_same=False):
         qs = self.get_queryset()
         if distance is not None:
