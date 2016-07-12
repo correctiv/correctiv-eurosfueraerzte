@@ -64,7 +64,7 @@
   </div>
 
   <div class="table-responsive">
-    <table class="table">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th>{% trans "Company" %}</th>
@@ -73,15 +73,14 @@
         </tr>
       </thead>
       <tfoot>
-       <tr>
-           <td colspan="2" class="text-right">
-             <strong>{% trans "Total" %}</strong>
-           </td>
-           <td class="text-right">
-             <strong>
-               {{ aggs.payments_total|intcomma_floatformat:2 }}&nbsp;€
-             </strong>
-           </td>
+        <tr>
+          <td></td>
+          <td>
+            <strong>{% trans "Total" %}</strong>
+          </td>
+          <td class="text-right">
+            <strong>{{ aggs.payments_total|intcomma_floatformat:2 }}&nbsp;€</strong>
+          </td>
        </tr>
      </tfoot>
       <tbody>
@@ -117,37 +116,17 @@
 
 
 {% if same_address_objects %}
-  <h3>{% trans "More organisations and doctors at similar address" %}</h3>
-  <ul>
-  {% for same_object in same_address_objects %}
-    <li>
-      <a href="{{ same_object.get_absolute_url }}">
-        {{ same_object.get_full_name }}
-      </a>
-      – {{ same_object.payments_total|intcomma_floatformat:2 }}&nbsp;€
-    </li>
-  {% endfor %}
-  </ul>
-  <a href="{% url "eurosfueraerzte:eurosfueraerzte-recipientsearch" %}?latlng={{ object.geo.1|unlocalize }},{{ object.geo.0|unlocalize }}">
-    {% trans "More recipient near this address" %}
-  </a>
+  <header class="page__section-header">
+    <h3 class="page__section-headline">{% trans "More organisations and doctors at similar address" %}</h3>
+  </header>
+  {% include "correctiv_eurosfueraerzte/_recipient_nearby.html" with nearby_objects=same_address_objects %}
 {% endif %}
 
 {% if nearby_objects %}
-  <h3>{% trans "Nearby doctors and organisations" %}</h3>
-  <ul>
-  {% for nearby_object in nearby_objects %}
-    <li>
-      <a href="{{ nearby_object.get_absolute_url }}">
-        {{ nearby_object.get_full_name }}
-      </a>
-      {{ nearby_object.address }} – {{ nearby_object.payments_total|intcomma_floatformat:2 }}&nbsp;€
-    </li>
-  {% endfor %}
-  </ul>
-  <a href="{% url "eurosfueraerzte:eurosfueraerzte-recipientsearch" %}?latlng={{ object.geo.1|unlocalize }},{{ object.geo.0|unlocalize }}">
-    {% trans "More recipient near this address" %}
-  </a>
+  <header class="page__section-header">
+    <h3 class="page__section-headline">{% trans "Nearby doctors and organisations" %}</h3>
+  </header>
+  {% include "correctiv_eurosfueraerzte/_recipient_nearby.html" with nearby_objects=nearby_objects %}
 {% endif %}
 
 {% endblock %}

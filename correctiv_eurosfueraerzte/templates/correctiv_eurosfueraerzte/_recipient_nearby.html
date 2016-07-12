@@ -1,0 +1,28 @@
+{% load i18n l10n %}
+{% load number_utils %}
+{% load humanize %}
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    {% for object in nearby_objects %}
+    <tr>
+      <td>
+        <a href="{{ object.get_absolute_url }}">{{ object.get_full_name }}</a>
+      </td>
+      <td>
+        {{ object.address }}
+      </td>
+      <td class="text-right">
+        {{ object.payments_total|intcomma_floatformat:2 }}&nbsp;€
+      </td>
+    </tr>
+    {% endfor %}
+    <tfoot>
+      <td colspan="3">
+        <a href="{% url "eurosfueraerzte:eurosfueraerzte-recipientsearch" %}?latlng={{ object.geo.1|unlocalize }},{{ object.geo.0|unlocalize }}">
+          {% trans "More recipient near this address" %}
+        </a>
+      </td>
+    </tfoot>
+  </table>
+</div>
