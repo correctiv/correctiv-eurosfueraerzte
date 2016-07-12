@@ -12,18 +12,18 @@
         </h1>
 
         <p class="efa__search__lead">
-          {% trans "Wie viel Geld hat Dein Arzt im vergangenen Jahr von der Pharmaindustrie bekommen?" %}
+          {% trans "How much money has your doctor received from the pharma industry last year?" %}
         </p>
 
         <div class="input-group">
-          {{ doctor_form.q }}
+          {{ recipient_form.q }}
           <span class="input-group-btn">
             <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
           </span>
         </div>
 
         <div class="efa__search__examples">
-          Beispiele:
+          {% trans "Examples:" %}
           <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=45147">45147</a>
           {% trans "or" %}
           <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=Dinslaken">Dinslaken</a>
