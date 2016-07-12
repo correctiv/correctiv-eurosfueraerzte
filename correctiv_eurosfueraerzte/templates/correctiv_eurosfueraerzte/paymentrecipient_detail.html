@@ -75,10 +75,12 @@
       <tfoot>
        <tr>
            <td colspan="2" class="text-right">
-             {% trans "Total" %}
+             <strong>{% trans "Total" %}</strong>
            </td>
            <td class="text-right">
-             {{ aggs.payments_total|intcomma_floatformat:2 }}&nbsp;€
+             <strong>
+               {{ aggs.payments_total|intcomma_floatformat:2 }}&nbsp;€
+             </strong>
            </td>
        </tr>
      </tfoot>
