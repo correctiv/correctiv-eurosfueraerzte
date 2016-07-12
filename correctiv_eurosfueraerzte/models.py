@@ -390,6 +390,10 @@ MANAGER_KWARGS = dict(
 @python_2_unicode_compatible
 class PaymentRecipient(models.Model):
     KIND_FILTER = None
+    KIND_MAPPING = {
+        'hcp': 0,
+        'hco': 1
+    }
 
     name = models.CharField(max_length=512)
     slug = models.SlugField(max_length=512)

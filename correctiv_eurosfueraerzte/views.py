@@ -38,6 +38,8 @@ class SearchView(ListView):
     def get_queryset(self):
         qs = super(SearchView, self).get_queryset()
         self.form = self.search_form(self.request.GET)
+        if not self.form.is_valid():
+            return qs
         if self.kwargs.get('json'):
             result = self.form.autocomplete(qs)
         else:
@@ -69,6 +71,11 @@ class SearchView(ListView):
 class RecipientSearchView(SearchView):
     model = PaymentRecipient
     search_form = PaymentRecipientSearchForm
+
+    def get_context_data(self, **kwargs):
+        context = super(RecipientSearchView, self).get_context_data(**kwargs)
+        context['recipient_form'] = context['form']
+        return context
 
 
 class RecipientDetailView(SearchMixin, DetailView):

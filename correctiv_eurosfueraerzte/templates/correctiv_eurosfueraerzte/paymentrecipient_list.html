@@ -1,6 +1,7 @@
 {% extends "correctiv_eurosfueraerzte/base_recipients.html" %}
 
 {% load i18n %}
+{% load number_utils %}
 
 
 {% block title %}{% blocktrans with query=query %}Search for „{{ query }}” in Euros for Doctors Database{% endblocktrans %}{% endblock %}
@@ -32,7 +33,7 @@
           {{ object.postcode }} {{ object.location }}
         </td>
         <td class="text-right">
-          {{ object.payments_total }}&nbsp;€
+          {{ object.total|intcomma_floatformat:2 }}&nbsp;€
         </td>
       </tr>
     {% endfor %}
