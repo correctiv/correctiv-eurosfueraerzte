@@ -1,26 +1,33 @@
 {% load i18n %}
 
-<div class="row">
-  <div class="col-md-12">
-    {% if not is_index %}
-      <div class="pull-right">
-        <a href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
-          {% trans "back to the index" %}
-        </a>
+<section class="efa__search">
+  <div class="page__container">
+    <form class="efa__search__form--pharma" action="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}" method="get">
+
+      <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
+        {% trans "Euros for Doctors" %}
+      </a>
+
+      <h1 class="efa__search__title">
+        {% trans "Search for your medicine" %}
+      </h1>
+
+      <p class="efa__search__lead">
+        {% trans "Finde heraus, für welche Medikamente Dein Arzt Geld von der Pharma­industrie bekommen kann!" %}
+      </p>
+
+      <div class="input-group">
+        {{ form.q }}
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
+        </span>
       </div>
-    {% endif %}
-    <form action="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}" method="get">
-      <div class="form-group">
-        <label for="id_q">
-          {% trans "Search for your medicine" %}
-        </label>
-        <div class="input-group">
-          {{ form.q }}
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
-          </span>
-        </div>
+
+      <div class="efa__search__examples">
+        Beispiel:
+        <a href="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}?q=Avastin">Avastin</a>
       </div>
+
     </form>
   </div>
-</div>
+</section>
