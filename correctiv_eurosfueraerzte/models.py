@@ -40,7 +40,7 @@ class PharmaCompanyManager(SearchManager):
     def get_by_natural_key(self, slug):
         return self.get(slug=slug)
 
-    def _get_type_aggregation(self, obj, df, kind):
+    def _get_type_aggregation(self, obj, df, kind, max_amount):
         type_df = df[df['recipient_kind'] == kind]
 
         label_amounts = type_df.groupby(['individual_recipient', 'label'])['amount'].sum().unstack().iteritems()
@@ -68,6 +68,8 @@ class PharmaCompanyManager(SearchManager):
                     'label': PharmaPayment.PAYMENT_LABELS_DICT[label],
                     'individual_percent': (val_row.get(True, 0) or 0) / val_row.sum() * 100,
                     'aggregated_percent': (val_row.get(False, 0) or 0) / val_row.sum() * 100,
+                    'vis_individual_percent': (val_row.get(True, 0) or 0) / max_amount * 100,
+                    'vis_aggregated_percent': (val_row.get(False, 0) or 0) / max_amount * 100,
                 }
                 for label, val_row in label_amounts
                 if val_row.sum()
@@ -83,12 +85,13 @@ class PharmaCompanyManager(SearchManager):
         )
 
         df = pd.DataFrame(list(result))
+        max_amount = df.groupby(['recipient_kind', 'label'])['amount'].sum().max()
 
         return {
             'total': df['amount'].sum(),
             'rnd': df[df['label'] == 'research_development']['amount'].sum(),
-            'hcp': self._get_type_aggregation(obj, df, 0),
-            'hco': self._get_type_aggregation(obj, df, 1),
+            'hcp': self._get_type_aggregation(obj, df, 0, max_amount),
+            'hco': self._get_type_aggregation(obj, df, 1, max_amount),
         }
 
 
