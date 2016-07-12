@@ -26,7 +26,7 @@ class SearchForm(forms.Form):
             attrs={
                 'type': 'search',
                 'class': 'form-control',
-                'placeholder': _('e.g. Avastin')
+                'placeholder': _('Name of drug')
             }))
 
     def update_queryset(self, qs):
@@ -63,7 +63,7 @@ class PaymentRecipientSearchForm(SearchForm):
             attrs={
                 'type': 'search',
                 'class': 'form-control',
-                'placeholder': _('Name or Postcode'),
+                'placeholder': _('Name, city or postcode'),
                 'id': 'id_q_doctors'
             }))
 
