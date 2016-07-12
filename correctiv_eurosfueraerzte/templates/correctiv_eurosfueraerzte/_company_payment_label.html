@@ -19,25 +19,31 @@
   </div>
 
   <ul class="efa__detail-vis__labels">
-    <li class="efa__detail-vis__label--individual">{{ label.individual_percent }}% Individual</li>
-    <li class="efa__detail-vis__label--aggregated">{{ label.aggregated_percent }}% Aggregated</li>
+    <li class="efa__detail-vis__label--individual">
+      {% blocktrans with percent=label.individual_percent|floatformat:0 %}
+        {{ percent }}&nbsp;% amount to known recipients
+      {% endblocktrans %}
+    </li>
+    <li class="efa__detail-vis__label--aggregated">
+      {% blocktrans with percent=label.aggregated_percent|floatformat:0 %}
+        {{ percent }}&nbsp;% amount to unknown recipients
+      {% endblocktrans %}
+    </li>
   </ul>
 
-  {% blocktrans with percent=label.individual_percent|floatformat:0 %}
-    {{ percent }}&nbsp;% amount to known recipients
-  {% endblocktrans %}
-  {% blocktrans with percent=label.aggregated_percent|floatformat:0 %}
-    {{ percent }}&nbsp;% amount to unknown recipients
-  {% endblocktrans %}
 
-  <ol>
+  <table class="efa__detail-vis__list">
   {% for recipient in label.top5 %}
-    <li>
-      <a href="{{ recipient.get_absolute_url }}">
-        <span class="efa__detail-vis__value">{{ recipient.amount|intcomma_floatformat:2 }}&nbsp;€</span>
-        <span class="efa__detail-vis__name">{{ recipient.get_full_name }}</span>
-      </a>
-    </li>
+    <tr>
+      <td>
+        <span class="efa__detail-vis__value">{{ recipient.amount|intcomma_floatformat:0 }}&nbsp;€</span>
+      </td>
+      <td>
+        <a class="efa__detail-vis__name" href="{{ recipient.get_absolute_url }}">{{ recipient.get_full_name }}</a>
+      </td>
+    </tr>
   {% endfor %}
-  </ol>
+  </table>
+
+  <a href="{{ recipient.get_absolute_url }}">{% trans "Show all recipients" %}</a>
 </div>

@@ -53,14 +53,19 @@
     {% endfor %}
   </div>
 
+</div>
 
   <div class="page__block">
-    <div class="page__row">
-      {% for label in payments.hco.labels %}
-        {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label %}
-      {% endfor %}
+    <div class="page__container">
+      <div class="page__row">
+        {% for label in payments.hco.labels %}
+          {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label %}
+        {% endfor %}
+      </div>
     </div>
   </div>
+
+<div class="page__container">
 
   <div class="page__row">
     <div class="page__section -narrow">
