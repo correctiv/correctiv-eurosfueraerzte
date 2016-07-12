@@ -6,26 +6,19 @@ from .forms import PaymentRecipientSearchForm
 
 class PaymentRecipientSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.CharField(source='get_absolute_url', read_only=True)
-    payments_total = serializers.DecimalField(decimal_places=2, max_digits=19)
-    # payments_fees = serializers.DecimalField(decimal_places=2, max_digits=19)
 
     def to_representation(self, obj):
         result = super(PaymentRecipientSerializer, self).to_representation(obj)
-        print('before access')
-        result['payments'] = [r.amount for r in obj.pharmapayment_set.all()]
+        result['full_name'] = obj.get_full_name()
         return result
 
     class Meta:
         model = PaymentRecipient
-        fields = ('first_name', 'last_name',
+        fields = ('name', 'first_name',
                   'url',
-                  'location', 'postcode',
-                  'payments_total',
-                #   'payments_fees',
+                  'address', 'location', 'postcode',
+                  'total',
                   )
-        #   'payments_registration_fees',
-        #   'payments_travel_accommodation',
-        #   'payments_total'
         read_only_fields = fields
 
 
@@ -38,9 +31,7 @@ class PaymentRecipientViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = PaymentRecipientSerializer
 
     def get_queryset(self):
-        print('before qs')
         qs = PaymentRecipient.objects.all()
-        qs = qs.prefetch_related('pharmapayment_set')
         form = PaymentRecipientSearchForm(self.request.query_params)
         qs = form.search(qs)
         return qs
