@@ -42,6 +42,27 @@
 
   {# Total #}
 
+  <div class="page__row">
+    <div class="page__section -narrow">
+      <p>
+        {% trans "Nur knapp 30 Prozent der Ärzte haben ihr Einverständnis gegeben, dass die Reise- und Hotelkosten, die Tagungsgebühren und Beratungshonorare, die sie von Pharmafirmen erhalten haben, veröffentlicht werden dürfen. Die Zahlungen an Ärzte für Studien und Anwendungsbeobachtungen wollen die Pharmafirmen grundsätzlich nicht personenbezogen veröffentlichen." %}
+      </p>
+      <p>
+        {% blocktrans with name=object.get_full_name %}
+        {{ name }} hat der Veröffentlichung folgender Zahlungen zugestimmt:
+        {% endblocktrans %}
+      </p>
+    </div>
+
+    <div class="page__sidebar">
+      <div class="well">
+        <p>
+          {% trans "Die Informationen auf dieser Seite stammen von den 54 Mitgliedsfirmen der „Freiwilligen Selbstkontrolle für die Arzneimittelindustrie e.V.“, die diese Angaben auf ihren jeweiligen Webseiten veröffentlicht haben." %}
+        </p>
+      </div>
+    </div>
+  </div>
+
   <div class="table-responsive">
     <table class="table">
       <thead>
