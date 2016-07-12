@@ -65,6 +65,7 @@ class PharmaCompanyManager(SearchManager):
                           """}, select_params=(obj.id, label, kind))
                         .order_by('-amount')[:5]
                     ),
+                    'label_slug': label,
                     'label': PharmaPayment.PAYMENT_LABELS_DICT[label],
                     'individual_percent': (val_row.get(True, 0) or 0) / val_row.sum() * 100,
                     'aggregated_percent': (val_row.get(False, 0) or 0) / val_row.sum() * 100,
@@ -444,11 +445,7 @@ class PaymentRecipient(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        if self.kind == 0:
-            urlname = 'eurosfueraerzte:eurosfueraerzte-doctordetail'
-        else:
-            urlname = 'eurosfueraerzte:eurosfueraerzte-organisationdetail'
-        return (urlname, (), {
+        return ('eurosfueraerzte:eurosfueraerzte-recipientdetail', (), {
             'slug': self.slug
         })
 
@@ -504,12 +501,6 @@ class HealthCareOrganisation(PaymentRecipient):
 
     def __str__(self):
         return self.name
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('eurosfueraerzte:eurosfueraerzte-organisationdetail', (), {
-            'slug': self.slug
-        })
 
 
 @python_2_unicode_compatible

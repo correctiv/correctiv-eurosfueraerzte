@@ -30,9 +30,7 @@
 
   <div class="page__row">
     <div class="page__section -narrow">
-      <p>Die Zahlungen an Ärzte für Tagungsgebühren, Reisekosten, Beratungs&shy;honorare und Spesen werden personenbezogen veröffentlicht – wenn der jeweilige Arzt zustimmt. Für den Rest wird die Summe zusammengefasst angegeben. Grundsätzlich nur zusammengefasst werden die Zahlungen im Rahmen von Studien und Anwendungsbeobachtungen veröffentlicht.
-      <br/>
-      Forschungszahlungen: {{ payments.rnd|intcomma_floatformat:2 }}&nbsp;€.
+      <p>Die Zahlungen an Ärzte für Tagungsgebühren, Reisekosten, Beratungs&shy;honorare und Spesen werden personenbezogen veröffentlicht – wenn der jeweilige Arzt zustimmt. Für den Rest wird die Summe zusammengefasst angegeben. Grundsätzlich nur zusammengefasst werden die Zahlungen im Rahmen von Studien und Anwendungsbeobachtungen veröffentlicht. Sie betragen <strong>{{ payments.rnd|intcomma_floatformat:2 }}&nbsp;€.</strong>
       </p>
     </div>
 
@@ -40,6 +38,9 @@
       <div class="well">
         <p>
           Die Informationen auf dieser Seite stammen von den 54 Mitgliedsfirmen der „Freiwilligen Selbstkontrolle für die Arzneimittelindustrie e.V.“, die diese Angaben auf ihren jeweiligen Webseiten veröffentlicht haben.
+          {% if obj.payments_url %}
+            <a href="{{ obj.payments_url }}">Die Webseite von {{ object.name }} befindet sich hier.</a>
+          {% endif %}
         </p>
       </div>
     </div>
@@ -47,7 +48,7 @@
 
   <div class="page__row">
     {% for label in payments.hcp.labels %}
-      {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label %}
+      {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hcp" %}
     {% endfor %}
   </div>
 
@@ -57,7 +58,7 @@
     <div class="page__container">
       <div class="page__row">
         {% for label in payments.hco.labels %}
-          {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label %}
+          {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hco" %}
         {% endfor %}
       </div>
     </div>

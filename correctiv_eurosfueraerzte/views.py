@@ -25,8 +25,9 @@ class IndexView(SearchMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['is_index'] = True
-        context['top_drugs'] = Drug.objects.get_by_patient_sum()[:10]
-        context['highest_paid_studies'] = ObservationalStudy.objects.get_by_fee_per_patient()[:10]
+        context['top_drugs'] = Drug.objects.get_by_patient_sum()[:5]
+        context['highest_paid_studies'] = ObservationalStudy.objects.get_by_fee_per_patient()[:5]
+        context['top_companies'] = PharmaCompany.objects.get_by_payment_sum()[:5]
         return context
 
 
@@ -79,6 +80,7 @@ class RecipientSearchView(SearchView):
 
 
 class RecipientDetailView(SearchMixin, DetailView):
+    model = PaymentRecipient
     template_name = 'correctiv_eurosfueraerzte/paymentrecipient_detail.html'
 
     def get_context_data(self, **kwargs):
@@ -87,25 +89,17 @@ class RecipientDetailView(SearchMixin, DetailView):
         context['same_address_objects'] = (self.object
                 .get_nearby(only_same=True)
                 .exclude(pk=self.object.pk)
-                .order_by('-payments_total')[:10]
+                .order_by('-payments_total')[:5]
         )
         context['nearby_objects'] = (self.object
                 .get_nearby(include_same=False)
-                .order_by('distance')[:10]
+                .order_by('distance')[:5]
         )
         context['title'] = _('%(name)s and money from the pharma industry') % {'name': self.object.get_full_name()}
         context['description'] = _('Details on how much money %(name)s got from pharma companies.') % {
             'name': self.object.get_full_name()
         }
         return context
-
-
-class DoctorDetailView(RecipientDetailView):
-    model = Doctor
-
-
-class OrganisationDetailView(RecipientDetailView):
-    model = HealthCareOrganisation
 
 
 class DrugDetailView(SearchMixin, DetailView):

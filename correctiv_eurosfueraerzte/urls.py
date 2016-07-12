@@ -8,8 +8,7 @@ except ImportError:
     c = lambda x: x
 
 from .views import (IndexView, SearchView, RecipientSearchView, DrugDetailView,
-                    DoctorDetailView, OrganisationDetailView,
-                    ObservationalStudyDetailView, CompanyDetailView)
+                    RecipientDetailView, ObservationalStudyDetailView, CompanyDetailView)
 from . import api_urls
 
 
@@ -21,10 +20,8 @@ urlpatterns = [
     url(_(r'^recipient-search/$'), RecipientSearchView.as_view(),
         name='eurosfueraerzte-recipientsearch'),
 
-    url(_(r'^doctor/(?P<slug>[\w-]+)/$'), DoctorDetailView.as_view(),
-        name='eurosfueraerzte-doctordetail'),
-    url(_(r'^organisation/(?P<slug>[\w-]+)/$'), OrganisationDetailView.as_view(),
-        name='eurosfueraerzte-organisationdetail'),
+    url(_(r'^recipient/(?P<slug>[\w-]+)/$'), RecipientDetailView.as_view(),
+        name='eurosfueraerzte-recipientdetail'),
 
     url(_(r'^drug/(?P<slug>[\w-]+)/$'), DrugDetailView.as_view(),
         name='eurosfueraerzte-drugdetail'),

@@ -8,13 +8,13 @@
     </h2>
   </a>
 
-  <form method="get" class="search-tile__form" action="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}">
+  <form method="get" class="search-tile__form" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}">
     <p class="search-tile__claim">
-      {% trans "Is your medicine pushed by big pharma?" %}
+      {% trans "Has your doctor received money from the pharma industry?" %}
     </p>
 
     <div class="input-group">
-      <input id="eurosfueraerzte-q" name="q" type="text" class="form-control" placeholder="{% trans "Drug name" %}">
+      <input id="eurosfueraerzte-q" name="q" type="text" class="form-control" placeholder="{% trans "Postcode, e.g. 45147" %}">
       <span class="input-group-btn">
         <button class="btn btn-primary" type="submit">{% trans "Search" %}</button>
       </span>
@@ -22,9 +22,7 @@
 
     <small class="search-tile__help">
       {% trans "Example:" %}
-      <a class="search-tile__link" href="{% url 'eurosfueraerzte:eurosfueraerzte-search' %}?q=Avastin">
-        {% trans "Avastin" %}
-      </a>
+      <a class="search-tile__link" href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=45147">45147</a>
     </small>
   </form>
 

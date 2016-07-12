@@ -1,6 +1,6 @@
 {% extends "correctiv_eurosfueraerzte/base_detail.html" %}
 
-{% load i18n %}
+{% load i18n l10n %}
 {% load number_utils %}
 {% load humanize %}
 
@@ -25,7 +25,7 @@
     {% if object.address %}
       {{ object.address }}<br/>
     {% endif %}
-    {{ object.location }}
+    {% if object.postcode %}{{ object.postcode }} {% endif %}{{ object.location }}
   </a>
 {% endblock %}
 
@@ -122,10 +122,13 @@
       <a href="{{ same_object.get_absolute_url }}">
         {{ same_object.get_full_name }}
       </a>
-      {{ same_object.payments_total|intcomma_floatformat:2 }}&nbsp;€
+      – {{ same_object.payments_total|intcomma_floatformat:2 }}&nbsp;€
     </li>
   {% endfor %}
   </ul>
+  <a href="{% url "eurosfueraerzte:eurosfueraerzte-recipientsearch" %}?latlng={{ object.geo.1|unlocalize }},{{ object.geo.0|unlocalize }}">
+    {% trans "More recipient near this address" %}
+  </a>
 {% endif %}
 
 {% if nearby_objects %}
@@ -136,10 +139,13 @@
       <a href="{{ nearby_object.get_absolute_url }}">
         {{ nearby_object.get_full_name }}
       </a>
-      ({{ nearby_object.distance }}, {{ nearby_object.payments_total|intcomma_floatformat:2 }}&nbsp;€)
+      {{ nearby_object.address }} – {{ nearby_object.payments_total|intcomma_floatformat:2 }}&nbsp;€
     </li>
   {% endfor %}
   </ul>
+  <a href="{% url "eurosfueraerzte:eurosfueraerzte-recipientsearch" %}?latlng={{ object.geo.1|unlocalize }},{{ object.geo.0|unlocalize }}">
+    {% trans "More recipient near this address" %}
+  </a>
 {% endif %}
 
 {% endblock %}

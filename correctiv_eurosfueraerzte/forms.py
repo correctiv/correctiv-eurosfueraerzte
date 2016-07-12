@@ -1,11 +1,12 @@
 import re
 
 from django import forms
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.db.models.functions import Distance
 
-from .models import Drug, PharmaCompany, PaymentRecipient
+from .models import Drug, PharmaCompany, PaymentRecipient, PharmaPayment
 
 LATLNG_RE = re.compile('(\d+\.?\d+),(\d+\.?\d+)')
 
@@ -71,6 +72,9 @@ class PaymentRecipientSearchForm(SearchForm):
         ('hco', _('Healthcare Organisations')),
     ), required=False)
 
+    label = forms.ChoiceField(choices=PharmaPayment.PAYMENT_LABELS,
+                              required=False)
+
     latlng = forms.CharField(
         required=False,
         widget=forms.HiddenInput()
@@ -100,12 +104,23 @@ class PaymentRecipientSearchForm(SearchForm):
         recipient_kind = self.cleaned_data['recipient_kind']
         if recipient_kind:
             qs = qs.filter(kind=PaymentRecipient.KIND_MAPPING[recipient_kind])
+
+        label = self.cleaned_data['label']
+        if label:
+            qs = qs.filter(pharmapayment__label=label)
         return qs
 
     def finalise_queryset(self, qs):
-        qs = qs.order_by('-total')
+        order_field = '-total'
+        # company = self.cleaned_data['company']
+        # label = self.cleaned_data['label']
+        # if company or label:
+        #     qs = qs.annotate(computed_total=models.Sum('pharmapayment__amount'))
+        #     order_field = '-computed_total'
+
+        qs = qs.order_by(order_field)
         latlng = self.cleaned_data['latlng']
         if latlng:
             qs = qs.annotate(distance=Distance('geo', latlng))
-            qs = qs.order_by('distance', '-total')
+            qs = qs.order_by('distance', order_field)
         return qs

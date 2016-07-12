@@ -39,11 +39,11 @@
         <span class="efa__detail-vis__value">{{ recipient.amount|intcomma_floatformat:0 }}&nbsp;€</span>
       </td>
       <td>
-        <a class="efa__detail-vis__name" href="{{ recipient.get_absolute_url }}">{{ recipient.get_full_name }}</a>
+        <a class="efa__detail-vis__name" href="{{ recipient.get_absolute_url }}">{{ recipient.get_full_name|truncatechars:30 }}</a>
       </td>
     </tr>
   {% endfor %}
   </table>
 
-  <a href="{{ recipient.get_absolute_url }}">{% trans "Show all recipients" %}</a>
+  <a href="{% url "eurosfueraerzte:eurosfueraerzte-recipientsearch" %}?company={{ object.pk}}&amp;label={{ label.label_slug }}&amp;recipient_kind={{ kind }}">{% trans "Show all recipients" %}</a>
 </div>
