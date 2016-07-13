@@ -40,7 +40,7 @@ class ReplacementMixin(object):
 
 
 class PharmaCompanyAdmin(ReplacementMixin, admin.ModelAdmin):
-    search_fields = ('name',)
+    search_fields = ('name', 'payments_url')
 
     actions = ['replace_objects']
 
