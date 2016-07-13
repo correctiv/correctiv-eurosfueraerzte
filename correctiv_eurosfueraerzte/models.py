@@ -92,11 +92,13 @@ class PharmaCompanyManager(SearchManager):
         )
 
         df = pd.DataFrame(list(result))
-        max_amount = df.groupby(['recipient_kind', 'label'])['amount'].sum().max()
+        rnd_amount = df[df['label'] == 'research_development']['amount'].sum()
+        max_amount = max(rnd_amount, df.groupby(['recipient_kind', 'label'])['amount'].sum().max())
 
         return {
             'total': df['amount'].sum(),
-            'rnd': df[df['label'] == 'research_development']['amount'].sum(),
+            'rnd': rnd_amount,
+            'rnd_percent': rnd_amount / max_amount * 100,
             'hcp': self._get_type_aggregation(obj, df, 0, max_amount),
             'hco': self._get_type_aggregation(obj, df, 1, max_amount),
         }

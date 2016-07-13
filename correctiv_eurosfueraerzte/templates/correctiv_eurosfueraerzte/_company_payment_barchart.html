@@ -1,0 +1,20 @@
+{% load i18n l10n %}
+{% load humanize %}
+{% load number_utils %}
+
+
+<dl class="efa__chart">
+  {% include "correctiv_eurosfueraerzte/_company_payment_barchart_item.html" with aggregated=payments.rnd_percent total=payments.rnd label="Studien und AWB" %}
+</dl>
+
+<dl class="efa__chart">
+  {% for item in payments.hcp.labels %}
+    {% include "correctiv_eurosfueraerzte/_company_payment_barchart_item.html" with aggregated=item.vis_aggregated_percent individual=vis_individual_percent total=item.total label=item.label %}
+  {% endfor %}
+</dl>
+
+<dl class="efa__chart">
+  {% for item in payments.hco.labels %}
+    {% include "correctiv_eurosfueraerzte/_company_payment_barchart_item.html" with aggregated=item.vis_aggregated_percent individual=vis_individual_percent total=item.total label=item.label %}
+  {% endfor %}
+</dl>

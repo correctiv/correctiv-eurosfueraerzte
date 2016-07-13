@@ -1,0 +1,24 @@
+{% load i18n l10n %}
+{% load humanize %}
+{% load number_utils %}
+
+<dt class="efa__chart__label">{{ label }}</dt>
+<dd class="efa__chart__bar-stack">
+  <div class="efa__chart__bar">
+    {% if individual > 0 %}
+      <span
+        class="efa__chart__bar--individual"
+        style="width: {{ individual|unlocalize }}%">
+      </span>
+    {% endif %}
+    {% if aggregated > 0 %}
+      <span
+        class="efa__chart__bar--aggregated"
+        style="width: {{ aggregated|unlocalize }}%">
+      </span>
+    {% endif %}
+    <span class="efa__chart__total{% if aggregated > 90 %}--inner{% endif %}">
+      {{ total|intcomma_floatformat:0 }}&nbsp;€
+    </span>
+  </div>
+</dd>

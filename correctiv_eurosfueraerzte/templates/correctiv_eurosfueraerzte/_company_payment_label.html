@@ -13,37 +13,43 @@
 
   <h3 class="efa__detail-vis__sum">{{ label.total|intcomma_floatformat:0 }}&nbsp;€</h3>
 
-  <div class="efa__detail-vis__bar-chart">
-    <span class="efa__detail-vis__bar--individual" style="width: {{ label.vis_individual_percent|unlocalize }}%"></span>
-    <span class="efa__detail-vis__bar--aggregated" style="width: {{ label.vis_aggregated_percent|unlocalize }}%"></span>
+  <p class="efa__detail-vis__description">Zahlungen an Ärzte im Jahr 2015</p>
+
+  <div class="efa__chart__bar">
+    {% if label.individual_percent > 0 %}
+      <span class="efa__chart__bar--individual"
+        style="width: {{ label.individual_percent|unlocalize }}%">
+      </span>
+    {% endif %}
+    {% if label.aggregated_percent > 0 %}
+    <span class="efa__chart__bar--aggregated"
+      style="width: {{ label.aggregated_percent|unlocalize }}%">
+    </span>
+    {% endif %}
   </div>
 
-  <ul class="efa__detail-vis__labels">
-    <li class="efa__detail-vis__label--individual">
+  <ul class="efa__chart__legend">
+    <li class="efa__chart__legend-item--individual">
       {% blocktrans with percent=label.individual_percent|floatformat:0 %}
-        {{ percent }}&nbsp;% amount to known recipients
-      {% endblocktrans %}
-    </li>
-    <li class="efa__detail-vis__label--aggregated">
-      {% blocktrans with percent=label.aggregated_percent|floatformat:0 %}
-        {{ percent }}&nbsp;% amount to unknown recipients
+        {{ percent }}&nbsp;% an namentlich bekannte Empfänger
       {% endblocktrans %}
     </li>
   </ul>
 
-
-  <table class="efa__detail-vis__list">
-  {% for recipient in label.top5 %}
-    <tr>
-      <td>
-        <span class="efa__detail-vis__value">{{ recipient.amount|intcomma_floatformat:0 }}&nbsp;€</span>
-      </td>
-      <td>
-        <a class="efa__detail-vis__name" href="{{ recipient.get_absolute_url }}">{{ recipient.get_full_name|truncatechars:30 }}</a>
-      </td>
-    </tr>
-  {% endfor %}
-  </table>
+  <div class="efa__detail-vis__list">
+    <table>
+    {% for recipient in label.top5 %}
+      <tr>
+        <td>
+          <span class="efa__detail-vis__value">{{ recipient.amount|intcomma_floatformat:0 }}&nbsp;€</span>
+        </td>
+        <td>
+          <a class="efa__detail-vis__name" href="{{ recipient.get_absolute_url }}">{{ recipient.get_full_name|truncatechars:30 }}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+  </div>
 
   <a href="{% url "eurosfueraerzte:eurosfueraerzte-recipientsearch" %}?company={{ object.pk}}&amp;label={{ label.label_slug }}&amp;recipient_kind={{ kind }}">{% trans "Show all recipients" %}</a>
 </div>

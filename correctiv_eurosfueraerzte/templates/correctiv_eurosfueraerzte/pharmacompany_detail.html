@@ -32,6 +32,8 @@
     <div class="page__section -narrow">
       <p>Die Zahlungen an Ärzte für Tagungsgebühren, Reisekosten, Beratungs&shy;honorare und Spesen werden personenbezogen veröffentlicht – wenn der jeweilige Arzt zustimmt. Für den Rest wird die Summe zusammengefasst angegeben. Grundsätzlich nur zusammengefasst werden die Zahlungen im Rahmen von Studien und Anwendungsbeobachtungen veröffentlicht. Sie betragen <strong>{{ payments.rnd|intcomma_floatformat:2 }}&nbsp;€.</strong>
       </p>
+
+      {% include "correctiv_eurosfueraerzte/_company_payment_barchart.html" %}
     </div>
 
     <div class="page__sidebar">
