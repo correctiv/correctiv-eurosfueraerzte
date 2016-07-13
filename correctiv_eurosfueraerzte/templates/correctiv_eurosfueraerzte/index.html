@@ -17,19 +17,6 @@
 
 <div class="row">
   <div class="col-md-6">
-    <h3>{% trans "Top paying companies" %}</h3>
-    <ol>
-      {% for company in top_companies %}
-      <li>
-        <a href="{{ company.get_absolute_url }}">
-          {{ company.name }}
-        </a>
-        – {{ company.amount|intcomma_floatformat:0 }}&nbsp;€
-      </li>
-      {% endfor %}
-    </ol>
-  </div>
-  <div class="col-md-6">
     <h3>{% trans "Known top money-receiving doctors" %}</h3>
     <ol>
       {% for doctor in top_doctors %}
@@ -39,6 +26,19 @@
           </a>
           – {{ doctor.total|intcomma_floatformat:0 }}&nbsp;€
         </li>
+      {% endfor %}
+    </ol>
+  </div>
+  <div class="col-md-6">
+    <h3>{% trans "Top paying companies" %}</h3>
+    <ol>
+      {% for company in top_companies %}
+      <li>
+        <a href="{{ company.get_absolute_url }}">
+          {{ company.name }}
+        </a>
+        – {{ company.amount|intcomma_floatformat:0 }}&nbsp;€
+      </li>
       {% endfor %}
     </ol>
   </div>
