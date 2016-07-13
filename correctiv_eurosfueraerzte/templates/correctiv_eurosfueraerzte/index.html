@@ -9,71 +9,104 @@
 {% endblock %}
 
 {% block content %}
-<header class="page__section-header ">
-  <h2 class="page__section-headline">
-    {% trans "Has your doctor received money from pharma companies?" %}
-  </h2>
-</header>
 
-<div class="row">
-  <div class="col-md-6">
-    <h3>{% trans "Known top money-receiving doctors" %}</h3>
-    <ol>
-      {% for doctor in top_doctors %}
-        <li>
-          <a href="{{ doctor.get_absolute_url }}">
-            {{ doctor.get_full_name }}
-          </a>
-          – {{ doctor.total|intcomma_floatformat:0 }}&nbsp;€
-        </li>
-      {% endfor %}
-    </ol>
-  </div>
-  <div class="col-md-6">
-    <h3>{% trans "Top paying companies" %}</h3>
-    <ol>
-      {% for company in top_companies %}
-      <li>
-        <a href="{{ company.get_absolute_url }}">
-          {{ company.name }}
-        </a>
-        – {{ company.amount|intcomma_floatformat:0 }}&nbsp;€
-      </li>
-      {% endfor %}
-    </ol>
+  <div class="page__row">
+    <div class="page__section -narrow">
+
+      <header class="page__section-header ">
+        <h2 class="page__section-headline">
+          {% trans "Has your doctor received money from pharma companies?" %}
+        </h2>
+      </header>
+
+      <table class="efa__table table table-striped">
+        <thead>
+          <th colspan="2">{% trans "Known top money-receiving doctors" %}</th>
+        </thead>
+        <tbody>
+        {% for doctor in top_doctors %}
+          <tr>
+            <td>
+              <a href="{{ doctor.get_absolute_url }}">
+                {{ doctor.get_full_name }}
+              </a>
+            </td>
+            <td class="text-right">{{ doctor.total|intcomma_floatformat:0 }}&nbsp;€</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+      <table class="efa__table table table-striped">
+        <thead>
+          <th colspan="2">{% trans "Top paying companies" %}</th>
+        </thead>
+        <tbody>
+        {% for company in top_companies %}
+          <tr>
+            <td>
+              <a href="{{ company.get_absolute_url }}">
+                {{ company.name }}
+              </a>
+            </td>
+            <td class="text-right">{{ company.amount|intcomma_floatformat:0 }}&nbsp;€</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
   </div>
 </div>
 
-</div>
 {% include "correctiv_eurosfueraerzte/_drug_search.html" %}
-<div class="page__container">
 
-<div class="row">
-  <div class="col-md-6">
-    <h3>{% trans "Top drugs by study patients" %}</h3>
-    <ol>
-      {% for drug in top_drugs %}
-        <li>
-          <a href="{{ drug.get_absolute_url }}">
-            {{ drug.name }}
-          </a>
-          – {% blocktrans with count=drug.sum_patients|intcomma %}{{ count }} patients{% endblocktrans %}
-        </li>
-      {% endfor %}
-    </ol>
+<div class="efa__content page__container">
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <table class="efa__table table table-striped">
+        <thead>
+          <th colspan="2">{% trans "Top drugs by study patients" %}</th>
+        </thead>
+        <tbody>
+        {% for drug in top_drugs %}
+          <tr>
+            <td>
+              <a href="{{ drug.get_absolute_url }}">
+                {{ drug.name }}
+              </a>
+            </td>
+            <td class="text-right">
+              {% blocktrans with count=drug.sum_patients|intcomma %}{{ count }} patients{% endblocktrans %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-6">
+      <table class="efa__table table table-striped">
+        <thead>
+          <th colspan="2">{% trans "Top studies by fees per patient" %}</th>
+        </thead>
+        <tbody>
+        {% for study in highest_paid_studies %}
+          <tr>
+            <td>
+              <a href="{{ study.get_absolute_url }}">
+              {{ study.drug_title }}
+              </a>
+            </td>
+            <td class="text-right">
+              {% blocktrans with fee=study.fee_per_patient|intcomma_floatformat:2 %}{{ fee }}&nbsp;€{% endblocktrans %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
-  <div class="col-md-6">
-    <h3>{% trans "Top studies by fees per patient" %}</h3>
-    <ol>
-      {% for study in highest_paid_studies %}
-        <li>
-          <a href="{{ study.get_absolute_url }}">
-            {{ study.drug_title }}
-          </a>
-          – {% blocktrans with fee=study.fee_per_patient|intcomma_floatformat:2 %}{{ fee }}&nbsp;€{% endblocktrans %}
-        </li>
-      {% endfor %}
-    </ol>
-  </div>
-</div>
 {% endblock %}
