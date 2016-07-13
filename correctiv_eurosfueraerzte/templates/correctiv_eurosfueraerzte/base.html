@@ -1,6 +1,8 @@
 {% extends CMS_TEMPLATE %}
 
-{% load i18n static %}
+{% load i18n %}
+{% load static %}
+{% load cms_tags %}
 {% load sekizai_tags %}
 
 
@@ -15,9 +17,10 @@
 
   {% block before_content %}{% endblock %}
 
-  <div class="page__container">
-  {% block content %}
-  {% endblock %}
+  <div class="efa__content page__container">
+  {% block content %}{% endblock %}
+
+  {% static_placeholder "eurosfueraerzte-footer" %}
   </div>
 
   {% block after_content %}{% endblock %}
