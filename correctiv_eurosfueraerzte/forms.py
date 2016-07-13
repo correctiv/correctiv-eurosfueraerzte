@@ -68,8 +68,9 @@ class PaymentRecipientSearchForm(SearchForm):
             }))
 
     recipient_kind = forms.ChoiceField(choices=(
-        ('hcp', _('Healthcare Professionals')),
-        ('hco', _('Healthcare Organisations')),
+        ('', _('People and organisations')),
+        ('hcp', _('Only people')),
+        ('hco', _('Only organisations')),
     ), required=False)
 
     label = forms.ChoiceField(choices=PharmaPayment.PAYMENT_LABELS,

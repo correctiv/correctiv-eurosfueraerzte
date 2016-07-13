@@ -21,14 +21,8 @@
             <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
           </span>
         </div>
+        {{ recipient_form.recipient_kind }}
         {% if recipient_form.is_valid %}
-          {% if recipient_form.recipient_kind.value %}
-            <small>
-              {% blocktrans with kind=recipient_form.recipient_kind.value %}
-                Currently only showing {{ kind }}.
-              {% endblocktrans %}
-            </small>
-          {% endif %}
           {% if recipient_form.latlng.value %}
             <small>
               {% blocktrans with latlng=recipient_form.latlng.value %}
