@@ -79,10 +79,10 @@ class PharmaCompanyManager(SearchManager):
         totals_ind_agg = type_df.groupby('individual_recipient')['amount'].sum()
         return {
             'total': type_df['amount'].sum(),
-            'total_individual_percent': totals_ind_agg[True] / max_amount * 100,
-            'total_aggregated_percent': totals_ind_agg[False] / max_amount * 100,
-            'total_individual': totals_ind_agg[True],
-            'total_aggregated': totals_ind_agg[False],
+            'total_individual_percent': totals_ind_agg.get(True, 0) / max_amount * 100,
+            'total_aggregated_percent': totals_ind_agg.get(False, 0) / max_amount * 100,
+            'total_individual': totals_ind_agg.get(True, 0),
+            'total_aggregated': totals_ind_agg.get(False, 0),
             'labels': labels
         }
 
@@ -102,7 +102,8 @@ class PharmaCompanyManager(SearchManager):
 
         df = pd.DataFrame(list(result))
         rnd_amount = df[df['label'] == 'research_development']['amount'].sum()
-        max_amount = max(rnd_amount, df.groupby(['recipient_kind', 'label'])['amount'].sum().max())
+
+        max_amount = max(rnd_amount, df.groupby('recipient_kind')['amount'].sum().max())
         totals_ind_agg = df.groupby('individual_recipient')['amount'].sum()
         total = df['amount'].sum()
         return {
