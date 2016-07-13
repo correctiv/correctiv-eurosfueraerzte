@@ -30,10 +30,12 @@
 
   <div class="page__row">
     <div class="page__section -narrow">
-      <p>Die Zahlungen an Ärzte für Tagungsgebühren, Reisekosten, Beratungs&shy;honorare und Spesen werden personenbezogen veröffentlicht – wenn der jeweilige Arzt zustimmt. Für den Rest wird die Summe zusammengefasst angegeben. Grundsätzlich nur zusammengefasst werden die Zahlungen im Rahmen von Studien und Anwendungsbeobachtungen veröffentlicht. Sie betragen <strong>{{ payments.rnd|intcomma_floatformat:2 }}&nbsp;€.</strong>
+      <p>
+        Die Zahlungen an Ärzte für Tagungsgebühren, Reisekosten, Beratungs&shy;honorare und Spesen werden personenbezogen veröffentlicht – wenn der jeweilige Arzt zustimmt. Für den Rest wird die Summe zusammengefasst angegeben. Grundsätzlich nur zusammengefasst werden die Zahlungen im Rahmen von Studien und Anwendungsbeobachtungen (AWB) veröffentlicht.
       </p>
 
       {% include "correctiv_eurosfueraerzte/_company_payment_barchart.html" %}
+
     </div>
 
     <div class="page__sidebar">
@@ -49,8 +51,12 @@
   </div>
 
   <div class="page__row">
+    <header class="page__section-header ">
+      <h3 class="page__section-headline">{% trans "Payments to persons" %}</h3>
+    </header>
+    {% trans "Payments to doctors in 2015" as hcp_description %}
     {% for label in payments.hcp.labels %}
-      {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hcp" %}
+      {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hcp" description=hcp_description %}
     {% endfor %}
   </div>
 
@@ -59,13 +65,18 @@
   <div class="page__block">
     <div class="page__container">
       <div class="page__row">
+        <header class="page__section-header ">
+          <h3 class="page__section-headline">{% trans "Payments to organisations" %}</h3>
+        </header>
+        {% trans "Payments to organisations in 2015" as hco_description %}
         {% for label in payments.hco.labels %}
-          {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hco" %}
+          {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hco" description=hco_description %}
         {% endfor %}
       </div>
     </div>
   </div>
 
+{% if drug_list %}
 <div class="page__container">
 
   <div class="page__row">
@@ -112,5 +123,7 @@
     </tbody>
   </table>
 </div>
+
+{% endif %}
 
 {% endblock %}

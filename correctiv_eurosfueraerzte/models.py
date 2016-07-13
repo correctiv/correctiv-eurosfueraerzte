@@ -45,36 +45,45 @@ class PharmaCompanyManager(SearchManager):
 
         label_amounts = type_df.groupby(['individual_recipient', 'label'])['amount'].sum().unstack().iteritems()
 
+        labels = [
+            {
+                'total': val_row.sum(),
+                'top5': (
+                    PaymentRecipient.objects.filter(
+                        kind=kind
+                    ).extra(select={
+                        "total_amount": """
+                        SELECT COALESCE(SUM(correctiv_eurosfueraerzte_pharmapayment.amount), 0.0) FROM
+                        correctiv_eurosfueraerzte_pharmapayment
+                        WHERE
+                        correctiv_eurosfueraerzte_paymentrecipient.id = correctiv_eurosfueraerzte_pharmapayment.recipient_id AND
+                        correctiv_eurosfueraerzte_pharmapayment.pharma_company_id = %s AND
+                        correctiv_eurosfueraerzte_pharmapayment.label = %s AND
+                        correctiv_eurosfueraerzte_pharmapayment.recipient_kind = %s
+                        """},
+                        select_params=(obj.id, label, kind),
+                        order_by=['-total_amount'])[:5]
+                ),
+                'label_slug': label,
+                'order': PharmaPayment.PAYMENT_LABELS_ORDER.index(label),
+                'label': PharmaPayment.PAYMENT_LABELS_DICT[label],
+                'individual_percent': round((val_row.get(True, 0) or 0) / val_row.sum() * 100),
+                'aggregated_percent': round((val_row.get(False, 0) or 0) / val_row.sum() * 100),
+                'vis_individual_percent': round((val_row.get(True, 0) or 0) / max_amount * 100),
+                'vis_aggregated_percent': round((val_row.get(False, 0) or 0) / max_amount * 100),
+            }
+            for label, val_row in label_amounts
+            if val_row.sum()
+        ]
+        labels = sorted(labels, key=lambda x: x['order'])
+        totals_ind_agg = type_df.groupby('individual_recipient')['amount'].sum()
         return {
             'total': type_df['amount'].sum(),
-            'labels': [
-                {
-                    'total': val_row.sum(),
-                    'top5': (
-                        PaymentRecipient.objects.filter(
-                            kind=kind
-                        ).extra(select={
-                          "amount": """
-                          SELECT COALESCE(SUM(correctiv_eurosfueraerzte_pharmapayment.amount), 0.0) AS amount FROM
-                          correctiv_eurosfueraerzte_pharmapayment
-                          WHERE
-                          correctiv_eurosfueraerzte_paymentrecipient.id = correctiv_eurosfueraerzte_pharmapayment.recipient_id AND
-                          correctiv_eurosfueraerzte_pharmapayment.pharma_company_id = %s AND
-                          correctiv_eurosfueraerzte_pharmapayment.label = %s AND
-                          correctiv_eurosfueraerzte_pharmapayment.recipient_kind = %s
-                          """}, select_params=(obj.id, label, kind))
-                        .order_by('-amount')[:5]
-                    ),
-                    'label_slug': label,
-                    'label': PharmaPayment.PAYMENT_LABELS_DICT[label],
-                    'individual_percent': (val_row.get(True, 0) or 0) / val_row.sum() * 100,
-                    'aggregated_percent': (val_row.get(False, 0) or 0) / val_row.sum() * 100,
-                    'vis_individual_percent': (val_row.get(True, 0) or 0) / max_amount * 100,
-                    'vis_aggregated_percent': (val_row.get(False, 0) or 0) / max_amount * 100,
-                }
-                for label, val_row in label_amounts
-                if val_row.sum()
-            ]
+            'total_individual_percent': totals_ind_agg[True] / max_amount * 100,
+            'total_aggregated_percent': totals_ind_agg[False] / max_amount * 100,
+            'total_individual': totals_ind_agg[True],
+            'total_aggregated': totals_ind_agg[False],
+            'labels': labels
         }
 
     def get_by_payment_sum(self):
@@ -94,11 +103,14 @@ class PharmaCompanyManager(SearchManager):
         df = pd.DataFrame(list(result))
         rnd_amount = df[df['label'] == 'research_development']['amount'].sum()
         max_amount = max(rnd_amount, df.groupby(['recipient_kind', 'label'])['amount'].sum().max())
-
+        totals_ind_agg = df.groupby('individual_recipient')['amount'].sum()
+        total = df['amount'].sum()
         return {
-            'total': df['amount'].sum(),
+            'total': total,
             'rnd': rnd_amount,
             'rnd_percent': rnd_amount / max_amount * 100,
+            'total_individual_percent': totals_ind_agg[True] / total * 100,
+            'total_aggregated_percent': totals_ind_agg[False] / total * 100,
             'hcp': self._get_type_aggregation(obj, df, 0, max_amount),
             'hco': self._get_type_aggregation(obj, df, 1, max_amount),
         }
@@ -521,10 +533,11 @@ class HealthCareOrganisation(PaymentRecipient):
 @python_2_unicode_compatible
 class PharmaPayment(models.Model):
     PAYMENT_LABELS = (
-        ('registration_fees', _('registration fees')),
-        ('travel_accommodation', _('travel & accommodation')),
         ('fees', _('fees')),
         ('related_expenses', _('related expenses')),
+
+        ('registration_fees', _('registration fees')),
+        ('travel_accommodation', _('travel & accommodation')),
 
         ('donations_grants', _('donations and grants')),
         ('sponsorship', _('sponsorship')),
@@ -532,6 +545,7 @@ class PharmaPayment(models.Model):
         ('research_development', _('Research & development'))
     )
     PAYMENT_LABELS_DICT = dict(PAYMENT_LABELS)
+    PAYMENT_LABELS_ORDER = [x[0] for x in PAYMENT_LABELS]
 
     pharma_company = models.ForeignKey(PharmaCompany, null=True, blank=True)
     recipient = models.ForeignKey(PaymentRecipient, null=True, blank=True)

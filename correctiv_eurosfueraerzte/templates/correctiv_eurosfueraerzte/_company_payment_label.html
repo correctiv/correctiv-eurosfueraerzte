@@ -3,7 +3,7 @@
 {% load number_utils %}
 
 
-<div class="efa__detail-vis">
+<div class="efa__detail-vis efa__detail-vis--{{ kind }}">
 
   <header class="page__section-header ">
     <h2 class="page__section-headline">
@@ -13,7 +13,7 @@
 
   <h3 class="efa__detail-vis__sum">{{ label.total|intcomma_floatformat:0 }}&nbsp;€</h3>
 
-  <p class="efa__detail-vis__description">Zahlungen an Ärzte im Jahr 2015</p>
+  <p class="efa__detail-vis__description">{{ description }}</p>
 
   <div class="efa__chart__bar">
     {% if label.individual_percent > 0 %}
@@ -39,14 +39,16 @@
   <div class="efa__detail-vis__list">
     <table>
     {% for recipient in label.top5 %}
-      <tr>
-        <td>
-          <span class="efa__detail-vis__value">{{ recipient.amount|intcomma_floatformat:0 }}&nbsp;€</span>
-        </td>
-        <td>
-          <a class="efa__detail-vis__name" href="{{ recipient.get_absolute_url }}">{{ recipient.get_full_name|truncatechars:30 }}</a>
-        </td>
-      </tr>
+      {% if recipient.total_amount %}
+        <tr>
+          <td>
+            <span class="efa__detail-vis__value">{{ recipient.total_amount|intcomma_floatformat:0 }}&nbsp;€</span>
+          </td>
+          <td>
+            <a class="efa__detail-vis__name" href="{{ recipient.get_absolute_url }}">{{ recipient.get_full_name|truncatechars:30 }}</a>
+          </td>
+        </tr>
+      {% endif %}
     {% endfor %}
     </table>
   </div>

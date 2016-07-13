@@ -8,13 +8,22 @@
 </dl>
 
 <dl class="efa__chart">
-  {% for item in payments.hcp.labels %}
-    {% include "correctiv_eurosfueraerzte/_company_payment_barchart_item.html" with aggregated=item.vis_aggregated_percent individual=vis_individual_percent total=item.total label=item.label %}
-  {% endfor %}
+  {% include "correctiv_eurosfueraerzte/_company_payment_barchart_item.html" with aggregated=payments.hcp.total_aggregated_percent individual=payments.hcp.total_individual_percent total=payments.hcp.total label="Zahlungen an Personen" %}
 </dl>
 
 <dl class="efa__chart">
-  {% for item in payments.hco.labels %}
-    {% include "correctiv_eurosfueraerzte/_company_payment_barchart_item.html" with aggregated=item.vis_aggregated_percent individual=vis_individual_percent total=item.total label=item.label %}
-  {% endfor %}
+  {% include "correctiv_eurosfueraerzte/_company_payment_barchart_item.html" with aggregated=payments.hco.total_aggregated_percent individual=payments.hco.total_individual_percent total=payments.hco.total label="Zahlungen an Organisationen" %}
 </dl>
+
+<ul class="efa__chart__legend">
+  <li class="efa__chart__legend-item--individual">
+    {% blocktrans with percent=payments.total_individual_percent|floatformat:0 %}
+      {{ percent }}&nbsp;% an namentlich bekannte Empfänger
+    {% endblocktrans %}
+  </li>
+  <li class="efa__chart__legend-item--aggregated">
+    {% blocktrans with percent=payments.total_aggregated_percent|floatformat:0 %}
+      {{ percent }}&nbsp;% an unbekannte Empfänger
+    {% endblocktrans %}
+  </li>
+</ul>

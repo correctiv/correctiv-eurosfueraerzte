@@ -2,7 +2,7 @@
 
 <section class="efa__search">
   <div class="page__container">
-    <form class="efa__search__form" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}" method="get">
+    <form id="search" class="efa__search__form" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}" method="get">
         <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
           {% trans "Euros for Doctors" %}
         </a>
@@ -23,27 +23,29 @@
         </div>
         {{ recipient_form.recipient_kind }}
         {% if recipient_form.is_valid %}
+            <ul>
           {% if recipient_form.latlng.value %}
-            <small>
+            <li>
               {% blocktrans with latlng=recipient_form.latlng.value %}
                 Currently searching near coordinate {{ latlng }}.
               {% endblocktrans %}
-            </small>
+            </li>
           {% endif %}
           {% if recipient_form.company_obj %}
-            <small>
+            <li>
               {% blocktrans with name=recipient_form.company_obj %}
                 Currently only showing recipients of {{ name }}.
               {% endblocktrans %}
-            </small>
+            </li>
           {% endif %}
           {% if recipient_form.label.value %}
-            <small>
+            <li>
               {% blocktrans with label=recipient_form.label.value %}
                 Currently only showing recipients getting {{ label }}.
               {% endblocktrans %}
-            </small>
+            </li>
           {% endif %}
+          </ul>
         {% endif %}
 
         <div class="efa__search__examples">
