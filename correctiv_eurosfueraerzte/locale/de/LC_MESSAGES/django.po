@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-13 12:18+0200\n"
-"PO-Revision-Date: 2016-07-13 12:23+0100\n"
+"POT-Creation-Date: 2016-07-13 17:34+0200\n"
+"PO-Revision-Date: 2016-07-13 17:35+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -27,7 +27,6 @@ msgid "Replace selected with..."
 msgstr "Ersetze Objekte mit..."
 
 #: apps.py:7 cms_app.py:7 cms_plugins.py:11
-#: templates/correctiv_eurosfueraerzte/_doctor_search.html:7
 #: templates/correctiv_eurosfueraerzte/_drug_search.html:8
 #: templates/correctiv_eurosfueraerzte/_recipient_search.html:7
 #: templates/correctiv_eurosfueraerzte/base_detail.html:20
@@ -41,7 +40,6 @@ msgid "Search Tile"
 msgstr "Such-Kachel"
 
 #: forms.py:24 forms.py:61
-#: templates/correctiv_eurosfueraerzte/_doctor_search.html:21
 #: templates/correctiv_eurosfueraerzte/_drug_search.html:22
 #: templates/correctiv_eurosfueraerzte/_recipient_search.html:21
 #: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:19
@@ -57,177 +55,175 @@ msgid "Name, city or postcode"
 msgstr "Name, Ort oder PLZ"
 
 #: forms.py:71
-msgid "Healthcare Professionals"
-msgstr "Fachpersonal im Gesundheitswesen"
+msgid "People and organisations"
+msgstr "Personen und Organisationen"
 
 #: forms.py:72
-msgid "Healthcare Organisations"
-msgstr "Organisationen im Gesundheitswesen"
+msgid "Only people"
+msgstr "Nur Personen"
 
-#: models.py:128 templates/correctiv_eurosfueraerzte/drug_detail.html:28
+#: forms.py:73
+msgid "Only organisations"
+msgstr "Nur Organisationen"
+
+#: models.py:142 templates/correctiv_eurosfueraerzte/drug_detail.html:28
 msgid "Pharma Company"
 msgstr "Pharmaunternehmen"
 
-#: models.py:129
+#: models.py:143
 msgid "Pharma Companies"
 msgstr "Pharmaunternehmen"
 
-#: models.py:197
+#: models.py:211
 msgid "active ingredient"
 msgstr "Wirkstoff"
 
-#: models.py:199
+#: models.py:213
 msgid "medical indication"
 msgstr "Indikation"
 
-#: models.py:205
+#: models.py:219
 msgid "pharma company"
 msgstr "Pharmaunternehmen"
 
-#: models.py:224 models.py:225
+#: models.py:238 models.py:239
 msgid "Drugs"
 msgstr "Medikamente"
 
-#: models.py:270
+#: models.py:284
 msgid "drugs"
 msgstr "Medikamente"
 
-#: models.py:280
+#: models.py:294
 msgid "executing company"
 msgstr "Ausführende Firma"
 
-#: models.py:282
+#: models.py:296
 msgid "sponsor"
 msgstr "Auftraggeber"
 
-#: models.py:296
+#: models.py:310
 msgid "observational study"
 msgstr "Anwendungsbeobachtung"
 
-#: models.py:297
+#: models.py:311
 msgid "observational studies"
 msgstr "Anwendungsbeobachtungen"
 
-#: models.py:415 models.py:543
+#: models.py:429 models.py:560
 msgid "Doctors (HCP)"
 msgstr "Ärzte (HCP)"
 
-#: models.py:416 models.py:544
+#: models.py:430 models.py:561
 msgid "Organisation (HCO)"
 msgstr "Organisation (HCO)"
 
-#: models.py:427
+#: models.py:441
 msgid "Geographic location"
 msgstr "Geographischer Standort"
 
-#: models.py:447
+#: models.py:462
 msgid "payment recipient"
 msgstr "Zahlungsempfänger"
 
-#: models.py:448
+#: models.py:463
 msgid "payment recipients"
 msgstr "Zahlungsempfänger"
 
-#: models.py:471 templates/correctiv_eurosfueraerzte/drug_list.html:18
+#: models.py:486 templates/correctiv_eurosfueraerzte/drug_list.html:18
 #: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:19
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:93
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:106
 msgid "Name"
 msgstr "Name"
 
-#: models.py:492
+#: models.py:507
 msgid "medical doctor"
 msgstr "Arzt"
 
-#: models.py:493
+#: models.py:508
 msgid "medical doctors"
 msgstr "Ärzte"
 
-#: models.py:510
+#: models.py:525
 msgid "healthcare organisation"
 msgstr "Organisation im Gesundheitswesen"
 
-#: models.py:511
+#: models.py:526
 msgid "healthcare organisations"
 msgstr "Fachpersonal im Gesundheitswesen"
 
-#: models.py:521
-msgid "registration fees"
-msgstr "Anmeldegebühren"
-
-#: models.py:522
-msgid "travel & accommodation"
-msgstr "Reise & Unterkunft"
-
-#: models.py:523
+#: models.py:536
 msgid "fees"
-msgstr "Honorar"
+msgstr "Honorare"
 
-#: models.py:524
+#: models.py:537
 msgid "related expenses"
 msgstr "Spesen"
 
-#: models.py:526
+#: models.py:539
+msgid "registration fees"
+msgstr "Tagungsgebühren"
+
+#: models.py:540
+msgid "travel & accommodation"
+msgstr "Reisekosten"
+
+#: models.py:542
 msgid "donations and grants"
 msgstr "Spenden & Fördergelder"
 
-#: models.py:527
+#: models.py:543
 msgid "sponsorship"
 msgstr "Sponsoring"
 
-#: models.py:529
+#: models.py:545
 msgid "Research & development"
 msgstr "Forschung & Entwicklung"
 
-#: models.py:552
+#: models.py:569
 msgid "pharma payment"
 msgstr "Zahlung der Pharmaindustrie"
 
-#: models.py:553
+#: models.py:570
 msgid "pharma payments"
 msgstr "Zahlungen der Pharmaindustrie"
 
-#: templates/correctiv_eurosfueraerzte/_company_payment_label.html:23
+#: templates/correctiv_eurosfueraerzte/_company_payment_barchart.html:20
 #, python-format
 msgid ""
 "\n"
-"        %(percent)s&nbsp;%% amount to known recipients\n"
-"      "
+"      %(percent)s&nbsp;%% an namentlich bekannte Empfänger\n"
+"    "
 msgstr ""
 "\n"
-"        %(percent)s&nbsp;%% aller Beträge an bekannte Empfänger\n"
+"        %(percent)s&nbsp;%% an namentlich bekannte Empfänger\n"
 "      "
 
-#: templates/correctiv_eurosfueraerzte/_company_payment_label.html:28
+#: templates/correctiv_eurosfueraerzte/_company_payment_barchart.html:25
 #, python-format
 msgid ""
 "\n"
-"        %(percent)s&nbsp;%% amount to unknown recipients\n"
+"      %(percent)s&nbsp;%% an unbekannte Empfänger\n"
+"    "
+msgstr ""
+"\n"
+"        %(percent)s&nbsp;%% an unbekannte Empfänger\n"
+"      "
+
+#: templates/correctiv_eurosfueraerzte/_company_payment_label.html:33
+#, python-format
+msgid ""
+"\n"
+"        %(percent)s&nbsp;%% an namentlich bekannte Empfänger\n"
 "      "
 msgstr ""
 "\n"
-"        %(percent)s&nbsp;%% aller Beträge an unbekannte Empfänger\n"
+"        %(percent)s&nbsp;%% an namentlich bekannte Empfänger\n"
 "      "
 
-#: templates/correctiv_eurosfueraerzte/_company_payment_label.html:48
+#: templates/correctiv_eurosfueraerzte/_company_payment_label.html:56
 msgid "Show all recipients"
 msgstr "Zeige alle Empfänger"
-
-#: templates/correctiv_eurosfueraerzte/_doctor_search.html:11
-#: templates/correctiv_eurosfueraerzte/_recipient_search.html:11
-msgid "Find your doctor"
-msgstr "Finde Deinen Arzt"
-
-#: templates/correctiv_eurosfueraerzte/_doctor_search.html:15
-msgid "Was your medicine pushed by pharma companies?"
-msgstr ""
-"Wurden Deine Medikamente von der Pharmaindustrie in den Markt gedrückt?"
-
-#: templates/correctiv_eurosfueraerzte/_doctor_search.html:28
-#: templates/correctiv_eurosfueraerzte/_doctor_search.html:30
-#: templates/correctiv_eurosfueraerzte/_recipient_search.html:58
-#: templates/correctiv_eurosfueraerzte/_recipient_search.html:60
-msgid "or"
-msgstr "oder"
 
 #: templates/correctiv_eurosfueraerzte/_drug_disclaimer.html:7
 msgid ""
@@ -268,6 +264,10 @@ msgstr "Finde heraus, für welche Medikamente es Anwendungsbeobachtungen gibt."
 msgid "More recipient near this address"
 msgstr "Mehr Empfänger in der Nähe"
 
+#: templates/correctiv_eurosfueraerzte/_recipient_search.html:11
+msgid "Find your doctor"
+msgstr "Finde Deinen Arzt"
+
 #: templates/correctiv_eurosfueraerzte/_recipient_search.html:15
 msgid ""
 "How much money has your doctor received from the pharma industry last year?"
@@ -275,18 +275,7 @@ msgstr ""
 "Wieviel Geld hat Dein Arzt im vergangenen Jahr von der Pharmaindustrie "
 "erhalten?"
 
-#: templates/correctiv_eurosfueraerzte/_recipient_search.html:27
-#, python-format
-msgid ""
-"\n"
-"                Currently only showing %(kind)s.\n"
-"              "
-msgstr ""
-"\n"
-"                Gerade werden nur Treffer vom Typ %(kind)s angezeigt.\n"
-"              "
-
-#: templates/correctiv_eurosfueraerzte/_recipient_search.html:34
+#: templates/correctiv_eurosfueraerzte/_recipient_search.html:29
 #, python-format
 msgid ""
 "\n"
@@ -297,7 +286,7 @@ msgstr ""
 "                Gerade wird in der Nähe der Koordinate %(latlng)s gesucht.\n"
 "              "
 
-#: templates/correctiv_eurosfueraerzte/_recipient_search.html:41
+#: templates/correctiv_eurosfueraerzte/_recipient_search.html:36
 #, python-format
 msgid ""
 "\n"
@@ -309,7 +298,7 @@ msgstr ""
 "%(name)s erhalten haben.\n"
 "              "
 
-#: templates/correctiv_eurosfueraerzte/_recipient_search.html:48
+#: templates/correctiv_eurosfueraerzte/_recipient_search.html:43
 #, python-format
 msgid ""
 "\n"
@@ -317,13 +306,18 @@ msgid ""
 "              "
 msgstr ""
 "\n"
-"                Gerade werden nur Empfänger gezeigt, %(label)s erhalten "
+"                Gerade werden nur Empfänger gezeigt, die %(label)s erhalten "
 "haben.\n"
 "              "
 
-#: templates/correctiv_eurosfueraerzte/_recipient_search.html:56
+#: templates/correctiv_eurosfueraerzte/_recipient_search.html:52
 msgid "Examples:"
 msgstr "Beispiele:"
+
+#: templates/correctiv_eurosfueraerzte/_recipient_search.html:54
+#: templates/correctiv_eurosfueraerzte/_recipient_search.html:56
+msgid "or"
+msgstr "oder"
 
 #: templates/correctiv_eurosfueraerzte/admin/replace_objects.html:17
 msgid "Home"
@@ -429,7 +423,7 @@ msgid "Search for „%(query)s” in Euros for Doctors Database"
 msgstr "Suche nach „%(query)s“ in der „Euros für Ärzte“-Datenbank"
 
 #: templates/correctiv_eurosfueraerzte/drug_list.html:19
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:60
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:63
 msgid "Company"
 msgstr "Pharmaunternehmen"
 
@@ -447,12 +441,12 @@ msgid "Has your doctor received money from pharma companies?"
 msgstr "Hat Dein Arzt Geld von der Pharmaindustrie erhalten?"
 
 #: templates/correctiv_eurosfueraerzte/index.html:20
-msgid "Top paying companies"
-msgstr "Top-Pharmafirmen"
-
-#: templates/correctiv_eurosfueraerzte/index.html:33
 msgid "Known top money-receiving doctors"
 msgstr "Top-Ärzte mit bekannten Zahlungen"
+
+#: templates/correctiv_eurosfueraerzte/index.html:33
+msgid "Top paying companies"
+msgstr "Top-Pharmafirmen"
 
 #: templates/correctiv_eurosfueraerzte/index.html:53
 msgid "Top drugs by study patients"
@@ -534,14 +528,18 @@ msgstr ""
 
 #: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:48
 msgid ""
-"Nur knapp 30 Prozent der Ärzte haben ihr Einverständnis gegeben, dass die "
-"Reise- und Hotelkosten, die Tagungsgebühren und Beratungshonorare, die sie "
-"von Pharmafirmen erhalten haben, veröffentlicht werden dürfen. Die Zahlungen "
-"an Ärzte für Studien und Anwendungsbeobachtungen wollen die Pharmafirmen "
-"grundsätzlich nicht personenbezogen veröffentlichen."
+"Nur knapp 30 Prozent der Ärzte haben den Firmen ihr Einverständnis gegeben, "
+"dass ihre Vortrags- und Beratungshonorare, Tagungsgebühren und Reisespesen "
+"veröffentlicht werden dürfen."
 msgstr ""
 
 #: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:51
+msgid ""
+"Die Zahlungen an Ärzte für Studien und Anwendungsbeobachtungen wollen die "
+"Pharmafirmen grundsätzlich nicht personenbezogen veröffentlichen."
+msgstr ""
+
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:54
 #, python-format
 msgid ""
 "\n"
@@ -552,23 +550,23 @@ msgstr ""
 "        %(name)s hat der Veröffentlichung folgender Zahlungen zugestimmt:\n"
 "        "
 
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:61
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:64
 msgid "Payment type"
 msgstr "Zahlungstyp"
 
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:62
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:65
 msgid "Amount"
 msgstr "Betrag"
 
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:69
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:72
 msgid "Total"
 msgstr "Gesamtbetrag"
 
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:92
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:95
 msgid "to:"
 msgstr "an:"
 
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:112
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:115
 msgid ""
 "Die Informationen auf dieser Seite stammen von den 54 Mitgliedsfirmen der "
 "„Freiwilligen Selbstkontrolle für die Arzneimittelindustrie e.V.“, die diese "
@@ -578,11 +576,11 @@ msgstr ""
 "„Freiwilligen Selbstkontrolle für die Arzneimittelindustrie e.V.“, die diese "
 "Angaben auf ihren jeweiligen Webseiten veröffentlicht haben."
 
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:122
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:125
 msgid "More organisations and doctors at similar address"
 msgstr "Weitere Empfänger an ähnlicher Adresse"
 
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:133
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:136
 msgid "Nearby doctors and organisations"
 msgstr "Weitere Empfänger in der Nähe"
 
@@ -621,11 +619,27 @@ msgstr ""
 "Gesamtsumme, die die %(name)s im vergangenen Jahr an Ärzte und Einrichtungen "
 "gezahlt hat."
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:72
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:55
+msgid "Payments to persons"
+msgstr "Zahlungen an Personen"
+
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:57
+msgid "Payments to doctors in 2015"
+msgstr "Zahlungen an Ärzte im Jahr 2015"
+
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:69
+msgid "Payments to organisations"
+msgstr "Zahlungen an Organisationen"
+
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:71
+msgid "Payments to organisations in 2015"
+msgstr "Zahlungen an Organisationen im Jahr 2015"
+
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:85
 msgid "Observational Studies"
 msgstr "Anwendungsbeobachtungen"
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:75
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:88
 #, python-format
 msgid ""
 "Die %(name)s hat den Behörden folgende Anwendungsbeobachtungen (AWB) "
@@ -640,12 +654,12 @@ msgstr ""
 "AWBs aber für ein Marketinginstrument, weil sie methodisch in der Regel zu "
 "schlecht sind, um daraus medizinische Erkenntnisse zu gewinnen."
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:87
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:100
 #, python-format
 msgid "„%(name)s“ is responsible for the following products."
 msgstr "„%(name)s“ ist verantwortlich für die folgenden Medikamente."
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:94
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:107
 msgid "Number of Observational Studies"
 msgstr "Anzahl der Anwendungsbeobachtungen"
 
@@ -732,6 +746,25 @@ msgid ""
 msgstr ""
 "Details darüber, wieviel Geld %(name)s an Ärzte und für "
 "Anwendungsbeobachtungen zahlt."
+
+#~ msgid "Healthcare Professionals"
+#~ msgstr "Fachpersonal im Gesundheitswesen"
+
+#~ msgid "Healthcare Organisations"
+#~ msgstr "Organisationen im Gesundheitswesen"
+
+#~ msgid "Was your medicine pushed by pharma companies?"
+#~ msgstr ""
+#~ "Wurden Deine Medikamente von der Pharmaindustrie in den Markt gedrückt?"
+
+#~ msgid ""
+#~ "\n"
+#~ "                Currently only showing %(kind)s.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "                Gerade werden nur Treffer vom Typ %(kind)s angezeigt.\n"
+#~ "              "
 
 #~ msgid "e.g. Avastin"
 #~ msgstr "z.B. Avastin"
