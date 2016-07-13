@@ -46,7 +46,15 @@
             <a href="{{ obj.payments_url }}">Die Webseite von {{ object.name }} befindet sich hier.</a>
           {% endif %}
         </p>
+
+        <a class="well__cta" href="#search">
+          {% trans "Continue searching" %}
+        </a>
+
       </div>
+
+      {% include "correctiv_eurosfueraerzte/_support.html" %}
+
     </div>
   </div>
 
