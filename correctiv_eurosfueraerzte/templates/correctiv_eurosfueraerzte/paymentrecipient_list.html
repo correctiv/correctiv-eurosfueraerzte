@@ -44,9 +44,29 @@
     </table>
   </div>
 {% else %}
-  <p>
-    {% trans "Your search did not give any results" %}
-  </p>
+  <div class="page__row">
+    <div class="page__section -narrow">
+
+      <p>
+        {% blocktrans %}
+          We could not find any person or organisation for the search criteria.
+        {% endblocktrans %}
+      </p>
+      <p>
+        {% blocktrans %}
+          Please note that <strong>only 30% of doctors</strong> allowed pharma companies to release their names. Only these persons are included in the database.
+        {% endblocktrans %}
+      </p>
+      <p>
+        {% trans "Try these example searches:" %}
+        <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=45147">45147</a>
+        {% trans "or" %}
+        <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=Dinslaken">Dinslaken</a>
+        {% trans "or" %}
+        <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=müller">Müller</a>
+      </p>
+    </div>
+  </div>
 {% endif %}
 {% if page_obj.has_other_pages %}
   {% include "pagination.html" with page_obj=page_obj getvars="&"|add:getvars %}
