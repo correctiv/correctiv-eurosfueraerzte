@@ -52,7 +52,59 @@
         {{ name }} hat der Veröffentlichung folgender Zahlungen zugestimmt:
         {% endblocktrans %}
       </p>
+
+      <div class="table-responsive">
+        <table class="efa__table table table-striped">
+          <thead>
+            <tr>
+              <th>{% trans "Company" %}</th>
+              <th>{% trans "Payment type" %}</th>
+              <th class="text-right">{% trans "Amount" %}</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td>
+                <strong>{% trans "Total" %}</strong>
+              </td>
+              <td class="text-right">
+                <strong>{{ aggs.payments_total|intcomma_floatformat:2 }}&nbsp;€</strong>
+              </td>
+           </tr>
+         </tfoot>
+          <tbody>
+        {% with payments=object.pharmapayment_set.all %}
+          {% for payment in payments %}
+            <tr>
+              <td>
+                {% if payment.pharma_company %}
+                  <a href="{{ payment.pharma_company.get_absolute_url }}">
+                    {{ payment.pharma_company.name }}
+                  </a>
+                {% endif %}
+              </td>
+              <td>
+                {{ payment.get_label_display }}
+                {% if payment.recipient_detail %}
+                  <br/>
+                  <small>
+                    {% trans "to:" %} {{ payment.recipient_detail }}
+                  </small>
+                {% endif %}
+              </td>
+              {# <td> {{ payment.date.year }} </td>#}
+              <td class="text-right">
+                {{ payment.amount|intcomma_floatformat:2 }}&nbsp;€
+              </td>
+            </tr>
+          {% endfor %}
+        {% endwith %}
+          </tbody>
+        </table>
+      </div>
     </div>
+
 
     <div class="page__sidebar">
       <div class="well">
@@ -63,70 +115,26 @@
     </div>
   </div>
 
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>{% trans "Company" %}</th>
-          <th>{% trans "Payment type" %}</th>
-          <th class="text-right">{% trans "Amount" %}</th>
-        </tr>
-      </thead>
-      <tfoot>
-        <tr>
-          <td></td>
-          <td>
-            <strong>{% trans "Total" %}</strong>
-          </td>
-          <td class="text-right">
-            <strong>{{ aggs.payments_total|intcomma_floatformat:2 }}&nbsp;€</strong>
-          </td>
-       </tr>
-     </tfoot>
-      <tbody>
-    {% with payments=object.pharmapayment_set.all %}
-      {% for payment in payments %}
-        <tr>
-          <td>
-            {% if payment.pharma_company %}
-              <a href="{{ payment.pharma_company.get_absolute_url }}">
-                {{ payment.pharma_company.name }}
-              </a>
-            {% endif %}
-          </td>
-          <td>
-            {{ payment.get_label_display }}
-            {% if payment.recipient_detail %}
-              <br/>
-              <small>
-                {% trans "to:" %} {{ payment.recipient_detail }}
-              </small>
-            {% endif %}
-          </td>
-          {# <td> {{ payment.date.year }} </td>#}
-          <td class="text-right">
-            {{ payment.amount|intcomma_floatformat:2 }}&nbsp;€
-          </td>
-        </tr>
-      {% endfor %}
-    {% endwith %}
-      </tbody>
-    </table>
-  </div>
-
-
 {% if same_address_objects %}
-  <header class="page__section-header">
-    <h3 class="page__section-headline">{% trans "More organisations and doctors at similar address" %}</h3>
-  </header>
-  {% include "correctiv_eurosfueraerzte/_recipient_nearby.html" with nearby_objects=same_address_objects %}
+  <div class="page__row">
+    <div class="page__section -narrow">
+      <header class="page__section-header">
+        <h3 class="page__section-headline">{% trans "More organisations and doctors at similar address" %}</h3>
+      </header>
+      {% include "correctiv_eurosfueraerzte/_recipient_nearby.html" with nearby_objects=same_address_objects %}
+    </div>
+  </div>
 {% endif %}
 
 {% if nearby_objects %}
-  <header class="page__section-header">
-    <h3 class="page__section-headline">{% trans "Nearby doctors and organisations" %}</h3>
-  </header>
-  {% include "correctiv_eurosfueraerzte/_recipient_nearby.html" with nearby_objects=nearby_objects %}
+  <div class="page__row">
+    <div class="page__section -narrow">
+      <header class="page__section-header">
+        <h3 class="page__section-headline">{% trans "Nearby doctors and organisations" %}</h3>
+      </header>
+      {% include "correctiv_eurosfueraerzte/_recipient_nearby.html" with nearby_objects=nearby_objects %}
+    </div>
+  </div>
 {% endif %}
 
 {% endblock %}

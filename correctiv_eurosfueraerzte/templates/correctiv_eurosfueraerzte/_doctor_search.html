@@ -1,0 +1,35 @@
+{% load i18n %}
+
+<section class="efa__search">
+  <div class="page__container">
+    <form class="efa__search__form" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}" method="get">
+        <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
+          {% trans "Euros for Doctors" %}
+        </a>
+
+        <h1 class="efa__search__title">
+          {% trans "Find your doctor" %}
+        </h1>
+
+        <p class="efa__search__lead">
+          {% trans "Was your medicine pushed by pharma companies?" %}
+        </p>
+
+        <div class="input-group">
+          {{ doctor_form.q }}
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
+          </span>
+        </div>
+
+        <div class="efa__search__examples">
+          Beispiele:
+          <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=45147">45147</a>
+          {% trans "or" %}
+          <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=Dinslaken">Dinslaken</a>
+          {% trans "or" %}
+          <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=müller">Müller</a>
+        </div>
+    </form>
+  </div>
+</section>
