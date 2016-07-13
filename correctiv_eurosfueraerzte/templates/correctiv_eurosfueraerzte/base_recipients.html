@@ -1,5 +1,52 @@
 {% extends "correctiv_eurosfueraerzte/base.html" %}
 
+{% load i18n %}
+
 {% block before_content %}
-  {% include "correctiv_eurosfueraerzte/_recipient_search.html" %}
+
+<section class="efa__search">
+  <div class="page__container">
+    <form class="efa__search__form--small" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}" method="get">
+        <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
+          {% trans "Euros for Doctors" %}
+        </a>
+
+        <p class="efa__search__lead">
+          {% trans "How much money has your doctor received from the pharma industry last year?" %}
+        </p>
+
+        <div class="input-group">
+          {{ recipient_form.q }}
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
+          </span>
+        </div>
+        {{ recipient_form.recipient_kind }}
+        {% if recipient_form.is_valid %}
+          {% if recipient_form.latlng.value %}
+            <small>
+              {% blocktrans with latlng=recipient_form.latlng.value %}
+                Currently searching near coordinate {{ latlng }}.
+              {% endblocktrans %}
+            </small>
+          {% endif %}
+          {% if recipient_form.company_obj %}
+            <small>
+              {% blocktrans with name=recipient_form.company_obj %}
+                Currently only showing recipients of {{ name }}.
+              {% endblocktrans %}
+            </small>
+          {% endif %}
+          {% if recipient_form.label.value %}
+            <small>
+              {% blocktrans with label=recipient_form.label.value %}
+                Currently only showing recipients getting {{ label }}.
+              {% endblocktrans %}
+            </small>
+          {% endif %}
+        {% endif %}
+    </form>
+  </div>
+</section>
+
 {% endblock %}
