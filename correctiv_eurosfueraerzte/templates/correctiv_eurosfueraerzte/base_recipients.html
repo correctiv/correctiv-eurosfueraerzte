@@ -11,9 +11,35 @@
           {% trans "Euros for Doctors" %}
         </a>
 
-        <p class="efa__search__lead">
+        <div class="efa__search__lead">
           {% trans "How much money has your doctor received from the pharma industry last year?" %}
-        </p>
+
+          {% if recipient_form.is_valid %}
+          <ul>
+            {% if recipient_form.latlng.value %}
+            <li>
+              {% blocktrans with latlng=recipient_form.latlng.value %}
+                Currently searching near coordinate {{ latlng }}.
+              {% endblocktrans %}
+            </li>
+          {% endif %}
+          {% if recipient_form.company_obj %}
+            <li>
+              {% blocktrans with name=recipient_form.company_obj %}
+                Currently only showing recipients of {{ name }}.
+              {% endblocktrans %}
+            </li>
+          {% endif %}
+          {% if recipient_form.label.value %}
+            <li>
+              {% blocktrans with label=recipient_form.label.value %}
+                Currently only showing recipients getting {{ label }}.
+              {% endblocktrans %}
+            </li>
+            {% endif %}
+          </ul>
+          {% endif %}
+        </div>
 
         <div class="input-group">
           {{ recipient_form.q }}
@@ -21,30 +47,9 @@
             <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
           </span>
         </div>
+
         {{ recipient_form.recipient_kind }}
-        {% if recipient_form.is_valid %}
-          {% if recipient_form.latlng.value %}
-            <small>
-              {% blocktrans with latlng=recipient_form.latlng.value %}
-                Currently searching near coordinate {{ latlng }}.
-              {% endblocktrans %}
-            </small>
-          {% endif %}
-          {% if recipient_form.company_obj %}
-            <small>
-              {% blocktrans with name=recipient_form.company_obj %}
-                Currently only showing recipients of {{ name }}.
-              {% endblocktrans %}
-            </small>
-          {% endif %}
-          {% if recipient_form.label.value %}
-            <small>
-              {% blocktrans with label=recipient_form.label.value %}
-                Currently only showing recipients getting {{ label }}.
-              {% endblocktrans %}
-            </small>
-          {% endif %}
-        {% endif %}
+
     </form>
   </div>
 </section>

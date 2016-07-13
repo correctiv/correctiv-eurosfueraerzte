@@ -21,32 +21,6 @@
             <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
           </span>
         </div>
-        {{ recipient_form.recipient_kind }}
-        {% if recipient_form.is_valid %}
-            <ul>
-          {% if recipient_form.latlng.value %}
-            <li>
-              {% blocktrans with latlng=recipient_form.latlng.value %}
-                Currently searching near coordinate {{ latlng }}.
-              {% endblocktrans %}
-            </li>
-          {% endif %}
-          {% if recipient_form.company_obj %}
-            <li>
-              {% blocktrans with name=recipient_form.company_obj %}
-                Currently only showing recipients of {{ name }}.
-              {% endblocktrans %}
-            </li>
-          {% endif %}
-          {% if recipient_form.label.value %}
-            <li>
-              {% blocktrans with label=recipient_form.label.value %}
-                Currently only showing recipients getting {{ label }}.
-              {% endblocktrans %}
-            </li>
-          {% endif %}
-          </ul>
-        {% endif %}
 
         <div class="efa__search__examples">
           {% trans "Examples:" %}
