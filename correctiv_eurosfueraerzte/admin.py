@@ -81,6 +81,7 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
     inlines = [
         PharmaPaymentInlineAdmin
     ]
+    display_raw = True
     list_display = ('get_full_name', 'address', 'postcode', 'location')
     list_filter = ('kind',)
     search_fields = ('first_name', 'name', 'address', 'postcode', 'location')
@@ -98,6 +99,7 @@ class DoctorAdmin(LeafletGeoAdmin):
     ]
     search_fields = ('first_name', 'name', 'postcode', 'location')
     list_display = ('get_full_name', 'address', 'postcode', 'location')
+    display_raw = True
 
 
 class HealthCareOrganisationAdmin(LeafletGeoAdmin):
@@ -106,6 +108,7 @@ class HealthCareOrganisationAdmin(LeafletGeoAdmin):
     ]
     search_fields = ('name', 'postcode', 'postcode', 'location')
     list_display = ('name', 'address', 'postcode', 'location')
+    display_raw = True
 
 
 class PharmaPaymentAdmin(admin.ModelAdmin):
