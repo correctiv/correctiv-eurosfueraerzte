@@ -12,11 +12,18 @@
 
 {% block header_title %}{{ object.name }}{% endblock %}
 
-{% block header_content %}{% endblock %}
+{% block header_content %}
+  {% if object.sub_names %}
+    <span class="efa__header__meta">
+      {% for sub_name in object.get_sub_names %}
+        u.a. {{ sub_name }}{% if not forloop.last %}, {% endif %}
+      {% endfor %}
+    </span>
+  {% endif %}
+{% endblock %}
 
 {% block header_sidebar_title %}
   {{ payments.total|intword }}&nbsp;€
-  {# TODO: payments total #}
 {% endblock %}
 
 {% block header_sidebar_modifier %}--pharma{% endblock %}
