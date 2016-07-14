@@ -156,6 +156,9 @@ class PharmaCompany(models.Model):
             'slug': self.slug
         })
 
+    def get_sub_names(self):
+        return [x for x in self.sub_names.splitlines() if x]
+
 
 class DrugManager(SearchManager):
     def get_by_natural_key(self, slug):
