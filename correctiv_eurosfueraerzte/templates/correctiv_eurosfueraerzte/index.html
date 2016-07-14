@@ -11,14 +11,20 @@
 {% block content %}
 
   <div class="page__row">
-    <div class="page__section -narrow">
+    <div class="page__section">
+      <h2 class="efa__search__title">
+        {% trans "Geld von der Pharmaindustrie" %}
+      </h2>
 
-      <header class="page__section-header ">
-        <h2 class="page__section-headline">
-          {% trans "Has your doctor received money from pharma companies?" %}
-        </h2>
-      </header>
+      <p class="efa__search__lead">
+        {% trans "Die 54 größten Pharma-Unternehmen in Deutschland veröffentlichen im Jahr 2016 erstmals alle Geldzahlungen, die sie im vergangenen Jahr an Ärzte und Kliniken geleistet haben." %}
+        <a href="/recherchen/euros-fuer-aerzte/artikel/2016/07/14/seid-umschlungen-millionen/">Zum Hintergrundartikel</a>
+      </p>
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col-md-6">
       <table class="efa__table table table-striped">
         <thead>
           <th colspan="2">{% trans "Known top money-receiving doctors" %}</th>
@@ -36,7 +42,9 @@
         {% endfor %}
         </tbody>
       </table>
+    </div>
 
+    <div class="col-md-6">
       <table class="efa__table table table-striped">
         <thead>
           <th colspan="2">{% trans "Top paying companies" %}</th>
@@ -57,56 +65,72 @@
 
     </div>
   </div>
-</div>
 
-{% include "correctiv_eurosfueraerzte/_drug_search.html" %}
-
-<div class="efa__content page__container">
-
-  <div class="row">
-    <div class="col-md-6">
-
-      <table class="efa__table table table-striped">
-        <thead>
-          <th colspan="2">{% trans "Top drugs by study patients" %}</th>
-        </thead>
-        <tbody>
-        {% for drug in top_drugs %}
-          <tr>
-            <td>
-              <a href="{{ drug.get_absolute_url }}">
-                {{ drug.name }}
-              </a>
-            </td>
-            <td class="text-right">
-              {% blocktrans with count=drug.sum_patients|intcomma %}{{ count }} patients{% endblocktrans %}
-            </td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
-    <div class="col-md-6">
-      <table class="efa__table table table-striped">
-        <thead>
-          <th colspan="2">{% trans "Top studies by fees per patient" %}</th>
-        </thead>
-        <tbody>
-        {% for study in highest_paid_studies %}
-          <tr>
-            <td>
-              <a href="{{ study.get_absolute_url }}">
-              {{ study.drug_title }}
-              </a>
-            </td>
-            <td class="text-right">
-              {% blocktrans with fee=study.fee_per_patient|intcomma_floatformat:2 %}{{ fee }}&nbsp;€{% endblocktrans %}
-            </td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  </div>
 {% endblock %}
+
+{% block after_content %}
+
+  {% include "correctiv_eurosfueraerzte/_drug_search.html" %}
+
+  <div class="efa__content page__container">
+
+    <div class="page__row">
+      <div class="page__section -wide">
+        <h2 class="efa__search__title">
+          {% trans "observational studies" %}
+        </h2>
+
+        <p class="efa__search__lead">
+          {% trans "Pharmakonzerne bezahlen Ärzte dafür, dass sie beobachten, wie gut ihre Patienten ein bestimmtes Medikament vertragen. Wissenschaftlich sind diese „Anwendungsbeobachtungen“ wertlos. Doch Ärzte bekommen dafür im Schnitt 669 Euro – pro Patient. Eine neue CORRECTIV-Datenbank zeigt erstmals, welches Ausmaß die umstrittenen Studien erreicht haben – und welche Präparate vor allem in den Markt gedrückt werden." %}
+          <a href="/recherchen/euros-fuer-aerzte/artikel/2016/07/14/seid-umschlungen-millionen/">Zum Hintergrundartikel</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+
+        <table class="efa__table table table-striped">
+          <thead>
+            <th colspan="2">{% trans "Top drugs by study patients" %}</th>
+          </thead>
+          <tbody>
+          {% for drug in top_drugs %}
+            <tr>
+              <td>
+                <a href="{{ drug.get_absolute_url }}">
+                  {{ drug.name }}
+                </a>
+              </td>
+              <td class="text-right">
+                {% blocktrans with count=drug.sum_patients|intcomma %}{{ count }} patients{% endblocktrans %}
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-md-6">
+        <table class="efa__table table table-striped">
+          <thead>
+            <th colspan="2">{% trans "Top studies by fees per patient" %}</th>
+          </thead>
+          <tbody>
+          {% for study in highest_paid_studies %}
+            <tr>
+              <td>
+                <a href="{{ study.get_absolute_url }}">
+                {{ study.drug_title }}
+                </a>
+              </td>
+              <td class="text-right">
+                {% blocktrans with fee=study.fee_per_patient|intcomma_floatformat:2 %}{{ fee }}&nbsp;€{% endblocktrans %}
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% endblock %}
