@@ -49,10 +49,12 @@
       <div class="well">
         <p>
           Die Informationen auf dieser Seite stammen von den 54 Mitgliedsfirmen der „Freiwilligen Selbstkontrolle für die Arzneimittelindustrie e.V.“, die diese Angaben auf ihren jeweiligen Webseiten veröffentlicht haben.
-          {% if obj.payments_url %}
-            <a href="{{ obj.payments_url }}">Die Webseite von {{ object.name }} befindet sich hier.</a>
-          {% endif %}
         </p>
+          {% if object.payments_url %}
+          <p>
+            <a href="{{ object.payments_url }}">Veröffentlichung von „{{ object.name }}“</a>
+          </p>
+          {% endif %}
 
         <a class="well__cta" href="#search">
           {% trans "Continue searching" %}
