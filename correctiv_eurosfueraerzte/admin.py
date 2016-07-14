@@ -78,6 +78,10 @@ class PharmaPaymentInlineAdmin(admin.TabularInline):
 
 
 class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
+    inlines = [
+        PharmaPaymentInlineAdmin
+    ]
+    list_display = ('get_full_name', 'address', 'postcode', 'location')
     list_filter = ('kind',)
     search_fields = ('first_name', 'name', 'address', 'postcode', 'location')
 
