@@ -21,6 +21,9 @@
   {% if object.orientations %}
     <span class="efa__header__meta">{{ object.orientations }}</span>
   {% endif %}
+  {% if object.name_detail %}
+    <span class="efa__header__meta">{{ object.name_detail }}</span>
+  {% endif %}
   {% if object.geo %}
     <a class="efa__header__back-link" href="{% url "eurosfueraerzte:eurosfueraerzte-recipientsearch" %}?latlng={{ object.geo.1|unlocalize }},{{ object.geo.0|unlocalize }}">
   {% else %}
