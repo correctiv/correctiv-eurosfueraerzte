@@ -113,6 +113,11 @@
           </tbody>
         </table>
       </div>
+      {% if object.note %}
+        <p>
+          <strong>Hinweis zu diesem Empfänger:</strong> {{ object.note }}
+        </p>
+      {% endif %}
     </div>
 
 
