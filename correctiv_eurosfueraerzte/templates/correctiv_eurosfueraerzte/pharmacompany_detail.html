@@ -16,7 +16,7 @@
   {% if object.sub_names %}
     <span class="efa__header__meta">
       {% for sub_name in object.get_sub_names %}
-        u.a. {{ sub_name }}{% if not forloop.last %}, {% endif %}
+        {{ sub_name }}{% if not forloop.last %}, {% endif %}
       {% endfor %}
     </span>
   {% endif %}
