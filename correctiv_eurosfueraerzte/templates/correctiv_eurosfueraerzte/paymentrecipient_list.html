@@ -28,14 +28,11 @@
   {% include "correctiv_eurosfueraerzte/_recipient_list_table.html" with object_list=distance_object_list.0.list %}
 {% endif %}
 
-{% if distance_object_list.0.list and distance_object_list.0.grouper and distance_object_list.1.list %}
+{% if distance_object_list.1.list %}
+  <h3>Folgende weitere Empfänger gibt es im Umkreis von 50 km</h3>
+  {% include "correctiv_eurosfueraerzte/_recipient_list_table.html" with object_list=distance_object_list.1.list %}
+{% elif object_list and not distance_object_list.0.grouper %}
   <h3>Folgende Empfänger gibt es im Umkreis von 50 km</h3>
-  {% if distance_object_list.0.list %}
-    {% include "correctiv_eurosfueraerzte/_recipient_list_table.html" with object_list=distance_object_list.1.list %}
-  {% else %}
-    {% include "correctiv_eurosfueraerzte/_recipient_list_table.html" with object_list=object_list %}
-  {% endif %}
-{% else %}
   {% include "correctiv_eurosfueraerzte/_recipient_list_table.html" with object_list=object_list %}
 {% endif %}
 
