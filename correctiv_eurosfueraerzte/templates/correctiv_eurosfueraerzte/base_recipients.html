@@ -25,7 +25,7 @@
           {% endif %}
           {% if recipient_form.label.value %}
             <li>
-              {% blocktrans with label=recipient_form.label.value %}
+              {% blocktrans with label=recipient_form.label_description %}
                 Currently only showing recipients getting {{ label }}.
               {% endblocktrans %}
             </li>

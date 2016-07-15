@@ -109,6 +109,7 @@ class PaymentRecipientSearchForm(SearchForm):
 
         label = self.cleaned_data['label']
         if label:
+            self.label_description = PharmaPayment.PAYMENT_LABELS_DICT[label]
             qs = qs.filter(pharmapayment__label=label)
         return qs
 
