@@ -11,6 +11,7 @@ from djorm_pgfulltext.fields import VectorField, FullTextLookup, startswith
 import pandas as pd
 
 
+
 class FullTextLookupCustom(FullTextLookup):
     lookup_name = 'ft_search'
 
@@ -479,6 +480,11 @@ class PaymentRecipient(models.Model):
         return ('eurosfueraerzte:eurosfueraerzte-recipientdetail', (), {
             'slug': self.slug
         })
+
+    def distance_is_zero(self):
+        if not hasattr(self, 'distance'):
+            return False
+        return self.distance.m == 0
 
     def get_full_name(self):
         if self.kind == 0:

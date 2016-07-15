@@ -5,6 +5,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.db.models.functions import Distance
+from django.contrib.gis.measure import D
 
 from .models import Drug, PharmaCompany, PaymentRecipient, PharmaPayment
 
@@ -123,5 +124,6 @@ class PaymentRecipientSearchForm(SearchForm):
         latlng = self.cleaned_data['latlng']
         if latlng:
             qs = qs.annotate(distance=Distance('geo', latlng))
+            qs = qs.filter(geo__distance_lte=(latlng, D(km=50)))
             qs = qs.order_by('distance', order_field)
         return qs

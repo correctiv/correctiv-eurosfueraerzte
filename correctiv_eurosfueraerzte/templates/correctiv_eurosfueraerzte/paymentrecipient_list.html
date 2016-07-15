@@ -1,7 +1,6 @@
 {% extends "correctiv_eurosfueraerzte/base_recipients.html" %}
 
 {% load i18n %}
-{% load number_utils %}
 
 
 {% block title %}{% blocktrans with query=query %}Search for „{{ query }}” in Euros for Doctors Database{% endblocktrans %}{% endblock %}
@@ -11,39 +10,36 @@
 {% endblock %}
 
 {% block content %}
-{% if object_list %}
-  <div class="table-responsive">
-    <table class="efa__table table table-striped">
-      <thead>
-        <tr>
-          <th>{% trans "Name" %}</th>
-          <th>{% trans "Address" %}</th>
-          <th class="text-right">{% trans "Total amount" %}</th>
-        </tr>
-      </thead>
-    {% for object in object_list %}
-      <tr>
-        <td>
-          <a href="{{ object.get_absolute_url }}">
-            {{ object.get_full_name }}
-          </a>
-        </td>
-        <td>
-          {{ object.address }}<br/>
-          {{ object.postcode }} {{ object.location }}
-        </td>
-        <td class="text-right">
-          {% if object.computed_total %}
-            {{ object.computed_total|intcomma_floatformat:2 }}&nbsp;€
-          {% else %}
-            {{ object.total|intcomma_floatformat:2 }}&nbsp;€
-          {% endif %}
-        </td>
-      </tr>
-    {% endfor %}
-    </table>
-  </div>
+{% regroup object_list by distance_is_zero as distance_object_list %}
+
+{% if distance_object_list.0.list and distance_object_list.0.grouper %}
+  <h3>
+    Genaue Treffer für diese Adresse
+  </h3>
+  {% with match=distance_object_list.0.list.0 %}
+    <p>Folgende Empfänger haben wir an der Adresse
+      <strong>
+        {{ match.address }}{% if match.location %}, {{ match.location }}
+        {% endif %}
+      </strong>
+      gefunden.
+    </p>
+  {% endwith %}
+  {% include "correctiv_eurosfueraerzte/_recipient_list_table.html" with object_list=distance_object_list.0.list %}
+{% endif %}
+
+{% if distance_object_list.0.list and distance_object_list.0.grouper and distance_object_list.1.list %}
+  <h3>Folgende Empfänger gibt es im Umkreis von 50 km</h3>
+  {% if distance_object_list.0.list %}
+    {% include "correctiv_eurosfueraerzte/_recipient_list_table.html" with object_list=distance_object_list.1.list %}
+  {% else %}
+    {% include "correctiv_eurosfueraerzte/_recipient_list_table.html" with object_list=object_list %}
+  {% endif %}
 {% else %}
+  {% include "correctiv_eurosfueraerzte/_recipient_list_table.html" with object_list=object_list %}
+{% endif %}
+
+{% if not object_list %}
   <div class="page__row">
     <div class="page__section -narrow">
 
