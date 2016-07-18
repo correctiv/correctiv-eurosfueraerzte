@@ -51,7 +51,7 @@ class PharmaCompanyManager(SearchManager):
                 'total': val_row.sum(),
                 'top5': (
                     PaymentRecipient.objects.filter(
-                        kind=kind
+                        kind=kind, hidden_payments=False
                     ).extra(select={
                         "total_amount": """
                         SELECT COALESCE(SUM(correctiv_eurosfueraerzte_pharmapayment.amount), 0.0) FROM

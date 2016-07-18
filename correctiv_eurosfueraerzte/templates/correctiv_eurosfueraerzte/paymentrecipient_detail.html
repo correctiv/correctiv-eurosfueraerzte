@@ -57,62 +57,68 @@
       <p>
         {% trans "Die Zahlungen an Ärzte für Studien und Anwendungsbeobachtungen wollen die Pharmafirmen grundsätzlich nicht personenbezogen veröffentlichen." %}
       </p>
+      {% if not object.hidden_payments %}
       <p>
         {% blocktrans with name=object.get_full_name %}
         {{ name }} hat der Veröffentlichung folgender Zahlungen zugestimmt:
         {% endblocktrans %}
       </p>
-
-      <div class="table-responsive">
-        <table class="efa__table table table-striped">
-          <thead>
-            <tr>
-              <th>{% trans "Company" %}</th>
-              <th>{% trans "Payment type" %}</th>
-              <th class="text-right">{% trans "Amount" %}</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <td></td>
-              <td>
-                <strong>{% trans "Total" %}</strong>
-              </td>
-              <td class="text-right">
-                <strong>{{ aggs.payments_total|intcomma_floatformat:2 }}&nbsp;€</strong>
-              </td>
-           </tr>
-         </tfoot>
-          <tbody>
-        {% with payments=object.pharmapayment_set.all %}
-          {% for payment in payments %}
-            <tr>
-              <td>
-                {% if payment.pharma_company %}
-                  <a href="{{ payment.pharma_company.get_absolute_url }}">
-                    {{ payment.pharma_company.name }}
-                  </a>
-                {% endif %}
-              </td>
-              <td>
-                {{ payment.get_label_display }}
-                {% if payment.recipient_detail %}
-                  <br/>
-                  <small>
-                    {% trans "to:" %} {{ payment.recipient_detail }}
-                  </small>
-                {% endif %}
-              </td>
-              {# <td> {{ payment.date.year }} </td>#}
-              <td class="text-right">
-                {{ payment.amount|intcomma_floatformat:2 }}&nbsp;€
-              </td>
-            </tr>
-          {% endfor %}
-        {% endwith %}
-          </tbody>
-        </table>
-      </div>
+        <div class="table-responsive">
+          <table class="efa__table table table-striped">
+            <thead>
+              <tr>
+                <th>{% trans "Company" %}</th>
+                <th>{% trans "Payment type" %}</th>
+                <th class="text-right">{% trans "Amount" %}</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td>
+                  <strong>{% trans "Total" %}</strong>
+                </td>
+                <td class="text-right">
+                  <strong>{{ aggs.payments_total|intcomma_floatformat:2 }}&nbsp;€</strong>
+                </td>
+             </tr>
+           </tfoot>
+            <tbody>
+          {% with payments=object.pharmapayment_set.all %}
+            {% for payment in payments %}
+              <tr>
+                <td>
+                  {% if payment.pharma_company %}
+                    <a href="{{ payment.pharma_company.get_absolute_url }}">
+                      {{ payment.pharma_company.name }}
+                    </a>
+                  {% endif %}
+                </td>
+                <td>
+                  {{ payment.get_label_display }}
+                  {% if payment.recipient_detail %}
+                    <br/>
+                    <small>
+                      {% trans "to:" %} {{ payment.recipient_detail }}
+                    </small>
+                  {% endif %}
+                </td>
+                {# <td> {{ payment.date.year }} </td>#}
+                <td class="text-right">
+                  {{ payment.amount|intcomma_floatformat:2 }}&nbsp;€
+                </td>
+              </tr>
+            {% endfor %}
+          {% endwith %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <h3>Einwilligung widderrufen</h3>
+        <p>
+          {{ object.get_full_name }} hat inzwischen die Einwilligung zur Veröffentlichung der erhaltenen Zahlungen widerrufen.
+        </p>
+      {% endif %}
       {% if object.note %}
         <p>
           <strong>Hinweis:</strong> {{ object.note }}

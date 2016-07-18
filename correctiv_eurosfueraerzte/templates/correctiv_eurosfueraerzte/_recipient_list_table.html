@@ -22,10 +22,14 @@
         {{ object.postcode }} {{ object.location }}
       </td>
       <td class="text-right">
-        {% if object.computed_total %}
-          {{ object.computed_total|intcomma_floatformat:2 }}&nbsp;€
+        {% if object.hidden_payments %}
+          nicht verfügbar
         {% else %}
-          {{ object.total|intcomma_floatformat:2 }}&nbsp;€
+          {% if object.computed_total %}
+            {{ object.computed_total|intcomma_floatformat:2 }}&nbsp;€
+          {% else %}
+            {{ object.total|intcomma_floatformat:2 }}&nbsp;€
+          {% endif %}
         {% endif %}
       </td>
     </tr>
