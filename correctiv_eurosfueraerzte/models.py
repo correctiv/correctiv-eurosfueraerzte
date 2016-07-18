@@ -455,6 +455,7 @@ class PaymentRecipient(models.Model):
     data = HStoreField(blank=True)
 
     note = models.TextField(blank=True)
+    hidden_payments = models.BooleanField(default=False)
 
     total = models.DecimalField(decimal_places=2, max_digits=19, blank=True, null=True)
     company_count = models.SmallIntegerField(blank=True, null=True)
