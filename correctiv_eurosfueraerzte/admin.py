@@ -86,11 +86,18 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
     list_filter = ('kind',)
     search_fields = ('first_name', 'name', 'address', 'postcode', 'location')
 
-    actions = ['replace_objects']
+    actions = ['replace_objects', 'compute_total']
 
     def handle_replacement(self, real_object, queryset):
         PharmaPayment.objects.filter(recipient__in=queryset).update(
                             recipient=real_object)
+
+    def compute_total(self, request, queryset):
+        for obj in queryset:
+            aggs = obj.pharmapayment_set.all().aggregate(models.Sum('amount'), models.Count('pharma_company', distinct=True))
+            obj.total = aggs['amount__sum']
+            obj.company_count = aggs['pharma_company__count']
+            obj.save()
 
 
 class PharmaPaymentAdmin(admin.ModelAdmin):
