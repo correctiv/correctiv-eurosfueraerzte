@@ -5,8 +5,8 @@ from django.core.exceptions import PermissionDenied
 from django.template.response import TemplateResponse
 from django.contrib.admin import helpers
 
-from .models import (PharmaCompany, Drug, ObservationalStudy, PaymentRecipient,
-                     Doctor, HealthCareOrganisation, PharmaPayment)
+from .models import (PharmaCompany, Drug, ObservationalStudy,
+                     PaymentRecipient, PharmaPayment)
 
 
 class ReplacementMixin(object):
@@ -93,24 +93,6 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
                             recipient=real_object)
 
 
-class DoctorAdmin(LeafletGeoAdmin):
-    inlines = [
-        PharmaPaymentInlineAdmin
-    ]
-    search_fields = ('first_name', 'name', 'postcode', 'location')
-    list_display = ('get_full_name', 'address', 'postcode', 'location')
-    display_raw = True
-
-
-class HealthCareOrganisationAdmin(LeafletGeoAdmin):
-    inlines = [
-        PharmaPaymentInlineAdmin
-    ]
-    search_fields = ('name', 'postcode', 'postcode', 'location')
-    list_display = ('name', 'address', 'postcode', 'location')
-    display_raw = True
-
-
 class PharmaPaymentAdmin(admin.ModelAdmin):
     list_filter = ('label',)
 
@@ -119,6 +101,4 @@ admin.site.register(PharmaCompany, PharmaCompanyAdmin)
 admin.site.register(Drug, DrugAdmin)
 admin.site.register(ObservationalStudy, ObservationalStudyAdmin)
 admin.site.register(PaymentRecipient, PaymentRecipientAdmin)
-admin.site.register(Doctor, DoctorAdmin)
-admin.site.register(HealthCareOrganisation, HealthCareOrganisationAdmin)
 admin.site.register(PharmaPayment, PharmaPaymentAdmin)
