@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import PermissionDenied
 from django.template.response import TemplateResponse
 from django.contrib.admin import helpers
+from django.db import models
 
 from .models import (PharmaCompany, Drug, ObservationalStudy,
                      PaymentRecipient, PharmaPayment)
