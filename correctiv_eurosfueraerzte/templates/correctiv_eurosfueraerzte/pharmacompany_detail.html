@@ -7,7 +7,7 @@
 {% block title %}{% blocktrans with name=object.name %}Pharma company {{ name }}{% endblocktrans %}{% endblock %}
 
 {% block additional_meta %}
-<meta name="description" content="{% blocktrans with name=object.name %}Details on which drugs where pushed by {{ name }} through observational studies.{% endblocktrans %}">
+<meta name="description" content="{% blocktrans with name=object.name %}Details on which doctors {{ name }} paid money and which drugs were pushed through observational studies.{% endblocktrans %}">
 {% endblock %}
 
 {% block header_title %}{{ object.name }}{% endblock %}
@@ -23,13 +23,23 @@
 {% endblock %}
 
 {% block header_sidebar_title %}
-  {{ payments.total|intword }}&nbsp;€
+  {% if payments %}
+    {{ payments.total|intword }}&nbsp;€
+  {% endif %}
 {% endblock %}
 
 {% block header_sidebar_modifier %}--pharma{% endblock %}
 
 {% block header_sidebar_about %}
-  <p>{% blocktrans with name=object.name %}Gesamtsumme, die die {{ name }} im vergangenen Jahr an Ärzte und Einrichtungen gezahlt hat.{% endblocktrans %}</p>
+  {% if payments %}
+    <p>
+      {% blocktrans with name=object.name %}Gesamtsumme, die die {{ name }} im vergangenen Jahr an Ärzte und Einrichtungen gezahlt hat.{% endblocktrans %}
+    </p>
+  {% else %}
+    <p>
+      {% blocktrans with name=object.name %}{{ name }} ist nicht Teil der Veröffentlichungs&shy;initiative.{% endblocktrans %}
+    </p>
+  {% endif %}
   <a class="efa__header__more-link" href="/recherchen/euros-fuer-aerzte/artikel/2016/07/14/seid-umschlungen-millionen/">Artikel lesen</a>
 {% endblock %}
 
@@ -41,7 +51,9 @@
         Die Zahlungen an Ärzte für Tagungsgebühren, Reisekosten, Beratungs&shy;honorare und Spesen werden personenbezogen veröffentlicht – wenn der jeweilige Arzt zustimmt. Für den Rest wird die Summe zusammengefasst angegeben. Grundsätzlich nur zusammengefasst werden die Zahlungen im Rahmen von Studien und Anwendungsbeobachtungen (AWB) veröffentlicht.
       </p>
 
-      {% include "correctiv_eurosfueraerzte/_company_payment_barchart.html" %}
+      {% if payments %}
+        {% include "correctiv_eurosfueraerzte/_company_payment_barchart.html" %}
+      {% endif %}
 
     </div>
 
@@ -64,6 +76,7 @@
     </div>
   </div>
 
+{% if payments %}
   <div class="page__row">
     <header class="page__section-header ">
       <h3 class="page__section-headline">{% trans "Payments to doctors" %}</h3>
@@ -89,6 +102,8 @@
       </div>
     </div>
   </div>
+
+{% endif %}
 
 {% if drug_list %}
 <div class="page__container">

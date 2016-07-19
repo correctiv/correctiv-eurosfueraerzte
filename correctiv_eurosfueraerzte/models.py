@@ -102,6 +102,8 @@ class PharmaCompanyManager(SearchManager):
         )
 
         df = pd.DataFrame(list(result))
+        if len(df) == 0:
+            return None
         rnd_amount = df[df['label'] == 'research_development']['amount'].sum()
 
         max_amount = max(rnd_amount, df.groupby('recipient_kind')['amount'].sum().max())
