@@ -82,6 +82,7 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
     inlines = [
         PharmaPaymentInlineAdmin
     ]
+    # Display raw input for geo fields
     display_raw = True
     list_display = ('get_full_name', 'address', 'postcode', 'location')
     list_filter = ('kind',)
@@ -102,7 +103,10 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
 
 
 class PharmaPaymentAdmin(admin.ModelAdmin):
-    list_filter = ('label',)
+    list_filter = ('label', 'pharma_company')
+    list_display = ('pharma_company', 'recipient', 'date', 'label', 'amount')
+    search_fields = ('recipient__name', 'recipient_detail', 'recipient_kind')
+    raw_id_fields = ('recipient',)
 
 
 admin.site.register(PharmaCompany, PharmaCompanyAdmin)
