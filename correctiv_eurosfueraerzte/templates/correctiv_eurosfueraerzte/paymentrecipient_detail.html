@@ -30,9 +30,9 @@
     <a class="efa__header__back-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q={{ object.location }}">
   {% endif %}
     {% if object.address %}
-      {{ object.address }}<br/>
+      {{ object.address }},
     {% endif %}
-    {% if object.postcode %}{{ object.postcode }} {% endif %}{{ object.location }}
+    {% if object.postcode %}{{ object.postcode }}&nbsp;{% endif %}{{ object.location }}
   </a>
 {% endblock %}
 
