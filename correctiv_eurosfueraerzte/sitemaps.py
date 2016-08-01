@@ -1,13 +1,15 @@
 from django.contrib.sitemaps import Sitemap
 
-from .models import Drug, ObservationalStudy, PharmaCompany, Doctor
+from .models import (Drug, ObservationalStudy, PharmaCompany,
+                     PaymentRecipient)
 
 
 def update_sitemap(sitemap_dict):
     sitemap_dict.update({
         'eurosfueraerzte-drugs': DrugSitemap,
         'eurosfueraerzte-observationalstudy': ObservationalStudySitemap,
-        'eurosfueraerzte-pharmacompany': PharmaCompanySitemap
+        'eurosfueraerzte-pharmacompany': PharmaCompanySitemap,
+        'eurosfueraerzte-paymentrecipient': PaymentRecipientSitemap
     })
     return sitemap_dict
 
@@ -45,7 +47,7 @@ class ObservationalStudySitemap(Sitemap):
         return ObservationalStudy.objects.all()
 
 
-class DoctorSitemap(Sitemap):
+class PaymentRecipientSitemap(Sitemap):
     priority = 0.25
     changefreq = 'yearly'
 
@@ -53,4 +55,4 @@ class DoctorSitemap(Sitemap):
         """
         Return published entries.
         """
-        return Doctor.objects.all()
+        return PaymentRecipient.objects.all()
