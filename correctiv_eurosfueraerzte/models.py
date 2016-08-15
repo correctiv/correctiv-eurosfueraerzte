@@ -11,7 +11,6 @@ from djorm_pgfulltext.fields import VectorField, FullTextLookup, startswith
 import pandas as pd
 
 
-
 class FullTextLookupCustom(FullTextLookup):
     lookup_name = 'ft_search'
 
@@ -113,8 +112,8 @@ class PharmaCompanyManager(SearchManager):
             'total': total,
             'rnd': rnd_amount,
             'rnd_percent': rnd_amount / max_amount * 100,
-            'total_individual_percent': totals_ind_agg[True] / total * 100,
-            'total_aggregated_percent': totals_ind_agg[False] / total * 100,
+            'total_individual_percent': totals_ind_agg.get(True, 0) / total * 100,
+            'total_aggregated_percent': totals_ind_agg.get(False, 0) / total * 100,
             'hcp': self._get_type_aggregation(obj, df, 0, max_amount),
             'hco': self._get_type_aggregation(obj, df, 1, max_amount),
         }
