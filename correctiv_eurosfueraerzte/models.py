@@ -430,6 +430,7 @@ class PaymentRecipient(models.Model):
 
     name = models.CharField(max_length=512)
     slug = models.SlugField(max_length=512)
+    origin = models.CharField(max_length=2, default='DE', db_index=True)
 
     kind = models.SmallIntegerField(choices=(
         (0, _('Doctors (HCP)')),
@@ -458,7 +459,10 @@ class PaymentRecipient(models.Model):
     note = models.TextField(blank=True)
     hidden_payments = models.BooleanField(default=False)
 
+    # aggregates
     total = models.DecimalField(decimal_places=2, max_digits=19, blank=True, null=True)
+    total_currency = models.CharField(max_length=3, blank=True)
+    total_euro = models.DecimalField(decimal_places=2, max_digits=19, blank=True, null=True)
     company_count = models.SmallIntegerField(blank=True, null=True)
 
     search_index = VectorField()
@@ -544,6 +548,11 @@ class HealthCareOrganisation(PaymentRecipient):
 
 @python_2_unicode_compatible
 class PharmaPayment(models.Model):
+    ORIGIN_CURRENCY = {
+        'DE': 'EUR',
+        'AT': 'EUR',
+        'CH': 'CHF'
+    }
     PAYMENT_LABELS = (
         ('fees', _('fees')),
         ('related_expenses', _('related expenses')),
@@ -562,8 +571,13 @@ class PharmaPayment(models.Model):
     pharma_company = models.ForeignKey(PharmaCompany, null=True, blank=True)
     recipient = models.ForeignKey(PaymentRecipient, null=True, blank=True)
     date = models.DateField()
+    origin = models.CharField(max_length=2, default='DE', db_index=True)
 
     amount = models.DecimalField(decimal_places=2, max_digits=19)
+    currency = models.CharField(max_length=3, default='EUR')
+
+    amount_euro = models.DecimalField(decimal_places=2, max_digits=19, null=True)
+
     label = models.CharField(max_length=512, blank=True,
                              choices=PAYMENT_LABELS)
 
