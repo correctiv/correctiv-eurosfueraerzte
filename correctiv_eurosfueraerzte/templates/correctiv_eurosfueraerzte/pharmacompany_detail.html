@@ -83,7 +83,7 @@
     </header>
     {% trans "Payments to doctors in 2015" as hcp_description %}
     {% for label in payments.hcp.labels %}
-      {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hcp" description=hcp_description %}
+      {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hcp" description=hcp_description currency=payments.currency %}
     {% endfor %}
   </div>
 
@@ -97,7 +97,7 @@
         </header>
         {% trans "Payments to organisations in 2015" as hco_description %}
         {% for label in payments.hco.labels %}
-          {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hco" description=hco_description %}
+          {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hco" description=hco_description currency=payments.currency %}
         {% endfor %}
       </div>
     </div>

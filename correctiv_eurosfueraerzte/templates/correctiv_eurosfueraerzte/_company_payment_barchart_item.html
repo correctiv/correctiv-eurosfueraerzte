@@ -18,7 +18,7 @@
       </span>
     {% endif %}
     <span class="efa__chart__total{% if aggregated > 90 %}--inner{% endif %}">
-      {{ total|intcomma_floatformat:0 }}&nbsp;€
+      {% currency_format total currency %}
     </span>
   </div>
 </dd>

@@ -23,13 +23,9 @@
       </td>
       <td class="text-right">
         {% if object.hidden_payments %}
-          nicht verfügbar
+          {% trans "not available" %}
         {% else %}
-          {% if object.computed_total %}
-            {{ object.computed_total|intcomma_floatformat:2 }}&nbsp;€
-          {% else %}
-            {{ object.total|intcomma_floatformat:2 }}&nbsp;€
-          {% endif %}
+          {% currency_format object.total object.total_currency %}
         {% endif %}
       </td>
     </tr>

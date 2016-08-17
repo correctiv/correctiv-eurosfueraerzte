@@ -14,15 +14,15 @@
 
 {% if distance_object_list.0.list and distance_object_list.0.grouper %}
   <h3>
-    Genaue Treffer für diese Adresse
+    {% trans "Exact matches at this address" %}
   </h3>
   {% with match=distance_object_list.0.list.0 %}
-    <p>Folgende Empfänger haben wir an der Adresse
+    <p>
+      {% trans "The following recipients were found at this address:" %}
       <strong>
         {{ match.address }}{% if match.location %}, {{ match.location }}
         {% endif %}
       </strong>
-      gefunden.
     </p>
   {% endwith %}
   {% include "correctiv_eurosfueraerzte/_recipient_list_table.html" with object_list=distance_object_list.0.list %}
@@ -32,7 +32,7 @@
   <h3>Folgende weitere Empfänger gibt es im Umkreis von 50 km</h3>
   {% include "correctiv_eurosfueraerzte/_recipient_list_table.html" with object_list=distance_object_list.1.list %}
 {% elif object_list and not distance_object_list.0.grouper %}
-  <h3>Folgende Empfänger gibt es im Umkreis von 50 km</h3>
+  <h3>{% trans "Your search matched these recipients" %}</h3>
   {% include "correctiv_eurosfueraerzte/_recipient_list_table.html" with object_list=object_list %}
 {% endif %}
 
@@ -52,11 +52,7 @@
       </p>
       <p>
         {% trans "Try these example searches:" %}
-        <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=45147">45147</a>
-        {% trans "or" %}
-        <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=Dinslaken">Dinslaken</a>
-        {% trans "or" %}
-        <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=müller">Müller</a>
+        {% include includes.search_examples %}
       </p>
     </div>
   </div>

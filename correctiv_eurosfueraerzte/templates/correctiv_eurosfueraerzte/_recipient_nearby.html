@@ -13,7 +13,7 @@
         {{ object.address }}
       </td>
       <td class="text-right">
-        {{ object.payments_total|intcomma_floatformat:2 }}&nbsp;€
+        {% currency_format object.payments_total object.payments_total_currency %}
       </td>
     </tr>
     {% endfor %}

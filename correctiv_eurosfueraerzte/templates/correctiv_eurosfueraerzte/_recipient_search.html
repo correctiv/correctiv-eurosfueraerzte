@@ -2,9 +2,13 @@
 
 <section class="efa__search">
   <div class="page__container">
-    <form id="search" class="efa__search__form" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}" method="get">
-        <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
-          {% trans "Euros for Doctors" %}
+    <form id="search" class="efa__search__form -{{ country|lower }}" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}" method="get">
+        {% if country %}
+          <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-country_index' country=country %}">
+        {% else %}
+          <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
+        {% endif %}
+          {{ project_title }}
         </a>
 
         <h1 class="efa__search__title">
@@ -22,13 +26,11 @@
           </span>
         </div>
 
+        <input type="hidden" name="country" value="{{ country }}"/>
+
         <div class="efa__search__examples">
           {% trans "Examples:" %}
-          <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=45147">45147</a>
-          {% trans "or" %}
-          <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=Dinslaken">Dinslaken</a>
-          {% trans "or" %}
-          <a href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=müller">Müller</a>
+          {% include includes.search_examples %}
         </div>
     </form>
   </div>

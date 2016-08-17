@@ -37,12 +37,11 @@
 {% endblock %}
 
 {% block header_sidebar_title %}
-  {% trans "Euros for Doctors" %}
+  {{ project_title }}
 {% endblock %}
 
 {% block header_sidebar_about %}
-  <p>{% trans "Die 54 größten Pharma-Unternehmen in Deutschland veröffentlichen im Jahr 2016 erstmals alle Geldzahlungen, die sie im vergangenen Jahr an Ärzte, Fachkreisangehörige und Kliniken geleistet haben." %}</p>
-  <a class="efa__header__more-link" href="/recherchen/euros-fuer-aerzte/artikel/2016/07/14/seid-umschlungen-millionen/">Artikel lesen</a>
+  {% include includes.about_blurb %}
 {% endblock %}
 
 {% block content %}
@@ -51,12 +50,7 @@
 
   <div class="page__row">
     <div class="page__section -narrow">
-      <p>
-        {% trans "Nur knapp 30 Prozent der Ärzte und Fachkreisangehörigen haben den Firmen ihr Einverständnis gegeben, dass ihre Vortrags- und Beratungshonorare, Tagungsgebühren und Reisespesen veröffentlicht werden dürfen." %}
-      </p>
-      <p>
-        {% trans "Die Zahlungen an Ärzte für Studien und Anwendungsbeobachtungen wollen die Pharmafirmen grundsätzlich nicht personenbezogen veröffentlichen." %}
-      </p>
+      {% include includes.recipient_main %}
       {% if not object.hidden_payments %}
       <p>
         {% blocktrans with name=object.get_full_name %}
@@ -79,7 +73,9 @@
                   <strong>{% trans "Total" %}</strong>
                 </td>
                 <td class="text-right">
-                  <strong>{{ aggs.payments_total|intcomma_floatformat:2 }}&nbsp;€</strong>
+                  <strong>
+                    {% currency_format aggs.payments_total aggs.payments_total_currency %}
+                  </strong>
                 </td>
              </tr>
            </tfoot>
@@ -105,7 +101,7 @@
                 </td>
                 {# <td> {{ payment.date.year }} </td>#}
                 <td class="text-right">
-                  {{ payment.amount|intcomma_floatformat:2 }}&nbsp;€
+                  {% currency_format payment.amount payment.currency %}
                 </td>
               </tr>
             {% endfor %}
@@ -129,9 +125,7 @@
 
     <div class="page__sidebar">
       <div class="well">
-        <p>
-          {% trans "Die Informationen auf dieser Seite stammen von den 54 Mitgliedsfirmen der „Freiwilligen Selbstkontrolle für die Arzneimittelindustrie e.V.“, die diese Angaben auf ihren jeweiligen Webseiten veröffentlicht haben." %}
-        </p>
+        {% include includes.recipient_sidebar %}
         <a class="well__cta" href="#search">
           {% trans "Continue searching" %}
         </a>

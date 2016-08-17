@@ -16,8 +16,8 @@
       <div class="efa__header__main">
         <div class="efa__header__content">
 
-          <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
-            {% trans "Euros for Doctors" %}
+          <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' country=country|lower %}">
+            {{ project_title }}
           </a>
 
           <h1 class="efa__header__title">
@@ -28,7 +28,7 @@
 
         </div>
       </div>
-      <div class="efa__header__sidebar{% block header_sidebar_modifier %}{% endblock %}">
+      <div class="efa__header__sidebar{% block header_sidebar_modifier %}{% endblock %} -{{ country|lower }}">
         <div class="efa__header__about">
 
           <h2 class="efa__header__title--light">

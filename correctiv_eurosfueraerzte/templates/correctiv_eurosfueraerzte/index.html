@@ -12,10 +12,7 @@
 
   <div class="page__row">
     <div class="page__section efa__content">
-      <p>
-        {% trans "Die 54 größten Pharma-Unternehmen in Deutschland veröffentlichen im Jahr 2016 erstmals alle Geldzahlungen, die sie im vergangenen Jahr an Ärzte, Fachkreisangehörige und Kliniken geleistet haben." %}
-        <a href="/recherchen/euros-fuer-aerzte/artikel/2016/07/14/seid-umschlungen-millionen/">Zum Hintergrundartikel</a>
-      </p>
+      {% include includes.index_blurb %}
     </div>
   </div>
 
@@ -33,7 +30,7 @@
                 {{ doctor.get_full_name }}
               </a>
             </td>
-            <td class="text-right">{{ doctor.total|intcomma_floatformat:0 }}&nbsp;€</td>
+            <td class="text-right">{% currency_format doctor.total doctor.total_currency %}</td>
           </tr>
         {% endfor %}
         </tbody>
@@ -53,7 +50,7 @@
                 {{ company.name }}
               </a>
             </td>
-            <td class="text-right">{{ company.amount|intcomma_floatformat:0 }}&nbsp;€</td>
+            <td class="text-right">{% currency_format company.amount company.amount_currency %}</td>
           </tr>
         {% endfor %}
         </tbody>

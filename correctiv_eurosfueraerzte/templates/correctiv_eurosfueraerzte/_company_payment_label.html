@@ -42,7 +42,9 @@
       {% if recipient.total_amount %}
         <tr>
           <td>
-            <span class="efa__detail-vis__value">{{ recipient.total_amount|intcomma_floatformat:0 }}&nbsp;€</span>
+            <span class="efa__detail-vis__value">
+              {% currency_format recipient.total_amount currency %}
+            </span>
           </td>
           <td>
             <a class="efa__detail-vis__name" href="{{ recipient.get_absolute_url }}">{{ recipient.get_full_name|truncatechars:30 }}</a>
