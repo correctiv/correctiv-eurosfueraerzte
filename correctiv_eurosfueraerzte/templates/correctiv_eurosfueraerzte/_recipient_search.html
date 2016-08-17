@@ -4,7 +4,7 @@
   <div class="page__container">
     <form id="search" class="efa__search__form -{{ country|lower }}" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}" method="get">
         {% if country %}
-          <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-country_index' country=country %}">
+          <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-country_index' country=country|lower %}">
         {% else %}
           <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
         {% endif %}
