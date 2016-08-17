@@ -1,7 +1,6 @@
 import re
 
 from django import forms
-from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.db.models.functions import Distance
@@ -82,6 +81,16 @@ class PaymentRecipientSearchForm(SearchForm):
         widget=forms.HiddenInput()
     )
 
+    country = forms.ChoiceField(
+        choices=(
+            ('', _('all available countries')),
+            ('DE', _('Germany')),
+            ('CH', _('Switzerland')),
+        ),
+        required=False,
+        widget=forms.HiddenInput()  # Remove this
+    )
+
     company = PharmaCompanyModelChoiceField(
         required=False,
         queryset=PharmaCompany.objects.all(),
@@ -114,12 +123,11 @@ class PaymentRecipientSearchForm(SearchForm):
         return qs
 
     def finalise_queryset(self, qs):
-        order_field = '-total'
-        # company = self.cleaned_data['company']
-        # label = self.cleaned_data['label']
-        # if company or label:
-        #     qs = qs.annotate(computed_total=models.Sum('pharmapayment__amount'))
-        #     order_field = '-computed_total'
+        order_field = '-total_euro'
+
+        country = self.cleaned_data['country']
+        if country:
+            qs = qs.filter(origin=country)
 
         qs = qs.order_by(order_field)
         latlng = self.cleaned_data['latlng']

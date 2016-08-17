@@ -86,14 +86,33 @@ class PharmaCompanyManager(SearchManager):
             'labels': labels
         }
 
-    def get_by_payment_sum(self):
+    def get_by_payment_sum(self, country=None):
         qs = PharmaCompany.objects.all()
-        qs = qs.annotate(amount=models.Sum('pharmapayment__amount'))
+
+        if country is not None:
+            qs = qs.filter(country=country)
+
+        if country is not None:
+            qs = qs.annotate(
+                amount=models.Sum('pharmapayment__amount'),
+                amount_currency=models.Value(
+                    PharmaPayment.ORIGIN_CURRENCY[country],
+                    output_field=models.CharField())
+            )
+        else:
+            qs = qs.annotate(
+                amount=models.Sum('pharmapayment__amount_euro'),
+                amount_currency=models.Value(
+                    'EUR',
+                    output_field=models.CharField())
+            )
         qs = qs.filter(amount__isnull=False)
-        return qs.order_by('-amount')
+        qs = qs.order_by('-amount')
+        return qs
 
     def get_aggregated_payments(self, obj):
         p = obj.pharmapayment_set.all()
+
         result = (p.annotate(individual_recipient=models.Case(
                 models.When(recipient__isnull=False, then=True), default=False, output_field=models.BooleanField())
             ).values('recipient_kind', 'label', 'individual_recipient')
@@ -110,6 +129,7 @@ class PharmaCompanyManager(SearchManager):
         total = df['amount'].sum()
         return {
             'total': total,
+            'currency': PharmaPayment.ORIGIN_CURRENCY[obj.country],
             'rnd': rnd_amount,
             'rnd_percent': rnd_amount / max_amount * 100,
             'total_individual_percent': totals_ind_agg.get(True, 0) / total * 100,
@@ -373,7 +393,8 @@ class PaymentRecipientManager(SearchManager):
 
     def add_annotations(self, queryset):
         return queryset.annotate(
-            payments_total=models.Sum('pharmapayment__amount'),
+            payments_total=models.F('total'),
+            payments_total_currency=models.F('total_currency')
             # payments_fees=models.Sum(
             #     models.Case(
             #         models.When(
@@ -386,11 +407,21 @@ class PaymentRecipientManager(SearchManager):
             # )
         )
 
-    def get_top_doctors(self):
-        return (super(PaymentRecipientManager, self).get_queryset()
-                .filter(kind=0)
-                .order_by('-total')
-        )
+    def get_top_doctors(self, origin=None):
+        qs = super(PaymentRecipientManager, self).get_queryset()
+        qs = qs.filter(kind=0)
+        if origin is None:
+            qs = qs.annotate(
+                total_amount=models.F('total_euro'),
+                total_amount_currency='EUR'
+            )
+        else:
+            qs = qs.filter(origin=origin)
+            qs = qs.annotate(
+                total_amount=models.F('total'),
+                total_amount_currency=models.F('total_currency')
+            )
+        return qs.order_by('-total_amount')
 
     def get_by_distance_to_point(self, point, distance=None, include_same=True, only_same=False):
         qs = self.get_queryset()
@@ -509,11 +540,11 @@ class PaymentRecipient(models.Model):
         return PaymentRecipient.objects.get_by_distance_to_point(
                 self.geo, **kwargs)
 
-    def get_aggregates(self):
-        aggs = self.pharmapayment_set.all().aggregate(
-            payments_total=models.Sum('amount')
-        )
-        return aggs
+    def get_aggregates(self, origin=None):
+        return {
+            'payments_total': self.total,
+            'payments_total_currency': self.total_currency
+        }
 
 
 @python_2_unicode_compatible

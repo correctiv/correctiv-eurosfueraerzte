@@ -1,34 +1,73 @@
+# -*- encoding: utf-8 -*-
 import json
 
 from django.views.generic import TemplateView, ListView
 from django.views.generic.detail import DetailView
 from django.http import HttpResponse, QueryDict
 from django.shortcuts import redirect
+from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
-from .models import (Drug, ObservationalStudy, PharmaCompany,
-                     PaymentRecipient, Doctor, HealthCareOrganisation)
+from .models import Drug, ObservationalStudy, PharmaCompany, PaymentRecipient
 from .forms import SearchForm, PaymentRecipientSearchForm
 
 
-class SearchMixin(object):
+def get_origin_include(origin, filename):
+    return 'correctiv_eurosfueraerzte/%s/%s' % (origin, filename)
+
+
+class LocaleIncludeDict(object):
+    def __init__(self, origin):
+        self.origin = origin
+
+    def __getattr__(self, key):
+        return get_origin_include(self.origin, '_%s.html' % key)
+
+
+class LocaleMixin(object):
+    TITLES = {
+        'de': _(u'Euros for Doctors'),
+        'ch': _(u'Fränkli for Doctors'),
+    }
+
     def get_context_data(self, **kwargs):
-        context = super(SearchMixin, self).get_context_data(**kwargs)
-        context['form'] = SearchForm()
-        context['recipient_form'] = PaymentRecipientSearchForm()
+        context = super(LocaleMixin, self).get_context_data(**kwargs)
+        country = self.get_country() or 'DE'
+        context['country'] = country
+        context['filter_country'] = self.get_country()
+        current_lang = translation.get_language()
+        context['locale'] = '%s_%s' % (current_lang, country)
+        context['project_title'] = self.TITLES.get(country.lower())
+        context['includes'] = LocaleIncludeDict(country.lower())
         return context
 
 
-class IndexView(SearchMixin, TemplateView):
+class SearchMixin(object):
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchMixin, self).get_context_data(**kwargs)
+        context['form'] = SearchForm()
+        context['recipient_form'] = PaymentRecipientSearchForm(initial={
+            'country': self.get_country()
+        })
+
+        return context
+
+
+class IndexView(LocaleMixin, SearchMixin, TemplateView):
     template_name = 'correctiv_eurosfueraerzte/index.html'
+
+    def get_country(self):
+        return self.kwargs.get('country', 'de').upper()
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
+        country = self.get_country()
         context['is_index'] = True
         context['top_drugs'] = Drug.objects.get_by_patient_sum()[:5]
         context['highest_paid_studies'] = ObservationalStudy.objects.get_by_fee_per_patient()[:5]
-        context['top_companies'] = PharmaCompany.objects.get_by_payment_sum()[:5]
-        context['top_doctors'] = PaymentRecipient.objects.get_top_doctors()[:5]
+        context['top_companies'] = PharmaCompany.objects.get_by_payment_sum(country)[:5]
+        context['top_doctors'] = PaymentRecipient.objects.get_top_doctors(country)[:5]
         return context
 
 
@@ -37,9 +76,12 @@ class SearchView(ListView):
     search_form = SearchForm
     paginate_by = 20
 
+    def get_search_form(self):
+        return self.search_form(self.request.GET)
+
     def get_queryset(self):
         qs = super(SearchView, self).get_queryset()
-        self.form = self.search_form(self.request.GET)
+        self.form = self.get_search_form()
         if not self.form.is_valid():
             return qs
         if self.kwargs.get('json'):
@@ -70,9 +112,12 @@ class SearchView(ListView):
                                                           **response_kwargs)
 
 
-class RecipientSearchView(SearchView):
+class RecipientSearchView(LocaleMixin, SearchView):
     model = PaymentRecipient
     search_form = PaymentRecipientSearchForm
+
+    def get_country(self):
+        return self.request.GET.get('country') or None
 
     def get_context_data(self, **kwargs):
         context = super(RecipientSearchView, self).get_context_data(**kwargs)
@@ -80,9 +125,12 @@ class RecipientSearchView(SearchView):
         return context
 
 
-class RecipientDetailView(SearchMixin, DetailView):
+class RecipientDetailView(LocaleMixin, SearchMixin, DetailView):
     model = PaymentRecipient
     template_name = 'correctiv_eurosfueraerzte/paymentrecipient_detail.html'
+
+    def get_country(self):
+        return self.object.origin
 
     def get_context_data(self, **kwargs):
         context = super(RecipientDetailView, self).get_context_data(**kwargs)
@@ -135,8 +183,11 @@ class ObservationalStudyDetailView(SearchMixin, DetailView):
         return context
 
 
-class CompanyDetailView(SearchMixin, DetailView):
+class CompanyDetailView(LocaleMixin, SearchMixin, DetailView):
     model = PharmaCompany
+
+    def get_country(self):
+        return self.object.country
 
     def get_context_data(self, **kwargs):
         context = super(CompanyDetailView, self).get_context_data(**kwargs)
