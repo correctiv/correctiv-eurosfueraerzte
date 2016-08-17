@@ -41,6 +41,7 @@ class ReplacementMixin(object):
 
 
 class PharmaCompanyAdmin(ReplacementMixin, admin.ModelAdmin):
+    list_filter = ('country',)
     search_fields = ('name', 'payments_url')
 
     actions = ['replace_objects']
@@ -85,7 +86,7 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
     # Display raw input for geo fields
     display_raw = True
     list_display = ('get_full_name', 'address', 'postcode', 'location')
-    list_filter = ('kind',)
+    list_filter = ('kind', 'origin')
     search_fields = ('first_name', 'name', 'address', 'postcode', 'location')
 
     actions = ['replace_objects', 'compute_total']
@@ -103,7 +104,7 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
 
 
 class PharmaPaymentAdmin(admin.ModelAdmin):
-    list_filter = ('label', 'pharma_company')
+    list_filter = ('label', 'pharma_company', 'origin')
     list_display = ('pharma_company', 'recipient', 'date', 'label', 'amount')
     search_fields = ('recipient__name', 'recipient_detail', 'recipient_kind')
     raw_id_fields = ('recipient',)
