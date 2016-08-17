@@ -37,7 +37,7 @@
     </p>
   {% else %}
     <p>
-      {% blocktrans with name=object.name %}{{ name }} ist nicht Teil der Veröffentlichungs&shy;initiative.{% endblocktrans %}
+      {% blocktrans with name=object.name %}{{ name }} is not part of the publication initiative.{% endblocktrans %}
     </p>
   {% endif %}
   {% include includes.article_link %}
@@ -67,8 +67,8 @@
           <p>
             <a href="{{ object.payments_url }}">
               {% blocktrans with name=object.name %}
-                Publication of “{{ object.name }}”
-              {% endblock %}
+                Publication of “{{ name }}”
+              {% endblocktrans %}
             </a>
           </p>
           {% endif %}
