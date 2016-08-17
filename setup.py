@@ -35,6 +35,7 @@ setup(
     install_requires=[
         'Django',
         'djorm-ext-pgfulltext>=0.9.3',
+        'babel'
     ],
     include_package_data=True,
     classifiers=[
