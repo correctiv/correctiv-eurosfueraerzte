@@ -129,6 +129,8 @@ class PharmaCompany(models.Model):
     web = models.CharField(max_length=1024, blank=True)
     payments_url = models.CharField(max_length=1024, blank=True)
 
+    country = models.CharField(max_length=2, default='DE')
+
     search_index = VectorField()
 
     objects = PharmaCompanyManager(
