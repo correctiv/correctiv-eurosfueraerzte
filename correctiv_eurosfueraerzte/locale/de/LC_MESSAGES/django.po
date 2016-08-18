@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-18 10:23+0200\n"
-"PO-Revision-Date: 2016-08-18 10:24+0100\n"
+"POT-Creation-Date: 2016-08-18 11:30+0200\n"
+"PO-Revision-Date: 2016-08-18 16:07+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -28,7 +28,7 @@ msgstr "Ersetze Objekte mit..."
 
 #: apps.py:7 cms_app.py:7 cms_plugins.py:11
 #: templates/correctiv_eurosfueraerzte/_drug_search.html:8
-#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:7 views.py:29
+#: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:7 views.py:33
 msgid "Euros for Doctors"
 msgstr "Euros für Ärzte"
 
@@ -143,7 +143,7 @@ msgstr "Zahlungsempfänger"
 #: models.py:535
 #: templates/correctiv_eurosfueraerzte/_recipient_list_table.html:8
 #: templates/correctiv_eurosfueraerzte/drug_list.html:17
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:140
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:139
 msgid "Name"
 msgstr "Name"
 
@@ -199,7 +199,7 @@ msgstr "Zahlung der Pharmaindustrie"
 msgid "pharma payments"
 msgstr "Zahlungen der Pharmaindustrie"
 
-#: templates/correctiv_eurosfueraerzte/_company_payment_barchart.html:20
+#: templates/correctiv_eurosfueraerzte/_company_payment_barchart.html:23
 #, python-format
 msgid ""
 "\n"
@@ -210,7 +210,7 @@ msgstr ""
 "        %(percent)s&nbsp;%% an namentlich bekannte Empfänger\n"
 "      "
 
-#: templates/correctiv_eurosfueraerzte/_company_payment_barchart.html:25
+#: templates/correctiv_eurosfueraerzte/_company_payment_barchart.html:28
 #, python-format
 msgid ""
 "\n"
@@ -221,12 +221,12 @@ msgstr ""
 "        %(percent)s&nbsp;%% an unbekannte Empfänger\n"
 "      "
 
-#: templates/correctiv_eurosfueraerzte/_company_payment_label.html:33
+#: templates/correctiv_eurosfueraerzte/_company_payment_label.html:32
 #, python-format
 msgid ""
 "\n"
-"        %(percent)s&nbsp;%% an namentlich bekannte Empfänger\n"
-"      "
+"          %(percent)s&nbsp;%% an namentlich bekannte Empfänger\n"
+"        "
 msgstr ""
 "\n"
 "        %(percent)s&nbsp;%% an namentlich bekannte Empfänger\n"
@@ -400,7 +400,7 @@ msgstr ""
 msgid "Read the article"
 msgstr "Zum Hintergrundartikel"
 
-#: templates/correctiv_eurosfueraerzte/ch/_article_link.html:2
+#: templates/correctiv_eurosfueraerzte/ch/_article_link.html:4
 #: templates/correctiv_eurosfueraerzte/de/_article_link.html:2
 msgid "Read article"
 msgstr "Zum Hintergrundartikel"
@@ -821,27 +821,27 @@ msgstr ""
 "                Veröffentlichungen von „%(name)s“\n"
 "              "
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:87
-msgid "Payments to doctors"
-msgstr "Zahlungen an Ärzte"
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:88
+msgid "Payments to doctors and health care professionals"
+msgstr "Zahlungen an Ärzte und Fachpersonal im Gesundheitswesen"
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:89
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:91
 msgid "Payments to doctors in 2015"
 msgstr "Zahlungen an Ärzte im Jahr 2015"
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:101
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:103
 msgid "Payments to organisations"
 msgstr "Zahlungen an Organisationen"
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:103
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:105
 msgid "Payments to organisations in 2015"
 msgstr "Zahlungen an Organisationen im Jahr 2015"
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:119
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:121
 msgid "Observational Studies"
 msgstr "Anwendungsbeobachtungen"
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:122
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:124
 #, python-format
 msgid ""
 "Die %(name)s hat den Behörden folgende Anwendungsbeobachtungen (AWB) "
@@ -856,12 +856,12 @@ msgstr ""
 "AWBs aber für ein Marketinginstrument, weil sie methodisch in der Regel zu "
 "schlecht sind, um daraus medizinische Erkenntnisse zu gewinnen."
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:134
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:133
 #, python-format
 msgid "„%(name)s“ is responsible for the following products."
 msgstr "„%(name)s“ ist verantwortlich für die folgenden Medikamente."
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:141
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:140
 msgid "Number of Observational Studies"
 msgstr "Anzahl der Anwendungsbeobachtungen"
 
@@ -905,53 +905,59 @@ msgstr "^medikament/(?P<slug>[\\w-]+)/$"
 msgid "^study/(?P<year>\\d{4,})/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$"
 msgstr "^awb/(?P<year>\\d{4,})/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$"
 
-#: views.py:30
-msgid "Swiss Francs for Doctors"
-msgstr "Franken für Ärzte"
+#: views.py:34
+msgid "Money for Doctors"
+msgstr "Geld für Ärzte"
 
-#: views.py:148
+#: views.py:153
 #, python-format
 msgid "%(name)s and money from the pharma industry"
 msgstr "%(name)s und Geld von der Pharmaindustrie."
 
-#: views.py:149
+#: views.py:154
 #, python-format
 msgid "Details on how much money %(name)s got from pharma companies."
 msgstr "Details wieviel Geld %(name)s von der Pharmaindustrie bekommen hat."
 
-#: views.py:161
+#: views.py:166
 #, python-format
 msgid "Drug %(name)s"
 msgstr "Medikament %(name)s"
 
-#: views.py:162
+#: views.py:167
 #, python-format
 msgid "Details on how much money doctors got to prescribe %(name)s."
 msgstr ""
 "Details wieviel Geld Ärzte bekommen haben, um %(name)s zu verschreiben."
 
-#: views.py:178
+#: views.py:183
 #, python-format
 msgid "Observational Study  %(title)s"
 msgstr "Anwendungsbeobachtung %(title)s"
 
-#: views.py:181
+#: views.py:186
 #, python-format
 msgid "Details on the observational study %(title)s."
 msgstr "Details über die Anwendungsbeobachtung %(title)s."
 
-#: views.py:198
+#: views.py:203
 #, python-format
 msgid "Pharma company  %(name)s"
 msgstr "Pharmaunternehmen %(name)s"
 
-#: views.py:201
+#: views.py:206
 #, python-format
 msgid ""
 "Details on how money from %(name)s goes to doctors and observational studies."
 msgstr ""
 "Details darüber, wieviel Geld %(name)s an Ärzte und für "
 "Anwendungsbeobachtungen zahlt."
+
+#~ msgid "Payments to doctors"
+#~ msgstr "Zahlungen an Ärzte"
+
+#~ msgid "Swiss Francs for Doctors"
+#~ msgstr "Franken für Ärzte"
 
 #~ msgid "Fränkli for Doctors"
 #~ msgstr "Fränkli für Ärzte"
@@ -1029,9 +1035,6 @@ msgstr ""
 
 #~ msgid "Payments to persons"
 #~ msgstr "Zahlungen an Personen"
-
-#~ msgid "Healthcare Professionals"
-#~ msgstr "Fachpersonal im Gesundheitswesen"
 
 #~ msgid "Healthcare Organisations"
 #~ msgstr "Organisationen im Gesundheitswesen"
