@@ -52,10 +52,7 @@ class SearchMixin(object):
     def get_context_data(self, **kwargs):
         context = super(SearchMixin, self).get_context_data(**kwargs)
         context['form'] = SearchForm()
-        context['recipient_form'] = PaymentRecipientSearchForm(initial={
-            'country': self.get_country()
-        })
-
+        context['recipient_form'] = PaymentRecipientSearchForm()
         return context
 
 
@@ -68,6 +65,9 @@ class IndexView(LocaleMixin, SearchMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         country = self.get_country()
+        context['recipient_form'] = PaymentRecipientSearchForm(initial={
+            'country': self.get_country()
+        })
         context['is_index'] = True
         context['top_drugs'] = Drug.objects.get_by_patient_sum()[:5]
         context['highest_paid_studies'] = ObservationalStudy.objects.get_by_fee_per_patient()[:5]
