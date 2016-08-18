@@ -88,6 +88,7 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
     list_display = ('get_full_name', 'address', 'postcode', 'location')
     list_filter = ('kind', 'origin')
     search_fields = ('first_name', 'name', 'address', 'postcode', 'location')
+    save_on_top = True
 
     actions = ['replace_objects', 'compute_total']
 
