@@ -27,7 +27,7 @@ class LocaleIncludeDict(object):
 class LocaleMixin(object):
     TITLES = {
         'de': _(u'Euros for Doctors'),
-        'ch': _(u'Swiss Francs for Doctors'),
+        'ch': _(u'Money for Doctors'),
     }
 
     def get_context_data(self, **kwargs):
