@@ -135,4 +135,5 @@ class PaymentRecipientSearchForm(SearchForm):
             qs = qs.annotate(distance=Distance('geo', latlng))
             qs = qs.filter(geo__distance_lte=(latlng, D(km=50)))
             qs = qs.order_by('distance', order_field)
+        qs = qs.distinct()
         return qs
