@@ -88,7 +88,6 @@ class PaymentRecipientSearchForm(SearchForm):
             ('CH', _('Switzerland')),
         ),
         required=False,
-        widget=forms.HiddenInput()  # Remove this
     )
 
     company = PharmaCompanyModelChoiceField(
