@@ -160,6 +160,9 @@ class RecipientDetailView(LocaleMixin, SearchMixin, DetailView):
 class DrugDetailView(SearchMixin, DetailView):
     model = Drug
 
+    def get_country(self):
+        return self.kwargs.get('country', 'de').upper()
+
     def get_context_data(self, **kwargs):
         context = super(DrugDetailView, self).get_context_data(**kwargs)
         context['aggs'] = self.object.get_aggregates()
@@ -170,6 +173,9 @@ class DrugDetailView(SearchMixin, DetailView):
 
 class ObservationalStudyDetailView(SearchMixin, DetailView):
     model = ObservationalStudy
+
+    def get_country(self):
+        return self.kwargs.get('country', 'de').upper()
 
     def get(self, request, *args, **kwargs):
         response = super(ObservationalStudyDetailView, self).get(request, *args, **kwargs)
