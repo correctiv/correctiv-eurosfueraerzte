@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-18 10:14+0200\n"
-"PO-Revision-Date: 2016-08-18 10:16+0100\n"
+"POT-Creation-Date: 2016-08-18 10:23+0200\n"
+"PO-Revision-Date: 2016-08-18 10:24+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -906,8 +906,8 @@ msgid "^study/(?P<year>\\d{4,})/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$"
 msgstr "^awb/(?P<year>\\d{4,})/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$"
 
 #: views.py:30
-msgid "Fränkli for Doctors"
-msgstr "Fränkli für Ärzte"
+msgid "Swiss Francs for Doctors"
+msgstr "Franken für Ärzte"
 
 #: views.py:148
 #, python-format
@@ -952,6 +952,9 @@ msgid ""
 msgstr ""
 "Details darüber, wieviel Geld %(name)s an Ärzte und für "
 "Anwendungsbeobachtungen zahlt."
+
+#~ msgid "Fränkli for Doctors"
+#~ msgstr "Fränkli für Ärzte"
 
 #, fuzzy
 #~| msgid ""
