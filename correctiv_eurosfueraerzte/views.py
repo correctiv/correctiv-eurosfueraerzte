@@ -25,6 +25,10 @@ class LocaleIncludeDict(object):
 
 
 class LocaleMixin(object):
+    HAS_AGGREGATES = {
+        'DE': True,
+        'CH': False
+    }
     TITLES = {
         'de': _(u'Euros for Doctors'),
         'ch': _(u'Money for Doctors'),
@@ -39,6 +43,7 @@ class LocaleMixin(object):
         context['locale'] = '%s_%s' % (current_lang, country)
         context['project_title'] = self.TITLES.get(country.lower())
         context['includes'] = LocaleIncludeDict(country.lower())
+        context['has_aggregates'] = self.HAS_AGGREGATES[country]
         return context
 
 

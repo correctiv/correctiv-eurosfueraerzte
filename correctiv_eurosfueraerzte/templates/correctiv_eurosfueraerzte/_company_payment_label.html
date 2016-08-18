@@ -13,28 +13,28 @@
 
   <h3 class="efa__detail-vis__sum">{{ label.total|intcomma_floatformat:0 }}&nbsp;€</h3>
 
-  <p class="efa__detail-vis__description">{{ description }}</p>
-
-  <div class="efa__chart__bar">
-    {% if label.individual_percent > 0 %}
-      <span class="efa__chart__bar--individual"
-        style="width: {{ label.individual_percent|unlocalize }}%">
+  {% if has_aggregates %}
+    <div class="efa__chart__bar">
+      {% if label.individual_percent > 0 %}
+        <span class="efa__chart__bar--individual"
+          style="width: {{ label.individual_percent|unlocalize }}%">
+        </span>
+      {% endif %}
+      {% if label.aggregated_percent > 0 %}
+      <span class="efa__chart__bar--aggregated"
+        style="width: {{ label.aggregated_percent|unlocalize }}%">
       </span>
-    {% endif %}
-    {% if label.aggregated_percent > 0 %}
-    <span class="efa__chart__bar--aggregated"
-      style="width: {{ label.aggregated_percent|unlocalize }}%">
-    </span>
-    {% endif %}
-  </div>
+      {% endif %}
+    </div>
 
-  <ul class="efa__chart__legend">
-    <li class="efa__chart__legend-item--individual">
-      {% blocktrans with percent=label.individual_percent|floatformat:0 %}
-        {{ percent }}&nbsp;% an namentlich bekannte Empfänger
-      {% endblocktrans %}
-    </li>
-  </ul>
+    <ul class="efa__chart__legend">
+      <li class="efa__chart__legend-item--individual">
+        {% blocktrans with percent=label.individual_percent|floatformat:0 %}
+          {{ percent }}&nbsp;% an namentlich bekannte Empfänger
+        {% endblocktrans %}
+      </li>
+    </ul>
+  {% endif %}
 
   <div class="efa__detail-vis__list">
     <table>

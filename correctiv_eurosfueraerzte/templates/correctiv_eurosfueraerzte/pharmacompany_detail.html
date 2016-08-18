@@ -84,7 +84,9 @@
 {% if payments %}
   <div class="page__row">
     <header class="page__section-header ">
-      <h3 class="page__section-headline">{% trans "Payments to doctors" %}</h3>
+      <h3 class="page__section-headline">
+        {% trans "Payments to doctors and health care professionals" %}
+      </h3>
     </header>
     {% trans "Payments to doctors in 2015" as hcp_description %}
     {% for label in payments.hcp.labels %}
@@ -110,9 +112,9 @@
 
 {% endif %}
 
-{% if drug_list %}
 <div class="page__container">
 
+{% if drug_list %}
   <div class="page__row">
     <div class="page__section -narrow">
       <header class="page__section-header ">
@@ -127,37 +129,34 @@
     </div>
   </div>
 
-{# TODO: Direct payments total with link to search #}
+  <div class="page__row">
+    <h3>{% blocktrans with name=object.name %}„{{ name }}“ is responsible for the following products.{% endblocktrans %}</h3>
 
-{# TODO: Aggregate payments list #}
-
-<h3>{% blocktrans with name=object.name %}„{{ name }}“ is responsible for the following products.{% endblocktrans %}</h3>
-
-<div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>{% trans "Name" %}</th>
-        <th>{% trans "Number of Observational Studies" %}</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for drug in drug_list %}
-      <tr>
-        <td>
-          <a href="{{ drug.get_absolute_url }}">
-            {{ drug.name }}
-          </a>
-        </td>
-        <td>
-          {{ drug.study_count }}
-        </td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-</div>
-
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Number of Observational Studies" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for drug in drug_list %}
+          <tr>
+            <td>
+              <a href="{{ drug.get_absolute_url }}">
+                {{ drug.name }}
+              </a>
+            </td>
+            <td>
+              {{ drug.study_count }}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 {% endif %}
 
 {% endblock %}
