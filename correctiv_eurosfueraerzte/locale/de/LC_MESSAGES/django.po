@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-18 11:30+0200\n"
-"PO-Revision-Date: 2016-08-18 16:07+0100\n"
+"POT-Creation-Date: 2016-08-23 10:34+0200\n"
+"PO-Revision-Date: 2016-08-23 10:35+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -561,7 +561,6 @@ msgid "Payment per patient"
 msgstr "Honorar pro Patient"
 
 #: templates/correctiv_eurosfueraerzte/drug_list.html:5
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:6
 #, python-format
 msgid "Search for „%(query)s” in Euros for Doctors Database"
 msgstr "Suche nach „%(query)s“ in der „Euros für Ärzte“-Datenbank"
@@ -718,6 +717,16 @@ msgstr "Weitere Empfänger an ähnlicher Adresse"
 #: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:151
 msgid "Nearby doctors and organisations"
 msgstr "Weitere Empfänger in der Nähe"
+
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:6
+#, python-format
+msgid "Search for „%(query)s” in %(project_title)s Database"
+msgstr "Suche nach „%(query)s“ in der „%(project_title)s“-Datenbank"
+
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:6
+#, python-format
+msgid "Search in %(project_title)s Database"
+msgstr "Suche in der „%(project_title)s“-Datenbank"
 
 #: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:9
 msgid "The database about money flows from pharma companies to doctors."
@@ -919,33 +928,33 @@ msgstr "%(name)s und Geld von der Pharmaindustrie."
 msgid "Details on how much money %(name)s got from pharma companies."
 msgstr "Details wieviel Geld %(name)s von der Pharmaindustrie bekommen hat."
 
-#: views.py:166
+#: views.py:169
 #, python-format
 msgid "Drug %(name)s"
 msgstr "Medikament %(name)s"
 
-#: views.py:167
+#: views.py:170
 #, python-format
 msgid "Details on how much money doctors got to prescribe %(name)s."
 msgstr ""
 "Details wieviel Geld Ärzte bekommen haben, um %(name)s zu verschreiben."
 
-#: views.py:183
+#: views.py:189
 #, python-format
 msgid "Observational Study  %(title)s"
 msgstr "Anwendungsbeobachtung %(title)s"
 
-#: views.py:186
+#: views.py:192
 #, python-format
 msgid "Details on the observational study %(title)s."
 msgstr "Details über die Anwendungsbeobachtung %(title)s."
 
-#: views.py:203
+#: views.py:209
 #, python-format
 msgid "Pharma company  %(name)s"
 msgstr "Pharmaunternehmen %(name)s"
 
-#: views.py:206
+#: views.py:212
 #, python-format
 msgid ""
 "Details on how money from %(name)s goes to doctors and observational studies."
