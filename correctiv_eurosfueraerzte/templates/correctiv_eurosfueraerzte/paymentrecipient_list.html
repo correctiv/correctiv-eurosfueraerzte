@@ -3,7 +3,7 @@
 {% load i18n %}
 
 
-{% block title %}{% blocktrans with query=query %}Search for „{{ query }}” in Euros for Doctors Database{% endblocktrans %}{% endblock %}
+{% block title %}{% if query %}{% blocktrans with query=query project_title=project_title %}Search for „{{ query }}” in {{ project_title }} Database{% endblocktrans %}{% else %}{% blocktrans with project_title=project_title %}Search in {{ project_title }} Database{% endblocktrans %}{% endif %}{% endblock %}
 
 {% block additional_meta %}
 <meta name="description" content="{% blocktrans %}The database about money flows from pharma companies to doctors.{% endblocktrans %}">
