@@ -297,10 +297,8 @@ class Drug(models.Model):
 
 
 class ObservationalStudyManager(models.Manager):
-    def get_by_natural_key(self, drug_slug, registration_date, start_date):
-        return self.get(drug_slug=drug_slug,
-                        registration_date=registration_date,
-                        start_date=start_date)
+    def get_by_natural_key(self, slug):
+        return self.get(slug=slug)
 
     def get_by_fee_per_patient(self):
         return self.get_queryset().filter(fee_per_patient__isnull=False
@@ -311,6 +309,7 @@ class ObservationalStudyManager(models.Manager):
 class ObservationalStudy(models.Model):
     drugs = models.ManyToManyField(Drug, blank=True, verbose_name=_('drugs'))
 
+    slug = models.SlugField(max_length=512, blank=True)
     drug_title = models.CharField(max_length=1024, blank=True)
     drug_slug = models.SlugField(max_length=1024, blank=True)
     description = models.TextField(blank=True)
@@ -343,16 +342,14 @@ class ObservationalStudy(models.Model):
         return self.drug_title
 
     def natural_key(self):
-        return (self.drug_slug, self.registration_date, self.start_date)
+        return (self.slug,)
     natural_key.dependencies = [
             'correctiv_eurosfueraerzte.Drug']
 
     @models.permalink
     def get_absolute_url(self):
         return ('eurosfueraerzte:eurosfueraerzte-studydetail', (), {
-            'pk': self.pk,
-            'year': self.registration_date.year,
-            'slug': self.drug_slug
+            'slug': self.slug
         })
 
     @property

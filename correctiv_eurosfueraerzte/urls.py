@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
 try:
@@ -29,7 +29,8 @@ urlpatterns = [
 
     url(_(r'^drug/(?P<slug>[\w-]+)/$'), DrugDetailView.as_view(),
         name='eurosfueraerzte-drugdetail'),
-    url(_(r'^study/(?P<year>\d{4,})/(?P<pk>\d+)/(?P<slug>[\w-]+)/$'),
+
+    url(_(r'^study/(?P<slug>[\w-]+)/$'),
         ObservationalStudyDetailView.as_view(),
         name='eurosfueraerzte-studydetail'),
 ]
