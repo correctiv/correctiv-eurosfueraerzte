@@ -98,9 +98,7 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
 
     def compute_total(self, request, queryset):
         for obj in queryset:
-            aggs = obj.pharmapayment_set.all().aggregate(models.Sum('amount'), models.Count('pharma_company', distinct=True))
-            obj.total = aggs['amount__sum']
-            obj.company_count = aggs['pharma_company__count']
+            obj.compute_total()
             obj.save()
 
 

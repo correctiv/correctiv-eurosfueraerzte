@@ -1,3 +1,5 @@
+import decimal
+
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models.functions import Distance
 from django.utils import timezone
@@ -9,6 +11,8 @@ from django.contrib.gis.measure import D
 from djorm_pgfulltext.models import SearchManager
 from djorm_pgfulltext.fields import VectorField, FullTextLookup, startswith
 import pandas as pd
+
+from .utils import convert_currency_to_euro
 
 
 class FullTextLookupCustom(FullTextLookup):
@@ -516,6 +520,15 @@ class PaymentRecipient(models.Model):
         return ('eurosfueraerzte:eurosfueraerzte-recipientdetail', (), {
             'slug': self.slug
         })
+
+    def compute_total(self):
+        aggs = self.pharmapayment_set.all().aggregate(models.Sum('amount'), models.Count('pharma_company', distinct=True))
+        self.total = aggs['amount__sum'] or decimal.Decimal(0)
+        self.total_currency = PharmaPayment.ORIGIN_CURRENCY[self.origin]
+        self.total_euro = convert_currency_to_euro(self.total,
+                                                   self.total_currency,
+                                                   2015)
+        self.company_count = aggs['pharma_company__count']
 
     def distance_is_zero(self):
         if not hasattr(self, 'distance'):
