@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 import django.contrib.gis.db.models.fields
 import django.contrib.postgres.fields.hstore
 from django.db import migrations, models
+from django.contrib.postgres.operations import HStoreExtension
 import django.db.models.deletion
 import djorm_pgfulltext.fields
 
@@ -16,6 +17,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        HStoreExtension(),
         migrations.CreateModel(
             name='PaymentRecipient',
             fields=[
