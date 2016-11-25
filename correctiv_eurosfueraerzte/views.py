@@ -27,11 +27,13 @@ class LocaleIncludeDict(object):
 class LocaleMixin(object):
     HAS_AGGREGATES = {
         'DE': True,
-        'CH': False
+        'CH': False,
+        'AT': True
     }
     TITLES = {
         'de': _(u'Euros for Doctors'),
         'ch': _(u'Money for Doctors'),
+        'at': _(u'Euros for Doctors'),
     }
 
     def get_context_data(self, **kwargs):

@@ -7,6 +7,7 @@ from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.measure import D
 
 from .models import Drug, PharmaCompany, PaymentRecipient, PharmaPayment
+from .apps import EFA_COUNTRIES
 
 LATLNG_RE = re.compile('(\d+\.?\d+),(\d+\.?\d+)')
 
@@ -82,11 +83,9 @@ class PaymentRecipientSearchForm(SearchForm):
     )
 
     country = forms.ChoiceField(
-        choices=(
+        choices=[
             ('', _('all available countries')),
-            ('DE', _('Germany')),
-            ('CH', _('Switzerland')),
-        ),
+        ] + EFA_COUNTRIES,
         required=False,
     )
 

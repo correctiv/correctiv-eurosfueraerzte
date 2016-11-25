@@ -7,13 +7,16 @@ try:
 except ImportError:
     c = lambda x: x
 
+from .apps import EFA_COUNTRIES
 from .views import (IndexView, SearchView, RecipientSearchView, DrugDetailView,
-                    RecipientDetailView, ObservationalStudyDetailView, CompanyDetailView)
+                    RecipientDetailView, ObservationalStudyDetailView,
+                    CompanyDetailView)
 
+country_code_matches = '|'.join([x[0].lower() for x in EFA_COUNTRIES])
 
 urlpatterns = [
     url(r'^$', c(IndexView.as_view()), name='eurosfueraerzte-index'),
-    url(r'^(?P<country>de|ch)/$', c(IndexView.as_view()), name='eurosfueraerzte-country_index'),
+    url(r'^(?P<country>%s)/$' % country_code_matches, c(IndexView.as_view()), name='eurosfueraerzte-country_index'),
     url(_(r'^recipient/(?P<slug>[\w-]+)/$'), RecipientDetailView.as_view(),
         name='eurosfueraerzte-recipientdetail'),
     url(_(r'^company/(?P<slug>[\w-]+)/$'),
