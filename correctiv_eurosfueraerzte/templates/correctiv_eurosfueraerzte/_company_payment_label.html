@@ -47,7 +47,9 @@
             </span>
           </td>
           <td>
-            <a class="efa__detail-vis__name" href="{{ recipient.get_absolute_url }}">{{ recipient.get_full_name|truncatechars:30 }}</a>
+            <a class="efa__detail-vis__name" href="{{ recipient.get_absolute_url }}">
+              {{ recipient.get_full_name|truncatechars:20 }}
+            </a>
           </td>
         </tr>
       {% endif %}
