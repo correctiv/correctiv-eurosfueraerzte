@@ -47,12 +47,7 @@
 
   <div class="page__row">
     <div class="page__section -narrow">
-      <p>
-        {% blocktrans %}
-          The payments to health care professionals for conferences, travel, consulting and expenses are published with the name of the person – if the person agrees.
-          The sum of all other payments is reported. Payments concerning studies are only given in aggregated form.
-        {% endblocktrans %}
-      </p>
+      {% include includes.company_blurb %}
 
       {% if payments %}
         {% include "correctiv_eurosfueraerzte/_company_payment_barchart.html" %}
