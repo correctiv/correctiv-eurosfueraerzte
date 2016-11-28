@@ -6,6 +6,7 @@ EFA_COUNTRIES = [
             ('AT', _('Austria')),
             ('CH', _('Switzerland')),
 ]
+EFA_COUNTRIES_DICT = dict(EFA_COUNTRIES)
 
 
 class EurosfuerAerzteConfig(AppConfig):

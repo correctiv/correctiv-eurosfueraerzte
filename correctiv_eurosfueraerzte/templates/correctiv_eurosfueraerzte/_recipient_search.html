@@ -16,7 +16,13 @@
         </h1>
 
         <p class="efa__search__lead">
-          {% trans "How much money has your doctor received from the pharma industry last year?" %}
+          {% if country_label %}
+            {% blocktrans with country_label=country_label %}
+              How much money has your doctor received from the pharma industry <strong>in {{ country_label }}</strong> in 2015?
+            {% endblocktrans %}
+          {% else %}
+            {% trans "How much money has your doctor received from the pharma industry last year?" %}
+          {% endif %}
         </p>
 
         <div class="input-group">

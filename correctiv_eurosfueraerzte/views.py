@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .models import Drug, ObservationalStudy, PharmaCompany, PaymentRecipient
 from .forms import SearchForm, PaymentRecipientSearchForm
+from .apps import EFA_COUNTRIES_DICT
 
 
 def get_origin_include(origin, filename):
@@ -40,6 +41,7 @@ class LocaleMixin(object):
         context = super(LocaleMixin, self).get_context_data(**kwargs)
         country = self.get_country() or 'DE'
         context['country'] = country
+        context['country_label'] = EFA_COUNTRIES_DICT.get(country)
         context['filter_country'] = self.get_country()
         current_lang = translation.get_language()
         context['locale'] = '%s_%s' % (current_lang, country)
