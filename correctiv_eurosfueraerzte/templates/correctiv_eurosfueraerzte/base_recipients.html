@@ -40,12 +40,11 @@
             <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
           </span>
         </div>
-
-        {% blocktrans with kind=recipient_form.recipient_kind country=recipient_form.country %}
-          <div class="efa__search__options">
+        <div class="efa__search__options">
+          {% blocktrans with kind=recipient_form.recipient_kind country=recipient_form.country %}
             Search for {{ kind }} in {{ country }}
-          </div>
-        {% endblocktrans %}
+          {% endblocktrans %}
+        </div>
 
         {% addtoblock "js" %}
           <script>
