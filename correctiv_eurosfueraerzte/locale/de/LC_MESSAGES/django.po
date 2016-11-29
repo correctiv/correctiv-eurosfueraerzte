@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-28 21:15+0100\n"
+"POT-Creation-Date: 2016-11-29 01:30+0100\n"
 "PO-Revision-Date: 2016-11-28 21:16+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
@@ -149,7 +149,7 @@ msgstr "Zahlungsempfänger"
 #: models.py:545
 #: templates/correctiv_eurosfueraerzte/_recipient_list_table.html:8
 #: templates/correctiv_eurosfueraerzte/drug_list.html:17
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:139
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:134
 msgid "Name"
 msgstr "Name"
 
@@ -299,9 +299,6 @@ msgstr "Finde Deinen Arzt"
 
 #: templates/correctiv_eurosfueraerzte/_recipient_search.html:20
 #, python-format
-#| msgid ""
-#| "How much money has your doctor received from the pharma industry last "
-#| "year?"
 msgid ""
 "\n"
 "              How much money has your doctor received from the pharma "
@@ -382,6 +379,31 @@ msgstr "Zum Hintergrundartikel"
 #: templates/correctiv_eurosfueraerzte/de/_article_link.html:4
 msgid "Read article"
 msgstr "Zum Hintergrundartikel"
+
+#: templates/correctiv_eurosfueraerzte/at/_company_blurb.html:4
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "          The payments to health care professionals for conferences, "
+#| "travel, consulting and expenses are published with the name of the person "
+#| "– if the person agrees.\n"
+#| "          The sum of all other payments is reported. Payments concerning "
+#| "studies are only given in aggregated form.\n"
+#| "        "
+msgid ""
+"\n"
+"  The payments to health care professionals for conferences, travel, "
+"consulting and expenses are published with the name of the person – if the "
+"person agrees.\n"
+"  The sum of all other payments is reported as well. Payments concerning "
+"research and development are only given in aggregated form.\n"
+msgstr ""
+"Die Zahlungen an Ärzte für Konferenzgebühren, Reisekosten, Beratungs&shy;"
+"honorare und Spesen werden personenbezogen veröffentlicht – wenn der "
+"jeweilige Arzt zustimmt. Gibt es keine Zustimmung, wird die Zahlung nur in einer Gesamtsumme "
+"miteinberechnet. Grundsätzlich nicht auf Personen heruntergebrochen werden die Zahlungen für "
+"Forschung und Entwicklung, also Beispielsweise von Studien und "
+"Anwendungsbeobachtungen (AWB) veröffentlicht.\t"
 
 #: templates/correctiv_eurosfueraerzte/at/_index_blurb.html:4
 #: templates/correctiv_eurosfueraerzte/ch/_index_blurb.html:4
@@ -491,6 +513,32 @@ msgstr ""
 "59 Pharma-Unternehmen in der Schweiz veröffentlichen im Jahr 2016 erstmals "
 "alle Geldzahlungen, die sie im vergangenen Jahr an Ärzte, Fachleute  und "
 "Spitäler geleistet haben."
+
+#: templates/correctiv_eurosfueraerzte/ch/_company_blurb.html:4
+#: templates/correctiv_eurosfueraerzte/de/_company_blurb.html:4
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "          The payments to health care professionals for conferences, "
+#| "travel, consulting and expenses are published with the name of the person "
+#| "– if the person agrees.\n"
+#| "          The sum of all other payments is reported. Payments concerning "
+#| "studies are only given in aggregated form.\n"
+#| "        "
+msgid ""
+"\n"
+"  The payments to health care professionals for conferences, travel, "
+"consulting and expenses are published with the name of the person – if the "
+"person agrees.\n"
+"  The sum of all other payments is reported. Payments concerning studies are "
+"only given in aggregated form.\n"
+msgstr ""
+"\n"
+"Die Zahlungen an Ärzte für Tagungsgebühren, Reisekosten, Beratungs&shy;"
+"honorare und Spesen werden personenbezogen veröffentlicht – wenn der "
+"jeweilige Arzt zustimmt. Für den Rest wird die Summe zusammengefasst "
+"angegeben. Grundsätzlich nur zusammengefasst werden die Zahlungen im Rahmen "
+"von Studien und Anwendungsbeobachtungen (AWB) veröffentlicht.\t"
 
 #: templates/correctiv_eurosfueraerzte/ch/_recipient_main.html:3
 msgctxt "CH"
@@ -781,7 +829,7 @@ msgid "to:"
 msgstr "an:"
 
 #: templates/correctiv_eurosfueraerzte/paymentrecipient_detail.html:130
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:77
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:72
 msgid "Continue searching"
 msgstr "zur Suche"
 
@@ -877,24 +925,7 @@ msgstr ""
 msgid "%(name)s is not part of the publication initiative."
 msgstr "%(name)s ist nicht Teil der Veröffentlichungs&shy;initiative."
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:51
-msgid ""
-"\n"
-"          The payments to health care professionals for conferences, travel, "
-"consulting and expenses are published with the name of the person – if the "
-"person agrees.\n"
-"          The sum of all other payments is reported. Payments concerning "
-"studies are only given in aggregated form.\n"
-"        "
-msgstr ""
-"\n"
-"Die Zahlungen an Ärzte für Tagungsgebühren, Reisekosten, Beratungs&shy;"
-"honorare und Spesen werden personenbezogen veröffentlicht – wenn der "
-"jeweilige Arzt zustimmt. Für den Rest wird die Summe zusammengefasst "
-"angegeben. Grundsätzlich nur zusammengefasst werden die Zahlungen im Rahmen "
-"von Studien und Anwendungsbeobachtungen (AWB) veröffentlicht.\t"
-
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:69
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:64
 #, python-format
 msgid ""
 "\n"
@@ -905,27 +936,27 @@ msgstr ""
 "                Veröffentlichungen von „%(name)s“\n"
 "              "
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:88
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:83
 msgid "Payments to doctors and health care professionals"
 msgstr "Zahlungen an Ärzte und Fachpersonal im Gesundheitswesen"
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:91
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:86
 msgid "Payments to doctors in 2015"
 msgstr "Zahlungen an Ärzte im Jahr 2015"
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:103
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:98
 msgid "Payments to organisations"
 msgstr "Zahlungen an Organisationen"
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:105
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:100
 msgid "Payments to organisations in 2015"
 msgstr "Zahlungen an Organisationen im Jahr 2015"
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:121
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:116
 msgid "Observational Studies"
 msgstr "Anwendungsbeobachtungen"
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:124
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:119
 #, python-format
 msgid ""
 "Die %(name)s hat den Behörden folgende Anwendungsbeobachtungen (AWB) "
@@ -940,12 +971,12 @@ msgstr ""
 "AWBs aber für ein Marketinginstrument, weil sie methodisch in der Regel zu "
 "schlecht sind, um daraus medizinische Erkenntnisse zu gewinnen."
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:133
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:128
 #, python-format
 msgid "„%(name)s“ is responsible for the following products."
 msgstr "„%(name)s“ ist verantwortlich für die folgenden Medikamente."
 
-#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:140
+#: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:135
 msgid "Number of Observational Studies"
 msgstr "Anzahl der Anwendungsbeobachtungen"
 
