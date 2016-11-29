@@ -7,7 +7,7 @@
 
 <section class="efa__search">
   <div class="page__container">
-    <form class="efa__search__form--small -{{ country|lower }}" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}" method="get">
+    <form id="efa-search-form" class="efa__search__form--small -{{ country|lower }}" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}" method="get">
 
         {% include "correctiv_eurosfueraerzte/_home_links.html" %}
 
@@ -46,6 +46,20 @@
             Search for {{ kind }} in {{ country }}
           </div>
         {% endblocktrans %}
+
+        {% addtoblock "js" %}
+          <script>
+            // "Euros fuer Ärzte" – auto-submit forms on select change:
+            document.addEventListener('DOMContentLoaded', function(event) {
+              var form = document.getElementById('efa-search-form')
+              form.addEventListener('change', function(event) {
+                if(event.target.tagName === 'SELECT') {
+                  form.submit()
+                }
+              })
+            })
+          </script>
+        {% endaddtoblock %}
 
     </form>
   </div>
