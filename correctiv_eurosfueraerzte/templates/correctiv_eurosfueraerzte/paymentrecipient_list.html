@@ -38,13 +38,13 @@
 
 {% if not object_list %}
   <div class="page__row">
-    <div class="page__section -narrow">
+    <div class="page__section">
 
-      <p>
+      <h3>
         {% blocktrans %}
           We could not find any person or organisation for the search criteria.
         {% endblocktrans %}
-      </p>
+      </h3>
       <p>
         {% blocktrans %}
           Please note that <strong>only 30% of doctors</strong> allowed pharma companies to release their names. Only these persons are included in the database.
@@ -54,6 +54,7 @@
         {% trans "Try these example searches:" %}
         {% include includes.search_examples %}
       </p>
+
     </div>
   </div>
 {% endif %}
