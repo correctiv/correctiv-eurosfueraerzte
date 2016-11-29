@@ -3,6 +3,7 @@ from django.template.defaultfilters import floatformat
 from django.utils import translation
 from django.contrib.humanize.templatetags.humanize import intcomma
 from django.utils.safestring import mark_safe
+from django.utils import six
 
 from babel.numbers import format_currency, get_currency_symbol
 
@@ -38,15 +39,27 @@ def intcomma_floatformat(value, arg=2):
 def currency_format(context, value, currency='EUR', decimal=2):
     if value is None:
         value = 0.0
-    value = round(value, decimal)
+
     lang = translation.get_language()
     locale = context.get('locale', lang)
+
+    if isinstance(value, six.string_types):
+        symbol = get_currency_symbol(currency, locale=locale)
+        if not symbol:
+            symbol = currency
+        return mark_safe('%s&nbsp;%s' % (value, symbol))
+
+    value = round(value, decimal)
     formatted = format_currency(value, currency, locale=locale)
     symbol = get_currency_symbol(currency, locale=locale)
     if context.get('filter_country') is None and len(symbol) == 1:
         # When we have possibly mixed currencies, show three letter symbol
         # This improves alignment
         formatted = formatted.replace(symbol, currency)
+    if decimal == 0:
+        zero_amount = format_currency(0, currency, locale=locale)
+        zero_decimals = zero_amount.replace(symbol, '').strip()[1:]
+        formatted = formatted.replace(zero_decimals, '')
     return mark_safe(formatted.replace(' ', '&nbsp;'))
 
 

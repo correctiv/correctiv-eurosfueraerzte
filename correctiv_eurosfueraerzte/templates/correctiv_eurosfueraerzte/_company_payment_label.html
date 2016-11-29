@@ -11,7 +11,9 @@
     </h2>
   </header>
 
-  <h3 class="efa__detail-vis__sum">{{ label.total|intcomma_floatformat:0 }}&nbsp;€</h3>
+  <h3 class="efa__detail-vis__sum">
+    {% currency_format label.total currency decimal=0 %}
+  </h3>
 
   {% if has_aggregates %}
     <div class="efa__chart__bar">

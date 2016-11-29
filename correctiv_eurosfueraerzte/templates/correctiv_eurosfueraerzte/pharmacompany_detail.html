@@ -24,7 +24,7 @@
 
 {% block header_sidebar_title %}
   {% if payments %}
-    {{ payments.total|intword }}&nbsp;€
+    {% currency_format payments.total|intword payments.currency decimal=0 %}
   {% endif %}
 {% endblock %}
 
