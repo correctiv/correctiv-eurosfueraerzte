@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-29 01:30+0100\n"
-"PO-Revision-Date: 2016-11-28 21:16+0100\n"
+"POT-Creation-Date: 2016-11-29 16:59+0100\n"
+"PO-Revision-Date: 2016-11-29 17:01+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.7.5\n"
 
-#: admin.py:25
+#: admin.py:24
 msgid "Successfully replaced objects."
 msgstr "Erfolgreich Objekte ersetzt."
 
-#: admin.py:40
+#: admin.py:39
 msgid "Replace selected with..."
 msgstr "Ersetze Objekte mit..."
 
@@ -82,126 +82,126 @@ msgstr "Nur Organisationen"
 msgid "all available countries"
 msgstr "allen verfügbaren Ländern"
 
-#: models.py:171 templates/correctiv_eurosfueraerzte/drug_detail.html:28
+#: models.py:178 templates/correctiv_eurosfueraerzte/drug_detail.html:28
 msgid "Pharma Company"
 msgstr "Pharmaunternehmen"
 
-#: models.py:172
+#: models.py:179
 msgid "Pharma Companies"
 msgstr "Pharmaunternehmen"
 
-#: models.py:243
+#: models.py:250
 msgid "active ingredient"
 msgstr "Wirkstoff"
 
-#: models.py:245
+#: models.py:252
 msgid "medical indication"
 msgstr "Indikation"
 
-#: models.py:251
+#: models.py:258
 msgid "pharma company"
 msgstr "Pharmaunternehmen"
 
-#: models.py:270 models.py:271
+#: models.py:277 models.py:278
 msgid "Drugs"
 msgstr "Medikamente"
 
-#: models.py:314
+#: models.py:321
 msgid "drugs"
 msgstr "Medikamente"
 
-#: models.py:325
+#: models.py:332
 msgid "executing company"
 msgstr "Ausführende Firma"
 
-#: models.py:327
+#: models.py:334
 msgid "sponsor"
 msgstr "Auftraggeber"
 
-#: models.py:341
+#: models.py:348
 msgid "observational study"
 msgstr "Anwendungsbeobachtung"
 
-#: models.py:342
+#: models.py:349
 msgid "observational studies"
 msgstr "Anwendungsbeobachtungen"
 
-#: models.py:470 models.py:629
+#: models.py:478 models.py:638
 msgid "Doctors (HCP)"
 msgstr "Ärzte (HCP)"
 
-#: models.py:471 models.py:630
+#: models.py:479 models.py:639
 msgid "Organisation (HCO)"
 msgstr "Organisation (HCO)"
 
-#: models.py:482
+#: models.py:490
 msgid "Geographic location"
 msgstr "Geographischer Standort"
 
-#: models.py:507
+#: models.py:515
 msgid "payment recipient"
 msgstr "Zahlungsempfänger"
 
-#: models.py:508
+#: models.py:516
 msgid "payment recipients"
 msgstr "Zahlungsempfänger"
 
-#: models.py:545
+#: models.py:554
 #: templates/correctiv_eurosfueraerzte/_recipient_list_table.html:8
 #: templates/correctiv_eurosfueraerzte/drug_list.html:17
 #: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:134
 msgid "Name"
 msgstr "Name"
 
-#: models.py:566
+#: models.py:575
 msgid "medical doctor"
 msgstr "Arzt"
 
-#: models.py:567
+#: models.py:576
 msgid "medical doctors"
 msgstr "Ärzte"
 
-#: models.py:584
+#: models.py:593
 msgid "healthcare organisation"
 msgstr "Organisation im Gesundheitswesen"
 
-#: models.py:585
+#: models.py:594
 msgid "healthcare organisations"
 msgstr "Fachpersonal im Gesundheitswesen"
 
-#: models.py:600
+#: models.py:609
 msgid "fees"
 msgstr "Honorare"
 
-#: models.py:601
+#: models.py:610
 msgid "related expenses"
 msgstr "Spesen"
 
-#: models.py:603
+#: models.py:612
 msgid "registration fees"
 msgstr "Tagungsgebühren"
 
-#: models.py:604
+#: models.py:613
 msgid "travel & accommodation"
 msgstr "Reisekosten"
 
-#: models.py:606
+#: models.py:615
 msgid "donations and grants"
 msgstr "Spenden & Fördergelder"
 
-#: models.py:607
+#: models.py:616
 msgid "sponsorship"
 msgstr "Sponsoring"
 
-#: models.py:609
+#: models.py:618
 msgid "Research & development"
 msgstr "Forschung & Entwicklung"
 
-#: models.py:638
+#: models.py:647
 msgid "pharma payment"
 msgstr "Zahlung der Pharmaindustrie"
 
-#: models.py:639
+#: models.py:648
 msgid "pharma payments"
 msgstr "Zahlungen der Pharmaindustrie"
 
@@ -227,7 +227,7 @@ msgstr ""
 "        %(percent)s&nbsp;%% an unbekannte Empfänger\n"
 "      "
 
-#: templates/correctiv_eurosfueraerzte/_company_payment_label.html:32
+#: templates/correctiv_eurosfueraerzte/_company_payment_label.html:34
 #, python-format
 msgid ""
 "\n"
@@ -238,7 +238,7 @@ msgstr ""
 "        %(percent)s&nbsp;%% an namentlich bekannte Empfänger\n"
 "      "
 
-#: templates/correctiv_eurosfueraerzte/_company_payment_label.html:60
+#: templates/correctiv_eurosfueraerzte/_company_payment_label.html:62
 msgid "Show all recipients"
 msgstr "Zeige alle Empfänger"
 
@@ -381,15 +381,6 @@ msgid "Read article"
 msgstr "Zum Hintergrundartikel"
 
 #: templates/correctiv_eurosfueraerzte/at/_company_blurb.html:4
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "          The payments to health care professionals for conferences, "
-#| "travel, consulting and expenses are published with the name of the person "
-#| "– if the person agrees.\n"
-#| "          The sum of all other payments is reported. Payments concerning "
-#| "studies are only given in aggregated form.\n"
-#| "        "
 msgid ""
 "\n"
 "  The payments to health care professionals for conferences, travel, "
@@ -398,12 +389,14 @@ msgid ""
 "  The sum of all other payments is reported as well. Payments concerning "
 "research and development are only given in aggregated form.\n"
 msgstr ""
-"Die Zahlungen an Ärzte für Konferenzgebühren, Reisekosten, Beratungs&shy;"
+"\n"
+"    Die Zahlungen an Ärzte für Konferenzgebühren, Reisekosten, Beratungs&shy;"
 "honorare und Spesen werden personenbezogen veröffentlicht – wenn der "
-"jeweilige Arzt zustimmt. Gibt es keine Zustimmung, wird die Zahlung nur in einer Gesamtsumme "
-"miteinberechnet. Grundsätzlich nicht auf Personen heruntergebrochen werden die Zahlungen für "
-"Forschung und Entwicklung, also Beispielsweise von Studien und "
-"Anwendungsbeobachtungen (AWB) veröffentlicht.\t"
+"jeweilige Arzt zustimmt. Gibt es keine Zustimmung, wird die Zahlung nur in "
+"einer Gesamtsumme miteinberechnet. Grundsätzlich nicht auf Personen "
+"heruntergebrochen werden die Zahlungen für Forschung und Entwicklung, also "
+"Beispielsweise von Studien und Anwendungsbeobachtungen (AWB) "
+"veröffentlicht.\n"
 
 #: templates/correctiv_eurosfueraerzte/at/_index_blurb.html:4
 #: templates/correctiv_eurosfueraerzte/ch/_index_blurb.html:4
@@ -516,15 +509,6 @@ msgstr ""
 
 #: templates/correctiv_eurosfueraerzte/ch/_company_blurb.html:4
 #: templates/correctiv_eurosfueraerzte/de/_company_blurb.html:4
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "          The payments to health care professionals for conferences, "
-#| "travel, consulting and expenses are published with the name of the person "
-#| "– if the person agrees.\n"
-#| "          The sum of all other payments is reported. Payments concerning "
-#| "studies are only given in aggregated form.\n"
-#| "        "
 msgid ""
 "\n"
 "  The payments to health care professionals for conferences, travel, "
@@ -538,7 +522,7 @@ msgstr ""
 "honorare und Spesen werden personenbezogen veröffentlicht – wenn der "
 "jeweilige Arzt zustimmt. Für den Rest wird die Summe zusammengefasst "
 "angegeben. Grundsätzlich nur zusammengefasst werden die Zahlungen im Rahmen "
-"von Studien und Anwendungsbeobachtungen (AWB) veröffentlicht.\t"
+"von Studien und Anwendungsbeobachtungen (AWB) veröffentlicht.\n"
 
 #: templates/correctiv_eurosfueraerzte/ch/_recipient_main.html:3
 msgctxt "CH"
@@ -914,11 +898,11 @@ msgstr ""
 #: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:36
 #, python-format
 msgid ""
-"Gesamtsumme, die die %(name)s im vergangenen Jahr an Ärzte und Einrichtungen "
-"gezahlt hat."
+"Total amount that %(name)s paid to doctors and organisations in the last "
+"year."
 msgstr ""
-"Gesamtsumme, die die %(name)s im vergangenen Jahr an Ärzte und Einrichtungen "
-"gezahlt hat."
+" Gesamtsumme, die die %(name)s im vergangenen Jahr an Ärzte und "
+"Einrichtungen gezahlt hat."
 
 #: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:40
 #, python-format
@@ -1067,6 +1051,13 @@ msgid ""
 msgstr ""
 "Details darüber, wieviel Geld %(name)s an Ärzte und für "
 "Anwendungsbeobachtungen zahlt."
+
+#~ msgid ""
+#~ "Gesamtsumme, die die %(name)s im vergangenen Jahr an Ärzte und "
+#~ "Einrichtungen gezahlt hat."
+#~ msgstr ""
+#~ "Gesamtsumme, die die %(name)s im vergangenen Jahr an Ärzte und "
+#~ "Einrichtungen gezahlt hat."
 
 #~ msgid "^study/(?P<year>\\d{4,})/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$"
 #~ msgstr "^awb/(?P<year>\\d{4,})/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$"
