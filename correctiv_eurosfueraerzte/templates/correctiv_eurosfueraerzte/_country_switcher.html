@@ -1,0 +1,22 @@
+{% load i18n %}
+
+<div class="well">
+  <h3>{% trans "Other countries" %}</h3>
+  <ul>
+    <li>
+      <a href="{% url 'eurosfueraerzte:eurosfueraerzte-country_index' country='de' %}">
+        {% trans "Germany" %}
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'eurosfueraerzte:eurosfueraerzte-country_index' country='at' %}">
+        {% trans "Austria" %}
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'eurosfueraerzte:eurosfueraerzte-country_index' country='ch' %}">
+        {% trans "Switzerland" %}
+      </a>
+    </li>
+  </p>
+</div>
