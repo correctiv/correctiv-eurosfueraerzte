@@ -40,6 +40,10 @@ VectorField.register_lookup(FullTextLookupCustom)
 VectorField.register_lookup(FullTextLookupCustomStartsWith)
 
 
+def perc(val, total):
+    return val / total * 100
+
+
 class PharmaCompanyManager(SearchManager):
     def get_by_natural_key(self, slug):
         return self.get(slug=slug)
@@ -47,7 +51,8 @@ class PharmaCompanyManager(SearchManager):
     def _get_type_aggregation(self, obj, df, kind, max_amount):
         type_df = df[df['recipient_kind'] == kind]
 
-        label_amounts = type_df.groupby(['individual_recipient', 'label'])['amount'].sum().unstack().iteritems()
+        label_amounts = (type_df.groupby(['individual_recipient', 'label'])['amount']
+                                .sum().unstack().iteritems())
 
         labels = [
             {
@@ -71,10 +76,10 @@ class PharmaCompanyManager(SearchManager):
                 'label_slug': label,
                 'order': PharmaPayment.PAYMENT_LABELS_ORDER.index(label),
                 'label': PharmaPayment.PAYMENT_LABELS_DICT[label],
-                'individual_percent': round((val_row.get(True, 0) or 0) / val_row.sum() * 100),
-                'aggregated_percent': round((val_row.get(False, 0) or 0) / val_row.sum() * 100),
-                'vis_individual_percent': round((val_row.get(True, 0) or 0) / max_amount * 100),
-                'vis_aggregated_percent': round((val_row.get(False, 0) or 0) / max_amount * 100),
+                'individual_percent': round(perc(val_row.get(True, 0) or 0, val_row.sum())),
+                'aggregated_percent': round(perc(val_row.get(False, 0) or 0, val_row.sum())),
+                'vis_individual_percent': round(perc(val_row.get(True, 0) or 0, max_amount)),
+                'vis_aggregated_percent': round(perc(val_row.get(False, 0) or 0, max_amount)),
             }
             for label, val_row in label_amounts
             if val_row.sum()
@@ -83,8 +88,8 @@ class PharmaCompanyManager(SearchManager):
         totals_ind_agg = type_df.groupby('individual_recipient')['amount'].sum()
         return {
             'total': type_df['amount'].sum(),
-            'total_individual_percent': totals_ind_agg.get(True, 0) / max_amount * 100,
-            'total_aggregated_percent': totals_ind_agg.get(False, 0) / max_amount * 100,
+            'total_individual_percent': perc(totals_ind_agg.get(True, 0), max_amount),
+            'total_aggregated_percent': perc(totals_ind_agg.get(False, 0), max_amount),
             'total_individual': totals_ind_agg.get(True, 0),
             'total_aggregated': totals_ind_agg.get(False, 0),
             'labels': labels
@@ -118,7 +123,8 @@ class PharmaCompanyManager(SearchManager):
         p = obj.pharmapayment_set.all()
 
         result = (p.annotate(individual_recipient=models.Case(
-                models.When(recipient__isnull=False, then=True), default=False, output_field=models.BooleanField())
+                models.When(recipient__isnull=False, then=True), default=False,
+                output_field=models.BooleanField())
             ).values('recipient_kind', 'label', 'individual_recipient')
             .annotate(amount=models.Sum('amount'))
         )
@@ -128,16 +134,17 @@ class PharmaCompanyManager(SearchManager):
             return None
         rnd_amount = df[df['label'] == 'research_development']['amount'].sum()
 
-        max_amount = max(rnd_amount, df.groupby('recipient_kind')['amount'].sum().max())
+        max_kind_amount = df.groupby('recipient_kind')['amount'].sum().max()
+        max_amount = max(rnd_amount, max_kind_amount)
         totals_ind_agg = df.groupby('individual_recipient')['amount'].sum()
         total = df['amount'].sum()
         return {
             'total': total,
             'currency': PharmaPayment.ORIGIN_CURRENCY[obj.country],
             'rnd': rnd_amount,
-            'rnd_percent': rnd_amount / max_amount * 100,
-            'total_individual_percent': totals_ind_agg.get(True, 0) / total * 100,
-            'total_aggregated_percent': totals_ind_agg.get(False, 0) / total * 100,
+            'rnd_percent': perc(rnd_amount, max_amount),
+            'total_individual_percent': perc(totals_ind_agg.get(True, 0), total),
+            'total_aggregated_percent': perc(totals_ind_agg.get(False, 0), total),
             'hcp': self._get_type_aggregation(obj, df, 0, max_amount),
             'hco': self._get_type_aggregation(obj, df, 1, max_amount),
         }
@@ -424,7 +431,8 @@ class PaymentRecipientManager(SearchManager):
             )
         return qs.order_by('-total_amount')
 
-    def get_by_distance_to_point(self, point, distance=None, include_same=True, only_same=False):
+    def get_by_distance_to_point(self, point, distance=None, include_same=True,
+                                 only_same=False):
         qs = self.get_queryset()
         if distance is not None:
             qs = qs.filter(geo__distance_lte=(point, D(m=distance)))
@@ -522,7 +530,8 @@ class PaymentRecipient(models.Model):
         })
 
     def compute_total(self):
-        aggs = self.pharmapayment_set.all().aggregate(models.Sum('amount'), models.Count('pharma_company', distinct=True))
+        aggs = self.pharmapayment_set.all().aggregate(models.Sum('amount'),
+                models.Count('pharma_company', distinct=True))
         self.total = aggs['amount__sum'] or decimal.Decimal(0)
         self.total_currency = PharmaPayment.ORIGIN_CURRENCY[self.origin]
         self.total_euro = convert_currency_to_euro(self.total,
