@@ -45,7 +45,9 @@
           </span>
         </div>
         {% blocktrans with kind=recipient_form.recipient_kind country=recipient_form.country %}
-          Search for {{ kind }} in {{ country }}
+          <div class="efa__search__options">
+            Search for {{ kind }} in {{ country }}
+          </div>
         {% endblocktrans %}
 
     </form>
