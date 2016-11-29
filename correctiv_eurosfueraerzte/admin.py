@@ -4,7 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import PermissionDenied
 from django.template.response import TemplateResponse
 from django.contrib.admin import helpers
-from django.db import models
 
 from .models import (PharmaCompany, Drug, ObservationalStudy,
                      PaymentRecipient, PharmaPayment)
@@ -103,8 +102,9 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
 
 
 class PharmaPaymentAdmin(admin.ModelAdmin):
-    list_filter = ('label', 'pharma_company', 'origin')
-    list_display = ('pharma_company', 'recipient', 'date', 'label', 'amount')
+    list_filter = ('origin', 'label', 'pharma_company',)
+    list_display = ('pharma_company', 'recipient', 'date', 'label', 'amount',
+                    'origin')
     search_fields = ('recipient__name', 'recipient_detail', 'recipient_kind')
     raw_id_fields = ('recipient',)
 
