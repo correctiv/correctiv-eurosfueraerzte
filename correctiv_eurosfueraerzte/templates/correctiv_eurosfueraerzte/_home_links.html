@@ -3,7 +3,8 @@
 <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
   {{ project_title }}
 </a>
-<a class="efa__home-link efa__home-link--subsection" href="{% url 'eurosfueraerzte:eurosfueraerzte-country_index' country=country|lower %}">
-  {{ country_label }}
-</a>
-
+{% if not recipient_form or recipient_form.country.value %}
+  <a class="efa__home-link efa__home-link--subsection" href="{% url 'eurosfueraerzte:eurosfueraerzte-country_index' country=country|lower %}">
+    {{ country_label }}
+  </a>
+{% endif %}
