@@ -1,19 +1,15 @@
 {% extends "correctiv_eurosfueraerzte/base.html" %}
 
 {% load i18n %}
+{% load sekizai_tags %}
 
 {% block before_content %}
 
 <section class="efa__search">
   <div class="page__container">
     <form class="efa__search__form--small -{{ country|lower }}" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}" method="get">
-        {% if country %}
-          <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-country_index' country=country|lower %}">
-        {% else %}
-          <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
-        {% endif %}
-          {{ project_title }}
-        </a>
+
+        {% include "correctiv_eurosfueraerzte/_home_links.html" %}
 
         <div class="efa__search__lead">
           {% trans "How much money has your doctor received from the pharma industry last year?" %}
@@ -44,6 +40,7 @@
             <button class="btn btn-default" type="submit">{% trans "Search" %}</button>
           </span>
         </div>
+
         {% blocktrans with kind=recipient_form.recipient_kind country=recipient_form.country %}
           <div class="efa__search__options">
             Search for {{ kind }} in {{ country }}
