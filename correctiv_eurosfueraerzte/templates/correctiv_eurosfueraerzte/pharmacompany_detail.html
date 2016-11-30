@@ -33,7 +33,7 @@
 {% block header_sidebar_about %}
   {% if payments %}
     <p>
-      {% blocktrans with name=object.name %}Total amount that {{ name }} paid to doctors and organisations in the last year.{% endblocktrans %}
+      {% blocktrans with name=object.name country=country_label_choice %}Total amount that {{ name }} paid to doctors and organisations in {{ country }} in the last year.{% endblocktrans %}
     </p>
   {% else %}
     <p>
