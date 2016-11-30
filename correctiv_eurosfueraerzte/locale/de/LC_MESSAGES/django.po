@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-29 19:22+0100\n"
-"PO-Revision-Date: 2016-11-29 19:23+0100\n"
+"POT-Creation-Date: 2016-11-30 12:04+0100\n"
+"PO-Revision-Date: 2016-11-30 12:04+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -920,11 +920,11 @@ msgstr ""
 #: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:36
 #, python-format
 msgid ""
-"Total amount that %(name)s paid to doctors and organisations in the last "
-"year."
+"Total amount that %(name)s paid to doctors and organisations in %(country)s "
+"in the last year."
 msgstr ""
 " Gesamtsumme, die die %(name)s im vergangenen Jahr an Ärzte und "
-"Einrichtungen gezahlt hat."
+"Einrichtungen in %(country)s gezahlt hat."
 
 #: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:40
 #, python-format
@@ -1061,12 +1061,12 @@ msgstr "Anwendungsbeobachtung %(title)s"
 msgid "Details on the observational study %(title)s."
 msgstr "Details über die Anwendungsbeobachtung %(title)s."
 
-#: views.py:215
+#: views.py:219
 #, python-format
 msgid "Pharma company  %(name)s"
 msgstr "Pharmaunternehmen %(name)s"
 
-#: views.py:218
+#: views.py:222
 #, python-format
 msgid ""
 "Details on how money from %(name)s goes to doctors and observational studies."
