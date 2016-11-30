@@ -5,11 +5,9 @@
 
 <div class="efa__detail-vis efa__detail-vis--{{ kind }}">
 
-  <header class="page__section-header ">
-    <h2 class="page__section-headline">
-      {{ label.label }}
-    </h2>
-  </header>
+  <h2 class="efa__detail-vis__title">
+    {{ label.label }}
+  </h2>
 
   <h3 class="efa__detail-vis__sum">
     {% currency_format label.total currency decimal=0 %}

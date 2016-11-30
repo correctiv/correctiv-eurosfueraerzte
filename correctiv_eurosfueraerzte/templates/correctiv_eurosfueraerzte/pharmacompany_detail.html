@@ -77,81 +77,71 @@
   </div>
 
 {% if payments %}
-  <div class="page__row">
-    <header class="page__section-header ">
-      <h2 class="page__section-headline">
-        {% trans "Payments to doctors and health care professionals" %}
-      </h2>
-    </header>
-    {% trans "Payments to doctors in 2015" as hcp_description %}
-    {% for label in payments.hcp.labels %}
-      {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hcp" description=hcp_description currency=payments.currency %}
-    {% endfor %}
-  </div>
-
 </div>
-
   <div class="page__block">
     <div class="page__container">
+      <h2 class="efa__title">
+        {% trans "Payments to doctors and health care professionals" %}
+      </h2>
+
       <div class="page__row">
-        <header class="page__section-header ">
-          <h3 class="page__section-headline">{% trans "Payments to organisations" %}</h3>
-        </header>
-        {% trans "Payments to organisations in 2015" as hco_description %}
-        {% for label in payments.hco.labels %}
-          {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hco" description=hco_description currency=payments.currency %}
+        {% trans "Payments to doctors in 2015" as hcp_description %}
+        {% for label in payments.hcp.labels %}
+          {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hcp" description=hcp_description currency=payments.currency %}
         {% endfor %}
       </div>
     </div>
   </div>
 
+  <div class="page__container">
+    <h2 class="efa__title">{% trans "Payments to organisations" %}</h2>
+    <div class="page__row">
+      {% trans "Payments to organisations in 2015" as hco_description %}
+      {% for label in payments.hco.labels %}
+        {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hco" description=hco_description currency=payments.currency %}
+      {% endfor %}
+    </div>
+  </div>
+<div class="page__container">
 {% endif %}
 
+{% if drug_list %}
+</div>
+  <div class="page__block">
+    <div class="page__container">
+      <h2 class="efa__title">{% trans "Observational Studies" %}</h2>
+      <div class="page__row">
+        <div class="page__section -narrow">
+
+          <p>{% blocktrans with name=object.name %}Die {{ name }} hat den Behörden folgende Anwendungsbeobachtungen (AWB) gemeldet. Bei AWBs erhalten Ärzte Geld dafür, dass sie beobachten, wie gut ein Patient ein bestimmtes Präparat verträgt. Viele Wissenschaftler halten AWBs aber für ein Marketinginstrument, weil sie methodisch in der Regel zu schlecht sind, um daraus medizinische Erkenntnisse zu gewinnen.{% endblocktrans %}</p>
+
+          <div class="table-responsive">
+            <table class="efa__table table">
+              <thead>
+                <tr>
+                  <th>{% trans "Name" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for drug in drug_list %}
+                <tr>
+                  <td>
+                    <a href="{{ drug.get_absolute_url }}">
+                      {{ drug.name }}
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="page__container">
 
-{% if drug_list %}
-  <div class="page__row">
-    <div class="page__section -narrow">
-      <header class="page__section-header ">
-        <h3 class="page__section-headline">{% trans "Observational Studies" %}</h3>
-      </header>
-
-      <p>{% blocktrans with name=object.name %}Die {{ name }} hat den Behörden folgende Anwendungsbeobachtungen (AWB) gemeldet. Bei AWBs erhalten Ärzte Geld dafür, dass sie beobachten, wie gut ein Patient ein bestimmtes Präparat verträgt. Viele Wissenschaftler halten AWBs aber für ein Marketinginstrument, weil sie methodisch in der Regel zu schlecht sind, um daraus medizinische Erkenntnisse zu gewinnen.{% endblocktrans %}</p>
-    </div>
-
-    <div class="page__sidebar">
-
-    </div>
-  </div>
-
-  <div class="page__row">
-    <h3>{% blocktrans with name=object.name %}„{{ name }}“ is responsible for the following products.{% endblocktrans %}</h3>
-
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>{% trans "Name" %}</th>
-            <th>{% trans "Number of Observational Studies" %}</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for drug in drug_list %}
-          <tr>
-            <td>
-              <a href="{{ drug.get_absolute_url }}">
-                {{ drug.name }}
-              </a>
-            </td>
-            <td>
-              {{ drug.study_count }}
-            </td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  </div>
 {% endif %}
 
 {% endblock %}
