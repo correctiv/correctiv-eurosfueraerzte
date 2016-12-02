@@ -40,6 +40,10 @@ class LocaleMixin(object):
     def get_context_data(self, **kwargs):
         context = super(LocaleMixin, self).get_context_data(**kwargs)
         country = self.get_country() or 'DE'
+        if country is not None:
+            country = country.upper()
+        if country not in self.HAS_AGGREGATES:
+            country = None
         context['country'] = country
         context['countries'] = EFA_COUNTRIES
         context['country_label'] = EFA_COUNTRIES_DICT.get(country)
@@ -49,7 +53,7 @@ class LocaleMixin(object):
         context['locale'] = '%s_%s' % (current_lang, country)
         context['project_title'] = self.TITLES.get(country.lower())
         context['includes'] = LocaleIncludeDict(country.lower())
-        context['has_aggregates'] = self.HAS_AGGREGATES[country]
+        context['has_aggregates'] = self.HAS_AGGREGATES.get(country)
         return context
 
 
