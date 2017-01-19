@@ -26,6 +26,7 @@ class LocaleIncludeDict(object):
 
 
 class LocaleMixin(object):
+    DEFAULT_LOCALE = 'de'
     HAS_AGGREGATES = {
         'DE': True,
         'CH': False,
@@ -39,11 +40,9 @@ class LocaleMixin(object):
 
     def get_context_data(self, **kwargs):
         context = super(LocaleMixin, self).get_context_data(**kwargs)
-        country = self.get_country() or 'DE'
-        if country is not None:
-            country = country.upper()
-        if country not in self.HAS_AGGREGATES:
-            country = None
+        country = self.get_country()
+        print('country', country)
+        country_lower = country.lower()
         context['country'] = country
         context['countries'] = EFA_COUNTRIES
         context['country_label'] = EFA_COUNTRIES_DICT.get(country)
@@ -51,8 +50,8 @@ class LocaleMixin(object):
         context['filter_country'] = self.get_country()
         current_lang = translation.get_language()
         context['locale'] = '%s_%s' % (current_lang, country)
-        context['project_title'] = self.TITLES.get(country.lower())
-        context['includes'] = LocaleIncludeDict(country.lower())
+        context['project_title'] = self.TITLES.get(country_lower)
+        context['includes'] = LocaleIncludeDict(country_lower)
         context['has_aggregates'] = self.HAS_AGGREGATES.get(country)
         return context
 
@@ -130,9 +129,13 @@ class SearchView(ListView):
 class RecipientSearchView(LocaleMixin, SearchView):
     model = PaymentRecipient
     search_form = PaymentRecipientSearchForm
+    ordering = '-total_euro'
 
     def get_country(self):
-        return self.request.GET.get('country') or None
+        form = self.form
+        if form.cleaned_data:
+            return form.cleaned_data['country']
+        return ''
 
     def get_context_data(self, **kwargs):
         context = super(RecipientSearchView, self).get_context_data(**kwargs)

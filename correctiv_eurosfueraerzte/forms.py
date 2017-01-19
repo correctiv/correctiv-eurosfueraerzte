@@ -17,6 +17,11 @@ class PharmaCompanyModelChoiceField(forms.ModelChoiceField):
         return obj.name
 
 
+class UpperCaseChoiceField(forms.ChoiceField):
+    def to_python(self, value):
+        return super(UpperCaseChoiceField, self).to_python(value).upper()
+
+
 class SearchForm(forms.Form):
     model = Drug
 
@@ -82,11 +87,11 @@ class PaymentRecipientSearchForm(SearchForm):
         widget=forms.HiddenInput()
     )
 
-    country = forms.ChoiceField(
+    country = UpperCaseChoiceField(
         choices=[
             ('', _('all available countries')),
         ] + EFA_COUNTRIES_CHOICE,
-        required=False,
+        required=False
     )
 
     company = PharmaCompanyModelChoiceField(
