@@ -54,7 +54,7 @@
       {% if not object.hidden_payments %}
       <p>
         {% blocktrans with name=object.get_full_name %}
-        {{ name }} hat der Veröffentlichung folgender Zahlungen zugestimmt:
+          {{ name }} agreed to the publication of these payments:
         {% endblocktrans %}
       </p>
         <div class="table-responsive">
@@ -110,18 +110,19 @@
           </table>
         </div>
       {% else %}
-        <h3>Einwilligung widderrufen</h3>
+        <h3>{% trans "Consent revoked" %}</h3>
         <p>
-          {{ object.get_full_name }} hat inzwischen die Einwilligung zur Veröffentlichung der erhaltenen Zahlungen widerrufen.
+          {% blocktrans with name=object.get_full_name %}
+            {{ name }} has revoked the consent to publish the payments.
+          {% endblocktrans %}
         </p>
       {% endif %}
       {% if object.note %}
         <p>
-          <strong>Hinweis:</strong> {{ object.note }}
+          <strong>{% trans "Note:" %}</strong> {{ object.note }}
         </p>
       {% endif %}
     </div>
-
 
     <div class="page__sidebar">
       <div class="well">
