@@ -26,7 +26,7 @@ class LocaleIncludeDict(object):
 
 
 class LocaleMixin(object):
-    DEFAULT_LOCALE = 'de'
+    DEFAULT_LOCALE = 'DE'
     HAS_AGGREGATES = {
         'DE': True,
         'CH': False,
@@ -41,15 +41,17 @@ class LocaleMixin(object):
     def get_context_data(self, **kwargs):
         context = super(LocaleMixin, self).get_context_data(**kwargs)
         country = self.get_country()
-        print('country', country)
-        country_lower = country.lower()
+        fallback_country = country
+        if not country:
+            fallback_country = self.DEFAULT_LOCALE
+        country_lower = fallback_country.lower()
         context['country'] = country
         context['countries'] = EFA_COUNTRIES
         context['country_label'] = EFA_COUNTRIES_DICT.get(country)
         context['country_label_choice'] = EFA_COUNTRIES_CHOICE_DICT.get(country)
         context['filter_country'] = self.get_country()
         current_lang = translation.get_language()
-        context['locale'] = '%s_%s' % (current_lang, country)
+        context['locale'] = '%s_%s' % (current_lang, fallback_country)
         context['project_title'] = self.TITLES.get(country_lower)
         context['includes'] = LocaleIncludeDict(country_lower)
         context['has_aggregates'] = self.HAS_AGGREGATES.get(country)
