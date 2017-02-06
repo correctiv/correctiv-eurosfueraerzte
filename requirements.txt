@@ -1,4 +1,4 @@
-Django<1.10
+Django<1.11
 dj-database-url==0.4.1
 django-cache-url==1.0.0
 djangorestframework==3.3.3
@@ -6,7 +6,6 @@ django-cors-headers==1.1.0
 django-leaflet==0.18.1
 pytz==2016.4
 django-sekizai==0.9.0
--e git+https://github.com/stefanw/djorm-ext-pgfulltext.git#egg=djorm-ext-pgfulltext
 psycopg2==2.6.1
 django-leaflet==0.18.1
 gunicorn

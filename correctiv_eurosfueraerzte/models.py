@@ -1,4 +1,5 @@
 import decimal
+import functools
 
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models.functions import Distance
@@ -7,44 +8,48 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.postgres.fields import HStoreField
 from django.contrib.gis.measure import D
+from django.contrib.postgres.search import (SearchVectorField, SearchVector,
+        SearchVectorExact, SearchQuery)
 
-from djorm_pgfulltext.models import SearchManager
-from djorm_pgfulltext.fields import VectorField, FullTextLookup, startswith
 import pandas as pd
 
 from .utils import convert_currency_to_euro
 
 
-class FullTextLookupCustom(FullTextLookup):
-    lookup_name = 'ft_search'
+SEARCH_LANG = 'simple'
+
+
+class SearchVectorStartsWith(SearchVectorExact):
+    """This lookup scans for full text index entries that BEGIN with
+    a given phrase, like:
+    will get translated to
+        ts_query('Foobar:* & Baz:* & Quux:*')
+    """
+    lookup_name = 'startswith'
+
+    def process_rhs(self, qn, connection):
+        if not hasattr(self.rhs, 'resolve_expression'):
+            config = getattr(self.lhs, 'config', None)
+            self.rhs = SearchQuery(self.rhs, config=config)
+        rhs, rhs_params = super(SearchVectorExact, self).process_rhs(qn, connection)
+        rhs = '(to_tsquery(%s::regconfig, %s))'
+        rhs_params[1] = ' & '.join('%s:*' % s for s in rhs_params[1].split())
+        return rhs, rhs_params
 
     def as_sql(self, qn, connection):
-        lhs, lhs_params = qn.compile(self.lhs)
+        lhs, lhs_params = self.process_lhs(qn, connection)
         rhs, rhs_params = self.process_rhs(qn, connection)
+        params = lhs_params + rhs_params
+        return '%s @@ %s' % (lhs, rhs), params
 
-        catalog, rhs_params = rhs_params
-
-        cmd = "%s @@ plainto_tsquery('%s', %%s)" % (lhs, catalog)
-        rest = (" & ".join(self.transform.__call__(rhs_params)),)
-
-        return cmd, rest
-
-
-class FullTextLookupCustomStartsWith(FullTextLookupCustom):
-    lookup_name = 'ft_search_startswith'
-
-    def transform(self, *args):
-        return startswith(*args)
-
-VectorField.register_lookup(FullTextLookupCustom)
-VectorField.register_lookup(FullTextLookupCustomStartsWith)
+SearchVectorField.register_lookup(SearchVectorStartsWith)
 
 
 def perc(val, total):
     return val / total * 100
 
 
-class PharmaCompanyManager(SearchManager):
+class PharmaCompanyManager(models.Manager):
     def get_by_natural_key(self, slug):
         return self.get(slug=slug)
 
@@ -158,6 +163,13 @@ class PharmaCompanyManager(SearchManager):
             'hco': self._get_type_aggregation(obj, df, 1, max_amount),
         }
 
+    def update_search_index(self):
+        search_vector = (
+            SearchVector('name', weight='A', config=SEARCH_LANG) +
+            SearchVector('sub_names', weight='B', config=SEARCH_LANG)
+        )
+        PharmaCompany.objects.update(search_vector=search_vector)
+
 
 @python_2_unicode_compatible
 class PharmaCompany(models.Model):
@@ -171,17 +183,9 @@ class PharmaCompany(models.Model):
 
     country = models.CharField(max_length=2, default='DE')
 
-    search_index = VectorField()
+    search_vector = SearchVectorField(default='')
 
-    objects = PharmaCompanyManager(
-        fields=[
-            ('name', 'A'),
-            ('sub_names', 'B')
-        ],
-        config='pg_catalog.german',
-        search_field='search_index',
-        auto_update_search_field=True
-    )
+    objects = PharmaCompanyManager()
 
     class Meta:
         verbose_name = _('Pharma Company')
@@ -204,25 +208,24 @@ class PharmaCompany(models.Model):
         return [x for x in self.sub_names.splitlines() if x]
 
 
-class DrugManager(SearchManager):
+class DrugManager(models.Manager):
     def get_by_natural_key(self, slug):
         return self.get(slug=slug)
 
     def search(self, qs, query):
         if query:
+            query = SearchQuery(query, config=SEARCH_LANG)
             qs = qs.filter(
-                models.Q(search_index__ft_search=(self.config, query)) |
-                models.Q(pharma_company__search_index__ft_search=(
-                    self.config, query
-                ))
+                models.Q(search_vector=query) |
+                models.Q(pharma_company__search_vector=query)
             )
         qs = self.add_annotations(qs)
         return qs
 
     def autocomplete(self, qs, query):
         if query:
-            query = startswith(query)
-            qs = qs.search(' & '.join(query), raw=True)
+            query = SearchQuery(query, config=SEARCH_LANG)
+            qs = qs.filter(search_vector__startswith=query)
         return qs
 
     def get_for_company(self, company):
@@ -250,6 +253,16 @@ class DrugManager(SearchManager):
                         'observationalstudy__doc_count')
                 ).order_by('-doc_sum')
 
+    def get_search_vector(self):
+        return (
+            SearchVector('name', weight='A', config=SEARCH_LANG) +
+            SearchVector('active_ingredient', weight='B', config=SEARCH_LANG) +
+            SearchVector('medical_indication', weight='C', config=SEARCH_LANG)
+        )
+
+    def update_search_index(self):
+        Drug.objects.update(search_vector=self.get_search_vector())
+
 
 @python_2_unicode_compatible
 class Drug(models.Model):
@@ -269,18 +282,9 @@ class Drug(models.Model):
                                        blank=True,
                                        null=True)
 
-    search_index = VectorField()
+    search_vector = SearchVectorField(default='')
 
-    objects = DrugManager(
-        fields=[
-            ('name', 'A'),
-            ('active_ingredient', 'B'),
-            ('medical_indication', 'C'),
-        ],
-        config='pg_catalog.german',
-        search_field='search_index',
-        auto_update_search_field=True
-    )
+    objects = DrugManager()
 
     class Meta:
         verbose_name = _('Drugs')
@@ -382,7 +386,7 @@ class ObservationalStudy(models.Model):
         return False
 
 
-class PaymentRecipientManager(SearchManager):
+class PaymentRecipientManager(models.Manager):
     def get_by_natural_key(self, slug):
         return self.get(slug=slug)
 
@@ -398,14 +402,15 @@ class PaymentRecipientManager(SearchManager):
     def search(self, qs, query):
         qs = self.kind_filter(qs)
         if query:
-            qs = qs.filter(search_index__ft_search=(self.config, query))
+            query = SearchQuery(query, config=SEARCH_LANG)
+            qs = qs.filter(search_vector=query)
         qs = self.add_annotations(qs)
         return qs
 
     def autocomplete(self, qs, query):
         if query:
-            query = startswith(query)
-            qs = qs.search(' & '.join(query), raw=True)
+            query = SearchQuery(query, config=SEARCH_LANG)
+            qs = qs.filter(search_vector__startswith=query)
         return qs
 
     def add_annotations(self, queryset):
@@ -453,22 +458,22 @@ class PaymentRecipientManager(SearchManager):
         qs = self.add_annotations(qs)
         return qs
 
+    def get_search_vector(self):
+        fields = [
+            ('first_name', 'A'),
+            ('name', 'A'),
+            ('name_detail', 'B'),
+            ('related_names', 'B'),
+            ('location', 'B'),
+            ('postcode', 'B'),
+            ('address', 'C'),
+            ('orientations', 'C'),
+        ]
+        return functools.reduce(lambda a, b: a + b,
+            [SearchVector(f, weight=w, config=SEARCH_LANG) for f, w in fields])
 
-MANAGER_KWARGS = dict(
-    fields=[
-        ('first_name', 'A'),
-        ('name', 'A'),
-        ('name_detail', 'B'),
-        ('related_names', 'B'),
-        ('location', 'B'),
-        ('postcode', 'B'),
-        ('address', 'C'),
-        ('orientations', 'C'),
-    ],
-    config='pg_catalog.german',
-    search_field='search_index',
-    auto_update_search_field=True
-)
+    def update_search_index(self):
+        PaymentRecipient.objects.update(search_vector=self.get_search_vector())
 
 
 @python_2_unicode_compatible
@@ -516,9 +521,9 @@ class PaymentRecipient(models.Model):
     total_euro = models.DecimalField(decimal_places=2, max_digits=19, blank=True, null=True)
     company_count = models.SmallIntegerField(blank=True, null=True)
 
-    search_index = VectorField()
+    search_vector = SearchVectorField(default='')
 
-    objects = PaymentRecipientManager(**MANAGER_KWARGS)
+    objects = PaymentRecipientManager()
 
     class Meta:
         verbose_name = _('payment recipient')

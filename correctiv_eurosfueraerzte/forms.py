@@ -47,11 +47,11 @@ class SearchForm(forms.Form):
 
         queryset = self.update_queryset(queryset)
 
-        query = self.cleaned_data['q'].strip().split()
-        query = [q.encode('utf-8') for q in query]
+        query = self.cleaned_data['q'].strip()
         if autocomplete:
             qs = self.model.objects.autocomplete(queryset, query)
-        qs = self.model.objects.search(queryset, query)
+        else:
+            qs = self.model.objects.search(queryset, query)
         qs = self.finalise_queryset(qs)
         return qs
 
