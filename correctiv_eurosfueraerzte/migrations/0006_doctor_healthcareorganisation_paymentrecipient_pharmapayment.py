@@ -7,7 +7,6 @@ import django.contrib.postgres.fields.hstore
 from django.db import migrations, models
 from django.contrib.postgres.operations import HStoreExtension
 import django.db.models.deletion
-import djorm_pgfulltext.fields
 
 
 class Migration(migrations.Migration):
@@ -37,7 +36,7 @@ class Migration(migrations.Migration):
                 ('orientations', models.CharField(blank=True, max_length=512)),
                 ('data', django.contrib.postgres.fields.hstore.HStoreField(blank=True)),
                 ('note', models.TextField(blank=True)),
-                ('search_index', djorm_pgfulltext.fields.VectorField()),
+                ('search_index', models.CharField(max_length=512, blank=True)),
             ],
             options={
                 'ordering': ('name',),

@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
-import djorm_pgfulltext.fields
 
 
 class Migration(migrations.Migration):
@@ -21,7 +20,7 @@ class Migration(migrations.Migration):
                 ('active_ingredient', models.CharField(max_length=512, blank=True)),
                 ('medical_indication', models.CharField(max_length=512, blank=True)),
                 ('atc_code', models.CharField(max_length=15, blank=True)),
-                ('search_index', djorm_pgfulltext.fields.VectorField()),
+                ('search_index', models.CharField(max_length=512, blank=True)),
             ],
         ),
         migrations.CreateModel(
