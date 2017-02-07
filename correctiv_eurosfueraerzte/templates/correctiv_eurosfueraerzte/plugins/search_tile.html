@@ -1,30 +1,30 @@
 {% load i18n static sekizai_tags %}
 
-<div class="search-tile">
+<div class="efa__search-tile">
 
   <a href="{% url 'eurosfueraerzte:eurosfueraerzte-index' %}">
-    <h2 class="search-tile__logo">
+    <h2 class="efa__search-tile__logo">
       {% trans "Euros for Doctors" %}
     </h2>
   </a>
 
-  <form method="get" class="search-tile__form" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}">
-    <p class="search-tile__claim">
+  <form method="get" class="efa__search-tile__form" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}">
+    <p class="efa__search-tile__claim">
       {% trans "Has your doctor received money from the pharma industry?" %}
     </p>
 
     <label class="sr-only" for="eurosfueraerzte-q">{% trans "Search" %}</label>
 
-    <div class="input-group">
-      <input id="eurosfueraerzte-q" name="q" type="text" class="form-control" placeholder="{% trans "Postcode, e.g. 45147" %}">
-      <span class="input-group-btn">
-        <button type="submit">{% trans "Search" %}</button>
+    <div class="efa__search-tile__input-group">
+      <input id="eurosfueraerzte-q" name="q" type="text" class="efa__search-tile__input" placeholder="{% trans 'Postcode' %}">
+      <span class="efa__search-tile__button">
+        <button>{% trans "Search" %}</button>
       </span>
     </div>
 
-    <small class="search-tile__help">
+    <small class="efa__search-tile__help">
       {% trans "Example:" %}
-      <a class="search-tile__link" href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=45147">45147</a>
+      <a class="efa__search-tile__link" href="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}?q=45147">45147</a>
     </small>
   </form>
 

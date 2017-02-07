@@ -1,0 +1,117 @@
+.efa__search-tile {
+  color: black;
+  background-color: #a8d9ed;
+  position: relative;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.efa__search-tile__claim {
+  hyphens: auto;
+  color: black;
+}
+
+.efa__search-tile__logo {
+  overflow: hidden;
+  background: #8ec6dd url('../img/euros-fuer-aerzte_logo.svg');
+  background-repeat: no-repeat;
+  background-position: 22px bottom;
+  height: 140px;
+  width: 100%;
+  text-indent: -100%;
+  margin: 0;
+  padding: 0;
+}
+
+.efa__search-tile__form {
+  padding: 22px;
+}
+
+.efa__search-tile__input-group {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+  .efa__search-tile__button,
+  .efa__search-tile__input {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 40px;
+    border-radius: 0;
+    transition: all 300ms;
+    font-size: 19px;
+    line-height: 24px;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  .efa__search-tile__input {
+    background: white;
+    border: 1px solid #9c9c9c;
+    position: relative;
+    z-index: 2;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+    margin-bottom: 0;
+    padding: 0 10px;
+    width: 1px;
+  }
+
+  .efa__search-tile__button > button {
+    position: relative;
+    -webkit-box-flex: 1;
+    -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
+    color: white;
+    background: #316f89;
+    border: 0;
+    padding: 0 10px;
+    transition: 300ms background;
+  }
+
+  .efa__search-tile__button > button:hover,
+  .efa__search-tile__button > button:focus,
+  .efa__search-tile__button > button:active {
+    color: white;
+    background: #06292e;
+  }
+
+
+.efa__search-tile__help {
+  display: block;
+  margin: 0;
+  padding: 10px 0 0 0;
+  font-style: italic;
+}
+
+.efa__search-tile__link {
+  text-decoration: underline;
+  color: #316f89;
+}
+
+@media (min-width: 1200px) {
+  .efa__search-tile {
+    min-height: 380px;
+  }
+}
+
+.input-group-addon:not(:first-child):not(:last-child),
+.input-group-btn:not(:first-child):not(:last-child),
+.input-group .form-control:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.input-group-addon,
+.input-group-btn {
+  white-space: nowrap;
+  vertical-align: middle;
+}
