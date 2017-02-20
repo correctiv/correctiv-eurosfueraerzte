@@ -46,6 +46,8 @@ SearchVectorField.register_lookup(SearchVectorStartsWith)
 
 
 def perc(val, total):
+    if total == 0.0:
+        return 0.0
     return val / total * 100
 
 
@@ -149,6 +151,8 @@ class PharmaCompanyManager(models.Manager):
         rnd_amount = df[df['label'] == 'research_development']['amount'].sum()
 
         max_kind_amount = df.groupby('recipient_kind')['amount'].sum().max()
+        if pd.isnull(max_kind_amount):
+            max_kind_amount = 0.0
         max_amount = max(rnd_amount, max_kind_amount)
         totals_ind_agg = df.groupby('individual_recipient')['amount'].sum()
         total = df['amount'].sum()
