@@ -78,6 +78,7 @@
 
 {% if payments %}
 </div>
+  {% if payments.hcp.labels %}
   <div class="page__block">
     <div class="page__container">
       <h2 class="efa__title">
@@ -92,16 +93,18 @@
       </div>
     </div>
   </div>
-
-  <div class="page__container">
-    <h2 class="efa__title">{% trans "Payments to organisations" %}</h2>
-    <div class="page__row">
-      {% trans "Payments to organisations in 2015" as hco_description %}
-      {% for label in payments.hco.labels %}
-        {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hco" description=hco_description currency=payments.currency %}
-      {% endfor %}
+  {% endif %}
+  {% if payments.hco.labels %}
+    <div class="page__container">
+      <h2 class="efa__title">{% trans "Payments to organisations" %}</h2>
+      <div class="page__row">
+        {% trans "Payments to organisations in 2015" as hco_description %}
+        {% for label in payments.hco.labels %}
+          {% include "correctiv_eurosfueraerzte/_company_payment_label.html" with label=label kind="hco" description=hco_description currency=payments.currency %}
+        {% endfor %}
+      </div>
     </div>
-  </div>
+  {% endif %}
 <div class="page__container">
 {% endif %}
 
