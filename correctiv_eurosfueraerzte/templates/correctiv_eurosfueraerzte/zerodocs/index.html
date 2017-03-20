@@ -1,0 +1,40 @@
+{% extends "correctiv_eurosfueraerzte/zerodocs/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<h1>{% trans "Zero Euro Doctors" %}</h1>
+
+<div class="page__row">
+  <div class="page__section -narrow efa__content">
+    <h2>
+      {% blocktrans %}You want to publicly show that you are not taking any money from the pharma industry?{% endblocktrans %}
+    </h2>
+
+    <p>
+      {% blocktrans %}
+        When users search for your name in our database, we can show them, that you are refusing to take money from pharma companies.
+      {% endblocktrans %}
+    </p>
+
+    <p>
+      {% blocktrans %}
+        Please fill out the form below to get started.
+      {% endblocktrans %}
+    </p>
+
+    <div>
+    {% crispy form %}
+    </div>
+
+
+  </div>
+  <aside class="page__sidebar efa__content">
+
+  </aside>
+</div>
+
+
+{% endblock %}

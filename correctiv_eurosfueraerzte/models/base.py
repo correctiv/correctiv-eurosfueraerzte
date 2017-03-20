@@ -13,7 +13,7 @@ from django.contrib.postgres.search import (SearchVectorField, SearchVector,
 
 import pandas as pd
 
-from .utils import convert_currency_to_euro
+from ..utils import convert_currency_to_euro
 
 
 SEARCH_LANG = 'simple'

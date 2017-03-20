@@ -1,22 +1,28 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.utils.translation import ugettext_lazy as _
 
 try:
     # Optional caching decorator
     from correctiv_community.helpers.cache_utils import cache_page_anonymous as c
 except ImportError:
-    c = lambda x: x
+    c = lambda x: x  # noqa
 
-from .apps import EFA_COUNTRIES
-from .views import (IndexView, SearchView, RecipientSearchView, DrugDetailView,
+from ..apps import EFA_COUNTRIES
+from ..views import (IndexView, SearchView, RecipientSearchView, DrugDetailView,
                     RecipientDetailView, ObservationalStudyDetailView,
                     CompanyDetailView)
+
+from .zerodocs import urlpatterns as zerodocs_patterns
+
 
 country_code_matches = '|'.join([x[0].lower() for x in EFA_COUNTRIES])
 
 urlpatterns = [
     url(r'^$', c(IndexView.as_view()), name='eurosfueraerzte-index'),
     url(r'^(?P<country>%s)/$' % country_code_matches, c(IndexView.as_view()), name='eurosfueraerzte-country_index'),
+
+    url(r'^', include(zerodocs_patterns)),
+
     url(_(r'^recipient/(?P<slug>[\w-]+)/$'), RecipientDetailView.as_view(),
         name='eurosfueraerzte-recipientdetail'),
     url(_(r'^company/(?P<slug>[\w-]+)/$'),

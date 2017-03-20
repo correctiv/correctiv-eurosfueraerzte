@@ -5,8 +5,7 @@ from django.core.exceptions import PermissionDenied
 from django.template.response import TemplateResponse
 from django.contrib.admin import helpers
 
-from .models import (PharmaCompany, Drug, ObservationalStudy,
-                     PaymentRecipient, PharmaPayment)
+from ..models import Drug, PharmaPayment, ObservationalStudy
 
 
 class ReplacementMixin(object):
@@ -107,10 +106,3 @@ class PharmaPaymentAdmin(admin.ModelAdmin):
                     'origin')
     search_fields = ('recipient__name', 'recipient_detail', 'recipient_kind')
     raw_id_fields = ('recipient',)
-
-
-admin.site.register(PharmaCompany, PharmaCompanyAdmin)
-admin.site.register(Drug, DrugAdmin)
-admin.site.register(ObservationalStudy, ObservationalStudyAdmin)
-admin.site.register(PaymentRecipient, PaymentRecipientAdmin)
-admin.site.register(PharmaPayment, PharmaPaymentAdmin)

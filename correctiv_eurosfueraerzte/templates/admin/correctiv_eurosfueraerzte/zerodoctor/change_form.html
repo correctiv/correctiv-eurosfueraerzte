@@ -1,0 +1,18 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+{% block object-tools %}
+{{ block.super }}
+{% if original.has_unconfirmed_submissions %}
+  <form method="post" action="{% url 'admin:eurosfueraerzte-zerodocs_confirm' %}">{% csrf_token %}
+    <input type="hidden" name="pk" value="{{ original.pk }}"/>
+    {% for sub in original.get_submissions %}
+      {% if not sub.confirmed %}
+        <label>
+            <input type="checkbox" name="year" value="{{ sub.date.year }}"/>{{ sub.date.year }}
+        </label>
+      {% endif %}
+    {% endfor %}
+    <input type="submit" value="{% trans "Confirm" %}"/>
+  </form>
+{% endif %}
+{% endblock %}

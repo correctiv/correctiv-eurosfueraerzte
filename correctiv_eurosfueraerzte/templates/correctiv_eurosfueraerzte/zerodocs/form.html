@@ -1,0 +1,56 @@
+{% extends "correctiv_eurosfueraerzte/zerodocs/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h1>
+  {% blocktrans with full_name=object.get_full_name %}
+    Zero Euro Profile of {{ full_name }}
+  {% endblocktrans %}
+</h1>
+
+{% with submissions=object.get_submissions %}
+  {% if not submissions %}
+    <p>
+      {% trans "Please fill out the form below to enter your details." %}
+    </p>
+  {% else %}
+    <p>
+      {% trans "We have received the following submissions from you." %}
+    </p>
+    <ul>
+    {% for submission in submissions %}
+      <li>
+        {{ submission.date.year }} -
+        {% if submission.confirmed %}
+          {% trans "confirmed" %}
+        {% else %}
+          <strong>{% trans "unconfirmed" %}</strong>
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+    {% if object.has_unconfirmed_submissions %}
+      <p>
+        {% trans "You have unconfirmed submissions, please use these options to confirm:" %}
+      </p>
+      <p>
+        {% trans "Download the following form letter, sign it, stamp it and send it to us via post or fax (address details are on the letter)." %}
+      </p>
+      <p>
+        <a class="btn btn-primary" href="{% url 'eurosfueraerzte:eurosfueraerzte-zerodocs_pdf' slug=object.secret %}">
+          {% trans "Download letter" %}
+        </a>
+      </p>
+    {% endif %}
+    <p>
+      {% trans "You can adjust your details with the form below." %}
+    </p>
+  {% endif %}
+{% endwith %}
+
+{% crispy form %}
+
+{% endblock %}

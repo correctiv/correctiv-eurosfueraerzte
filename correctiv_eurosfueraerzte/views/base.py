@@ -8,9 +8,9 @@ from django.shortcuts import redirect
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Drug, ObservationalStudy, PharmaCompany, PaymentRecipient
-from .forms import SearchForm, PaymentRecipientSearchForm
-from .apps import EFA_COUNTRIES_DICT, EFA_COUNTRIES_CHOICE_DICT, EFA_COUNTRIES
+from ..models import Drug, ObservationalStudy, PharmaCompany, PaymentRecipient
+from ..forms import SearchForm, PaymentRecipientSearchForm
+from ..apps import EFA_COUNTRIES_DICT, EFA_COUNTRIES_CHOICE_DICT, EFA_COUNTRIES
 
 
 def get_origin_include(origin, filename):

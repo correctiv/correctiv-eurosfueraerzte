@@ -34,7 +34,9 @@ setup(
     packages=find_packages(),
     install_requires=[
         'Django',
-        'babel'
+        'babel',
+        'pandas',
+        'reportlab'
     ],
     include_package_data=True,
     classifiers=[

@@ -17,6 +17,8 @@ EFA_COUNTRIES_CHOICE = [
 ]
 EFA_COUNTRIES_CHOICE_DICT = dict(EFA_COUNTRIES_CHOICE)
 
+EFA_YEARS = [2015, 2016]
+
 
 class EurosfuerAerzteConfig(AppConfig):
     name = 'correctiv_eurosfueraerzte'

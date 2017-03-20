@@ -6,8 +6,8 @@ from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.measure import D
 
-from .models import Drug, PharmaCompany, PaymentRecipient, PharmaPayment
-from .apps import EFA_COUNTRIES_CHOICE
+from ..models import Drug, PharmaCompany, PaymentRecipient, PharmaPayment
+from ..apps import EFA_COUNTRIES_CHOICE
 
 LATLNG_RE = re.compile('(\d+\.?\d+),(\d+\.?\d+)')
 

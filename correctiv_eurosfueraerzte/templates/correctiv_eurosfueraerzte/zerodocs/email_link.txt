@@ -1,0 +1,14 @@
+{% load i18n %}{% autoescape off %}{% blocktrans with gender_title=object.get_gender_title last_name=object.last_name url=object.get_absolute_domain_url %}Dear {{ gender_title }} {{ last_name }}
+
+Thank you for becoming a 0-Euro Doctor on correctiv.org.
+
+Please continue your submission by clicking this link:
+
+{{ url }}
+
+Thanks
+
+The team of CORRECTIV
+
+{% endblocktrans %}{% include "account/email/default_footer.txt" %}
+{% endautoescape %}
