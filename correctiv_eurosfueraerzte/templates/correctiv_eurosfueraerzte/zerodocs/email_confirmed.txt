@@ -1,0 +1,14 @@
+{% load i18n %}{% autoescape off %}{% blocktrans with gender_title=object.get_gender_title last_name=object.last_name url=url %}Dear {{ gender_title }} {{ last_name }}
+
+Your Zero Euro Doctor submission has been confirmed. Your public profile is now live.
+
+This is the link to your public profile:
+
+{{ url }}
+
+Thanks
+
+The team of CORRECTIV
+
+{% endblocktrans %}{% include "account/email/default_footer.txt" %}
+{% endautoescape %}

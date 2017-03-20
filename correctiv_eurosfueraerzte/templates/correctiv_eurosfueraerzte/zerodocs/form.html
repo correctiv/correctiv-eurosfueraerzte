@@ -1,14 +1,15 @@
 {% extends "correctiv_eurosfueraerzte/zerodocs/base.html" %}
 
 {% load i18n %}
+
 {% load crispy_forms_tags %}
+
+{% block title %}{% blocktrans with full_name=object.get_full_name %}Zero Euro Form of {{ full_name }}{% endblocktrans %}{% endblock title %}
 
 {% block content %}
 
 <h1>
-  {% blocktrans with full_name=object.get_full_name %}
-    Zero Euro Profile of {{ full_name }}
-  {% endblocktrans %}
+  {% blocktrans with full_name=object.get_full_name %}Zero Euro Form of {{ full_name }}{% endblocktrans %}
 </h1>
 
 {% with submissions=object.get_submissions %}
@@ -18,7 +19,7 @@
     </p>
   {% else %}
     <p>
-      {% trans "We have received the following submissions from you." %}
+      {% trans "You have not received money from pharma companies in the following years:" %}
     </p>
     <ul>
     {% for submission in submissions %}
@@ -40,8 +41,15 @@
         {% trans "Download the following form letter, sign it, stamp it and send it to us via post or fax (address details are on the letter)." %}
       </p>
       <p>
-        <a class="btn btn-primary" href="{% url 'eurosfueraerzte:eurosfueraerzte-zerodocs_pdf' slug=object.secret %}">
+        <a class="btn btn-primary btn-lg" href="{% url 'eurosfueraerzte:eurosfueraerzte-zerodocs_pdf' slug=object.secret %}">
           {% trans "Download letter" %}
+        </a>
+      </p>
+    {% endif %}
+    {% if object.recipient %}
+      <p>
+        <a href="{% url 'eurosfueraerzte-recipientdetail' slug=object.recipient.slug %}">
+          {% trans "Your public profile page can be found here." %}
         </a>
       </p>
     {% endif %}

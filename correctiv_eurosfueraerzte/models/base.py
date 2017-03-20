@@ -1,6 +1,7 @@
 import decimal
 import functools
 
+from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models.functions import Distance
 from django.utils import timezone
@@ -8,6 +9,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.postgres.fields import HStoreField
 from django.contrib.gis.measure import D
+from django.contrib.postgres.fields import JSONField
 from django.contrib.postgres.search import (SearchVectorField, SearchVector,
         SearchVectorExact, SearchQuery)
 
@@ -514,7 +516,7 @@ class PaymentRecipient(models.Model):
     unique_country_identifier = models.CharField(max_length=255, blank=True)
     orientations = models.CharField(max_length=512, blank=True)
 
-    data = HStoreField(blank=True)
+    data = HStoreField(blank=True, default=dict)
 
     note = models.TextField(blank=True)
     hidden_payments = models.BooleanField(default=False)
@@ -548,6 +550,9 @@ class PaymentRecipient(models.Model):
         return ('eurosfueraerzte:eurosfueraerzte-recipientdetail', (), {
             'slug': self.slug
         })
+
+    def get_absolute_domain_url(self):
+        return settings.SITE_URL + self.get_absolute_url()
 
     def compute_total(self):
         aggs = self.pharmapayment_set.all().aggregate(models.Sum('amount'),
@@ -671,3 +676,7 @@ class PharmaPayment(models.Model):
     def __str__(self):
         return u'%s -> %s: %s (%s)' % (self.pharma_company, self.recipient,
                                        self.amount, self.label)
+
+    @property
+    def is_zerodoc(self):
+        return self.pharma_company_id is None and not self.label

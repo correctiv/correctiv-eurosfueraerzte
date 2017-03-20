@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from django import forms
+from django.contrib.gis import forms
 from django.utils.translation import ugettext_lazy as _
 from django.utils.crypto import get_random_string
 from django.utils import timezone
@@ -12,6 +12,7 @@ from crispy_forms.bootstrap import StrictButton
 
 from ..models.zerodocs import ZeroDoctor, ZeroDocSubmission
 from ..apps import EFA_COUNTRIES_CHOICE, EFA_YEARS
+from ..geocode import geocode
 
 
 def generate_secret():
@@ -25,12 +26,13 @@ def generate_secret():
 
 
 class ZeroDocLoginForm(forms.ModelForm):
-    terms = forms.BooleanField(label=_('I agree to the publication of the'
-                                        'information I give'))
+    # terms = forms.BooleanField(label=_('I agree to the publication of '
+    #                     'my name, business address and statements.'),
+    #         help_text=_('Your email address will not be published.'))
 
     class Meta:
         model = ZeroDoctor
-        fields = ('gender', 'title', 'first_name', 'last_name', 'email')
+        fields = ('gender', 'title', 'first_name', 'last_name', 'email',)
         help_texts = {
             'email': _('We will send you an email to confirm your address.'),
         }
@@ -77,8 +79,7 @@ class ZeroDocLoginForm(forms.ModelForm):
 
 
 class ZeroDocSubmitForm(forms.ModelForm):
-    address = forms.CharField(label=_('address'),
-        help_text=_('Please give your business address'))
+    address = forms.CharField(label=_('address'))
     postcode = forms.CharField(label=_('postcode'))
     location = forms.CharField(label=_('location'))
     country = forms.ChoiceField(label=_('country'),
@@ -87,12 +88,14 @@ class ZeroDocSubmitForm(forms.ModelForm):
     years = forms.TypedMultipleChoiceField(
         label=_('Please check all years that apply:'),
         widget=forms.CheckboxSelectMultiple(),
-        coerce=int
+        coerce=int,
+        required=False
     )
 
     class Meta:
         model = ZeroDoctor
-        fields = ('gender', 'title', 'first_name', 'last_name', 'address', 'postcode', 'location', 'country')
+        fields = ('gender', 'title', 'first_name', 'last_name', 'address',
+                  'postcode', 'location', 'country')
 
     def __init__(self, *args, **kwargs):
         super(ZeroDocSubmitForm, self).__init__(*args, **kwargs)
@@ -100,7 +103,7 @@ class ZeroDocSubmitForm(forms.ModelForm):
                            if x.confirmed)
         remaining_years = [y for y in EFA_YEARS if y not in confirmed_years]
         self.fields['years'].choices = [
-            (y, _('In %d I have not received any money from pharmaceutical companies') % y)
+            (y, _('In %d I have not received any money from pharmaceutical companies.') % y)
             for y in remaining_years
         ]
         self.fields['years'].initial = [x.date.year for x in self.instance.get_submissions()]
@@ -109,13 +112,17 @@ class ZeroDocSubmitForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
 
-        layout_elements = list(self.fields.keys())
-        layout_elements.remove('years')
+        name_elements = ['gender', 'title', 'first_name', 'last_name']
+        addr_elements = ['address', 'postcode', 'location', 'country']
 
         layout = [
             Fieldset(
-                _('Your details'),
-                *layout_elements
+                _('Your name'),
+                *name_elements
+            ),
+            Fieldset(
+                _('Your business address'),
+                *addr_elements
             )]
         if remaining_years:
             layout += [Fieldset(
@@ -131,16 +138,29 @@ class ZeroDocSubmitForm(forms.ModelForm):
     def save(self):
         obj = super(ZeroDocSubmitForm, self).save(commit=False)
 
-        # TODO: Create Recipient if not exists
+        point = geocode(obj)
+
+        obj.geo = point
         obj.save()
 
-        years = self.cleaned_data['years']
+        if obj.recipient is not None:
+            obj.create_or_update_recipient()
+
+        submitted_years = set(self.cleaned_data['years'])
         current_tz = timezone.get_current_timezone()
-        for year in years:
+        for year in EFA_YEARS:
             date = current_tz.localize(datetime(year, 1, 1))
-            # TODO: Create payments if not exist
-            ZeroDocSubmission.objects.get_or_create(zerodoc=obj, date=date, defaults={
-                'submitted_on': timezone.now()
-            })
+            if year in submitted_years:
+                ZeroDocSubmission.objects.get_or_create(zerodoc=obj, date=date, defaults={
+                    'submitted_on': timezone.now()
+                })
+            else:
+                ZeroDocSubmission.objects.filter(
+                    zerodoc=obj, date=date, confirmed=False
+                ).delete()
+        obj._submissions = None
+
+        if submitted_years:
+            obj.send_submission_email()
 
         return obj

@@ -36,6 +36,9 @@ setup(
         'Django',
         'babel',
         'pandas',
+        'python-slugify',
+        'unicodecsv',
+        'geocoder',
         'reportlab'
     ],
     include_package_data=True,

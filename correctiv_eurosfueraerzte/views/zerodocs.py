@@ -17,7 +17,7 @@ from django.contrib import messages
 from django.utils import timezone
 
 from ..forms.zerodocs import ZeroDocLoginForm, ZeroDocSubmitForm
-from ..models.zerodocs import ZeroDoctor
+from ..models.zerodocs import ZeroDoctor, LETTER_FILENAME
 from ..zerodocs import generate_pdf
 
 
@@ -72,8 +72,7 @@ def get_zerodocs_pdf(request, slug=None):
 
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="{}.pdf"'.format(
-            # Translators: filename part
-            _('letter_zeroeurodocs'))
+            LETTER_FILENAME)
 
     generate_pdf(response, obj)
 

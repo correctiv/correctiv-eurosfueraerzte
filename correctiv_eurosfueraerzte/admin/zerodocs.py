@@ -4,6 +4,9 @@ from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import PermissionDenied
 from django.utils.html import format_html
+from django.contrib import messages
+
+from leaflet.admin import LeafletGeoAdmin
 
 from ..models import ZeroDoctor, ZeroDocSubmission
 
@@ -13,11 +16,12 @@ class ZeroDocSubmissionInlineAdmin(admin.TabularInline):
     raw_id_fields = ('payment',)
 
 
-class ZeroDoctorAdmin(admin.ModelAdmin):
+class ZeroDoctorAdmin(LeafletGeoAdmin):
     inlines = [
         # ZeroDocSubmissionInlineAdmin
     ]
 
+    display_raw = True  # raw geo field
     list_display = ('get_full_name', 'email', 'get_full_address',)
     list_filter = ('country',)
     search_fields = ('first_name', 'last_name', 'email', 'location', 'address',
@@ -51,8 +55,13 @@ class ZeroDoctorAdmin(admin.ModelAdmin):
 
         obj = get_object_or_404(ZeroDoctor, pk=request.POST['pk'])
 
-        for year in request.POST.getlist('year'):
-            year = int(year)
-            print(obj, year)
-
+        years = [int(year) for year in request.POST.getlist('year')]
+        if years:
+            try:
+                obj.confirm_submissions(years)
+            except ValueError as e:
+                messages.add_message(request, messages.ERROR, e)
+            else:
+                messages.add_message(request, messages.SUCCESS,
+                    _('Successfully confirmed!'))
         return redirect('admin:correctiv_eurosfueraerzte_zerodoctor_changelist')

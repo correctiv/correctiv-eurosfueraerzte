@@ -42,17 +42,28 @@ def generate_pdf(f, obj):
         'Singerstr. 109',
         '10179 Berlin',
         'Deutschland',
-        'Fax: +49 (0) 30 – 555 780 2 20'
     ]
     for a in address:
         p.append(Paragraph(a, styles["Normal"]))
 
+    p.append(Spacer(1, 12))
+    p.append(Paragraph('Fax: +49 (0) 30 – 555 780 2 20', styles['Normal']))
+
     p.append(Spacer(1, 12 * 4))
 
     now = timezone.now()
-
     p.append(Paragraph(now.strftime('%d.%m.%Y'), styles["Right"]))
+
     p.append(Paragraph('Bestätigung meines Eintrags in Ihrer Null-Euro-Ärzte-Datenbank', styles["Normal"]))
+
+    p.append(Paragraph('Aktenzeichen: {date}-{pk}'.format(
+        date=obj.last_login.strftime('%Y%m%d'),
+        pk=obj.pk
+    ), styles["Normal"]))
+
+    # p.append(Paragraph('URL: <a href="{url}">{url}</a>'.format(
+    #     url=obj.get_absolute_domain_url()
+    # ), styles["Normal"]))
 
     p.append(Spacer(1, 12 * 3))
 
@@ -69,6 +80,8 @@ def generate_pdf(f, obj):
         None,
         'hiermit bestätige ich, dass ich in {} {} keine Gelder '
         'oder geldwerte Leistungen von Unternehmen der Pharmaindustrie erhalten habe.'.format(year_prefix, year_str),
+        None,
+        'Ich stimme der Veröffentlichung meines vollständigen Namens, meiner beruflichen Adresse und der gemachten Angaben zu.',
         None,
         'Mit freundlichen Grüßen',
         None,

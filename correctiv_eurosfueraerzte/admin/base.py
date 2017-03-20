@@ -1,9 +1,10 @@
 from django.contrib import admin
-from leaflet.admin import LeafletGeoAdmin
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import PermissionDenied
 from django.template.response import TemplateResponse
 from django.contrib.admin import helpers
+
+from leaflet.admin import LeafletGeoAdmin
 
 from ..models import Drug, PharmaPayment, ObservationalStudy
 
