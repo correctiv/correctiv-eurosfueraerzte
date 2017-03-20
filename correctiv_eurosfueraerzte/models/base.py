@@ -525,6 +525,7 @@ class PaymentRecipient(models.Model):
     total_euro = models.DecimalField(decimal_places=2, max_digits=19, blank=True, null=True)
     company_count = models.SmallIntegerField(blank=True, null=True)
 
+    is_zerodoc = models.BooleanField(default=False)
     search_vector = SearchVectorField(default='')
 
     objects = PaymentRecipientManager()
