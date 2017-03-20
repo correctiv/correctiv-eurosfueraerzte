@@ -39,6 +39,9 @@ class ZeroDoctor(models.Model):
     country = models.CharField(_('country'), max_length=255, blank=True,
                                choices=EFA_COUNTRIES)
 
+    geo = models.PointField(_('Geographic location'), geography=True,
+                            blank=True, null=True)
+
     class Meta:
         verbose_name = _('Zero Doctor')
         verbose_name_plural = _('Zero Doctors')
