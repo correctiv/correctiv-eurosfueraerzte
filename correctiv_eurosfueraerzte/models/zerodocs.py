@@ -110,7 +110,8 @@ class ZeroDoctor(models.Model):
             if sub.date.year in years and not sub.confirmed:
                 sub.confirmed = True
                 sub.confirmed_on = timezone.now()
-                sub.create_payment()
+                # Don't create payment for now, not needed
+                sub.save()
 
         self._submissions = None
         self.send_confirmed_email()
