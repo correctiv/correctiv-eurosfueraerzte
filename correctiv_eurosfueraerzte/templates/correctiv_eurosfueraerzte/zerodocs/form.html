@@ -48,7 +48,7 @@
     {% endif %}
     {% if object.recipient %}
       <p>
-        <a href="{% url 'eurosfueraerzte-recipientdetail' slug=object.recipient.slug %}">
+        <a href="{{ object.recipient.get_absolute_url }}">
           {% trans "Your public profile page can be found here." %}
         </a>
       </p>
