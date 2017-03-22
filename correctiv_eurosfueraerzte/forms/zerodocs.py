@@ -86,7 +86,7 @@ class ZeroDocSubmitForm(forms.ModelForm):
                                 choices=EFA_COUNTRIES_CHOICE)
 
     years = forms.TypedMultipleChoiceField(
-        label=_('Please check all years that apply:'),
+        label='',
         widget=forms.CheckboxSelectMultiple(),
         coerce=int,
         required=False
@@ -126,7 +126,7 @@ class ZeroDocSubmitForm(forms.ModelForm):
             )]
         if remaining_years:
             layout += [Fieldset(
-                _('You have not received money from the pharma industry in these years'),
+                _('Please check all that apply:'),
                 'years'
             )]
         layout += [
