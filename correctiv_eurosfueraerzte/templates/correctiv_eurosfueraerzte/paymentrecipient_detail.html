@@ -50,83 +50,19 @@
 
   <div class="page__row">
     <div class="page__section -narrow">
-      {% include includes.recipient_main %}
-      {% if not object.hidden_payments %}
-      <p>
-        {% blocktrans with name=object.get_full_name %}
-          {{ name }} agreed to the publication of these payments:
-        {% endblocktrans %}
-      </p>
-        <div class="table-responsive">
-          <table class="efa__table table table-striped">
-            <thead>
-              <tr>
-                <th>{% trans "Company" %}</th>
-                <th>{% trans "Payment type" %}</th>
-                <th class="text-right">{% trans "Amount" %}</th>
-              </tr>
-            </thead>
-            <tfoot>
-              <tr>
-                <td></td>
-                <td>
-                  <strong>{% trans "Total" %}</strong>
-                </td>
-                <td class="text-right">
-                  <strong>
-                    {% currency_format aggs.payments_total aggs.payments_total_currency %}
-                  </strong>
-                </td>
-             </tr>
-           </tfoot>
-            <tbody>
-          {% with payments=object.pharmapayment_set.all %}
-            {% for payment in payments %}
-              <tr>
-                <td>
-                  {% if payment.pharma_company %}
-                    <a href="{{ payment.pharma_company.get_absolute_url }}">
-                      {{ payment.pharma_company.name }}
-                    </a>
-                  {% endif %}
-                </td>
-                <td>
-                  {{ payment.get_label_display }}
-                  {% if payment.recipient_detail %}
-                    <br/>
-                    <small>
-                      {% trans "to:" %} {{ payment.recipient_detail }}
-                    </small>
-                  {% endif %}
-                </td>
-                {# <td> {{ payment.date.year }} </td>#}
-                <td class="text-right">
-                  {% currency_format payment.amount payment.currency %}
-                </td>
-              </tr>
-            {% endfor %}
-          {% endwith %}
-            </tbody>
-          </table>
-        </div>
-      {% else %}
-        <h3>{% trans "Consent revoked" %}</h3>
-        <p>
-          {% blocktrans with name=object.get_full_name %}
-            {{ name }} has revoked the consent to publish the payments.
-          {% endblocktrans %}
-        </p>
-      {% endif %}
-      {% if object.note %}
-        <p>
-          <strong>{% trans "Note:" %}</strong> {{ object.note }}
-        </p>
+      {% block recipient_main %}
+        {% include includes.recipient_main %}
+      {% endblock %}
+      {% if payments %}
+        {% include "correctiv_eurosfueraerzte/_payment_list.html" %}
       {% endif %}
     </div>
 
     <div class="page__sidebar">
       <div class="well">
-        {% include includes.recipient_sidebar %}
+        {% block recipient_sidebar %}
+          {% include includes.recipient_sidebar %}
+        {% endblock %}
         <a class="well__cta" href="#search">
           {% trans "Continue searching" %}
         </a>

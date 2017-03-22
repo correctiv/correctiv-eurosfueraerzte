@@ -1,4 +1,6 @@
 # -*- encoding: utf-8 -*-
+from __future__ import unicode_literals
+
 import json
 
 from django.views.generic import TemplateView, ListView
@@ -33,9 +35,9 @@ class LocaleMixin(object):
         'AT': True
     }
     TITLES = {
-        'de': _(u'Euros for Doctors'),
-        'ch': _(u'Money for Doctors'),
-        'at': _(u'Euros for Doctors'),
+        'de': _('Euros for Doctors'),
+        'ch': _('Money for Doctors'),
+        'at': _('Euros for Doctors'),
     }
 
     def get_context_data(self, **kwargs):
@@ -147,14 +149,39 @@ class RecipientSearchView(LocaleMixin, SearchView):
 
 class RecipientDetailView(LocaleMixin, SearchMixin, DetailView):
     model = PaymentRecipient
-    template_name = 'correctiv_eurosfueraerzte/paymentrecipient_detail.html'
 
     def get_country(self):
         return self.object.origin
 
+    def get_template_names(self):
+        if self.object.is_zerodoc:
+            return ['correctiv_eurosfueraerzte/zerodocs/detail.html']
+        return ['correctiv_eurosfueraerzte/paymentrecipient_detail.html']
+
+    def get_meta_info(self, context):
+        if self.object.is_zerodoc and not context['payments']:
+            return {
+                'title': _('%(name)s does not take money from the pharma industry') % {
+                    'name': self.object.get_full_name()
+                },
+                'description': _("Details on why %(name)s doesn't take money from pharma companies.") % {
+                    'name': self.object.get_full_name()
+                },
+                'project_title': _('Project “Zero Euro Doctors”')
+            }
+        return {
+            'title': _('%(name)s and money from the pharma industry') % {
+                'name': self.object.get_full_name()
+            },
+            'description': _('Details on how much money %(name)s got from pharma companies.') % {
+                'name': self.object.get_full_name()
+            }
+        }
+
     def get_context_data(self, **kwargs):
         context = super(RecipientDetailView, self).get_context_data(**kwargs)
         context['aggs'] = self.object.get_aggregates()
+        context['payments'] = self.object.pharmapayment_set.all()
         if self.object.geo:
             context['same_address_objects'] = (self.object
                     .get_nearby(only_same=True)
@@ -165,10 +192,8 @@ class RecipientDetailView(LocaleMixin, SearchMixin, DetailView):
                     .get_nearby(include_same=False)
                     .order_by('distance')[:5]
             )
-        context['title'] = _('%(name)s and money from the pharma industry') % {'name': self.object.get_full_name()}
-        context['description'] = _('Details on how much money %(name)s got from pharma companies.') % {
-            'name': self.object.get_full_name()
-        }
+
+        context.update(self.get_meta_info(context))
         return context
 
 
