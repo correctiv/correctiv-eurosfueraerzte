@@ -1,9 +1,13 @@
+# -*- encoding: utf-8 -*-
+from __future__ import unicode_literals
+
 from datetime import datetime, timedelta
 
 from django.contrib.gis import forms
 from django.utils.translation import ugettext_lazy as _
 from django.utils.crypto import get_random_string
 from django.utils import timezone
+from django.utils.html import format_html
 from django.core.urlresolvers import reverse_lazy
 
 from crispy_forms.helper import FormHelper
@@ -89,13 +93,44 @@ class ZeroDocSubmitForm(forms.ModelForm):
         label='',
         widget=forms.CheckboxSelectMultiple(),
         coerce=int,
-        required=False
+        required=False,
+        help_text=format_html(_('These are payments in accordance with the <a href="http://www.pharma-transparenz.de/ueber-den-transparenzkodex/die-eckpunkte-des-transparenzkodex/">transparency codex of the FSA.</a>'))
     )
+
+    address_type = forms.ChoiceField(choices=(
+        ('', '---'),
+        ('Praxis', 'Praxis'),
+        ('Klinik', 'Klinik'),
+        ('MVZ', 'Medizinisches Versorgungszentrum'),
+        ('Sonstiges', 'Sonstiges'),
+    ), label=_('Type of address'))
+
+    specialisation = forms.ChoiceField(label=_('your specialisation'),
+            required=False, choices=(
+        ('', '---'),
+        ('Allgemeinmediziner', 'Allgemeinmediziner / Praktischer Arzt'),
+        ('Internist', 'Facharzt für Innere Medizin / Internist'),
+        ('Frauenheilkunde', 'Facharzt für Frauenheilkunde'),
+        ('Kinderheilkunde', 'Facharzt für Kinderheilkunde'),
+        ('Augenheilkunde', 'Facharzt für Augenheilkunde'),
+        ('Hals-Nasen-Ohrenheilkunde', 'Facharzt für Hals-Nasen-Ohrenheilkunde'),
+        ('Orthopädie', 'Facharzt für Orthopädie'),
+        ('Chirurgie', 'Facharzt für Chirurgie'),
+        ('Haut- und Geschlechtskrankheiten', 'Facharzt für Haut- und Geschlechtskrankheiten'),
+        ('Radiologie und Nuklearmedizin', 'Facharzt für Radiologie und Nuklearmedizin'),
+        ('Neurologie, Psychiatrie, Kinderpsychiatrie, Psychotherapie', 'Facharzt für Neurologie, Psychiatrie, Kinderpsychiatrie, Psychotherapie'),
+        ('Urologie', 'Facharzt für Urologie'),
+        ('Psychologischer Psychotherapeut', 'Psychologischer Psychotherapeut'),
+        ('Zahnarzt', 'Zahnarzt'),
+        ('Sonstige', 'Sonstige'),
+    ))
+    web = forms.URLField(label=_('website'), required=False,
+                widget=forms.URLInput(attrs={'placeholder': 'http://'}))
 
     class Meta:
         model = ZeroDoctor
         fields = ('gender', 'title', 'first_name', 'last_name', 'address',
-                  'postcode', 'location', 'country')
+                  'postcode', 'location', 'country', 'specialisation', 'web')
 
     def __init__(self, *args, **kwargs):
         super(ZeroDocSubmitForm, self).__init__(*args, **kwargs)
@@ -103,7 +138,7 @@ class ZeroDocSubmitForm(forms.ModelForm):
                            if x.confirmed)
         remaining_years = [y for y in EFA_YEARS if y not in confirmed_years]
         self.fields['years'].choices = [
-            (y, _('In %d I have not received any money from pharmaceutical companies.') % y)
+            (y, _('In %d I have not received any payments from pharmaceutical companies.') % y)
             for y in remaining_years
         ]
         self.fields['years'].initial = [x.date.year for x in self.instance.get_submissions()]
@@ -113,7 +148,9 @@ class ZeroDocSubmitForm(forms.ModelForm):
         self.helper.field_class = 'col-lg-8'
 
         name_elements = ['gender', 'title', 'first_name', 'last_name']
-        addr_elements = ['address', 'postcode', 'location', 'country']
+        addr_elements = ['address_type', 'address', 'postcode', 'location',
+                         'country']
+        optional_elements = ['specialisation', 'web']
 
         layout = [
             Fieldset(
@@ -121,9 +158,14 @@ class ZeroDocSubmitForm(forms.ModelForm):
                 *name_elements
             ),
             Fieldset(
+                _('Optional details'),
+                *optional_elements
+            ),
+            Fieldset(
                 _('Your business address'),
                 *addr_elements
-            )]
+            ),
+        ]
         if remaining_years:
             layout += [Fieldset(
                 _('Please check all that apply:'),

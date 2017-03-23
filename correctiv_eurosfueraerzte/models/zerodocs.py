@@ -48,9 +48,13 @@ class ZeroDoctor(models.Model):
     location = models.CharField(_('location'), max_length=255, blank=True)
     country = models.CharField(_('country'), max_length=255, blank=True,
                                choices=EFA_COUNTRIES)
+    address_type = models.CharField(max_length=50, blank=True)
 
     geo = models.PointField(_('Geographic location'), geography=True,
                             blank=True, null=True)
+
+    specialisation = models.CharField(max_length=255, blank=True)
+    web = models.URLField(max_length=1024, blank=True)
 
     class Meta:
         verbose_name = _('Zero Doctor')
