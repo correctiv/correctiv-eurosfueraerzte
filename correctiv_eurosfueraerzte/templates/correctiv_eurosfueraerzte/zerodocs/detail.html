@@ -9,17 +9,17 @@
 {% endblock %}
 
 {% block header_sidebar_about %}
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  <p>
+    Die Pharmaindustrie veröffentlicht seit 2016 die Honorare, die sie für Fortbildungen und Vorträge an einzelne Ärzte zahlt – wenn diese zuvor einer Veröffentlichung zustimmen. Das Problem: Ärzte, die überhaupt kein Geld annehmen, bleiben bei der Transparenzoffensive der Pharmaindustrie ebenso unsichtbar, wie jene Ärzte, die ihre Zahlungen verschweigen. Deshalb diese Datenbank: Sie listet erstmals jene Ärzte und Heilberufler auf, die versichern, kein Geld für Fortbildungen oder Vortragshonorare erhalten zu haben.
+  </p>
 {% endblock %}
 
 {% block recipient_main %}
-  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  {{ object.get_full_name }} versichert, im Jahr  kein Geld oder geldwerte Vorteile für Vorträge oder Fortbildungen von Pharmafirmen erhalten zu haben, die im Sinne des FSA-Transparenzkodexes hätten gemeldet werden müssen.
+  Diese Offenlegung gilt nicht für Zahlungen, die Pharmaunternehmen für die Durchführung von klinischen Studien oder Anwendungsbeobachtungen geleistet haben, da die Konzerne diese Zahlungen an Ärzte grundsätzlich verschweigen und jeweils nur Gesamtsummen veröffentlichen.
 {% endblock %}
 
 {% block recipient_sidebar %}
-  <p>
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
   {% if payments %}
     {% include includes.recipient_sidebar %}
   {% endif %}
