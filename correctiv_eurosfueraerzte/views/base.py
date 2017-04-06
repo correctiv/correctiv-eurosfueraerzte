@@ -166,8 +166,7 @@ class RecipientDetailView(LocaleMixin, SearchMixin, DetailView):
                 },
                 'description': _("Details on why %(name)s doesn't take money from pharma companies.") % {
                     'name': self.object.get_full_name()
-                },
-                'project_title': _('Project “Zero Euro Doctors”')
+                }
             }
         return {
             'title': _('%(name)s and money from the pharma industry') % {
