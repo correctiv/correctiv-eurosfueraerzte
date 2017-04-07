@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-07 11:30+0200\n"
-"PO-Revision-Date: 2017-04-07 11:38+0100\n"
+"POT-Creation-Date: 2017-04-07 12:11+0200\n"
+"PO-Revision-Date: 2017-04-07 12:15+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -357,25 +357,29 @@ msgstr "E-Mail-Adresse"
 msgid "Zero Doctor"
 msgstr "Null-Euro-Arzt"
 
-#: models/zerodocs.py:66 models/zerodocs.py:241
+#: models/zerodocs.py:66
 msgid "Zero Doctors"
 msgstr "Null-Euro-Ärzte"
 
-#: models/zerodocs.py:146
+#: models/zerodocs.py:156
 msgid "Your Zero Euro Doctor Link"
 msgstr "Ihr Null-Euro-Arzt-Link"
 
-#: models/zerodocs.py:161
+#: models/zerodocs.py:171
 msgid "Your Zero Euro Doctor Submission"
 msgstr "Ihre Null-Euro-Ärzte-Einreichung"
 
-#: models/zerodocs.py:182
+#: models/zerodocs.py:192
 msgid "Your Zero Euro Doctor submission is confirmed"
 msgstr "Ihre Einreichung zum Null-Euro-Ärzte-Projekt wurde bestätigt"
 
-#: models/zerodocs.py:240
+#: models/zerodocs.py:250
 msgid "Zero Doctor Submission"
 msgstr "Null-Euro-Angabe"
+
+#: models/zerodocs.py:251
+msgid "Zero Doctor Submissions"
+msgstr "Null-Euro-Angaben"
 
 #: templates/admin/correctiv_eurosfueraerzte/zerodoctor/change_form.html:15
 msgid "Confirm"
@@ -1172,9 +1176,93 @@ msgstr "PLZ"
 msgid "Example:"
 msgstr "Beispiel:"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:8
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:9
 msgid "Zero Euro Doctor"
 msgstr "Null-Euro-Ärzte"
+
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:14
+msgid ""
+"Since 2016 the pharma industry publishes the fees paid to individual doctors "
+"– if they agreed to the publication. The problem: doctors who don't take any "
+"money are not visible in this transparency project.\n"
+"    "
+msgstr ""
+"Die Pharmaindustrie veröffentlicht seit 2016 die Honorare, die sie an "
+"einzelne Ärzte zahlt – wenn diese zuvor einer Veröffentlichung zustimmen. "
+"Das Problem: Ärzte, die überhaupt kein Geld annehmen, bleiben bei der "
+"Transparenzoffensive unsichtbar.\n"
+"    "
+
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:20
+msgid "To the Zero Euro Doctors Project"
+msgstr "Zum Projekt Null-Euro-Ärzte"
+
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:31
+#, python-format
+msgid ""
+"\n"
+"          %(name)s has not received benefits from pharma companies under the "
+"EFPIA transparency codex in %(year_list)s.\n"
+"        "
+msgid_plural ""
+"\n"
+"          %(name)s has not received benefits from pharma companies under the "
+"EFPIA transparency codex in %(year_list)s.\n"
+"        "
+msgstr[0] ""
+"\n"
+"          %(name)s versichert, im Jahr %(year_list)s kein Geld oder "
+"geldwerte Vorteile für Vorträge oder Fortbildungen von Pharmafirmen erhalten "
+"zu haben, die im Sinne des FSA-Transparenzkodexes hätten gemeldet werden "
+"müssen.\n"
+"        "
+msgstr[1] ""
+"\n"
+"          %(name)s versichert, in den Jahren %(year_list)s kein Geld oder "
+"geldwerte Vorteile für Vorträge oder Fortbildungen von Pharmafirmen erhalten "
+"zu haben, die im Sinne des FSA-Transparenzkodexes hätten gemeldet werden "
+"müssen.\n"
+"        "
+
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:43
+#, python-format
+msgid ""
+"\n"
+"          %(name)s has not received fees for observational studies/NIS in "
+"%(year_list)s.\n"
+"        "
+msgid_plural ""
+"\n"
+"          %(name)s has not received fees for observational studies/NIS in "
+"%(year_list)s.\n"
+"        "
+msgstr[0] ""
+"\n"
+"          %(name)s versichert, im Jahr %(year_list)s kein Honorar für die "
+"Durchführung von Anwendungsbeobachtungen/NIS erhalten zu haben.\n"
+"        "
+msgstr[1] ""
+"\n"
+"          %(name)s versichert, in den Jahren %(year_list)s kein Honorar für "
+"die Durchführung von Anwendungsbeobachtungen/NIS erhalten zu haben.\n"
+"        "
+
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:56
+msgid ""
+"\n"
+"    The disclosure according to the transparency code does not apply to "
+"payments by pharma companies for clinical trials and observational studies. "
+"The pharma companies withhold the details of these payments to doctors and "
+"only publish aggregate sums.\n"
+"  "
+msgstr ""
+"\n"
+"   Die Offenlegung nach dem Transparenzkodex gilt nicht für Zahlungen, die "
+"Pharma&shy;unternehmen für die Durchführung von klinischen Studien oder "
+"Anwendungs&shy;beobachtungen geleistet haben, da die Konzerne diese "
+"Zahlungen an Ärzte grundsätzlich verschweigen und die Unternehmen jeweils "
+"nur Gesamtsummen veröffentlichen.\n"
+"  "
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/email_confirmed.txt:1
 #, python-format
@@ -1352,6 +1440,10 @@ msgstr "Sie können Ihre Angaben mit dem Formular weiter unten anpassen."
 #: templates/correctiv_eurosfueraerzte/zerodocs/index.html:11
 msgid "“Zero Euro Doctors”"
 msgstr "„Null-Euro-Ärzte“"
+
+#: templatetags/number_utils.py:18
+msgid "{} and {}"
+msgstr "{} und {}"
 
 #: urls/__init__.py:26
 msgid "^recipient/(?P<slug>[\\w-]+)/$"
