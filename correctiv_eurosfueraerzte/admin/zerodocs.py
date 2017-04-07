@@ -8,19 +8,19 @@ from django.contrib import messages
 
 from leaflet.admin import LeafletGeoAdmin
 
-from ..models import ZeroDoctor, ZeroDocSubmission
+from ..models import ZeroDoctor
 
 
-class ZeroDocSubmissionInlineAdmin(admin.TabularInline):
-    model = ZeroDocSubmission
+class ZeroDocSubmissionAdmin(admin.ModelAdmin):
     raw_id_fields = ('payment',)
+    date_hierarchy = 'submitted_on'
+    list_display = ('zerodoc', 'kind', 'date', 'submitted_on', 'confirmed')
+    list_filter = ('kind', 'confirmed', 'date')
+    search_fields = ('zerodoc__first_name', 'zerodoc__last_name',
+                     'zerodoc__email',)
 
 
 class ZeroDoctorAdmin(LeafletGeoAdmin):
-    inlines = [
-        # ZeroDocSubmissionInlineAdmin
-    ]
-
     display_raw = True  # raw geo field
     list_display = ('get_full_name', 'email', 'get_full_address',)
     list_filter = ('country',)
