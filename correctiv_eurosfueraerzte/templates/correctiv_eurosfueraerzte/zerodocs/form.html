@@ -12,19 +12,22 @@
   {% blocktrans with full_name=object.get_full_name %}Zero Euro Form of {{ full_name }}{% endblocktrans %}
 </h1>
 
-{% with submissions=object.get_submissions %}
+{% with submissions=object.get_all_submissions %}
   {% if not submissions %}
     <p>
       {% trans "Please fill out the form below to enter your details." %}
     </p>
   {% else %}
     <p>
-      {% trans "You have not received money from pharma companies in the following years:" %}
+      {% trans "You have not received money :" %}
     </p>
     <ul>
     {% for submission in submissions %}
       <li>
-        {{ submission.date.year }} -
+        {% blocktrans with year=submission.date.year kind=submission.get_kind_display %}
+          No money received in {{ year }} in category {{ kind }}
+        {% endblocktrans %}
+        -
         {% if submission.confirmed %}
           {% trans "confirmed" %}
         {% else %}

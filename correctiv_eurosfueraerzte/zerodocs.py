@@ -8,6 +8,16 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_RIGHT
 
 
+def get_year_formatter(years):
+    if len(years) > 1:
+        year_prefix = 'in den Jahren'
+        year_str = '{} und {}'.format(', '.join(years[:-1]), years[-1])
+    else:
+        year_prefix = 'im Jahr'
+        year_str = years[0]
+    return year_prefix, year_str
+
+
 def generate_pdf(f, obj):
     doc = SimpleDocTemplate(f, rightMargin=72, leftMargin=72,
                                topMargin=72, bottomMargin=18)
@@ -67,21 +77,34 @@ def generate_pdf(f, obj):
 
     p.append(Spacer(1, 12 * 3))
 
-    years = [str(sub.date.year) for sub in obj.get_submissions()]
-    if len(years) > 1:
-        year_prefix = 'den Jahren'
-        year_str = '{} und {}'.format(', '.join(years[:-1]), years[-1])
-    else:
-        year_prefix = 'im Jahr'
-        year_str = years[0]
-
     text = [
         'Sehr geehrte Damen und Herren,',
-        None,
-        'hiermit bestätige ich, dass ich in {} {} keine Gelder '
-        'oder geldwerte Leistungen von Unternehmen der Pharmaindustrie erhalten habe.'.format(year_prefix, year_str),
-        None,
-        'Ich stimme der Veröffentlichung meines vollständigen Namens, meiner beruflichen Adresse und der gemachten Angaben zu.',
+        None
+    ]
+    efpia_years = [str(sub.date.year) for sub in obj.get_efpia_submissions()]
+    if efpia_years:
+        year_prefix, year_str = get_year_formatter(efpia_years)
+        text += [
+            'hiermit bestätige ich, dass ich {} {} keine Zuwendungen der '
+            'Pharmaindustrie im Sinne des FSA/EFPIA-Kodex erhalten ' 'habe.'.format(year_prefix, year_str),
+            None,
+        ]
+    obs_years = [str(sub.date.year) for sub in obj.get_observational_submissions()]
+    if obs_years:
+        year_prefix, year_str = get_year_formatter(obs_years)
+        s = ('hiermit bestätige ich, dass ich {} {} keine Honorare'
+             'für Anwendungsbeobachtungen/NIS erhalten habe.')
+        if efpia_years:
+            s = ('Hiermit bestätige ich weiterhin, dass ich {} {} keine Honorare'
+                 'für Anwendungsbeobachtungen/NIS erhalten habe.')
+        s = s.format(year_prefix, year_str)
+        text += [
+            s,
+            None,
+        ]
+
+    text += [
+        'Ich stimme der Veröffentlichung meines vollständigen Namens, meiner beruflichen Adresse und der oben gemachten Angaben zu.',
         None,
         'Mit freundlichen Grüßen',
         None,

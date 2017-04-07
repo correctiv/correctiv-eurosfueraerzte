@@ -10,16 +10,30 @@
 
 {% block header_sidebar_about %}
   <p>
-    Die Pharmaindustrie veröffentlicht seit 2016 die Honorare, die sie für Fortbildungen und Vorträge an einzelne Ärzte zahlt – wenn diese zuvor einer Veröffentlichung zustimmen. Das Problem: Ärzte, die überhaupt kein Geld annehmen, bleiben bei der Transparenzoffensive der Pharmaindustrie ebenso unsichtbar, wie jene Ärzte, die ihre Zahlungen verschweigen. Deshalb diese Datenbank: Sie listet erstmals jene Ärzte und Heilberufler auf, die versichern, kein Geld für Fortbildungen oder Vortragshonorare erhalten zu haben.
+    Die Pharmaindustrie veröffentlicht seit 2016 die Honorare, die sie an einzelne Ärzte zahlt – wenn diese zuvor einer Veröffentlichung zustimmen. Das Problem: Ärzte, die überhaupt kein Geld annehmen, bleiben bei der Transparenzoffensive unsichtbar.
+  </p>
+  <p>
+    <a class="efa__header__more-link" href="{% url "eurosfueraerzte:eurosfueraerzte-zerodocs_index" %}">
+      Zum Projekt Null-Euro-Ärzte
+    </a>
   </p>
 {% endblock %}
 
 {% block recipient_main %}
-  {{ object.get_full_name }} versichert, im Jahr  kein Geld oder geldwerte Vorteile für Vorträge oder Fortbildungen von Pharmafirmen erhalten zu haben, die im Sinne des FSA-Transparenzkodexes hätten gemeldet werden müssen.
-  Diese Offenlegung gilt nicht für Zahlungen, die Pharmaunternehmen für die Durchführung von klinischen Studien oder Anwendungsbeobachtungen geleistet haben, da die Konzerne diese Zahlungen an Ärzte grundsätzlich verschweigen und jeweils nur Gesamtsummen veröffentlichen.
+  <p>
+    {{ object.get_full_name }} versichert, im Jahr XYZ kein Geld oder geldwerte Vorteile für Vorträge oder Fortbildungen von Pharmafirmen erhalten zu haben, die im Sinne des FSA-Transparenzkodexes hätten gemeldet werden müssen.
+  </p>
+  <p>
+    {{ object.get_full_name }} versichert, im Jahr XYZ kein Honorar für die Durchführung von Anwendungsbeobachtungen/NIS erhalten zu haben.
+  </p>
 {% endblock %}
 
 {% block recipient_sidebar %}
+
+<p>
+  Die Offenlegung nach dem Transparenzkodex gilt nicht für Zahlungen, die Pharmaunternehmen für die Durchführung von klinischen Studien oder Anwendungs&shy;beobachtungen geleistet haben, da die Konzerne diese Zahlungen an Ärzte grundsätzlich verschweigen und die Unternehmen jeweils nur Gesamtsummen veröffentlichen.
+</p>
+
   {% if payments %}
     {% include includes.recipient_sidebar %}
   {% endif %}

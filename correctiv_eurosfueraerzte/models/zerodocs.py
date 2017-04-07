@@ -85,13 +85,26 @@ class ZeroDoctor(models.Model):
     def get_absolute_domain_pdf_url(self):
         return settings.SITE_URL + self.get_absolute_pdf_url()
 
-    def get_submissions(self):
+    def get_submissions(self, kind='efpia'):
         if not hasattr(self, '_submissions') or self._submissions is None:
-            self._submissions = self.zerodocsubmission_set.all()
-        return self._submissions
+            self._submissions = {}
+        if kind not in self._submissions:
+            self._submissions[kind] = self.zerodocsubmission_set.all()
+            if kind is not None:
+                self._submissions[kind] = self._submissions[kind].filter(kind=kind)
+        return self._submissions[kind]
+
+    def get_all_submissions(self):
+        return self.get_submissions(None)
+
+    def get_efpia_submissions(self):
+        return self.get_submissions('efpia')
+
+    def get_observational_submissions(self):
+        return self.get_submissions('observational')
 
     def has_unconfirmed_submissions(self):
-        return any(not x.confirmed for x in self.get_submissions())
+        return any(not x.confirmed for x in self.get_all_submissions())
 
     def get_gender_title(self):
         if self.title:

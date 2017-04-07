@@ -19,6 +19,12 @@ from ..apps import EFA_COUNTRIES_CHOICE, EFA_YEARS
 from ..geocode import geocode
 
 
+SUBMISSION_CHECKBOX_LABELS = (
+    ('efpia', _('In %d I have not received any payments from pharmaceutical companies.')),
+    ('observational', _('In %d I have not received fees for observational studies/NIS.'))
+)
+
+
 def generate_secret():
     CHARSET = 'abcdefhikmnpqrstuvwxyz234568'
     LENGTH = 8
@@ -89,12 +95,19 @@ class ZeroDocSubmitForm(forms.ModelForm):
     country = forms.ChoiceField(label=_('country'),
                                 choices=EFA_COUNTRIES_CHOICE)
 
-    years = forms.TypedMultipleChoiceField(
+    years_efpia = forms.TypedMultipleChoiceField(
         label='',
         widget=forms.CheckboxSelectMultiple(),
         coerce=int,
         required=False,
         help_text=format_html(_('These are payments in accordance with the <a href="http://www.pharma-transparenz.de/ueber-den-transparenzkodex/die-eckpunkte-des-transparenzkodex/">transparency codex of the FSA.</a>'))
+    )
+
+    years_observational = forms.TypedMultipleChoiceField(
+        label='',
+        widget=forms.CheckboxSelectMultiple(),
+        coerce=int,
+        required=False
     )
 
     address_type = forms.ChoiceField(choices=(
@@ -134,14 +147,24 @@ class ZeroDocSubmitForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ZeroDocSubmitForm, self).__init__(*args, **kwargs)
-        confirmed_years = set(x.date.year for x in self.instance.get_submissions()
-                           if x.confirmed)
-        remaining_years = [y for y in EFA_YEARS if y not in confirmed_years]
-        self.fields['years'].choices = [
-            (y, _('In %d I have not received any payments from pharmaceutical companies.') % y)
-            for y in remaining_years
-        ]
-        self.fields['years'].initial = [x.date.year for x in self.instance.get_submissions()]
+        confirmed_years = {}
+        remaining_years = {}
+        year_field_names = []
+        for kind, label in SUBMISSION_CHECKBOX_LABELS:
+            confirmed_years[kind] = set(x.date.year for x in
+                    self.instance.get_submissions(kind) if x.confirmed)
+            remaining_years[kind] = [y for y in EFA_YEARS
+                                     if y not in confirmed_years]
+
+            year_field_name = 'years_%s' % kind
+            self.fields[year_field_name].choices = [
+                (y, label % y)
+                for y in remaining_years[kind]
+            ]
+            self.fields[year_field_name].initial = [x.date.year for x in self.instance.get_submissions(kind)]
+            year_field_names.append(year_field_name)
+
+        any_remaining_years = any(x for x in remaining_years.values())
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
@@ -166,10 +189,10 @@ class ZeroDocSubmitForm(forms.ModelForm):
                 *addr_elements
             ),
         ]
-        if remaining_years:
+        if any_remaining_years:
             layout += [Fieldset(
                 _('Please check all that apply:'),
-                'years'
+                *year_field_names
             )]
         layout += [
             StrictButton(_(u'Submit'),
@@ -188,21 +211,32 @@ class ZeroDocSubmitForm(forms.ModelForm):
         if obj.recipient is not None:
             obj.create_or_update_recipient()
 
-        submitted_years = set(self.cleaned_data['years'])
         current_tz = timezone.get_current_timezone()
-        for year in EFA_YEARS:
-            date = current_tz.localize(datetime(year, 1, 1))
-            if year in submitted_years:
-                ZeroDocSubmission.objects.get_or_create(zerodoc=obj, date=date, defaults={
-                    'submitted_on': timezone.now()
-                })
-            else:
-                ZeroDocSubmission.objects.filter(
-                    zerodoc=obj, date=date, confirmed=False
-                ).delete()
+        has_submitted_years = False
+
+        for kind, label in SUBMISSION_CHECKBOX_LABELS:
+            submitted_years = set(self.cleaned_data['years_%s' % kind])
+            if submitted_years:
+                has_submitted_years = True
+
+            for year in EFA_YEARS:
+                date = current_tz.localize(datetime(year, 1, 1))
+                if year in submitted_years:
+                    ZeroDocSubmission.objects.get_or_create(
+                        zerodoc=obj,
+                        kind=kind,
+                        date=date,
+                        defaults={
+                            'submitted_on': timezone.now()
+                        }
+                    )
+                else:
+                    ZeroDocSubmission.objects.filter(
+                        zerodoc=obj, date=date, kind=kind, confirmed=False
+                    ).delete()
         obj._submissions = None
 
-        if submitted_years:
+        if has_submitted_years:
             obj.send_submission_email()
 
         return obj
