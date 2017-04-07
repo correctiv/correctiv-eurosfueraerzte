@@ -181,6 +181,8 @@ class RecipientDetailView(LocaleMixin, SearchMixin, DetailView):
         context = super(RecipientDetailView, self).get_context_data(**kwargs)
         context['aggs'] = self.object.get_aggregates()
         context['payments'] = self.object.pharmapayment_set.all()
+        if self.object.is_zerodoc:
+            context['zerodoc'] = self.object.zerodoctor
         if self.object.geo:
             context['same_address_objects'] = (self.object
                     .get_nearby(only_same=True)

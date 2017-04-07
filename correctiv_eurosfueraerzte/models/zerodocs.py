@@ -100,8 +100,18 @@ class ZeroDoctor(models.Model):
     def get_efpia_submissions(self):
         return self.get_submissions('efpia')
 
+    def get_confirmed_efpia_years(self):
+        return [
+            x.date.year for x in self.get_efpia_submissions() if x.confirmed
+        ]
+
     def get_observational_submissions(self):
         return self.get_submissions('observational')
+
+    def get_confirmed_observational_years(self):
+        return [
+            x.date.year for x in self.get_observational_submissions() if x.confirmed
+        ]
 
     def has_unconfirmed_submissions(self):
         return any(not x.confirmed for x in self.get_all_submissions())
@@ -238,7 +248,7 @@ class ZeroDocSubmission(models.Model):
 
     class Meta:
         verbose_name = _('Zero Doctor Submission')
-        verbose_name_plural = _('Zero Doctors')
+        verbose_name_plural = _('Zero Doctor Submissions')
         ordering = ('kind', 'date',)
 
     def __str__(self):

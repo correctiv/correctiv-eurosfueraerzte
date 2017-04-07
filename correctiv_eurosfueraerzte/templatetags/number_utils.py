@@ -1,6 +1,9 @@
+from __future__ import unicode_literals
+
 from django import template
 from django.template.defaultfilters import floatformat
 from django.utils import translation
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.humanize.templatetags.humanize import intcomma
 from django.utils.safestring import mark_safe
 from django.utils import six
@@ -8,6 +11,12 @@ from django.utils import six
 from babel.numbers import format_currency, get_currency_symbol
 
 register = template.Library()
+
+
+def join_list(values):
+    if len(values) > 1:
+        return _('{} and {}').format(', '.join(values[:-1]), values[-1])
+    return '{}'.format(values[0])
 
 
 def intcomma_floatformat(value, arg=2):
@@ -65,3 +74,4 @@ def currency_format(context, value, currency='EUR', decimal=2):
 
 register.filter('intcomma_floatformat', intcomma_floatformat)
 register.filter('currency_format', currency_format)
+register.filter('join_list', join_list)
