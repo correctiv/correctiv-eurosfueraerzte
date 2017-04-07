@@ -27,6 +27,11 @@ GENDER_CHOICES = (
     ('male', _('Mr.')),
 )
 
+SUBMISSION_CHOICES = (
+    ('efpia', _('EFPIA Transparency Codex')),
+    ('observational', _('observational studies')),
+)
+
 
 @python_2_unicode_compatible
 class ZeroDoctor(models.Model):
@@ -210,6 +215,8 @@ class ZeroDoctor(models.Model):
 class ZeroDocSubmission(models.Model):
     zerodoc = models.ForeignKey(ZeroDoctor)
     date = models.DateField()
+    kind = models.CharField(max_length=25, choices=SUBMISSION_CHOICES,
+                            default='efpia')
     submitted_on = models.DateTimeField(null=True, blank=True)
     confirmed = models.BooleanField(default=False)
     confirmed_on = models.DateTimeField(null=True, blank=True)
@@ -219,10 +226,10 @@ class ZeroDocSubmission(models.Model):
     class Meta:
         verbose_name = _('Zero Doctor Submission')
         verbose_name_plural = _('Zero Doctors')
-        ordering = ('date',)
+        ordering = ('kind', 'date',)
 
     def __str__(self):
-        return '%s -> %s' % (self.date.year, self.confirmed)
+        return '%s %s -> %s' % (self.date.year, self.kind, self.confirmed)
 
     def create_payment(self):
         if self.payment is not None:
