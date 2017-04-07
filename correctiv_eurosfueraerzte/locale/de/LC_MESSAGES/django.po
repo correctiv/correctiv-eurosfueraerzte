@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-23 15:41-0400\n"
-"PO-Revision-Date: 2017-03-23 15:41-0500\n"
+"POT-Creation-Date: 2017-04-07 11:30+0200\n"
+"PO-Revision-Date: 2017-04-07 11:38+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -109,15 +109,25 @@ msgstr "Nur Organisationen"
 msgid "all available countries"
 msgstr "allen verfügbaren Ländern"
 
-#: forms/zerodocs.py:41
+#: forms/zerodocs.py:23
+#, python-format
+msgid "In %d I have not received any payments from pharmaceutical companies."
+msgstr "Ich habe %d keine Zuwendungen im Sinne des FSA/EFPIA-Kodex erhalten."
+
+#: forms/zerodocs.py:24
+#, python-format
+msgid "In %d I have not received fees for observational studies/NIS."
+msgstr "Ich habe %d keine Honorare für Anwendungsbeobachtungen/NIS erhalten."
+
+#: forms/zerodocs.py:47
 msgid "We will send you an email to confirm your address."
 msgstr "Wir werden Ihnen eine E-Mail senden, um Ihre Adresse zu bestätigen."
 
-#: forms/zerodocs.py:57
+#: forms/zerodocs.py:63
 msgid "Create or change your entry"
 msgstr "Erstellen oder bearbeiten Sie Ihren Eintrag"
 
-#: forms/zerodocs.py:68
+#: forms/zerodocs.py:74
 msgid ""
 "Last login has been less than 12 hours ago. Please use the link in the email "
 "we sent you."
@@ -125,23 +135,23 @@ msgstr ""
 "Ihr letzter Login ist weniger als 12 Stunden her. Bitte nutzen Sie den Link "
 "aus der E-Mail, die wir Ihnen gesendet hatten."
 
-#: forms/zerodocs.py:86 models/zerodocs.py:46
+#: forms/zerodocs.py:92 models/zerodocs.py:51
 msgid "address"
 msgstr "Adresse"
 
-#: forms/zerodocs.py:87 models/zerodocs.py:47
+#: forms/zerodocs.py:93 models/zerodocs.py:52
 msgid "postcode"
 msgstr "PLZ"
 
-#: forms/zerodocs.py:88 models/zerodocs.py:48
+#: forms/zerodocs.py:94 models/zerodocs.py:53
 msgid "location"
 msgstr "Ort"
 
-#: forms/zerodocs.py:89 models/zerodocs.py:49
+#: forms/zerodocs.py:95 models/zerodocs.py:54
 msgid "country"
 msgstr "Land"
 
-#: forms/zerodocs.py:97
+#: forms/zerodocs.py:103
 msgid ""
 "These are payments in accordance with the <a href=\"http://www.pharma-"
 "transparenz.de/ueber-den-transparenzkodex/die-eckpunkte-des-transparenzkodex/"
@@ -151,40 +161,35 @@ msgstr ""
 "den-transparenzkodex/die-eckpunkte-des-transparenzkodex/\">Transparenzkodex "
 "des FSA/EFPIA.</a>"
 
-#: forms/zerodocs.py:106
+#: forms/zerodocs.py:119
 msgid "Type of address"
 msgstr "Art der Addresse"
 
-#: forms/zerodocs.py:108
+#: forms/zerodocs.py:121
 msgid "your specialisation"
 msgstr "Ihr Fachgebiet"
 
-#: forms/zerodocs.py:127
+#: forms/zerodocs.py:140
 msgid "website"
 msgstr "Ihre Webseite"
 
-#: forms/zerodocs.py:141
-#, python-format
-msgid "In %d I have not received any payments from pharmaceutical companies."
-msgstr "Ich habe im Jahr %d keine Zuwendungen von Pharmafirmen erhalten."
-
-#: forms/zerodocs.py:157
+#: forms/zerodocs.py:180
 msgid "Your name"
 msgstr "Ihr Name"
 
-#: forms/zerodocs.py:161
+#: forms/zerodocs.py:184
 msgid "Optional details"
 msgstr "Optionale Angaben"
 
-#: forms/zerodocs.py:165
+#: forms/zerodocs.py:188
 msgid "Your business address"
 msgstr "Ihre berufliche Adresse"
 
-#: forms/zerodocs.py:171
+#: forms/zerodocs.py:194
 msgid "Please check all that apply:"
 msgstr "Bitte kreuzen Sie an:"
 
-#: forms/zerodocs.py:175
+#: forms/zerodocs.py:198
 msgid "Submit"
 msgstr "Abschicken"
 
@@ -228,7 +233,7 @@ msgstr "Auftraggeber"
 msgid "observational study"
 msgstr "Anwendungsbeobachtung"
 
-#: models/base.py:368
+#: models/base.py:368 models/zerodocs.py:32
 msgid "observational studies"
 msgstr "Anwendungsbeobachtungen"
 
@@ -240,7 +245,7 @@ msgstr "Ärzte (HCP)"
 msgid "Organisation (HCO)"
 msgstr "Organisation (HCO)"
 
-#: models/base.py:510 models/zerodocs.py:53
+#: models/base.py:510 models/zerodocs.py:58
 msgid "Geographic location"
 msgstr "Geographischer Standort"
 
@@ -324,47 +329,51 @@ msgstr "Frau"
 msgid "Mr."
 msgstr "Herr"
 
-#: models/zerodocs.py:33
+#: models/zerodocs.py:31
+msgid "EFPIA Transparency Codex"
+msgstr "FSA/EFPIA-Transparenz-Kodex"
+
+#: models/zerodocs.py:38
 msgid "Mr/Ms"
 msgstr "Anrede"
 
-#: models/zerodocs.py:34
+#: models/zerodocs.py:39
 msgid "title"
 msgstr "Titel"
 
-#: models/zerodocs.py:36
+#: models/zerodocs.py:41
 msgid "first name"
 msgstr "Vorname"
 
-#: models/zerodocs.py:37
+#: models/zerodocs.py:42
 msgid "last name"
 msgstr "Nachname"
 
-#: models/zerodocs.py:39
+#: models/zerodocs.py:44
 msgid "email address"
 msgstr "E-Mail-Adresse"
 
-#: models/zerodocs.py:60
+#: models/zerodocs.py:65
 msgid "Zero Doctor"
 msgstr "Null-Euro-Arzt"
 
-#: models/zerodocs.py:61 models/zerodocs.py:221
+#: models/zerodocs.py:66 models/zerodocs.py:241
 msgid "Zero Doctors"
 msgstr "Null-Euro-Ärzte"
 
-#: models/zerodocs.py:128
+#: models/zerodocs.py:146
 msgid "Your Zero Euro Doctor Link"
 msgstr "Ihr Null-Euro-Arzt-Link"
 
-#: models/zerodocs.py:143
+#: models/zerodocs.py:161
 msgid "Your Zero Euro Doctor Submission"
 msgstr "Ihre Null-Euro-Ärzte-Einreichung"
 
-#: models/zerodocs.py:164
+#: models/zerodocs.py:182
 msgid "Your Zero Euro Doctor submission is confirmed"
 msgstr "Ihre Einreichung zum Null-Euro-Ärzte-Projekt wurde bestätigt"
 
-#: models/zerodocs.py:220
+#: models/zerodocs.py:240
 msgid "Zero Doctor Submission"
 msgstr "Null-Euro-Angabe"
 
@@ -1292,26 +1301,34 @@ msgid "Please fill out the form below to enter your details."
 msgstr "Bitte füllen Sie das Formular weiter unten mit Ihren Angaben aus."
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/form.html:22
-msgid ""
-"You have not received money from pharma companies in the following years:"
-msgstr ""
-"Sie haben kein Geld oder geldwerte Leistungen in diesen Jahren von der "
-"Pharmaindustrie erhalten:"
+msgid "You gave the following statements:"
+msgstr "Sie haben folgende Angaben gemacht:"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:29
+#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:27
+#, python-format
+msgid ""
+"\n"
+"          No money received in %(year)s in category %(kind)s\n"
+"        "
+msgstr ""
+"\n"
+"         %(year)s keine Zuwendungen/Honorare in der Kategorie %(kind)s\n"
+"        "
+
+#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:32
 msgid "confirmed"
 msgstr "bestätigt"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:31
+#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:34
 msgid "unconfirmed"
 msgstr "unbestätigt"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:38
+#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:41
 msgid "You have unconfirmed submissions, please use these options to confirm:"
 msgstr ""
 "Sie haben unbestätigte Angaben. Bitte bestätigen Sie Ihre Angaben hier:"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:41
+#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:44
 msgid ""
 "Download the following form letter, sign it, stamp it and send it to us via "
 "post or fax (address details are on the letter)."
@@ -1320,15 +1337,15 @@ msgstr ""
 "ihn ab und schicken Sie ihn uns per Post oder Fax (die Adresse finden Sie "
 "auf dem Brief)."
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:45
+#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:48
 msgid "Download letter"
 msgstr "Brief herunterladen"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:52
+#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:55
 msgid "Your public profile page can be found here."
 msgstr "Ihr öffentliche Profilseite finden Sie hier."
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:57
+#: templates/correctiv_eurosfueraerzte/zerodocs/form.html:60
 msgid "You can adjust your details with the form below."
 msgstr "Sie können Ihre Angaben mit dem Formular weiter unten anpassen."
 
@@ -1403,47 +1420,43 @@ msgstr "%(name)s nimmt kein Geld von der Pharmaindustrie an"
 msgid "Details on why %(name)s doesn't take money from pharma companies."
 msgstr "Details warum %(name)s kein Geld von Pharmaunternehmen annimmt."
 
-#: views/base.py:170
-msgid "Project “Zero Euro Doctors”"
-msgstr "Projekt „Null-Euro-Ärzte“"
-
-#: views/base.py:173
+#: views/base.py:172
 #, python-format
 msgid "%(name)s and money from the pharma industry"
 msgstr "%(name)s und Geld von der Pharmaindustrie."
 
-#: views/base.py:176
+#: views/base.py:175
 #, python-format
 msgid "Details on how much money %(name)s got from pharma companies."
 msgstr "Details wieviel Geld %(name)s von der Pharmaindustrie bekommen hat."
 
-#: views/base.py:209
+#: views/base.py:208
 #, python-format
 msgid "Drug %(name)s"
 msgstr "Medikament %(name)s"
 
-#: views/base.py:210
+#: views/base.py:209
 #, python-format
 msgid "Details on how much money doctors got to prescribe %(name)s."
 msgstr ""
 "Details wieviel Geld Ärzte bekommen haben, um %(name)s zu verschreiben."
 
-#: views/base.py:229
+#: views/base.py:228
 #, python-format
 msgid "Observational Study  %(title)s"
 msgstr "Anwendungsbeobachtung %(title)s"
 
-#: views/base.py:232
+#: views/base.py:231
 #, python-format
 msgid "Details on the observational study %(title)s."
 msgstr "Details über die Anwendungsbeobachtung %(title)s."
 
-#: views/base.py:249
+#: views/base.py:248
 #, python-format
 msgid "Pharma company  %(name)s"
 msgstr "Pharmaunternehmen %(name)s"
 
-#: views/base.py:252
+#: views/base.py:251
 #, python-format
 msgid ""
 "Details on how money from %(name)s goes to doctors and observational studies."
@@ -1464,6 +1477,18 @@ msgstr ""
 #: views/zerodocs.py:48
 msgid "Please check your form input again!"
 msgstr "Bitte überprüfen Sie Ihre Eingaben!"
+
+#~ msgid "You have not received money :"
+#~ msgstr "Sie haben"
+
+#~ msgid ""
+#~ "You have not received money from pharma companies in the following years:"
+#~ msgstr ""
+#~ "Sie haben kein Geld oder geldwerte Leistungen in diesen Jahren von der "
+#~ "Pharmaindustrie erhalten:"
+
+#~ msgid "Project “Zero Euro Doctors”"
+#~ msgstr "Projekt „Null-Euro-Ärzte“"
 
 #, fuzzy
 #~| msgid "^study/(?P<slug>[\\w-]+)/$"
