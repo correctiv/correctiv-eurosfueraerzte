@@ -15,7 +15,7 @@ register = template.Library()
 
 def join_list(values):
     if len(values) > 1:
-        return _('{} and {}').format(', '.join(values[:-1]), values[-1])
+        return _('{} and {}').format(', '.join(str(s) for s in values[:-1]), values[-1])
     return '{}'.format(values[0])
 
 
