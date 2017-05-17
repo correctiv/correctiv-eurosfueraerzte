@@ -59,10 +59,10 @@ class ZeroDoctorAdmin(LeafletGeoAdmin):
 
         obj = get_object_or_404(ZeroDoctor, pk=request.POST['pk'])
 
-        years = [int(year) for year in request.POST.getlist('year')]
-        if years:
+        sub_ids = [int(sub_id) for sub_id in request.POST.getlist('sub_id')]
+        if sub_ids:
             try:
-                obj.confirm_submissions(years)
+                obj.confirm_submissions(sub_ids)
             except ValueError as e:
                 messages.add_message(request, messages.ERROR, e)
             else:

@@ -5,10 +5,13 @@
 {% if original.has_unconfirmed_submissions %}
   <form method="post" action="{% url 'admin:eurosfueraerzte-zerodocs_confirm' %}">{% csrf_token %}
     <input type="hidden" name="pk" value="{{ original.pk }}"/>
-    {% for sub in original.get_submissions %}
+    {% for sub in original.get_all_submissions %}
       {% if not sub.confirmed %}
         <label>
-            <input type="checkbox" name="year" value="{{ sub.date.year }}"/>{{ sub.date.year }}
+            <input type="checkbox" name="sub_id" value="{{ sub.pk }}"/>
+            <span style="text-transform: none">
+              {{ sub.get_kind_display }} - {{ sub.date.year }}
+            </span>
         </label>
       {% endif %}
     {% endfor %}

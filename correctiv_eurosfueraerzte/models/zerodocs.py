@@ -128,22 +128,19 @@ class ZeroDoctor(models.Model):
             last_name=self.last_name,
         )
 
-    def confirm_submissions(self, years):
-        if not years:
+    def confirm_submissions(self, sub_ids):
+        if not sub_ids:
             return
 
-        years = set(years)
+        sub_ids = set(sub_ids)
 
         # Create recipient
         if not self.recipient_id:
             self.create_or_update_recipient()
 
-        for sub in self.get_submissions():
-            if sub.date.year in years and not sub.confirmed:
-                sub.confirmed = True
-                sub.confirmed_on = timezone.now()
-                # Don't create payment for now, not needed
-                sub.save()
+        self.zerodocsubmission_set.filter(id__in=sub_ids,
+                confirmed=False).update(
+                confirmed=True, confirmed_on=timezone.now())
 
         self._submissions = None
         self.send_confirmed_email()
