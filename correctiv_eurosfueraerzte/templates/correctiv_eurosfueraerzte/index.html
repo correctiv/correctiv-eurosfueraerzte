@@ -15,7 +15,9 @@
       {% include includes.index_blurb %}
     </div>
     <aside class="page__sidebar efa__content">
-      {% include "correctiv_eurosfueraerzte/_country_switcher.html" %}
+      {% if country|lower == "de" %}
+        {% include includes.zero_euro %}
+      {% endif %}
     </aside>
   </div>
 

@@ -12,9 +12,7 @@
 
       <p class="efa__search__lead">
         {% if country_label %}
-          {% blocktrans with country_label=country_label_choice %}
-            How much money has your doctor received from the pharma industry <strong>in {{ country_label }}</strong> in 2015?
-          {% endblocktrans %}
+          {% include includes.search_blurb %}
         {% else %}
           {% trans "How much money has your doctor received from the pharma industry last year?" %}
         {% endif %}
@@ -32,6 +30,13 @@
       <div class="efa__search__examples">
         {% trans "Examples:" %}
         {% include includes.search_examples %}
+        <br/>
+        {% trans "Data also available for:" %}
+        {% for country_code, country_name in countries %}
+          {% if country_code != country %}
+              <a href="{% url 'eurosfueraerzte:eurosfueraerzte-country_index' country=country_code|lower %}">{{ country_name }}</a>{% if not forloop.last %},{% endif %}
+          {% endif %}
+        {% endfor %}
       </div>
     </form>
   </div>
