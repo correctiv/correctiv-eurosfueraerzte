@@ -64,7 +64,7 @@ class ZeroDoctor(models.Model):
     class Meta:
         verbose_name = _('Zero Doctor')
         verbose_name_plural = _('Zero Doctors')
-        ordering = ('email_sent',)
+        ordering = ('-email_sent',)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
@@ -249,7 +249,7 @@ class ZeroDocSubmission(models.Model):
     class Meta:
         verbose_name = _('Zero Doctor Submission')
         verbose_name_plural = _('Zero Doctor Submissions')
-        ordering = ('kind', 'date',)
+        ordering = ('-submitted_on', 'date', 'kind',)
 
     def __str__(self):
         return '%s %s -> %s' % (self.date.year, self.kind, self.confirmed)

@@ -14,10 +14,14 @@ from ..models import ZeroDoctor
 class ZeroDocSubmissionAdmin(admin.ModelAdmin):
     raw_id_fields = ('payment',)
     date_hierarchy = 'submitted_on'
-    list_display = ('zerodoc', 'kind', 'date', 'submitted_on', 'confirmed')
+    list_display = ('zerodoc', 'kind', 'date_year', 'submitted_on', 'confirmed')
     list_filter = ('kind', 'confirmed', 'date')
     search_fields = ('zerodoc__first_name', 'zerodoc__last_name',
                      'zerodoc__email',)
+
+    def date_year(self, obj):
+        return obj.date.year
+    date_year.short_description = _('Year')
 
 
 class ZeroDoctorAdmin(LeafletGeoAdmin):
@@ -39,7 +43,7 @@ class ZeroDoctorAdmin(LeafletGeoAdmin):
         return my_urls + urls
 
     def get_full_address(self, obj):
-        return format_html('{address}<br/>{postcode} {location} ({country})',
+        return format_html('{address}, {postcode} {location} ({country})',
             address=obj.address,
             postcode=obj.postcode,
             location=obj.location,
