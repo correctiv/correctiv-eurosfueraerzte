@@ -56,7 +56,7 @@ def generate_pdf(f, obj):
     for a in address:
         p.append(Paragraph(a, styles["Normal"]))
 
-    p.append(Spacer(1, 12))
+    p.append(Spacer(1, 12 * 3))
     p.append(Paragraph('Fax: +49 (0) 30 – 555 780 2 20', styles['Normal']))
 
     p.append(Spacer(1, 12 * 4))
@@ -92,10 +92,10 @@ def generate_pdf(f, obj):
     obs_years = [str(sub.date.year) for sub in obj.get_observational_submissions()]
     if obs_years:
         year_prefix, year_str = get_year_formatter(obs_years)
-        s = ('hiermit bestätige ich, dass ich {} {} keine Honorare'
+        s = ('hiermit bestätige ich, dass ich {} {} keine Honorare '
              'für Anwendungsbeobachtungen/NIS erhalten habe.')
         if efpia_years:
-            s = ('Hiermit bestätige ich weiterhin, dass ich {} {} keine Honorare'
+            s = ('Hiermit bestätige ich weiterhin, dass ich {} {} keine Honorare '
                  'für Anwendungsbeobachtungen/NIS erhalten habe.')
         s = s.format(year_prefix, year_str)
         text += [
