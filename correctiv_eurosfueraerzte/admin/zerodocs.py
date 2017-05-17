@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.contrib import admin
 from django.conf.urls import url
 from django.shortcuts import redirect, get_object_or_404
