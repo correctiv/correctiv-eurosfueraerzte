@@ -10,11 +10,11 @@
 
 {% block content %}
 
-  <div class="page__row">
-    <div class="page__section -narrow efa__content">
+  <div class="row">
+    <div class="col-md-6 efa__content">
       {% include includes.index_blurb %}
     </div>
-    <aside class="page__sidebar efa__content">
+    <aside class="col-md-6 efa__content">
       {% if country|lower == "de" %}
         {% include includes.zero_euro %}
       {% endif %}
