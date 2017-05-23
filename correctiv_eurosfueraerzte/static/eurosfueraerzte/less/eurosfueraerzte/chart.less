@@ -1,0 +1,97 @@
+.striped(@color: rgba(0,0,0,.15); @angle: 45deg) {
+    background-image: -webkit-linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+    background-image: -o-linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+    background-image: linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+    background-size: 40px 40px;
+}
+
+.efa__chart {
+  overflow: hidden;
+  font-family: @tabular-font;
+  font-weight: 500;
+  line-height: 17px;
+  border-top: 1px solid @gray-light;
+  padding: 15px 0;
+  margin: 0;
+  color: black;
+}
+
+.efa__chart__label {
+  width: 35%;
+  display: block;
+  float: left;
+  clear: left;
+  font-size: 15px;
+  font-weight: normal;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.efa__chart__bar-stack {
+  width: 65%;
+  display: block;
+  float: left;
+  margin-bottom: 5px;
+}
+
+.efa__chart__bar {
+  position: relative;
+  background: @gray-lighter;
+  height: 17px;
+  font-size: 12px;
+  line-height: 17px;
+}
+
+.efa__chart__bar--individual {
+  display: block;
+  height: 100%;
+  float: left;
+  min-width: 2px;
+  background: @efa-blue-dark;
+}
+
+.efa__chart__bar--aggregated {
+  &:extend(.efa__chart__bar--individual);
+  background-color: @efa-blue;
+}
+
+.efa__chart__total {
+  padding: 0 5px;
+  color: @efa-blue-dark;
+}
+
+.efa__chart__total--inner {
+  position: absolute;
+  color: @efa-blue-dark;
+  right: 5px;
+}
+
+.efa__chart__legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin: 5px 0;
+}
+
+.efa__chart__legend-item--individual {
+  padding: 0;
+  margin: 0;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: .3em;
+    background: @efa-blue-dark;
+    border-radius: 50%;
+  }
+}
+
+.efa__chart__legend-item--aggregated {
+  &:extend(.efa__chart__legend-item--individual all);
+
+  &:before {
+    background: @efa-blue;
+  }
+}

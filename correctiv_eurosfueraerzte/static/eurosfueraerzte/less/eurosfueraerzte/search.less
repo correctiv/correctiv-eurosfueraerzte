@@ -1,0 +1,145 @@
+.efa__search {
+  background: @efa-blue;
+}
+
+.efa__search__title {
+  color: black;
+  font-size: @efa-headline-size;
+  margin-bottom: 0;
+
+  &:after {
+    content: '';
+    display: block;
+    width: 140px;
+    height: 2px;
+    margin-top: 15px;
+    background: black;
+  }
+}
+
+.efa__search__lead {
+  color: black;
+  font-size: 19px;
+  padding: 15px 0;
+  width: 80%;
+}
+
+.efa__search__form {
+  padding: 30px 0;
+  position: relative;
+
+  @media (min-width: @screen-sm) {
+    width: percentage(7/12);
+    padding: 50px 0;
+  }
+
+  button,
+  input {
+    height: 60px;
+    border-radius: 0;
+    border: 0;
+    padding: 0 20px;
+    transition: all 300ms;
+    font-size: 19px;
+    line-height: 24px;
+    position: relative;
+    z-index: 1;
+
+    @media (min-width: @screen-md) {
+      font-size: 24px;
+      height: 72px;
+    }
+  }
+
+  button {
+    color: white;
+    background: @efa-blue-dark;
+
+    @media (min-width: @screen-md) {
+      min-width: 150px;
+    }
+  }
+
+  button:hover,
+  button:focus,
+  button:active {
+    color: white;
+    background: darken(@efa-blue-dark, 10);
+  }
+}
+
+.efa__search__form--small {
+  &:extend(.efa__search__form all);
+  padding: 30px 0;
+
+  button,
+  input {
+    margin-bottom: 15px;
+
+    @media (min-width: @screen-md) {
+      font-size: 19px;
+      height: 60px;
+    }
+  }
+
+  &:after {
+    left: 92% !important;
+  }
+}
+
+.efa__search__form:after {
+  pointer-events: none;
+
+  @media (min-width: @screen-sm) {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-image: url(/static/eurosfueraerzte/img/character-handshake.png);
+    height: 105%;
+    width: 630px;
+    left: 85%;
+    bottom: 0;
+  }
+}
+
+.efa__search__form--pharma {
+  &:extend(.efa__search__form all);
+
+  @media (min-width: @screen-sm) {
+    left: percentage(5/12);
+  }
+}
+
+.efa__search__form--pharma:after {
+  pointer-events: none;
+
+  @media (min-width: @screen-sm) {
+    background-image: url(/static/eurosfueraerzte/img/character-pharma-pipet.png);
+    height: 110%;
+    left: -600px;
+  }
+}
+
+.efa__search__examples {
+  color: #000000;
+  text-shadow: 0 0 30px white;
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.efa__search__examples > a {
+  text-decoration: underline;
+}
+
+.efa__search__options {
+  margin-top: 5px;
+  font-size: 15px;
+
+  select {
+    margin: 0 5px;
+  }
+}

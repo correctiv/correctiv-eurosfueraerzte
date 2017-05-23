@@ -1,0 +1,552 @@
+.efa__content {
+  padding: 15px;
+}
+.efa__title {
+  color: #316f89;
+  font-size: 24px;
+  padding: 30px 0 5px 0;
+}
+.efa__title:after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 2px;
+  margin-top: 15px;
+  background: #316f89;
+}
+.efa__button {
+  color: white;
+  background: #9c9c9c;
+  display: inline-block;
+  padding: 5px 15px;
+  margin: 0 5px 0 0;
+  text-decoration: none;
+}
+.efa__button:hover,
+.efa__button:active,
+.efa__button:focus {
+  background: #4d4d4d;
+  color: white;
+  text-decoration: none;
+}
+.efa__button--primary {
+  color: white;
+  background: #9c9c9c;
+  display: inline-block;
+  padding: 5px 15px;
+  margin: 0 5px 0 0;
+  text-decoration: none;
+  background: #316f89;
+}
+.efa__button--primary:hover,
+.efa__button--primary:active,
+.efa__button--primary:focus {
+  background: #4d4d4d;
+  color: white;
+  text-decoration: none;
+}
+.efa__header,
+.efa__header--split {
+  background: #a8d0e0;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 45px;
+}
+@media (min-width: 768px) {
+  .efa__header--split {
+    background: linear-gradient(90deg, #a8d0e0 58.33333333%, #316f89 0);
+  }
+}
+.efa__header__title,
+.efa__header__title--light {
+  margin: 0;
+  padding: 15px 0 0 0;
+  line-height: 1.2em;
+  text-decoration: none;
+  color: black;
+}
+@media (min-width: 992px) {
+  .efa__header__title,
+  .efa__header__title--light {
+    font-size: 36px;
+  }
+}
+.efa__header__title:link,
+.efa__header__title:hover,
+.efa__header__title:focus,
+.efa__header__title:active {
+  text-decoration: none;
+  color: black;
+}
+.efa__header__title--light {
+  color: white;
+  display: block;
+}
+.efa__header__title--light:after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 2px;
+  margin: 10px 0;
+  background: white;
+}
+@media (min-width: 768px) {
+  .efa__header__academic-title,
+  .efa__header__name {
+    display: inline-block;
+  }
+}
+@media (min-width: 480px) {
+  .efa__header__main {
+    padding-right: 40%;
+  }
+}
+@media (min-width: 768px) {
+  .efa__header__main {
+    width: 58.33333333%;
+    float: left;
+  }
+}
+.efa__header__sidebar,
+.efa__header__sidebar--pharma {
+  position: relative;
+  z-index: 1;
+  margin: -15px;
+  background: #316f89;
+  color: white;
+}
+@media (min-width: 480px) {
+  .efa__header__sidebar,
+  .efa__header__sidebar--pharma {
+    padding-right: 30%;
+  }
+}
+@media (min-width: 768px) {
+  .efa__header__sidebar,
+  .efa__header__sidebar--pharma {
+    float: right;
+    width: 41.66666667%;
+    min-height: 280px;
+    margin: 0;
+    padding: 0;
+  }
+}
+.efa__header__sidebar p {
+  padding: .33em 0;
+  margin: 0;
+}
+.efa__header__sidebar:after,
+.efa__header__sidebar--pharma:after {
+  pointer-events: none;
+}
+@media (min-width: 480px) {
+  .efa__header__sidebar:after,
+  .efa__header__sidebar--pharma:after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-image: url(/static/eurosfueraerzte/img/character-doctor-thumb.png);
+    height: 220%;
+    width: 370px;
+    right: -15%;
+    bottom: 0;
+  }
+}
+@media (min-width: 768px) {
+  .efa__header__sidebar:after,
+  .efa__header__sidebar--pharma:after {
+    height: 90%;
+    right: 72%;
+  }
+}
+.-zerodoc.efa__header__sidebar:after {
+  background-image: none;
+}
+.efa__header__sidebar--pharma:after {
+  background-image: url(/static/eurosfueraerzte/img/character-pharma.png);
+}
+@media (min-width: 992px) {
+  .efa__header__sidebar--pharma:after {
+    height: 95%;
+    right: 72%;
+  }
+}
+@media (min-width: 1200px) {
+  .efa__header__sidebar--pharma:after {
+    right: 76%;
+  }
+}
+.efa__header__content {
+  padding: 45px 0;
+}
+@media (min-width: 768px) {
+  .efa__header__content {
+    position: absolute;
+    bottom: 0;
+    width: 25%;
+    z-index: 2;
+  }
+}
+.efa__header__about {
+  padding: 30px 15px;
+}
+@media (min-width: 768px) {
+  .efa__header__about {
+    padding: 45px 0 45px 25%;
+  }
+}
+.efa__header__more-link {
+  color: #b8dfef;
+  text-decoration: underline;
+}
+.efa__header__more-link:hover,
+.efa__header__more-link:focus,
+.efa__header__more-link:active {
+  color: #a8d0e0;
+}
+.efa__header__back-link {
+  color: #316f89;
+  text-decoration: none;
+}
+.efa__header__meta {
+  display: block;
+}
+.efa__home-link {
+  font-family: 'Neuzeit-Condensed', 'Arial Narrow', 'Franklin Gothic Medium', sans-serif;
+  background: #316f89;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  -webkit-font-smoothing: subpixel-antialiased;
+  padding: 4px 8px;
+  line-height: 1.4em;
+}
+.efa__home-link:hover,
+.efa__home-link:focus,
+.efa__home-link:active {
+  text-decoration: none;
+  color: white;
+  background: #1d4151;
+}
+.efa__home-link--subsection {
+  margin: 0 5px;
+  background: #1d4151;
+}
+.efa__home-link--subsection:hover,
+.efa__home-link--subsection:focus,
+.efa__home-link--subsection:active {
+  text-decoration: none;
+  color: white;
+  background: black;
+}
+.efa__search {
+  background: #a8d0e0;
+}
+.efa__search__title {
+  color: black;
+  font-size: 36px;
+  margin-bottom: 0;
+}
+.efa__search__title:after {
+  content: '';
+  display: block;
+  width: 140px;
+  height: 2px;
+  margin-top: 15px;
+  background: black;
+}
+.efa__search__lead {
+  color: black;
+  font-size: 19px;
+  padding: 15px 0;
+  width: 80%;
+}
+.efa__search__form,
+.efa__search__form--small,
+.efa__search__form--pharma {
+  padding: 30px 0;
+  position: relative;
+}
+@media (min-width: 768px) {
+  .efa__search__form,
+  .efa__search__form--small,
+  .efa__search__form--pharma {
+    width: 58.33333333%;
+    padding: 50px 0;
+  }
+}
+.efa__search__form button,
+.efa__search__form input,
+.efa__search__form--small button,
+.efa__search__form--small input,
+.efa__search__form--pharma button,
+.efa__search__form--pharma input {
+  height: 60px;
+  border-radius: 0;
+  border: 0;
+  padding: 0 20px;
+  transition: all 300ms;
+  font-size: 19px;
+  line-height: 24px;
+  position: relative;
+  z-index: 1;
+}
+@media (min-width: 992px) {
+  .efa__search__form button,
+  .efa__search__form input,
+  .efa__search__form--small button,
+  .efa__search__form--small input,
+  .efa__search__form--pharma button,
+  .efa__search__form--pharma input {
+    font-size: 24px;
+    height: 72px;
+  }
+}
+.efa__search__form button,
+.efa__search__form--small button,
+.efa__search__form--pharma button {
+  color: white;
+  background: #316f89;
+}
+@media (min-width: 992px) {
+  .efa__search__form button,
+  .efa__search__form--small button,
+  .efa__search__form--pharma button {
+    min-width: 150px;
+  }
+}
+.efa__search__form button:hover,
+.efa__search__form button:focus,
+.efa__search__form button:active,
+.efa__search__form--small button:hover,
+.efa__search__form--small button:focus,
+.efa__search__form--small button:active,
+.efa__search__form--pharma button:hover,
+.efa__search__form--pharma button:focus,
+.efa__search__form--pharma button:active {
+  color: white;
+  background: #245163;
+}
+.efa__search__form--small {
+  padding: 30px 0;
+}
+.efa__search__form--small button,
+.efa__search__form--small input {
+  margin-bottom: 15px;
+}
+@media (min-width: 992px) {
+  .efa__search__form--small button,
+  .efa__search__form--small input {
+    font-size: 19px;
+    height: 60px;
+  }
+}
+.efa__search__form--small:after {
+  left: 92% !important;
+}
+.efa__search__form:after,
+.efa__search__form--small:after,
+.efa__search__form--pharma:after {
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .efa__search__form:after,
+  .efa__search__form--small:after,
+  .efa__search__form--pharma:after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-image: url(/static/eurosfueraerzte/img/character-handshake.png);
+    height: 105%;
+    width: 630px;
+    left: 85%;
+    bottom: 0;
+  }
+}
+@media (min-width: 768px) {
+  .efa__search__form--pharma {
+    left: 41.66666667%;
+  }
+}
+.efa__search__form--pharma:after {
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .efa__search__form--pharma:after {
+    background-image: url(/static/eurosfueraerzte/img/character-pharma-pipet.png);
+    height: 110%;
+    left: -600px;
+  }
+}
+.efa__search__examples {
+  color: #000000;
+  text-shadow: 0 0 30px white;
+  margin-top: 15px;
+  font-size: 15px;
+}
+.efa__search__examples > a {
+  text-decoration: underline;
+}
+.efa__search__options {
+  margin-top: 5px;
+  font-size: 15px;
+}
+.efa__search__options select {
+  margin: 0 5px;
+}
+.efa__table {
+  margin: 30px 0;
+  font-size: 15px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.efa__table tfoot {
+  font-weight: bold;
+}
+.efa__table small {
+  font-size: 1em;
+  color: #9c9c9c;
+}
+.efa__chart {
+  overflow: hidden;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  line-height: 17px;
+  border-top: 1px solid #dadada;
+  padding: 15px 0;
+  margin: 0;
+  color: black;
+}
+.efa__chart__label {
+  width: 35%;
+  display: block;
+  float: left;
+  clear: left;
+  font-size: 15px;
+  font-weight: normal;
+  text-align: right;
+  padding-right: 10px;
+}
+.efa__chart__bar-stack {
+  width: 65%;
+  display: block;
+  float: left;
+  margin-bottom: 5px;
+}
+.efa__chart__bar {
+  position: relative;
+  background: #f5f5f5;
+  height: 17px;
+  font-size: 12px;
+  line-height: 17px;
+}
+.efa__chart__bar--individual,
+.efa__chart__bar--aggregated {
+  display: block;
+  height: 100%;
+  float: left;
+  min-width: 2px;
+  background: #316f89;
+}
+.efa__chart__bar--aggregated {
+  background-color: #a8d0e0;
+}
+.efa__chart__total {
+  padding: 0 5px;
+  color: #316f89;
+}
+.efa__chart__total--inner {
+  position: absolute;
+  color: #316f89;
+  right: 5px;
+}
+.efa__chart__legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin: 5px 0;
+}
+.efa__chart__legend-item--individual,
+.efa__chart__legend-item--aggregated {
+  padding: 0;
+  margin: 0;
+}
+.efa__chart__legend-item--individual:before,
+.efa__chart__legend-item--aggregated:before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: .3em;
+  background: #316f89;
+  border-radius: 50%;
+}
+.efa__chart__legend-item--aggregated:before {
+  background: #a8d0e0;
+}
+.efa__detail-vis {
+  padding: 0 30px 0 15px;
+  font-size: 15px;
+  line-height: 1.5em;
+  min-height: 440px;
+}
+@media (min-width: 768px) {
+  .efa__detail-vis {
+    width: 50%;
+    float: left;
+  }
+}
+@media (min-width: 992px) {
+  .efa__detail-vis {
+    width: 25%;
+  }
+}
+.efa__detail-vis__title {
+  border-bottom: 2px solid black;
+  font-size: 19px;
+  margin: 15px 0;
+  padding-bottom: 10px;
+}
+.efa__detail-vis__sum {
+  margin: 0;
+  padding: 0;
+  font-size: 36px;
+  line-height: 1.4em;
+  text-decoration: none;
+  color: black;
+}
+.efa__detail-vis__list {
+  border-collapse: collapse;
+  margin: 15px 0;
+  padding: 15px 0;
+  border-top: 1px solid #dadada;
+  border-bottom: 1px solid #dadada;
+}
+.efa__detail-vis__value {
+  display: block;
+  text-align: right;
+}
+.efa__detail-vis__name {
+  display: block;
+  width: 100%;
+  padding-left: .5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.efa__zero-euro-info {
+  background: #f5f5f5;
+  padding: 0 20px;
+}
+.efa__zero-euro-info > h3 {
+  margin: 0;
+  padding: 1em 0 .2em 0;
+}

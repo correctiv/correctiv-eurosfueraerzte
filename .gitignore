@@ -1,3 +1,4 @@
 *.pyc
 *.egg-info
 efa_project/local_settings.py
+node_modules/

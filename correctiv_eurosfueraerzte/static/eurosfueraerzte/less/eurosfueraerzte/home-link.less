@@ -1,0 +1,28 @@
+.efa__home-link {
+  font-family: 'Neuzeit-Condensed', 'Arial Narrow', 'Franklin Gothic Medium', sans-serif;
+  background: @efa-blue-dark;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  -webkit-font-smoothing: subpixel-antialiased;
+  padding: 4px 8px;
+  line-height: 1.4em;
+
+  &:hover, &:focus, &:active {
+    text-decoration: none;
+    color: white;
+    background: darken(@efa-blue-dark, 15);
+  }
+}
+
+.efa__home-link--subsection {
+  margin: 0 5px;
+  background: darken(@efa-blue-dark, 15);
+
+  &:hover, &:focus, &:active {
+    text-decoration: none;
+    color: white;
+    background: black;
+  }
+}

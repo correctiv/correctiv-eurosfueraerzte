@@ -1,0 +1,173 @@
+.efa__header {
+  background: @efa-blue;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 45px;
+}
+
+.efa__header--split {
+  &:extend(.efa__header);
+
+  @media (min-width: @screen-sm) {
+    background: linear-gradient(90deg, @efa-blue percentage(7/12), @efa-blue-dark 0);
+  }
+}
+
+.efa__header__title {
+  margin: 0;
+  padding: 15px 0 0 0;
+  line-height: 1.2em;
+  text-decoration: none;
+  color: black;
+
+  @media (min-width: @screen-md) {
+    font-size: @efa-headline-size;
+  }
+
+  &:link, &:hover, &:focus, &:active {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.efa__header__title--light {
+  &:extend(.efa__header__title);
+  color: white;
+  display: block;
+
+  &:after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 2px;
+    margin: 10px 0;
+    background: white;
+  }
+}
+
+.efa__header__academic-title,
+.efa__header__name, {
+  @media (min-width: @screen-sm) {
+    display: inline-block;
+  }
+}
+
+.efa__header__main {
+
+  @media (min-width: @screen-xs) {
+    padding-right: 40%;
+  }
+
+  @media (min-width: @screen-sm) {
+    width: percentage(7/12);
+    float: left;
+  }
+}
+
+.efa__header__sidebar {
+  position: relative;
+  z-index: 1;
+  margin: -15px;
+  background: @efa-blue-dark;
+  color: white;
+
+  @media (min-width: @screen-xs) {
+    padding-right: 30%;
+  }
+
+  @media (min-width: @screen-sm) {
+    float: right;
+    width: percentage(5/12);
+    min-height: 280px;
+    margin: 0;
+    padding: 0;
+  }
+
+  p {
+    padding: .33em 0;
+    margin: 0;
+  }
+}
+
+.efa__header__sidebar:after {
+  pointer-events: none;
+
+  @media (min-width: @screen-xs) {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-image: url(/static/eurosfueraerzte/img/character-doctor-thumb.png);
+    height: 220%;
+    width: 370px;
+    right: -15%;
+    bottom: 0;
+  }
+
+  @media (min-width: @screen-sm) {
+    height: 90%;
+    right: 72%;
+  }
+}
+
+.-zerodoc.efa__header__sidebar:after {
+  background-image: none;
+}
+
+.efa__header__sidebar--pharma {
+  &:extend(.efa__header__sidebar);
+
+  &:after {
+    &:extend(.efa__header__sidebar:after);
+    background-image: url(/static/eurosfueraerzte/img/character-pharma.png);
+
+    @media (min-width: @screen-md) {
+      height: 95%;
+      right: 72%;
+    }
+
+    @media (min-width: @screen-lg) {
+      right: 76%;
+    }
+  }
+}
+
+.efa__header__content {
+  padding: 45px 0;
+
+  @media (min-width: @screen-sm) {
+    position: absolute;
+    bottom: 0;
+    width: 25%;
+    z-index: 2;
+  }
+}
+
+.efa__header__about {
+  padding: 30px 15px;
+
+  @media (min-width: @screen-sm) {
+    padding: 45px 0 45px 25%;
+  }
+}
+
+.efa__header__more-link {
+  color: @efa-blue-light;
+  text-decoration: underline;
+
+  &:hover, &:focus, &:active {
+    color: @efa-blue;
+  }
+}
+
+.efa__header__back-link {
+  color: @efa-blue-dark;
+  text-decoration: none;
+}
+
+.efa__header__meta {
+  display: block;
+}
