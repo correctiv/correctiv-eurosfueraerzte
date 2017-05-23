@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<div class="well">
+<div class="efa__zero-euro-info">
 <h3>{% trans "Zero-Euro-Doctors" %}</h3>
 <p>
   {% blocktrans %}
@@ -8,8 +8,8 @@
   {% endblocktrans %}
 </p>
 <p>
-  <a class="btn btn-default" href="{% trans "/recherchen/euros-fuer-aerzte/artikel/2017/05/16/interesse-am-konflikt/" %}">{% trans "background article" %}</a>
+  <a class="efa__button" href="{% trans "/recherchen/euros-fuer-aerzte/artikel/2017/05/16/interesse-am-konflikt/" %}">{% trans "background article" %}</a>
 
-  <a class="btn btn-primary" href="{% url 'eurosfueraerzte:eurosfueraerzte-zerodocs_index' %}">{% trans "Register" %}</a>
+  <a class="efa__button--primary" href="{% url 'eurosfueraerzte:eurosfueraerzte-zerodocs_index' %}">{% trans "Register" %}</a>
 </p>
 </div>
