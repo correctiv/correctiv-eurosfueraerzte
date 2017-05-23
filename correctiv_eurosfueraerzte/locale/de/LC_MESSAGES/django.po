@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-17 12:46+0200\n"
+"POT-Creation-Date: 2017-05-23 20:14+0200\n"
 "PO-Revision-Date: 2017-05-17 12:50+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
@@ -26,16 +26,16 @@ msgstr "Erfolgreich Objekte ersetzt."
 msgid "Replace selected with..."
 msgstr "Ersetze Objekte mit..."
 
-#: admin/zerodocs.py:24
+#: admin/zerodocs.py:26
 msgid "Year"
 msgstr "Jahr"
 
-#: admin/zerodocs.py:52
+#: admin/zerodocs.py:54
 #: templates/correctiv_eurosfueraerzte/_recipient_list_table.html:9
 msgid "Address"
 msgstr "Adresse"
 
-#: admin/zerodocs.py:70
+#: admin/zerodocs.py:72
 msgid "Successfully confirmed!"
 msgstr "Erfolgreich bestätigt!"
 
@@ -621,9 +621,9 @@ msgstr ""
 "Beispielsweise von Studien und Anwendungsbeobachtungen (AWB) "
 "veröffentlicht.\n"
 
-#: templates/correctiv_eurosfueraerzte/at/_index_blurb.html:4
-#: templates/correctiv_eurosfueraerzte/ch/_index_blurb.html:4
-#: templates/correctiv_eurosfueraerzte/de/_index_blurb.html:4
+#: templates/correctiv_eurosfueraerzte/at/_index_blurb.html:6
+#: templates/correctiv_eurosfueraerzte/ch/_index_blurb.html:6
+#: templates/correctiv_eurosfueraerzte/de/_index_blurb.html:6
 msgid "Read the background article"
 msgstr "Zum Hintergrundartikel"
 
@@ -803,7 +803,7 @@ msgstr ""
 
 #: templates/correctiv_eurosfueraerzte/de/_about_blurb.html:6
 #: templates/correctiv_eurosfueraerzte/de/_article_link.html:3
-#: templates/correctiv_eurosfueraerzte/de/_index_blurb.html:4
+#: templates/correctiv_eurosfueraerzte/de/_index_blurb.html:6
 msgid ""
 "/en/investigations/euros-doctors/articles/2016/12/15/embracing-millionsbe-"
 "embraced/"
@@ -925,7 +925,7 @@ msgid "Total Number of Patients"
 msgstr "Gesamtanzahl Patienten"
 
 #: templates/correctiv_eurosfueraerzte/drug_detail.html:46
-#: templates/correctiv_eurosfueraerzte/index.html:100
+#: templates/correctiv_eurosfueraerzte/index.html:102
 #, python-format
 msgid "%(count)s patients"
 msgstr "%(count)s Patienten"
@@ -935,7 +935,7 @@ msgid "Total minimum fees planned"
 msgstr "Geplante Gesamtausgaben"
 
 #: templates/correctiv_eurosfueraerzte/drug_detail.html:54
-#: templates/correctiv_eurosfueraerzte/index.html:122
+#: templates/correctiv_eurosfueraerzte/index.html:124
 #, python-format
 msgid "%(fee)s&nbsp;€"
 msgstr "%(fee)s&nbsp;€"
@@ -988,7 +988,7 @@ msgstr "Top-Ärzte mit bekannten Zahlungen"
 msgid "Top paying companies"
 msgstr "Top-Pharmafirmen"
 
-#: templates/correctiv_eurosfueraerzte/index.html:78
+#: templates/correctiv_eurosfueraerzte/index.html:80
 msgid ""
 "Pharma companies pay doctors to observe how well patients tolerate certain "
 "drugs. These ”observational studies” are useless for science. But doctors "
@@ -1002,15 +1002,15 @@ msgstr ""
 "umstrittenen Studien erreicht haben – und welche Präparate vor allem in den "
 "Markt gedrückt werden."
 
-#: templates/correctiv_eurosfueraerzte/index.html:79
+#: templates/correctiv_eurosfueraerzte/index.html:81
 msgid "Read this for more"
 msgstr "Zum Hintergrundartikel"
 
-#: templates/correctiv_eurosfueraerzte/index.html:89
+#: templates/correctiv_eurosfueraerzte/index.html:91
 msgid "Top drugs by study patients"
 msgstr "AWBs mit den meisten Patienten"
 
-#: templates/correctiv_eurosfueraerzte/index.html:111
+#: templates/correctiv_eurosfueraerzte/index.html:113
 msgid "Top studies by fees per patient"
 msgstr "AWBs mit dem höchsten Honorar"
 
