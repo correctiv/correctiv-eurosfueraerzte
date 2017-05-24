@@ -349,6 +349,9 @@
 .efa__search__form--small:after {
   left: 92% !important;
 }
+.efa__search__form--small .efa__search__lead {
+  width: 100%;
+}
 .efa__search__form:after,
 .efa__search__form--small:after,
 .efa__search__form--pharma:after {
