@@ -31,7 +31,7 @@ gulp.task('less', function() {
   return combined;
 });
 
-/* Watch Files For Changes */
+/* Watch files For changes */
 gulp.task('watch', function() {
   livereload.listen();
   gulp.watch(CSS_SOURCE + '/**/*.less', ['less']);
@@ -44,7 +44,8 @@ gulp.task('watch', function() {
   gulp.watch(CSS_DEST + '/**').on('change', livereload.changed);
 });
 
-gulp.task('watch', ['less', 'watch']);
+/* Watch and rebundle code during development */
+gulp.task('dev', ['less', 'watch']);
 
 /* Create a build of frontend code */
 gulp.task('default', ['less']);
