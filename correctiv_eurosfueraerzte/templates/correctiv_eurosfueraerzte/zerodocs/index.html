@@ -1,45 +1,29 @@
 {% extends "correctiv_eurosfueraerzte/zerodocs/base.html" %}
 
 {% load i18n %}
+{% load cms_tags %}
 {% load crispy_forms_tags %}
 
 
 {% block content %}
 
 <div class="page__row">
-  <div class="page__section efa__content">
-    <h1>{% trans "“Zero Euro Doctors”" %}</h1>
+  <div class="page__section -narrow efa__content">
 
-    <p>
-      Im Jahr 2016 haben die großen Pharmaunternehmen in Europa erstmals die Namen von Ärzten und Fachkreisangehörigen veröffentlicht, die Geld von Pharmafirmen erhalten hatten.
-    </p>
-
-    <p>
-      Das Problem: Keiner weiß, ob jene Ärzte, deren Namen nicht veröffentlicht wurde, tatsächlich keine geldwerten Leistungen erhalten – oder ob sie nur gegen die Veröffentlichung ihrer Daten waren.
-    </p>
-
-    <p><strong>
-      Dieses Problem will das Recherchezentrum correctiv.org mit dem Projekt „Null-Euro-Ärzte“ lösen.
-    </strong></p>
-
-    <p>
-      Jetzt können Mediziner und Fachkreisangehörige selbst erklären, dass sie kein Geld von der Pharmaindustrie erhalten haben.
-    </p>
-
-    <p>
-      Dies ist ein großer Schritt in Richtung Transparenz und setzt Ärzte, die keine Gelder angenommen haben, keinem falschen Verdacht mehr aus.
-    </p>
-
-    <p><strong>
-      Wenn Sie im vergangenen Jahr keine geldwerten Leistungen von Pharmafirmen erhalten haben, füllen Sie bitte das unten stehende Formular aus:
-    </strong></p>
+      {% static_placeholder "eurosfueraerzte-zerodoctor_content" %}
 
     <div>
     {% crispy form %}
     </div>
-
-
   </div>
+
+  <div class="page__sidebar">
+    {% static_placeholder "eurosfueraerzte-zerodoctor_sidebar" %}
+  </div>
+</div>
+
+<div class="page__row">
+  {% static_placeholder "eurosfueraerzte-zerodoctor_footer" %}
 </div>
 
 
