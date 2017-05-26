@@ -6,7 +6,7 @@ from django.contrib.admin import helpers
 
 from leaflet.admin import LeafletGeoAdmin
 
-from ..models import Drug, PharmaPayment, ObservationalStudy
+from ..models import Drug, PharmaPayment, ObservationalStudy, PaymentRecipient
 
 
 class ReplacementMixin(object):
@@ -89,7 +89,7 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
     search_fields = ('first_name', 'name', 'address', 'postcode', 'location')
     save_on_top = True
 
-    actions = ['replace_objects', 'compute_total']
+    actions = ['replace_objects', 'compute_total', 'update_search_vector']
 
     def handle_replacement(self, real_object, queryset):
         PharmaPayment.objects.filter(recipient__in=queryset).update(
@@ -99,6 +99,10 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
         for obj in queryset:
             obj.compute_total()
             obj.save()
+
+    def update_search_vector(self, request, queryset):
+        queryset.update(
+                search_vector=PaymentRecipient.objects.get_search_vector())
 
 
 class PharmaPaymentAdmin(admin.ModelAdmin):
