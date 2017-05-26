@@ -44,6 +44,7 @@ class SearchVectorStartsWith(SearchVectorExact):
         params = lhs_params + rhs_params
         return '%s @@ %s' % (lhs, rhs), params
 
+
 SearchVectorField.register_lookup(SearchVectorStartsWith)
 
 
@@ -450,6 +451,13 @@ class PaymentRecipientManager(models.Manager):
                 total_amount_currency=models.F('total_currency')
             )
         return qs.order_by('-total_amount')
+
+    def get_latest_zerodocs(self, country='DE'):
+        qs = super(PaymentRecipientManager, self).get_queryset()
+        return qs.filter(is_zerodoc=True,
+                country=country,
+                zerodoctor__confirmed_on__isnull=False
+                ).order_by('-zerodoctor__confirmed_on')
 
     def get_by_distance_to_point(self, point, distance=None, include_same=True,
                                  only_same=False):

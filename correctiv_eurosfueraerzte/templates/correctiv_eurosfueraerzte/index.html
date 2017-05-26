@@ -45,6 +45,26 @@
     <div class="col-md-6">
       <table class="efa__table table table-striped">
         <thead>
+          <th colspan="2">{% trans "Newest Zero Doctors" %}</th>
+        </thead>
+        <tbody>
+        {% for doctor in latest_zerodocs %}
+          <tr>
+            <td>
+              <a href="{{ doctor.get_absolute_url }}">
+                {{ doctor.get_full_name }}
+              </a>
+            </td>
+            <td class="text-right">
+              {% currency_format doctor.total doctor.total_currency %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+      <table class="efa__table table table-striped">
+        <thead>
           <th colspan="2">{% trans "Top paying companies" %}</th>
         </thead>
         <tbody>
