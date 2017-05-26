@@ -45,6 +45,7 @@ class ZeroDoctor(models.Model):
     email_sent = models.DateTimeField(null=True, blank=True)
     secret = models.SlugField(max_length=20)
     last_login = models.DateTimeField(null=True, blank=True)
+    confirmed_on = models.DateTimeField(null=True, blank=True)
 
     recipient = models.OneToOneField(PaymentRecipient, null=True, blank=True)
 
