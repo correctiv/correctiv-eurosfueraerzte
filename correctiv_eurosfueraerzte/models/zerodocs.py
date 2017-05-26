@@ -1,4 +1,5 @@
-import decimal
+from __future__ import unicode_literals
+
 from io import BytesIO
 import smtplib
 
@@ -116,6 +117,18 @@ class ZeroDoctor(models.Model):
 
     def has_unconfirmed_submissions(self):
         return any(not x.confirmed for x in self.get_all_submissions())
+    has_unconfirmed_submissions.boolean = True
+
+    def all_submissions_confirmed(self):
+        return self.has_submissions() and all(
+                x.confirmed for x in self.get_all_submissions())
+    all_submissions_confirmed.boolean = True
+    all_submissions_confirmed.short_description = _('All confirmed')
+
+    def has_submissions(self):
+        return len(self.get_all_submissions()) > 0
+    has_submissions.boolean = True
+    has_submissions.short_description = _('Submitted')
 
     def get_gender_title(self):
         if self.title:
@@ -128,16 +141,17 @@ class ZeroDoctor(models.Model):
             first_name=self.first_name,
             last_name=self.last_name,
         )
+    get_full_name.short_description = _('Name')
 
     def confirm_submissions(self, sub_ids):
+        self.create_or_update_recipient()
+        self.confirmed_on = timezone.now()
+        self.save()
+
         if not sub_ids:
             return
 
         sub_ids = set(sub_ids)
-
-        # Create recipient
-        if not self.recipient_id:
-            self.create_or_update_recipient()
 
         self.zerodocsubmission_set.filter(id__in=sub_ids,
                 confirmed=False).update(
@@ -223,8 +237,9 @@ class ZeroDoctor(models.Model):
             if PaymentRecipient.objects.filter(slug=kwargs['slug']).exists():
                 raise ValueError('Recipient with slug already exists')
             pr = PaymentRecipient.objects.create(**kwargs)
-            PaymentRecipient.objects.filter(pk=pr.pk).update(
-                    search_vector=PaymentRecipient.objects.get_search_vector())
+            pr.search_vector = PaymentRecipient.objects.get_search_vector()
+            pr.compute_total()
+            pr.save()
             self.recipient = pr
             self.save()
         else:
@@ -251,17 +266,3 @@ class ZeroDocSubmission(models.Model):
 
     def __str__(self):
         return '%s %s -> %s' % (self.date.year, self.kind, self.confirmed)
-
-    def create_payment(self):
-        if self.payment is not None:
-            return
-        kwargs = {
-            'recipient': self.zerodoc.recipient,
-            'date': self.date,
-            'origin': self.zerodoc.country,
-            'amount': decimal.Decimal(0.0),
-            'amount_euro': decimal.Decimal(0.0),
-        }
-        pp = PharmaPayment.objects.create(**kwargs)
-        self.payment = pp
-        self.save()
