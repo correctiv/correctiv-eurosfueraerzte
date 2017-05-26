@@ -74,7 +74,11 @@
   <div class="page__row">
     <div class="page__section -narrow">
       <header class="page__section-header">
-        <h3 class="page__section-headline">{% trans "More organisations and doctors at similar address" %}</h3>
+        <h3 class="page__section-headline">
+          {% block "eurosfueraerzte-recipients_similar_address_title" %}
+            {% trans "More organisations and doctors at similar address" %}
+          {% endblock %}
+        </h3>
       </header>
       {% include "correctiv_eurosfueraerzte/_recipient_nearby.html" with nearby_objects=same_address_objects %}
     </div>
@@ -85,7 +89,11 @@
   <div class="page__row">
     <div class="page__section -narrow">
       <header class="page__section-header">
-        <h3 class="page__section-headline">{% trans "Nearby doctors and organisations" %}</h3>
+        <h3 class="page__section-headline">
+          {% block "eurosfueraerzte-recipients_nearby_title" %}
+            {% trans "More doctors and organisations nearby" %}
+          {% endblock %}
+        </h3>
       </header>
       {% include "correctiv_eurosfueraerzte/_recipient_nearby.html" with nearby_objects=nearby_objects %}
     </div>
