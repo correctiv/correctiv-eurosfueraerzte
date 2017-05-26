@@ -28,7 +28,8 @@ class ZeroDocSubmissionAdmin(admin.ModelAdmin):
 
 class ZeroDoctorAdmin(LeafletGeoAdmin):
     display_raw = True  # raw geo field
-    list_display = ('get_full_name', 'email', 'get_full_address',)
+    list_display = ('get_full_name', 'email', 'has_submissions',
+                    'all_submissions_confirmed', 'get_full_address',)
     list_filter = ('country',)
     search_fields = ('first_name', 'last_name', 'email', 'location', 'address',
                      'postcode')
@@ -45,6 +46,8 @@ class ZeroDoctorAdmin(LeafletGeoAdmin):
         return my_urls + urls
 
     def get_full_address(self, obj):
+        if not obj.address and not obj.location:
+            return '---'
         return format_html('{address}, {postcode} {location} ({country})',
             address=obj.address,
             postcode=obj.postcode,

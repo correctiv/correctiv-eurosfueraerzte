@@ -85,7 +85,7 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
     # Display raw input for geo fields
     display_raw = True
     list_display = ('get_full_name', 'address', 'postcode', 'location')
-    list_filter = ('kind', 'origin')
+    list_filter = ('kind', 'origin', 'is_zerodoc')
     search_fields = ('first_name', 'name', 'address', 'postcode', 'location')
     save_on_top = True
 
