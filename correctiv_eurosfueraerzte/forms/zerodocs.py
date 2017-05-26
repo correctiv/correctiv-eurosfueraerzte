@@ -122,6 +122,7 @@ class ZeroDocSubmitForm(forms.ModelForm):
             required=False, choices=(
         ('', '---'),
         ('Allgemeinmediziner', 'Allgemeinmediziner / Praktischer Arzt'),
+        ('Anästhesie', 'Facharzt für  Anästhesiologie'),
         ('Internist', 'Facharzt für Innere Medizin / Internist'),
         ('Frauenheilkunde', 'Facharzt für Frauenheilkunde'),
         ('Kinderheilkunde', 'Facharzt für Kinderheilkunde'),
