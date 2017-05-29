@@ -1,0 +1,32 @@
+{% autoescape off %}--
+
+Markus Grill
+
+Chefredakteur
+CORRECTIV
+
+
+Tel: +49 (0)30 5557 8020
+Tel: +49 (0)201 7471 7860
+Email: info@correctiv.org
+
+Jede und jeder kann Mitglied der CORRECTIV-Community werden: https://correctiv.org/community/
+Unterstützt gemeinnützigen Recherche-Journalismus in Deutschland!
+
+https://correctiv.org
+https://www.twitter.com/correctiv_org
+https://www.facebook.com/correctiv.org
+
+CORRECTIV
+
+ist eine Marke der
+
+CORRECTIV - Recherchen für die Gesellschaft gemeinnützige GmbH
+Huyssenallee 11
+45128 Essen
+
+Handelsregister Essen
+HRB 25135
+
+Geschäftsführer: David Schraven
+{% endautoescape %}

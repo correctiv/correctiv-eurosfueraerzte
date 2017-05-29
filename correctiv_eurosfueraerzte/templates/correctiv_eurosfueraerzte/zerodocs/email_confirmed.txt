@@ -10,5 +10,5 @@ Thanks
 
 The team of CORRECTIV
 
-{% endblocktrans %}{% include "account/email/default_footer.txt" %}
+{% endblocktrans %}{% include "correctiv_eurosfueraerzte/default_footer.txt" %}
 {% endautoescape %}
