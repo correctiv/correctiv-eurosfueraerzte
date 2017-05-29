@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-26 12:02+0200\n"
-"PO-Revision-Date: 2017-05-26 12:04+0100\n"
+"POT-Creation-Date: 2017-05-29 12:13+0200\n"
+"PO-Revision-Date: 2017-05-29 11:09+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -888,17 +888,16 @@ msgstr ""
 "  "
 
 #: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:11
-msgid "/recherchen/euros-fuer-aerzte/artikel/2017/05/16/interesse-am-konflikt/"
-msgstr ""
-"/recherchen/euros-fuer-aerzte/artikel/2017/05/16/interesse-am-konflikt/"
-
-#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:11
-msgid "background article"
-msgstr "Zum Hintergrund"
-
-#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:13
 msgid "Register"
 msgstr "Eintragen"
+
+#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:12
+msgid "https://correctiv.org/a/1739"
+msgstr "https://correctiv.org/a/1739"
+
+#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:12
+msgid "background article"
+msgstr "Zum Hintergrund"
 
 #: templates/correctiv_eurosfueraerzte/drug_detail.html:20
 msgid "Active ingredient"
@@ -934,7 +933,7 @@ msgid "Total Number of Patients"
 msgstr "Gesamtanzahl Patienten"
 
 #: templates/correctiv_eurosfueraerzte/drug_detail.html:46
-#: templates/correctiv_eurosfueraerzte/index.html:122
+#: templates/correctiv_eurosfueraerzte/index.html:124
 #, python-format
 msgid "%(count)s patients"
 msgstr "%(count)s Patienten"
@@ -944,7 +943,7 @@ msgid "Total minimum fees planned"
 msgstr "Geplante Gesamtausgaben"
 
 #: templates/correctiv_eurosfueraerzte/drug_detail.html:54
-#: templates/correctiv_eurosfueraerzte/index.html:144
+#: templates/correctiv_eurosfueraerzte/index.html:146
 #, python-format
 msgid "%(fee)s&nbsp;€"
 msgstr "%(fee)s&nbsp;€"
@@ -990,18 +989,14 @@ msgid "Your search did not give any results"
 msgstr "Deine Suche brachte keine Ergebnisse."
 
 #: templates/correctiv_eurosfueraerzte/index.html:28
-msgid "Known top money-receiving doctors"
-msgstr "Top-Ärzte mit bekannten Zahlungen"
+msgid "Doctors with highest payments"
+msgstr "Ärzte mit den höchsten Zahlungen"
 
 #: templates/correctiv_eurosfueraerzte/index.html:48
-msgid "Newest Zero Doctors"
-msgstr "Neueste Null-Euro-Ärzte"
+msgid "Latest entries for 'Zero Euro Doctors'"
+msgstr "Neueste Einträge bei „Null-Euro-Ärzte“"
 
-#: templates/correctiv_eurosfueraerzte/index.html:68
-msgid "Top paying companies"
-msgstr "Top-Pharmafirmen"
-
-#: templates/correctiv_eurosfueraerzte/index.html:100
+#: templates/correctiv_eurosfueraerzte/index.html:102
 msgid ""
 "Pharma companies pay doctors to observe how well patients tolerate certain "
 "drugs. These ”observational studies” are useless for science. But doctors "
@@ -1015,15 +1010,15 @@ msgstr ""
 "umstrittenen Studien erreicht haben – und welche Präparate vor allem in den "
 "Markt gedrückt werden."
 
-#: templates/correctiv_eurosfueraerzte/index.html:101
+#: templates/correctiv_eurosfueraerzte/index.html:103
 msgid "Read this for more"
 msgstr "Zum Hintergrundartikel"
 
-#: templates/correctiv_eurosfueraerzte/index.html:111
+#: templates/correctiv_eurosfueraerzte/index.html:113
 msgid "Top drugs by study patients"
 msgstr "AWBs mit den meisten Patienten"
 
-#: templates/correctiv_eurosfueraerzte/index.html:133
+#: templates/correctiv_eurosfueraerzte/index.html:135
 msgid "Top studies by fees per patient"
 msgstr "AWBs mit dem höchsten Honorar"
 
@@ -1639,6 +1634,20 @@ msgstr ""
 #: views/zerodocs.py:48
 msgid "Please check your form input again!"
 msgstr "Bitte überprüfen Sie Ihre Eingaben!"
+
+#~ msgid ""
+#~ "/recherchen/euros-fuer-aerzte/artikel/2017/05/16/interesse-am-konflikt/"
+#~ msgstr ""
+#~ "/recherchen/euros-fuer-aerzte/artikel/2017/05/16/interesse-am-konflikt/"
+
+#~ msgid "Known top money-receiving doctors"
+#~ msgstr "Top-Ärzte mit bekannten Zahlungen"
+
+#~ msgid "Newest Zero Doctors"
+#~ msgstr "Neueste Null-Euro-Ärzte"
+
+#~ msgid "Top paying companies"
+#~ msgstr "Top-Pharmafirmen"
 
 #~ msgid "Confirm"
 #~ msgstr "Bestätigen"
