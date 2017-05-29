@@ -25,7 +25,7 @@
     <div class="col-md-6">
       <table class="efa__table table table-striped">
         <thead>
-          <th colspan="2">{% trans "Known top money-receiving doctors" %}</th>
+          <th colspan="2">{% trans "Doctors with highest payments" %}</th>
         </thead>
         <tbody>
         {% for doctor in top_doctors %}
@@ -45,7 +45,7 @@
     <div class="col-md-6">
       <table class="efa__table table table-striped">
         <thead>
-          <th colspan="2">{% trans "Newest Zero Doctors" %}</th>
+          <th colspan="2">{% trans "Latest entries for 'Zero Euro Doctors'" %}</th>
         </thead>
         <tbody>
         {% for doctor in latest_zerodocs %}
@@ -63,9 +63,10 @@
         </tbody>
       </table>
 
+      {% comment %}
       <table class="efa__table table table-striped">
         <thead>
-          <th colspan="2">{% trans "Top paying companies" %}</th>
+          <th colspan="2">{% trans "Pharma companies with the highest payments" %}</th>
         </thead>
         <tbody>
         {% for company in top_companies %}
@@ -80,7 +81,7 @@
         {% endfor %}
         </tbody>
       </table>
-
+      {% endcomment %}
     </div>
   </div>
 

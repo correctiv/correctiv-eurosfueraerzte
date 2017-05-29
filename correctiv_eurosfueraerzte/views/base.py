@@ -84,9 +84,9 @@ class IndexView(LocaleMixin, SearchMixin, TemplateView):
         context['is_index'] = True
         context['top_drugs'] = Drug.objects.get_by_patient_sum()[:5]
         context['highest_paid_studies'] = ObservationalStudy.objects.get_by_fee_per_patient()[:5]
-        context['top_companies'] = PharmaCompany.objects.get_by_payment_sum(country)[:5]
-        context['top_doctors'] = PaymentRecipient.objects.get_top_doctors(country)[:12]
-        context['latest_zerodocs'] = PaymentRecipient.objects.get_latest_zerodocs(country)[:5]
+        # context['top_companies'] = PharmaCompany.objects.get_by_payment_sum(country)[:5]
+        context['top_doctors'] = PaymentRecipient.objects.get_top_doctors(country)[:10]
+        context['latest_zerodocs'] = PaymentRecipient.objects.get_latest_zerodocs(country)[:10]
         return context
 
 
