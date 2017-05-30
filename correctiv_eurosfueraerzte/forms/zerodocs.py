@@ -121,7 +121,7 @@ class ZeroDocSubmitForm(forms.ModelForm):
     specialisation = forms.ChoiceField(label=_('your specialisation'),
             required=False, choices=(
         ('', '---'),
-        ('Allgemeinmediziner', 'Allgemeinmediziner / Praktischer Arzt'),
+        ('Allgemeinmediziner', 'Facharzt für Allgemeinmedizin'),
         ('Anästhesie', 'Facharzt für  Anästhesiologie'),
         ('Internist', 'Facharzt für Innere Medizin / Internist'),
         ('Frauenheilkunde', 'Facharzt für Frauenheilkunde'),
@@ -136,6 +136,7 @@ class ZeroDocSubmitForm(forms.ModelForm):
         ('Urologie', 'Facharzt für Urologie'),
         ('Psychologischer Psychotherapeut', 'Psychologischer Psychotherapeut'),
         ('Zahnarzt', 'Zahnarzt'),
+        ('Praktischer Arzt', 'Praktischer Arzt'),
         ('Sonstige', 'Sonstige'),
     ))
     web = forms.URLField(label=_('website'), required=False,
