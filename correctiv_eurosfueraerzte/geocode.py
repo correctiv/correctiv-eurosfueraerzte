@@ -1,8 +1,10 @@
+import logging
 from django.conf import settings
 from django.contrib.gis.geos import GEOSGeometry
 
 import geocoder
 
+logger = logging.getLogger()
 
 SEARCH_URL = u'https://search.mapzen.com/v1/search'
 
@@ -15,14 +17,17 @@ def geocode_google(search, country):
         'language': country.lower(),
         'components': 'country:%s' % country,
     }
-
-    geocoding_result = geocoder.google(search, **kwargs)
-    latlng = None
-    if geocoding_result.geojson['properties']['status'] == "OVER_QUERY_LIMIT":
-        raise Exception('Over query API limit')
-    if geocoding_result and geocoding_result.latlng:
-        latlng = geocoding_result.latlng
-    return latlng
+    try:
+        geocoding_result = geocoder.google(search, **kwargs)
+        latlng = None
+        if geocoding_result.geojson['properties']['status'] == "OVER_QUERY_LIMIT":
+            raise Exception('Over query API limit')
+        if geocoding_result and geocoding_result.latlng:
+            latlng = geocoding_result.latlng
+        return latlng
+    except Exception as e:
+        logger.exception('Geocoding failed')
+        return None
 
 
 def geocode(obj):
