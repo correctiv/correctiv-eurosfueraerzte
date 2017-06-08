@@ -1,0 +1,74 @@
+{% extends "correctiv_eurosfueraerzte/zerodocs/detail.html" %}
+
+{% load i18n %}
+{% load number_utils %}
+
+{% block header_sidebar_title %}
+  {% trans "Zero Francs Doctor" %}
+{% endblock %}
+
+{% block header_sidebar_about %}
+  <p>
+    {% blocktrans %}Since 2016 the pharma industry publishes the fees paid to individual doctors – if they agreed to the publication. The problem: doctors who don't take any money are not visible in this transparency project.
+    {% endblocktrans %}
+  </p>
+  <p>
+    <a class="efa__header__more-link" href="{% url "eurosfueraerzte:eurosfueraerzte-zerodocs_index" %}?country=ch">
+      {% trans "To the Zero Francs Doctors Project" %}
+    </a>
+  </p>
+{% endblock %}
+
+{% block recipient_main %}
+  {% with efpia_years=zerodoc.get_confirmed_efpia_years %}
+    {% if efpia_years %}
+      <p>
+        {% blocktrans with name=zerodoc.get_full_name year_list=efpia_years|join_list count counter=efpia_years|length context "CH" %}
+          {{ name }} has not received benefits from pharma companies under the pharma cooperation codex (PKK) transparency codex in {{ year_list }}.
+        {% plural %}
+          {{ name }} has not received benefits from pharma companies under the pharma cooperation codex (PKK) in {{ year_list }}.
+        {% endblocktrans %}
+    </p>
+  {% endif %}
+  {% with observational_years=zerodoc.get_confirmed_observational_years %}
+    {% if observational_years %}
+      <p>
+        {% if efpia_years %}
+          {% blocktrans with name=zerodoc.get_full_name year_list=observational_years|join_list count counter=observational_years|length context "CH" %}
+            Additionally, {{ name }} has not received fees for observational studies/NIS in {{ year_list }}.
+          {% plural %}
+            Additionally, {{ name }} has not received fees for observational studies/NIS in {{ year_list }}.
+          {% endblocktrans %}
+        {% else %}
+          {% blocktrans with name=zerodoc.get_full_name year_list=observational_years|join_list count counter=observational_years|length context "CH" %}
+            {{ name }} has not received fees for observational studies/NIS in {{ year_list }}.
+          {% plural %}
+            {{ name }} has not received fees for observational studies/NIS in {{ year_list }}.
+          {% endblocktrans %}
+        {% endif %}
+      </p>
+    {% endif %}
+  {% endwith %}
+  {% endwith %}
+{% endblock %}
+
+{% block "eurosfueraerzte-recipients_similar_address_title" %}
+  {% trans "Organisations and doctors at similar address" %}
+{% endblock %}
+
+{% block "eurosfueraerzte-recipients_nearby_title" %}
+  {% trans "Nearby doctors and organisations" %}
+{% endblock %}
+
+{% block recipient_sidebar %}
+
+<p>
+  {% blocktrans %}
+    The disclosure according to the transparency code does not apply to payments by pharma companies for clinical trials and observational studies. The pharma companies withhold the details of these payments to doctors and only publish aggregate sums.
+  {% endblocktrans %}
+</p>
+
+  {% if payments %}
+    {% include includes.recipient_sidebar %}
+  {% endif %}
+{% endblock %}

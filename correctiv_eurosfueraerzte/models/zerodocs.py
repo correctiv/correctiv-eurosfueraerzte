@@ -7,6 +7,7 @@ from django.contrib.gis.db import models
 from django.conf import settings
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
@@ -23,6 +24,12 @@ DEFAULT_FROM_EMAIL = 'nulleuro@correctiv.org'
 # Translators: filename part
 LETTER_FILENAME = _('letter_zeroeurodocs')
 
+PROJECT_NAME = {
+    'CH': _('Zero Swiss Francs Doctors'),
+    'DE': _('Zero Euro Doctors'),
+    'AT': _('Zero Euro Doctors'),
+}
+
 GENDER_CHOICES = (
     ('female', _('Ms.')),
     ('male', _('Mr.')),
@@ -32,6 +39,24 @@ SUBMISSION_CHOICES = (
     ('efpia', _('EFPIA Transparency Codex')),
     ('observational', _('observational studies')),
 )
+SUBMISSION_CHOICES_DICT = dict(SUBMISSION_CHOICES)
+
+SUBMISSION_CHOICES_LOCALIZED = {
+    'DE': SUBMISSION_CHOICES_DICT,
+    'CH': {
+        'efpia': pgettext_lazy('CH', 'EFPIA Transparency Codex'),
+        'observational': pgettext_lazy('CH', 'observational studies')
+    }
+}
+
+
+def get_templates(country, name):
+    country = country.lower()
+    return [
+        'correctiv_eurosfueraerzte/zerodocs/{country}/{name}'.format(
+            country=country, name=name),
+        'correctiv_eurosfueraerzte/zerodocs/{name}'.format(name=name),
+    ]
 
 
 @python_2_unicode_compatible
@@ -161,7 +186,8 @@ class ZeroDoctor(models.Model):
         self.send_confirmed_email()
 
     def send_login_email(self):
-        content = render_to_string('correctiv_eurosfueraerzte/zerodocs/email_link.txt', {
+        templates = get_templates(self.country, 'email_link.txt')
+        content = render_to_string(templates, {
             'object': self
         })
         try:
@@ -176,7 +202,8 @@ class ZeroDoctor(models.Model):
         return True
 
     def send_submission_email(self):
-        content = render_to_string('correctiv_eurosfueraerzte/zerodocs/email_submitted.txt', {
+        templates = get_templates(self.country, 'email_submitted.txt')
+        content = render_to_string(templates, {
             'object': self
         })
         email = EmailMessage(
@@ -196,7 +223,8 @@ class ZeroDoctor(models.Model):
         return True
 
     def send_confirmed_email(self):
-        content = render_to_string('correctiv_eurosfueraerzte/zerodocs/email_confirmed.txt', {
+        templates = get_templates(self.country, 'email_confirmed.txt')
+        content = render_to_string(templates, {
             'object': self,
             'url': self.recipient.get_absolute_domain_url()
         })
@@ -266,3 +294,9 @@ class ZeroDocSubmission(models.Model):
 
     def __str__(self):
         return '%s %s -> %s' % (self.date.year, self.kind, self.confirmed)
+
+    def get_localized_kind(self):
+        country = self.zerodoc.country
+        if country not in SUBMISSION_CHOICES_LOCALIZED:
+            country = 'DE'
+        return SUBMISSION_CHOICES_LOCALIZED[country][self.kind]

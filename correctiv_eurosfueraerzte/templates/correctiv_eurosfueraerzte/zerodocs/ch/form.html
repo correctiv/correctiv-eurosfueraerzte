@@ -1,0 +1,21 @@
+{% extends "correctiv_eurosfueraerzte/zerodocs/form.html" %}
+
+{% load i18n %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}{% blocktrans with full_name=object.get_full_name %}Zero Francs Form of {{ full_name }}{% endblocktrans %}{% endblock title %}
+
+{% block content_header %}
+
+<h1>
+  {% blocktrans with full_name=object.get_full_name %}Zero Francs Form of {{ full_name }}{% endblocktrans %}
+</h1>
+
+{% endblock %}
+
+{% block zerodoc_posting_means %}
+<p>
+  {% trans "Download the following form letter, sign it, stamp it and send it to us via post or email (details are on the letter)." %}
+</p>
+{% endblock %}

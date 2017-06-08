@@ -10,7 +10,7 @@
       <label>
           <input type="checkbox" name="sub_id" value="{{ sub.pk }}" checked/>
           <span style="text-transform: none">
-            {{ sub.get_kind_display }} - {{ sub.date.year }}
+            {{ sub.get_localized_kind }} - {{ sub.date.year }}
           </span>
       </label>
     {% endif %}

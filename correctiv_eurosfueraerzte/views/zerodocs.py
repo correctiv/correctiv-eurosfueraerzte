@@ -10,23 +10,41 @@
 '''
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import TemplateView
-from django.views.generic import UpdateView
+from django.views.generic import TemplateView, UpdateView
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.utils import timezone
 
 from ..forms.zerodocs import ZeroDocLoginForm, ZeroDocSubmitForm
-from ..models.zerodocs import ZeroDoctor, LETTER_FILENAME
+from ..models.zerodocs import ZeroDoctor, LETTER_FILENAME, get_templates
 from ..zerodocs import generate_pdf
+from ..apps import EFA_COUNTRIES_DICT
 
 
-class ZeroDocsIndexView(TemplateView):
+class CountryMixin(object):
+    def get_country(self):
+        if hasattr(self, 'object'):
+            return self.object.country
+        country = self.request.GET.get('country', '').upper()
+        if country not in EFA_COUNTRIES_DICT:
+            return 'DE'
+        return country
+
+
+class ZeroDocsIndexView(CountryMixin, TemplateView):
     template_name = 'correctiv_eurosfueraerzte/zerodocs/index.html'
 
     def get_context_data(self):
         context = super(ZeroDocsIndexView, self).get_context_data()
         context['form'] = ZeroDocLoginForm()
+
+        # Customise static placeholder for different languages
+        country = self.get_country()
+        if country == 'DE':
+            postfix = ''
+        else:
+            postfix = '_%s' % country
+        context['static_placeholder_lang'] = postfix
         return context
 
 
@@ -53,11 +71,20 @@ def login(request):
     })
 
 
-class ZeroDocsEntryView(UpdateView):
+class EmailSentView(CountryMixin, TemplateView):
+    def get_template_names(self):
+        country = self.get_country()
+        return get_templates(country, 'email_sent.html')
+
+
+class ZeroDocsEntryView(CountryMixin, UpdateView):
     model = ZeroDoctor
     slug_field = 'secret'
     form_class = ZeroDocSubmitForm
-    template_name = 'correctiv_eurosfueraerzte/zerodocs/form.html'
+
+    def get_template_names(self):
+        country = self.get_country()
+        return get_templates(country, 'form.html')
 
     def render_to_response(self, context, **response_kwargs):
         ZeroDoctor.objects.filter(pk=self.object.pk).update(

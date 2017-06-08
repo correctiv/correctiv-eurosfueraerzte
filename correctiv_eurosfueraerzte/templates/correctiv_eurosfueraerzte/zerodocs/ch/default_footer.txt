@@ -1,0 +1,25 @@
+{% autoescape off %}--
+
+Sylke Gruhnwald
+
+Beobachter
+Ringier Axel Springer Schweiz AG
+Flurstrasse 55
+8021 Zürich
+Tel: +41 (0)58 269 20 64
+Mobil: +41 (0)76 737 79 14 – Threema und Signal verfügbar
+E-Mail: sylke.gruhnwald@beobachter.ch – PGP verfügbar via keybase.io/sylke
+www.beobachter.ch
+
+
+In Zusammenarbeit mit
+
+CORRECTIV - Recherchen für die Gesellschaft gemeinnützige GmbH
+Huyssenallee 11
+45128 Essen
+
+Handelsregister Essen
+HRB 25135
+
+Geschäftsführer: David Schraven
+{% endautoescape %}

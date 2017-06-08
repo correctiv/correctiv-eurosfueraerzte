@@ -18,7 +18,52 @@ def get_year_formatter(years):
     return year_prefix, year_str
 
 
+SUBJECT = {
+    'DE': 'Bestätigung meines Eintrags in Ihrer Null-Euro-Äzte-Datenbank',
+    'CH': 'Bestätigung meines Eintrags in Ihrer Null-Franken-Ärzte-Datenbank'
+}
+
+ADDRESS = {
+    'DE': [
+        'CORRECTIV - Recherchen für die Gesellschaft gGmbH',
+        'Singerstr. 109',
+        '10179 Berlin',
+        'Deutschland',
+        None, None, None,
+        'Fax: +49 (0) 30 – 555 780 2 20'
+    ],
+    'CH': [
+        'Beobachter',
+        'Ringier Axel Springer Schweiz AG',
+        'z. Hd. Sylke Gruhnwald',
+        'Flurstrasse 55',
+        '8021 Zürich',
+        None, None, None,
+        'E-Mail: sylke.gruhnwald@beobachter.ch'
+    ]
+}
+
+EFPIA_STATEMENT = {
+    'DE': 'hiermit bestätige ich, dass ich {year_prefix} {year} keine Zuwendungen der Pharmaindustrie im Sinne des FSA/EFPIA-Kodex erhalten habe.',
+    'CH': 'hiermit bestätige ich, dass ich {year_prefix} {year} keine Zuwendungen der Pharmaindustrie im Sinne des PKK/EFPIA-Kodex erhalten habe.',
+}
+
+NIS_NAME = {
+    'DE': 'Anwendungsbeobachtungen/NIS',
+    'CH': 'Praxiserfahrungsberichte'
+}
+
+CLOSING = {
+    'DE': 'Mit freundlichen Grüßen',
+    'CH': 'Mit freundlichen Grüssen'
+}
+
+
 def generate_pdf(f, obj):
+    country = obj.country
+    if country not in SUBJECT:
+        country = 'DE'
+
     doc = SimpleDocTemplate(f, rightMargin=72, leftMargin=72,
                                topMargin=72, bottomMargin=18)
 
@@ -36,35 +81,29 @@ def generate_pdf(f, obj):
         'location': obj.location,
         'country': obj.get_country_display(),
     }
-    address = [
+    doc_address = [
         '{title} {first_name} {last_name}',
         '{address}',
         '{postcode} {location}',
         '{country}'
     ]
-    for a in address:
+    for a in doc_address:
         p.append(Paragraph(a.format(**data), styles["Right"]))
 
     p.append(Spacer(1, 12 * 5))
 
-    address = [
-        'CORRECTIV - Recherchen für die Gesellschaft gGmbH',
-        'Singerstr. 109',
-        '10179 Berlin',
-        'Deutschland',
-    ]
-    for a in address:
-        p.append(Paragraph(a, styles["Normal"]))
-
-    p.append(Spacer(1, 12 * 3))
-    p.append(Paragraph('Fax: +49 (0) 30 – 555 780 2 20', styles['Normal']))
+    for a in ADDRESS[country]:
+        if a is None:
+            p.append(Spacer(1, 12))
+        else:
+            p.append(Paragraph(a, styles["Normal"]))
 
     p.append(Spacer(1, 12 * 4))
 
     now = timezone.now()
     p.append(Paragraph(now.strftime('%d.%m.%Y'), styles["Right"]))
 
-    p.append(Paragraph('Bestätigung meines Eintrags in Ihrer Null-Euro-Ärzte-Datenbank', styles["Normal"]))
+    p.append(Paragraph(SUBJECT[country], styles["Normal"]))
 
     p.append(Paragraph('Aktenzeichen: {date}-{pk}'.format(
         date=obj.last_login.strftime('%Y%m%d'),
@@ -85,19 +124,22 @@ def generate_pdf(f, obj):
     if efpia_years:
         year_prefix, year_str = get_year_formatter(efpia_years)
         text += [
-            'hiermit bestätige ich, dass ich {} {} keine Zuwendungen der '
-            'Pharmaindustrie im Sinne des FSA/EFPIA-Kodex erhalten ' 'habe.'.format(year_prefix, year_str),
+            EFPIA_STATEMENT[country].format(year_prefix=year_prefix, year=year_str),
             None,
         ]
     obs_years = [str(sub.date.year) for sub in obj.get_observational_submissions()]
     if obs_years:
         year_prefix, year_str = get_year_formatter(obs_years)
-        s = ('hiermit bestätige ich, dass ich {} {} keine Honorare '
-             'für Anwendungsbeobachtungen/NIS erhalten habe.')
+        s = ('hiermit bestätige ich, dass ich {year_prefix} {year} keine Honorare '
+             'für {obs} erhalten habe.')
         if efpia_years:
-            s = ('Hiermit bestätige ich weiterhin, dass ich {} {} keine Honorare '
-                 'für Anwendungsbeobachtungen/NIS erhalten habe.')
-        s = s.format(year_prefix, year_str)
+            s = ('Hiermit bestätige ich weiterhin, dass ich {year_prefix} {year} keine Honorare '
+                 'für {obs} erhalten habe.')
+        s = s.format(
+            year_prefix=year_prefix,
+            year=year_str,
+            obs=NIS_NAME[country]
+        )
         text += [
             s,
             None,
@@ -106,7 +148,7 @@ def generate_pdf(f, obj):
     text += [
         'Ich stimme der Veröffentlichung meines vollständigen Namens, meiner beruflichen Adresse und der oben gemachten Angaben zu.',
         None,
-        'Mit freundlichen Grüßen',
+        CLOSING[country],
         None,
         None,
         None,

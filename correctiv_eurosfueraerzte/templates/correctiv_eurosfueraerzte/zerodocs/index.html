@@ -10,7 +10,7 @@
 <div class="page__row">
   <div class="page__section -narrow efa__content">
 
-      {% static_placeholder "eurosfueraerzte-zerodoctor_content" %}
+      {% static_placeholder "eurosfueraerzte-zerodoctor_content"|add:static_placeholder_lang %}
 
     <div>
     {% crispy form %}
@@ -18,12 +18,12 @@
   </div>
 
   <div class="page__sidebar">
-    {% static_placeholder "eurosfueraerzte-zerodoctor_sidebar" %}
+    {% static_placeholder "eurosfueraerzte-zerodoctor_sidebar"|add:static_placeholder_lang %}
   </div>
 </div>
 
 <div class="page__row">
-  {% static_placeholder "eurosfueraerzte-zerodoctor_footer" %}
+  {% static_placeholder "eurosfueraerzte-zerodoctor_footer"|add:static_placeholder_lang %}
 </div>
 
 

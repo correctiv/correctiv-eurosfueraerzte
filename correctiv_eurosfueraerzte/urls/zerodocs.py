@@ -1,9 +1,8 @@
 from django.conf.urls import url, include
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import TemplateView
 
-from ..views.zerodocs import (ZeroDocsIndexView, login, ZeroDocsEntryView,
-                              get_zerodocs_pdf)
+from ..views.zerodocs import (ZeroDocsIndexView, login, EmailSentView,
+                              ZeroDocsEntryView, get_zerodocs_pdf)
 
 
 zerodocs_patterns = [
@@ -11,8 +10,7 @@ zerodocs_patterns = [
     # Translators: url slug
     url(_(r'^login/$'), login, name='eurosfueraerzte-zerodocs_login'),
     # Translators: url slug
-    url(_(r'^login/email-sent/$'), TemplateView.as_view(
-        template_name='correctiv_eurosfueraerzte/zerodocs/email_sent.html'),
+    url(_(r'^login/email-sent/$'), EmailSentView.as_view(),
         name='eurosfueraerzte-zerodocs_email_sent'),
     # Translators: url slug
     url(_(r'^entry/(?P<slug>\w+)/$'), ZeroDocsEntryView.as_view(),

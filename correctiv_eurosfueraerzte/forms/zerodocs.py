@@ -9,20 +9,33 @@ from django.utils.crypto import get_random_string
 from django.utils import timezone
 from django.utils.html import format_html
 from django.core.urlresolvers import reverse_lazy
+from django.utils.translation import pgettext_lazy
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset
 from crispy_forms.bootstrap import StrictButton
 
 from ..models.zerodocs import ZeroDoctor, ZeroDocSubmission
-from ..apps import EFA_COUNTRIES_CHOICE, EFA_YEARS
+from ..apps import EFA_COUNTRIES, EFA_YEARS
 from ..geocode import geocode
 
 
-SUBMISSION_CHECKBOX_LABELS = (
-    ('efpia', _('In %d I have not received any payments from pharmaceutical companies.')),
-    ('observational', _('In %d I have not received fees for observational studies/NIS.'))
-)
+SUBMISSION_CHECKBOX_LABELS = {
+    'DE': (
+        ('efpia', pgettext_lazy('DE', 'In %d I have not received any payments from pharmaceutical companies.')),
+        ('observational', pgettext_lazy('DE', 'In %d I have not received fees for observational studies/NIS.'))
+    ),
+    'CH': (
+        ('efpia', pgettext_lazy('CH', 'In %d I have not received any payments from pharmaceutical companies.')),
+        ('observational', pgettext_lazy('CH', 'In %d I have not received fees for observational studies/NIS.'))
+    )
+
+}
+
+SUBMISSION_EFPIA_HELP_TEXT = {
+    'DE': _('These are payments in accordance with the <a href="http://www.pharma-transparenz.de/ueber-den-transparenzkodex/die-eckpunkte-des-transparenzkodex/">transparency codex of the FSA.</a>'),
+    'CH': _('These are payments in accordance with the <a href=" https://www.scienceindustries.ch/pkk">pharma cooperation codex (PKK).</a>')
+}
 
 
 def generate_secret():
@@ -42,7 +55,7 @@ class ZeroDocLoginForm(forms.ModelForm):
 
     class Meta:
         model = ZeroDoctor
-        fields = ('gender', 'title', 'first_name', 'last_name', 'email',)
+        fields = ('gender', 'title', 'first_name', 'last_name', 'email', 'country')
         help_texts = {
             'email': _('We will send you an email to confirm your address.'),
         }
@@ -92,15 +105,13 @@ class ZeroDocSubmitForm(forms.ModelForm):
     address = forms.CharField(label=_('address'))
     postcode = forms.CharField(label=_('postcode'))
     location = forms.CharField(label=_('location'))
-    country = forms.ChoiceField(label=_('country'),
-                                choices=EFA_COUNTRIES_CHOICE)
+    country = forms.ChoiceField(label=_('country'), choices=EFA_COUNTRIES)
 
     years_efpia = forms.TypedMultipleChoiceField(
         label='',
         widget=forms.CheckboxSelectMultiple(),
         coerce=int,
         required=False,
-        help_text=format_html(_('These are payments in accordance with the <a href="http://www.pharma-transparenz.de/ueber-den-transparenzkodex/die-eckpunkte-des-transparenzkodex/">transparency codex of the FSA.</a>'))
     )
 
     years_observational = forms.TypedMultipleChoiceField(
@@ -152,7 +163,11 @@ class ZeroDocSubmitForm(forms.ModelForm):
         confirmed_years = {}
         remaining_years = {}
         year_field_names = []
-        for kind, label in SUBMISSION_CHECKBOX_LABELS:
+        country = self.instance.country
+        labels = SUBMISSION_CHECKBOX_LABELS.get(country)
+        if labels is None:
+            labels = SUBMISSION_CHECKBOX_LABELS.get('DE')
+        for kind, label in labels:
             confirmed_years[kind] = set(x.date.year for x in
                     self.instance.get_submissions(kind) if x.confirmed)
             remaining_years[kind] = [y for y in EFA_YEARS
@@ -167,6 +182,10 @@ class ZeroDocSubmitForm(forms.ModelForm):
             year_field_names.append(year_field_name)
 
         any_remaining_years = any(x for x in remaining_years.values())
+
+        help_text = format_html(SUBMISSION_EFPIA_HELP_TEXT.get(country, ''))
+        self.fields['years_efpia'].help_text = help_text
+
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'

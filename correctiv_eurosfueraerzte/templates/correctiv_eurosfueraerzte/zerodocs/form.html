@@ -1,4 +1,4 @@
-{% extends "correctiv_eurosfueraerzte/zerodocs/base.html" %}
+:{% extends "correctiv_eurosfueraerzte/zerodocs/base.html" %}
 
 {% load i18n %}
 
@@ -8,9 +8,11 @@
 
 {% block content %}
 
+{% block content_header %}
 <h1>
   {% blocktrans with full_name=object.get_full_name %}Zero Euro Form of {{ full_name }}{% endblocktrans %}
 </h1>
+{% endblock %}
 
 {% with submissions=object.get_all_submissions %}
   {% if not submissions %}
@@ -24,7 +26,7 @@
     <ul>
     {% for submission in submissions %}
       <li>
-        {% blocktrans with year=submission.date.year kind=submission.get_kind_display %}
+        {% blocktrans with year=submission.date.year kind=submission.get_localized_kind %}
           No money received in {{ year }} in category {{ kind }}
         {% endblocktrans %}
         -
@@ -40,9 +42,11 @@
       <p>
         {% trans "You have unconfirmed submissions, please use these options to confirm:" %}
       </p>
+      {% block zerodoc_posting_means %}
       <p>
         {% trans "Download the following form letter, sign it, stamp it and send it to us via post or fax (address details are on the letter)." %}
       </p>
+      {% endblock %}
       <p>
         <a class="btn btn-primary btn-lg" href="{% url 'eurosfueraerzte:eurosfueraerzte-zerodocs_pdf' slug=object.secret %}">
           {% trans "Download letter" %}

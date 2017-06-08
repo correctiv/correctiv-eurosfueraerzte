@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from ..models import Drug, ObservationalStudy, PharmaCompany, PaymentRecipient
 from ..forms import SearchForm, PaymentRecipientSearchForm
 from ..apps import EFA_COUNTRIES_DICT, EFA_COUNTRIES_CHOICE_DICT, EFA_COUNTRIES
+from ..models.zerodocs import get_templates as get_zerodocs_templates
 
 
 def get_origin_include(origin, filename):
@@ -156,7 +157,7 @@ class RecipientDetailView(LocaleMixin, SearchMixin, DetailView):
 
     def get_template_names(self):
         if self.object.is_zerodoc:
-            return ['correctiv_eurosfueraerzte/zerodocs/detail.html']
+            return get_zerodocs_templates(self.object.country, 'detail.html')
         return ['correctiv_eurosfueraerzte/paymentrecipient_detail.html']
 
     def get_meta_info(self, context):
