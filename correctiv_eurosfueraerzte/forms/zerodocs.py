@@ -234,8 +234,12 @@ class ZeroDocSubmitForm(forms.ModelForm):
 
         current_tz = timezone.get_current_timezone()
         has_submitted_years = False
+        country = self.cleaned_data['country']
+        labels = SUBMISSION_CHECKBOX_LABELS.get(country)
+        if labels is None:
+            labels = SUBMISSION_CHECKBOX_LABELS.get('DE')
 
-        for kind, label in SUBMISSION_CHECKBOX_LABELS:
+        for kind, label in labels:
             submitted_years = set(self.cleaned_data['years_%s' % kind])
             if submitted_years:
                 has_submitted_years = True
