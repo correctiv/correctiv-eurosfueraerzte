@@ -61,11 +61,12 @@ class ZeroDocLoginForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        country = kwargs.pop('country', '')
         super(ZeroDocLoginForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper()
         self.helper.form_action = reverse_lazy('eurosfueraerzte:eurosfueraerzte'
-                                               '-zerodocs_login')
+                           '-zerodocs_login') + '?country=' + country.lower()
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'

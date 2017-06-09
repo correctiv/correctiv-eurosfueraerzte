@@ -31,20 +31,24 @@ class CountryMixin(object):
         return country
 
 
+def get_postfix(country):
+    if country == 'DE' or country == '':
+        return ''
+    else:
+        return '_%s' % country
+
+
 class ZeroDocsIndexView(CountryMixin, TemplateView):
     template_name = 'correctiv_eurosfueraerzte/zerodocs/index.html'
 
     def get_context_data(self):
         context = super(ZeroDocsIndexView, self).get_context_data()
-        context['form'] = ZeroDocLoginForm()
 
         # Customise static placeholder for different languages
         country = self.get_country()
-        if country == 'DE':
-            postfix = ''
-        else:
-            postfix = '_%s' % country
+        postfix = get_postfix(country)
         context['static_placeholder_lang'] = postfix
+        context['form'] = ZeroDocLoginForm(country=country)
         return context
 
 
@@ -65,8 +69,12 @@ def login(request):
             messages.add_message(request, messages.ERROR,
                 _('Please check your form input again!'))
     else:
-        form = ZeroDocLoginForm()
+        form = ZeroDocLoginForm(country=request.GET.get('country', ''))
+
+    country = request.GET.get('country', '').upper()
+    postfix = get_postfix(country)
     return render(request, ZeroDocsIndexView.template_name, {
+        'static_placeholder_lang': postfix,
         'form': form
     })
 
