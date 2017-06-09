@@ -157,7 +157,8 @@ class ZeroDocSubmitForm(forms.ModelForm):
     class Meta:
         model = ZeroDoctor
         fields = ('gender', 'title', 'first_name', 'last_name', 'address',
-                  'postcode', 'location', 'country', 'specialisation', 'web')
+                  'postcode', 'location', 'country', 'specialisation',
+                  'address_type', 'web')
 
     def __init__(self, *args, **kwargs):
         super(ZeroDocSubmitForm, self).__init__(*args, **kwargs)
