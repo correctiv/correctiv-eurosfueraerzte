@@ -35,7 +35,8 @@ class SearchVectorStartsWith(SearchVectorExact):
             self.rhs = SearchQuery(self.rhs, config=config)
         rhs, rhs_params = super(SearchVectorExact, self).process_rhs(qn, connection)
         rhs = '(to_tsquery(%s::regconfig, %s))'
-        rhs_params[1] = ' & '.join('%s:*' % s for s in rhs_params[1].split())
+        parts = (s.replace("'", '') for s in rhs_params[1].split())
+        rhs_params[1] = ' & '.join("'%s':*" % s for s in parts if s)
         return rhs, rhs_params
 
     def as_sql(self, qn, connection):
