@@ -464,12 +464,13 @@ class PaymentRecipientManager(models.Manager):
                                  only_same=False):
         qs = self.get_queryset()
         if distance is not None:
-            qs = qs.filter(geo__distance_lte=(point, D(m=distance)))
+            qs = qs.filter(geo__dwithin=(point, D(m=distance)))
         qs = qs.annotate(distance=Distance('geo', point))
         if not include_same:
-            qs = qs.filter(distance__gt=0.0)
+            qs = qs.filter(geo__dwithin=(point, D(m=10000)))  # within 10 km
+            qs = qs.exclude(geo__dwithin=(point, D(m=0.0)))  # but not there
         if only_same:
-            qs = qs.filter(distance=0.0)
+            qs = qs.filter(geo__dwithin=(point, D(m=0.0)))
         qs = self.add_annotations(qs)
         return qs
 
