@@ -86,6 +86,7 @@ class PaymentRecipientSearchForm(SearchForm):
         required=False,
         widget=forms.HiddenInput()
     )
+    zeroeuro = forms.BooleanField(required=False)
 
     country = UpperCaseChoiceField(
         choices=[
@@ -118,6 +119,10 @@ class PaymentRecipientSearchForm(SearchForm):
         recipient_kind = self.cleaned_data['recipient_kind']
         if recipient_kind:
             qs = qs.filter(kind=PaymentRecipient.KIND_MAPPING[recipient_kind])
+
+        is_zerodoc = self.cleaned_data['zeroeuro']
+        if is_zerodoc:
+            qs = qs.filter(is_zerodoc=True)
 
         label = self.cleaned_data['label']
         if label:
