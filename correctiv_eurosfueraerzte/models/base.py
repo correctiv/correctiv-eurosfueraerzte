@@ -412,7 +412,6 @@ class PaymentRecipientManager(models.Manager):
         if query:
             query = SearchQuery(query, config=SEARCH_LANG)
             qs = qs.filter(search_vector=query)
-        qs = self.add_annotations(qs)
         return qs
 
     def autocomplete(self, qs, query):
@@ -425,16 +424,6 @@ class PaymentRecipientManager(models.Manager):
         return queryset.annotate(
             payments_total=models.F('total'),
             payments_total_currency=models.F('total_currency')
-            # payments_fees=models.Sum(
-            #     models.Case(
-            #         models.When(
-            #             pharmapayment__label='fees', then=models.F('pharmapayment__amount')
-            #         ),
-            #         default=0, output_field=models.DecimalField(
-            #             decimal_places=2, max_digits=19
-            #         )
-            #     )
-            # )
         )
 
     def get_top_doctors(self, origin=None):

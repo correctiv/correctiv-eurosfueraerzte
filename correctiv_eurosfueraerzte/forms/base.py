@@ -55,6 +55,9 @@ class SearchForm(forms.Form):
         qs = self.finalise_queryset(qs)
         return qs
 
+    def annotate(self, queryset):
+        return self.model.objects.add_annotations(queryset)
+
     def autocomplete(self, queryset):
         return self.search(queryset, autocomplete=True)
 
@@ -110,6 +113,9 @@ class PaymentRecipientSearchForm(SearchForm):
             raise forms.ValidationError("Bad latlng")
         return ''
 
+    def requires_distinct(self):
+        return self.cleaned_data['company'] or self.cleaned_data['label']
+
     def update_queryset(self, qs):
         company = self.cleaned_data['company']
         if company:
@@ -131,17 +137,27 @@ class PaymentRecipientSearchForm(SearchForm):
         return qs
 
     def finalise_queryset(self, qs):
-        order_field = '-total_euro'
-
         country = self.cleaned_data['country']
         if country:
             qs = qs.filter(origin=country)
 
+        latlng = self.cleaned_data['latlng']
+        if latlng:
+            qs = qs.filter(geo__dwithin=(latlng, D(km=50)))
+
+        if self.requires_distinct():
+            qs = qs.distinct()
+
+        return qs
+
+    def annotate(self, queryset):
+        qs = super(PaymentRecipientSearchForm, self).annotate(queryset)
+        order_field = '-total_euro'
+
         qs = qs.order_by(order_field)
+
         latlng = self.cleaned_data['latlng']
         if latlng:
             qs = qs.annotate(distance=Distance('geo', latlng))
-            qs = qs.filter(geo__distance_lte=(latlng, D(km=50)))
             qs = qs.order_by('distance', order_field)
-        qs = qs.distinct()
         return qs

@@ -14,6 +14,7 @@ from ..models import Drug, ObservationalStudy, PharmaCompany, PaymentRecipient
 from ..forms import SearchForm, PaymentRecipientSearchForm
 from ..apps import EFA_COUNTRIES_DICT, EFA_COUNTRIES_CHOICE_DICT, EFA_COUNTRIES
 from ..models.zerodocs import get_templates as get_zerodocs_templates
+from ..utils import OptimizedPaginator
 
 
 def get_origin_include(origin, filename):
@@ -95,6 +96,7 @@ class SearchView(ListView):
     model = Drug
     search_form = SearchForm
     paginate_by = 20
+    paginator_class = OptimizedPaginator
 
     def get_search_form(self):
         return self.search_form(self.request.GET)
@@ -109,6 +111,21 @@ class SearchView(ListView):
         else:
             result = self.form.search(qs)
         return result
+
+    def annotate(self, queryset):
+        return self.form.annotate(queryset)
+
+    def get_paginator(self, queryset, per_page, orphans=0,
+                      allow_empty_first_page=True, **kwargs):
+        """
+        Return an instance of the paginator for this view.
+        """
+        annotated_qs = self.annotate(queryset)
+        return self.paginator_class(
+            queryset, per_page, orphans=orphans,
+            allow_empty_first_page=allow_empty_first_page,
+            annotated_qs=annotated_qs,
+            **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
