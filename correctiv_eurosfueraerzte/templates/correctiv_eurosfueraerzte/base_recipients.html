@@ -14,21 +14,26 @@
         <div class="efa__search__lead">
           {% trans "How much money has your doctor received from the pharma industry last year?" %}
 
-          {% if recipient_form.is_valid and recipient_form.company_obj and recipient_form.label.value %}
+          {% if recipient_form.is_valid and recipient_form.company_obj or recipient_form.label.value %}
           <ul>
-          {% if recipient_form.company_obj %}
-            <li>
-              {% blocktrans with name=recipient_form.company_obj %}
-                Currently only showing recipients of {{ name }}.
-              {% endblocktrans %}
-            </li>
-          {% endif %}
-          {% if recipient_form.label.value %}
-            <li>
-              {% blocktrans with label=recipient_form.label_description %}
-                Currently only showing recipients getting {{ label }}.
-              {% endblocktrans %}
-            </li>
+            {% if recipient_form.company_obj and recipient_form.label.value %}
+              <li>
+                {% blocktrans with name=recipient_form.company_obj label=recipient_form.label_description %}
+                  Currently only showing recipients of {{ name }} getting {{ label }}.
+                {% endblocktrans %}
+              </li>
+            {% elif recipient_form.company_obj %}
+              <li>
+                {% blocktrans with name=recipient_form.company_obj %}
+                  Currently only showing recipients of {{ name }}.
+                {% endblocktrans %}
+              </li>
+            {% elif recipient_form.label.value %}
+              <li>
+                {% blocktrans with label=recipient_form.label_description %}
+                  Currently only showing recipients getting {{ label }}.
+                {% endblocktrans %}
+              </li>
             {% endif %}
           </ul>
           {% endif %}

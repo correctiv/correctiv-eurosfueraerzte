@@ -118,9 +118,20 @@ class PaymentRecipientSearchForm(SearchForm):
 
     def update_queryset(self, qs):
         company = self.cleaned_data['company']
+        label = self.cleaned_data['label']
+
         if company:
             self.company_obj = company
+        if label:
+            self.label_description = PharmaPayment.PAYMENT_LABELS_DICT[label]
+
+        if company and label:
+            qs = qs.filter(pharmapayment__pharma_company=company,
+                           pharmapayment__label=label)
+        elif company:
             qs = qs.filter(pharmapayment__pharma_company=company)
+        elif label:
+            qs = qs.filter(pharmapayment__label=label)
 
         recipient_kind = self.cleaned_data['recipient_kind']
         if recipient_kind:
@@ -130,10 +141,6 @@ class PaymentRecipientSearchForm(SearchForm):
         if is_zerodoc:
             qs = qs.filter(is_zerodoc=True)
 
-        label = self.cleaned_data['label']
-        if label:
-            self.label_description = PharmaPayment.PAYMENT_LABELS_DICT[label]
-            qs = qs.filter(pharmapayment__label=label)
         return qs
 
     def finalise_queryset(self, qs):
