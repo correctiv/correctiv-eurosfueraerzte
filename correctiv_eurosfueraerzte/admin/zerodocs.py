@@ -1,16 +1,64 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from django.db import models
 from django.conf.urls import url
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import PermissionDenied
 from django.utils.html import format_html
 from django.contrib import messages
+from django.utils import timezone
+from django.contrib.admin.filters import SimpleListFilter
 
 from leaflet.admin import LeafletGeoAdmin
 
 from ..models import ZeroDoctor
+
+
+class RecipientNullFilterSpec(SimpleListFilter):
+    title = _('In Euros for Doctors database')
+    parameter_name = 'recipient_id'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('1', _('Has value')),
+            ('0', _('None')),
+        )
+
+    def queryset(self, request, queryset):
+        kwargs = {
+            '%s' % self.parameter_name: None,
+        }
+        if self.value() == '0':
+            return queryset.filter(**kwargs)
+        if self.value() == '1':
+            return queryset.exclude(**kwargs)
+        return queryset
+
+
+class HasSubmissionsListFilter(admin.SimpleListFilter):
+    title = _('Has submissions')
+
+    parameter_name = 'has_submissions'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('1', _('has submissions')),
+            ('0', _('has no submissions')),
+        )
+
+    def queryset(self, request, qs):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        qs = qs.annotate(submission_count=models.Count('zerodocsubmission'))
+        if self.value() == '0':
+            return qs.filter(submission_count=0)
+        elif self.value() == '1':
+            return qs.filter(submission_count__gt=0)
 
 
 class ZeroDocSubmissionAdmin(admin.ModelAdmin):
@@ -30,11 +78,13 @@ class ZeroDoctorAdmin(LeafletGeoAdmin):
     display_raw = True  # raw geo field
     list_display = ('get_full_name', 'email', 'has_submissions',
                     'all_submissions_confirmed', 'get_full_address',)
-    list_filter = ('country',)
+    list_filter = ('country', RecipientNullFilterSpec, HasSubmissionsListFilter)
     search_fields = ('first_name', 'last_name', 'email', 'location', 'address',
                      'postcode')
     raw_id_fields = ('recipient',)
     save_on_top = True
+
+    actions = ['export_csv']
 
     def get_urls(self):
         urls = super(ZeroDoctorAdmin, self).get_urls()
@@ -74,3 +124,16 @@ class ZeroDoctorAdmin(LeafletGeoAdmin):
             messages.add_message(request, messages.SUCCESS,
                 _('Successfully confirmed!'))
         return redirect('admin:correctiv_eurosfueraerzte_zerodoctor_changelist')
+
+    def export_csv(self, request, queryset):
+        from correctiv_community.helpers.csv_utils import export_csv_response
+
+        fields = ('id', 'gender', 'title', 'first_name', 'last_name',
+                'email', 'recipient_id',
+                'address', 'postcode', 'location', 'country',
+                'address_type', 'geo', 'specialisation', 'web',
+                'confirmed_on', 'secret'
+        )
+        filename = timezone.now().strftime('zerodocs_%Y%m%d-%H%M.csv')
+        return export_csv_response(queryset, fields, name=filename)
+    export_csv.short_description = _("Export to CSV")
