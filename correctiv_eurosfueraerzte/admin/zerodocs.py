@@ -16,10 +16,7 @@ from leaflet.admin import LeafletGeoAdmin
 from ..models import ZeroDoctor
 
 
-class RecipientNullFilterSpec(SimpleListFilter):
-    title = _('In Euros for Doctors database')
-    parameter_name = 'recipient_id'
-
+class NullFilterSpec(SimpleListFilter):
     def lookups(self, request, model_admin):
         return (
             ('1', _('Has value')),
@@ -35,6 +32,16 @@ class RecipientNullFilterSpec(SimpleListFilter):
         if self.value() == '1':
             return queryset.exclude(**kwargs)
         return queryset
+
+
+class RecipientNullFilterSpec(NullFilterSpec):
+    title = _('In Euros for Doctors database')
+    parameter_name = 'recipient_id'
+
+
+class LastLoginNullFilterSpec(NullFilterSpec):
+    title = _('Logged in')
+    parameter_name = 'last_login'
 
 
 class HasSubmissionsListFilter(admin.SimpleListFilter):
@@ -78,7 +85,8 @@ class ZeroDoctorAdmin(LeafletGeoAdmin):
     display_raw = True  # raw geo field
     list_display = ('get_full_name', 'email', 'has_submissions',
                     'all_submissions_confirmed', 'get_full_address',)
-    list_filter = ('country', RecipientNullFilterSpec, HasSubmissionsListFilter)
+    list_filter = ('country', RecipientNullFilterSpec, HasSubmissionsListFilter,
+                    LastLoginNullFilterSpec)
     search_fields = ('first_name', 'last_name', 'email', 'location', 'address',
                      'postcode')
     raw_id_fields = ('recipient',)
@@ -132,7 +140,7 @@ class ZeroDoctorAdmin(LeafletGeoAdmin):
                 'email', 'recipient_id',
                 'address', 'postcode', 'location', 'country',
                 'address_type', 'geo', 'specialisation', 'web',
-                'confirmed_on', 'secret'
+                'confirmed_on', 'get_absolute_domain_url',
         )
         filename = timezone.now().strftime('zerodocs_%Y%m%d-%H%M.csv')
         return export_csv_response(queryset, fields, name=filename)
