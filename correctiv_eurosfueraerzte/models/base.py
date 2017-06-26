@@ -16,6 +16,7 @@ from django.contrib.postgres.search import (SearchVectorField, SearchVector,
 import pandas as pd
 
 from ..utils import convert_currency_to_euro
+from ..apps import EFA_YEARS
 
 
 SEARCH_LANG = 'simple'
@@ -556,12 +557,28 @@ class PaymentRecipient(models.Model):
     def compute_total(self):
         aggs = self.pharmapayment_set.all().aggregate(models.Sum('amount'),
                 models.Count('pharma_company', distinct=True))
+
         self.total = aggs['amount__sum'] or decimal.Decimal(0)
         self.total_currency = PharmaPayment.ORIGIN_CURRENCY[self.origin]
-        self.total_euro = convert_currency_to_euro(self.total,
-                                                   self.total_currency,
-                                                   2015)
+
         self.company_count = aggs['pharma_company__count']
+
+        year_aggs = self.pharmapayment_set.all().values('date').annotate(
+            amount=models.Sum('amount'),
+            company_count=models.Count('pharma_company', distrinct=True)
+        )
+        total_euro = decimal.Decimal(0.0)
+
+        for year_agg in year_aggs:
+            year = year_agg['date'].year
+            self.aggs['total_%s' % year] = float(year_agg['amount'])
+            year_euro = convert_currency_to_euro(year_agg['amount'],
+                                                 self.total_currency, year)
+            total_euro += year_euro
+            self.aggs['total_euro_%s' % year] = float(year_euro)
+            self.aggs['company_count_%s' % year] = year_agg['company_count']
+
+        self.total_euro = total_euro
 
     def distance_is_zero(self):
         if not hasattr(self, 'distance'):
