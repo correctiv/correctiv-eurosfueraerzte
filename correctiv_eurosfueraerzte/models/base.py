@@ -606,6 +606,11 @@ class PaymentRecipient(models.Model):
             'payments_total_currency': self.total_currency
         }
 
+    def get_amounts_for_years(self):
+        for year in EFA_YEARS:
+            amount = self.aggs.get('total_%s' % year)
+            yield amount
+
 
 @python_2_unicode_compatible
 class Doctor(PaymentRecipient):
