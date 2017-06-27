@@ -61,7 +61,7 @@ def currency_format(context, value, currency='EUR', decimal=2):
     value = round(value, decimal)
     formatted = format_currency(value, currency, locale=locale)
     symbol = get_currency_symbol(currency, locale=locale)
-    if context.get('filter_country') is None and len(symbol) == 1:
+    if not context.get('filter_country') and len(symbol) == 1:
         # When we have possibly mixed currencies, show three letter symbol
         # This improves alignment
         formatted = formatted.replace(symbol, currency)
