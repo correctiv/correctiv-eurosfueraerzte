@@ -41,6 +41,7 @@ class LocaleMixin(object):
         'ch': _('Money for Doctors'),
         'at': _('Euros for Doctors'),
     }
+    SUBLOCALE = {'de': {'ch', 'at'}}
 
     def get_context_data(self, **kwargs):
         context = super(LocaleMixin, self).get_context_data(**kwargs)
@@ -55,7 +56,12 @@ class LocaleMixin(object):
         context['country_label_choice'] = EFA_COUNTRIES_CHOICE_DICT.get(country)
         context['filter_country'] = self.get_country()
         current_lang = translation.get_language()
-        context['locale'] = '%s_%s' % (current_lang, fallback_country)
+        sublocales = self.SUBLOCALE.get(current_lang)
+        if sublocales and country in sublocales:
+            context['locale'] = '%s_%s' % (current_lang, country)
+        else:
+            context['locale'] = current_lang
+
         context['project_title'] = self.TITLES.get(country_lower)
         context['includes'] = LocaleIncludeDict(country_lower)
         context['has_aggregates'] = self.HAS_AGGREGATES.get(country)
