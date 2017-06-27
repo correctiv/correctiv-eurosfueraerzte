@@ -148,7 +148,7 @@ class PaymentRecipientSearchForm(SearchForm):
         if country:
             qs = qs.filter(origin=country)
 
-        latlng = self.cleaned_data['latlng']
+        latlng = self.cleaned_data.get('latlng')
         if latlng:
             qs = qs.filter(geo__dwithin=(latlng, D(km=50)))
 
@@ -163,7 +163,7 @@ class PaymentRecipientSearchForm(SearchForm):
 
         qs = qs.order_by(order_field)
 
-        latlng = self.cleaned_data['latlng']
+        latlng = self.cleaned_data.get('latlng')
         if latlng:
             qs = qs.annotate(distance=Distance('geo', latlng))
             qs = qs.order_by('distance', order_field)
