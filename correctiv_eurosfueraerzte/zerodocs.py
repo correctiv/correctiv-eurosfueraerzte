@@ -40,6 +40,16 @@ ADDRESS = {
         '8021 Zürich',
         None, None, None,
         'E-Mail: sylke.gruhnwald@beobachter.ch'
+    ],
+    'AT': [
+        'CORRECTIV - Recherchen für die Gesellschaft gGmbH',
+        'Singerstr. 109',
+        '10179 Berlin',
+        'Deutschland',
+        None, None, None,
+        'E-Mail: nulleuro@correctiv.org',
+        None,
+        'Fax: +49 (0) 30 – 555 780 2 20',
     ]
 }
 
@@ -59,11 +69,11 @@ CLOSING = {
 }
 
 
-def generate_pdf(f, obj):
-    country = obj.country
-    if country not in SUBJECT:
-        country = 'DE'
+def trans(dic, key, fallback='DE'):
+    return dic.get(key, dic[fallback])
 
+
+def generate_pdf(f, obj):
     doc = SimpleDocTemplate(f, rightMargin=72, leftMargin=72,
                                topMargin=72, bottomMargin=18)
 
@@ -92,7 +102,7 @@ def generate_pdf(f, obj):
 
     p.append(Spacer(1, 12 * 5))
 
-    for a in ADDRESS[country]:
+    for a in trans(ADDRESS, obj.country):
         if a is None:
             p.append(Spacer(1, 12))
         else:
@@ -103,7 +113,7 @@ def generate_pdf(f, obj):
     now = timezone.now()
     p.append(Paragraph(now.strftime('%d.%m.%Y'), styles["Right"]))
 
-    p.append(Paragraph(SUBJECT[country], styles["Normal"]))
+    p.append(Paragraph(trans(SUBJECT, obj.country), styles["Normal"]))
 
     p.append(Paragraph('Aktenzeichen: {date}-{pk}'.format(
         date=obj.last_login.strftime('%Y%m%d'),
@@ -124,7 +134,9 @@ def generate_pdf(f, obj):
     if efpia_years:
         year_prefix, year_str = get_year_formatter(efpia_years)
         text += [
-            EFPIA_STATEMENT[country].format(year_prefix=year_prefix, year=year_str),
+            trans(EFPIA_STATEMENT,
+                  obj.country).format(
+                    year_prefix=year_prefix, year=year_str),
             None,
         ]
     obs_years = [str(sub.date.year) for sub in obj.get_observational_submissions()]
@@ -138,7 +150,7 @@ def generate_pdf(f, obj):
         s = s.format(
             year_prefix=year_prefix,
             year=year_str,
-            obs=NIS_NAME[country]
+            obs=trans(NIS_NAME, obj.country)
         )
         text += [
             s,
@@ -148,7 +160,7 @@ def generate_pdf(f, obj):
     text += [
         'Ich stimme der Veröffentlichung meines vollständigen Namens, meiner beruflichen Adresse und der oben gemachten Angaben zu.',
         None,
-        CLOSING[country],
+        trans(CLOSING, obj.country),
         None,
         None,
         None,
