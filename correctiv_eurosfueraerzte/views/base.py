@@ -162,7 +162,7 @@ class RecipientSearchView(LocaleMixin, SearchView):
 
     def get_country(self):
         form = self.form
-        if form.cleaned_data:
+        if form.cleaned_data and 'country' in form.cleaned_data:
             return form.cleaned_data['country']
         return ''
 
