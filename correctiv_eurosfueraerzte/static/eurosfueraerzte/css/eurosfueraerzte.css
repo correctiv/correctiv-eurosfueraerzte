@@ -163,7 +163,7 @@
     right: 72%;
   }
 }
-.-zerodoc.efa__header__sidebar:after {
+.efa__header__sidebar.-zerodoc:after {
   background-image: none;
 }
 .efa__header__sidebar--pharma:after {
@@ -191,6 +191,9 @@
     z-index: 2;
   }
 }
+.efa__header__content.-zerodoc {
+  width: 45%;
+}
 .efa__header__about {
   padding: 30px 15px;
 }
@@ -214,6 +217,24 @@
 }
 .efa__header__meta {
   display: block;
+}
+.efa__header__credentials {
+  display: block;
+  margin: 0;
+  padding: 15px 0 0 0;
+}
+.efa__header__credentials > li {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.efa__header__credentials-item {
+  color: #316f89;
+  margin: 0;
+  padding: .5em 0 0 0;
+}
+.efa__header__credentials-item:before {
+  content: '✓ ';
 }
 .efa__home-link {
   font-family: 'Neuzeit-Condensed', 'Arial Narrow', 'Franklin Gothic Medium', sans-serif;

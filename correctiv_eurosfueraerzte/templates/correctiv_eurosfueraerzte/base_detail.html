@@ -14,7 +14,7 @@
   <header class="efa__header--split">
     <div class="container">
       <div class="efa__header__main">
-        <div class="efa__header__content">
+        <div class="efa__header__content{% block header_content_modifier %}{% endblock %}">
 
           <a class="efa__home-link" href="{% url 'eurosfueraerzte:eurosfueraerzte-country_index' country=country|lower %}">
             {{ project_title }}

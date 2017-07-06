@@ -3,6 +3,22 @@
 {% load i18n %}
 {% load number_utils %}
 
+{% block header_content %}
+  <ul class="efa__header__credentials">
+    <li>
+      <h2 class="efa__header__credentials-item">
+        {% trans "Zero Euro Doctor" %} 2016
+      </h2>
+    </li>
+    <li>
+      <h2 class="efa__header__credentials-item">
+        {% trans "Zero Euro Doctor" %} 2015
+      </h2>
+    </li>
+  </ul>
+{% endblock %}
+
+{% block header_content_modifier %} -zerodoc{% endblock %}
 {% block header_sidebar_modifier %} -zerodoc{% endblock %}
 
 {% block header_sidebar_title %}
