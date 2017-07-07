@@ -1,7 +1,6 @@
 {% extends "correctiv_eurosfueraerzte/base_recipients.html" %}
 
-{% load i18n %}
-
+{% load i18n static sekizai_tags %}
 
 {% block title %}{% if query %}{% blocktrans with query=query project_title=project_title %}Search for „{{ query }}” in {{ project_title }} Database{% endblocktrans %}{% else %}{% blocktrans with project_title=project_title %}Search in {{ project_title }} Database{% endblocktrans %}{% endif %}{% endblock %}
 
@@ -13,6 +12,10 @@
 {% regroup object_list by distance_is_zero as distance_object_list %}
 
 {% if distance_object_list.0.list and distance_object_list.0.grouper %}
+  {% addtoblock "js" %}
+    <script src="{% static 'eurosfueraerzte/dist/bundle.js' %}"></script>
+  {% endaddtoblock %}
+
   <h3>
     {% trans "Exact matches at this address" %}
   </h3>
@@ -29,7 +32,7 @@
 {% endif %}
 
 {% if distance_object_list.1.list %}
-  <h3>Folgende weitere Empfänger gibt es im Umkreis von 50 km</h3>
+
   {% include "correctiv_eurosfueraerzte/_recipient_list_table.html" with object_list=distance_object_list.1.list %}
 {% elif object_list and not distance_object_list.0.grouper %}
   <h3>{% trans "Your search matched these recipients" %}</h3>
