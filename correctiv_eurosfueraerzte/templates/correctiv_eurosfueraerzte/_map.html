@@ -2,6 +2,13 @@
 
 <div id="efa__map" class="efa__map"></div>
 
-{% addtoblock "js" %}
-  <script src="{% static 'eurosfueraerzte/dist/map.js' %}"></script>
-{% endaddtoblock %}
+{% with place=places.0.geo %}
+  {% addtoblock "js" %}
+    <script src="{% static 'eurosfueraerzte/dist/map.js' %}"></script>
+    <script>
+      eurosfueraerzte.initializeMap({
+        center: [{{ place.y|safe }}, {{ place.x|safe }}]
+      })
+    </script>
+  {% endaddtoblock %}
+{% endwith %}

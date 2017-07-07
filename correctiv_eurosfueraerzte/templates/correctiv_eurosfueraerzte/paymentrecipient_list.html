@@ -12,7 +12,7 @@
 {% regroup object_list by distance_is_zero as distance_object_list %}
 
 {% if distance_object_list.0.list and distance_object_list.0.grouper %}
-  {% include "correctiv_eurosfueraerzte/_map.html" %}
+  {% include "correctiv_eurosfueraerzte/_map.html" with places=distance_object_list.0.list %}
 
   <h3>
     {% trans "Exact matches at this address" %}

@@ -40,7 +40,10 @@ gulp.task('less', function() {
 
 /* Transpile, browsify and uglify/minify ES6 */
 gulp.task('babel', function () {
-  var bundler = browserify(JS_SOURCE + MAIN_JS_FILE);
+  var bundler = browserify(JS_SOURCE + MAIN_JS_FILE, {
+    standalone: 'eurosfueraerzte'
+  });
+
   bundler.transform(babelify);
   bundler.bundle()
     .on('error', function (err) { console.error(err); })
