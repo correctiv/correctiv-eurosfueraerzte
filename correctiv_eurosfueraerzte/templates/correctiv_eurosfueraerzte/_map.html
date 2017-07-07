@@ -6,6 +6,7 @@
   {% addtoblock "js" %}
     <script src="{% static 'eurosfueraerzte/dist/map.js' %}"></script>
     <script>
+      // TODO: Initialize map with list of places
       eurosfueraerzte.initializeMap({
         center: [{{ place.y|safe }}, {{ place.x|safe }}]
       })
