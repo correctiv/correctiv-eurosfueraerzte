@@ -1,6 +1,6 @@
 {% extends "correctiv_eurosfueraerzte/base_recipients.html" %}
 
-{% load i18n static sekizai_tags %}
+{% load i18n %}
 
 {% block title %}{% if query %}{% blocktrans with query=query project_title=project_title %}Search for „{{ query }}” in {{ project_title }} Database{% endblocktrans %}{% else %}{% blocktrans with project_title=project_title %}Search in {{ project_title }} Database{% endblocktrans %}{% endif %}{% endblock %}
 
@@ -12,9 +12,7 @@
 {% regroup object_list by distance_is_zero as distance_object_list %}
 
 {% if distance_object_list.0.list and distance_object_list.0.grouper %}
-  {% addtoblock "js" %}
-    <script src="{% static 'eurosfueraerzte/dist/bundle.js' %}"></script>
-  {% endaddtoblock %}
+  {% include "correctiv_eurosfueraerzte/_map.html" %}
 
   <h3>
     {% trans "Exact matches at this address" %}
