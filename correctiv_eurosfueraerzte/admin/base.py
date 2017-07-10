@@ -106,6 +106,7 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
 
 
 class PharmaPaymentAdmin(admin.ModelAdmin):
+    date_hierarchy = 'date'
     list_filter = ('origin', 'label', 'pharma_company',)
     list_display = ('pharma_company', 'recipient', 'date', 'label', 'amount',
                     'origin')
