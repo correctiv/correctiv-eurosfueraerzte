@@ -1,0 +1,16 @@
+{% load i18n %}{% autoescape off %}{% blocktrans with gender_title=object.get_gender_title last_name=object.last_name url=object.get_absolute_domain_url %}Dear {{ gender_title }} {{ last_name }}
+
+Please print the attached PDF file and send it to us via postal mail, fax or email to complete your submission.
+
+You can review and adjust your submission here:
+
+{{ url }}
+
+This link is only for you and acts as a password. Do not share it with others.
+
+Thanks
+
+The team of CORRECTIV and Beobachter
+
+{% endblocktrans %}{% include "correctiv_eurosfueraerzte/zerodocs/ch/default_footer.txt" %}
+{% endautoescape %}
