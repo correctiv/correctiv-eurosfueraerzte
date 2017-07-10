@@ -7,7 +7,7 @@ const TILES_ATTRIBUTION = `
   © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,
   © <a href="https://carto.com/attribution">CARTO</a>`
 
-const initializeMap = ({ center }) => {
+const initializeMap = ({ center, places }) => {
   const map = new Map(CONTAINER, {
     center: center,
     scrollWheelZoom: false,
@@ -25,7 +25,10 @@ const initializeMap = ({ center }) => {
   });
 
   // TODO: Initialize with JSON (to be passed through from initialization)
-  markers.addLayer(L.marker(center));
+  places.forEach(function(c) {
+    markers.addLayer(L.marker(c.geo, {title: c.name})
+                      .bindPopup(`<a href="${c.url}">${c.name}</a>`));
+  });
 
   map.addLayer(tiles)
   map.addLayer(markers)

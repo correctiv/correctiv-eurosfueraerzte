@@ -2,14 +2,20 @@
 
 <div id="efa__map" class="efa__map"></div>
 
-{% with place=places.0.geo %}
-  {% addtoblock "js" %}
-    <script src="{% static 'eurosfueraerzte/dist/map.js' %}"></script>
-    <script>
-      // TODO: Initialize map with list of places
-      eurosfueraerzte.initializeMap({
-        center: [{{ place.y|safe }}, {{ place.x|safe }}]
-      })
-    </script>
-  {% endaddtoblock %}
-{% endwith %}
+{% addtoblock "js" %}
+  <script src="{% static 'eurosfueraerzte/dist/map.js' %}"></script>
+  <script>
+    eurosfueraerzte.initializeMap({
+      center: [{{ places.0.geo.y|safe }}, {{ places.0.geo.x|safe }}],
+      places: [
+        {% for place in places %}
+          {
+            geo: [{{ place.geo.y|safe }}, {{ place.geo.x|safe }}],
+            name: "{{ place.get_full_name|escapejs }}",
+            url: "{{ place.get_absolute_url|escapejs }}"
+          }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      ]
+    });
+  </script>
+{% endaddtoblock %}
