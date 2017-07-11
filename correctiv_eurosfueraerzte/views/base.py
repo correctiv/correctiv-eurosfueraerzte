@@ -207,7 +207,7 @@ class RecipientDetailView(LocaleMixin, SearchMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(RecipientDetailView, self).get_context_data(**kwargs)
         context['aggs'] = self.object.get_aggregates()
-        context['payments'] = self.object.pharmapayment_set.all()
+        context['payments'] = self.object.get_payments()
         if self.object.is_zerodoc:
             context['zerodoc'] = self.object.zerodoctor
         if self.object.geo:

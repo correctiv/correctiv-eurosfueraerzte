@@ -16,7 +16,7 @@ from django.contrib.postgres.search import (SearchVectorField, SearchVector,
 import pandas as pd
 
 from ..utils import convert_currency_to_euro
-from ..apps import EFA_YEARS, CURRENT_YEAR_BY_COUNTRY
+from ..apps import EFA_YEARS, CURRENT_YEAR, FILTER_YEAR
 
 
 SEARCH_LANG = 'simple'
@@ -143,7 +143,7 @@ class PharmaCompanyManager(models.Manager):
         return qs
 
     def get_aggregated_payments(self, obj):
-        current_year = CURRENT_YEAR_BY_COUNTRY[obj.country]
+        current_year = CURRENT_YEAR[obj.country]
         p = obj.pharmapayment_set.filter(date__year=current_year)
 
         result = (p.annotate(individual_recipient=models.Case(
@@ -610,9 +610,20 @@ class PaymentRecipient(models.Model):
         }
 
     def get_amounts_for_years(self):
+        filter_year = FILTER_YEAR.get(self.origin)
         for year in EFA_YEARS:
+            if filter_year is not None and filter_year != year:
+                yield None
+                continue
             amount = self.aggs.get('total_%s' % year)
             yield amount
+
+    def get_payments(self):
+        qs = self.pharmapayment_set.all()
+        filter_year = FILTER_YEAR.get(self.origin)
+        if filter_year:
+            return qs.filter(date__year=filter_year)
+        return qs
 
 
 @python_2_unicode_compatible
