@@ -19,14 +19,13 @@ EFA_COUNTRIES_CHOICE_DICT = dict(EFA_COUNTRIES_CHOICE)
 
 EFA_YEARS = [2015, 2016]
 
-CURRENT_YEAR = 2016
 CURRENT_YEAR = {
-    'AT': 2015,
+    'AT': 2016,
     'DE': 2015,
     'CH': 2015,
 }
 FILTER_YEAR = {
-    'AT': 2015,
+    'AT': None,
     'DE': 2015,
     'CH': 2015,
 }
