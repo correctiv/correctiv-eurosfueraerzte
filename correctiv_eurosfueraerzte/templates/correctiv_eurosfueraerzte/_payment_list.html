@@ -14,13 +14,13 @@
         <tr>
           <th>{% trans "Company" %}</th>
           <th>{% trans "Payment type" %}</th>
+          <th>{% trans "Year" %}</th>
           <th class="text-right">{% trans "Amount" %}</th>
         </tr>
       </thead>
       <tfoot>
         <tr>
-          <td></td>
-          <td>
+          <td colspan="3" class="text-right">
             <strong>{% trans "Total" %}</strong>
           </td>
           <td class="text-right">
@@ -49,7 +49,7 @@
               </small>
             {% endif %}
           </td>
-          {# <td> {{ payment.date.year }} </td>#}
+          <td> {{ payment.date.year }} </td>
           <td class="text-right">
             {% currency_format payment.amount payment.currency %}
           </td>
