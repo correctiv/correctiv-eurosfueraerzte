@@ -34,8 +34,7 @@ class ReplacementMixin(object):
 
         # Display the confirmation page
         return TemplateResponse(request,
-            'correctiv_eurosfueraerzte/admin/replace_objects.html',
-                context, current_app=self.admin_site.name)
+            'correctiv_eurosfueraerzte/admin/replace_objects.html', context)
     replace_objects.short_description = _('Replace selected with...')
 
 
@@ -106,6 +105,7 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
 
 
 class PharmaPaymentAdmin(admin.ModelAdmin):
+    date_hierarchy = 'date'
     list_filter = ('origin', 'label', 'pharma_company',)
     list_display = ('pharma_company', 'recipient', 'date', 'label', 'amount',
                     'origin')

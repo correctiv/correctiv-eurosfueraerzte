@@ -6,6 +6,9 @@ from django.core.paginator import Paginator
 CURRENCY_CONVERSION_EURO = {
     2015: {
         'CHF': decimal.Decimal(0.9205150814)
+    },
+    2016: {
+        'CHF': decimal.Decimal(0.9322542672)
     }
 }
 

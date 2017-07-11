@@ -38,9 +38,8 @@
 {% endif %}
 
 {% if not object_list %}
-  <div class="page__row">
-    <div class="page__section">
-
+  <div class="row">
+    <div class="col-md-7 efa__content">
       <h3>
         {% blocktrans %}
           We could not find any person or organisation for the search criteria.
@@ -53,10 +52,17 @@
       </p>
       <p>
         {% trans "Try these example searches:" %}
+      </p>
+      <p>
         {% include includes.search_examples %}
       </p>
-
     </div>
+
+    <aside class="col-md-5 efa__content">
+      {% if country|lower == "de" %}
+        {% include includes.zero_euro %}
+      {% endif %}
+    </aside>
   </div>
 {% endif %}
 {% if page_obj.has_other_pages %}

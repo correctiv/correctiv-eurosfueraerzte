@@ -46,9 +46,17 @@
           </span>
         </div>
         <div class="efa__search__options">
-          {% blocktrans with kind=recipient_form.recipient_kind country=recipient_form.country %}
+          <p>
+            {% blocktrans with kind=recipient_form.recipient_kind country=recipient_form.country %}
             Search for {{ kind }} in {{ country }}
           {% endblocktrans %}
+          </p>
+          <div class="checkbox">
+            <label>
+              {{ recipient_form.zeroeuro }}
+              {% trans "Show only Zero Euro Docs" %}
+            </label>
+          </div>
         </div>
 
         {% addtoblock "js" %}

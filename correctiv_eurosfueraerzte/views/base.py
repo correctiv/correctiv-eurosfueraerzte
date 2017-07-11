@@ -12,7 +12,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from ..models import Drug, ObservationalStudy, PharmaCompany, PaymentRecipient
 from ..forms import SearchForm, PaymentRecipientSearchForm
-from ..apps import EFA_COUNTRIES_DICT, EFA_COUNTRIES_CHOICE_DICT, EFA_COUNTRIES
+from ..apps import (EFA_COUNTRIES_DICT, EFA_COUNTRIES_CHOICE_DICT,
+                    EFA_COUNTRIES, EFA_YEARS)
 from ..models.zerodocs import get_templates as get_zerodocs_templates
 from ..utils import OptimizedPaginator
 
@@ -169,6 +170,7 @@ class RecipientSearchView(LocaleMixin, SearchView):
     def get_context_data(self, **kwargs):
         context = super(RecipientSearchView, self).get_context_data(**kwargs)
         context['recipient_form'] = context['form']
+        context['efa_years'] = EFA_YEARS
         return context
 
 

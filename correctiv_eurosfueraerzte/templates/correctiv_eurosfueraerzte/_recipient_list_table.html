@@ -7,7 +7,12 @@
       <tr>
         <th>{% trans "Name" %}</th>
         <th>{% trans "Address" %}</th>
-        <th class="text-right">{% trans "Total amount" %}</th>
+        {% for year in efa_years %}
+          <th class="text-right hidden-xs">
+            {{ year }}
+          </th>
+        {% endfor %}
+        {# <th class="text-right">{% trans "Total amount" %}</th>#}
       </tr>
     </thead>
   {% for object in object_list %}
@@ -21,6 +26,16 @@
         {{ object.address }}<br/>
         {{ object.postcode }} {{ object.location }}
       </td>
+      {% for amount in object.get_amounts_for_years %}
+        <td class="text-right hidden-xs">
+          {% if object.hidden_payments or amount is None %}
+            {% trans "not available" %}
+          {% else %}
+            {% currency_format amount object.total_currency %}
+          {% endif %}
+        </td>
+      {% endfor %}
+      {% comment %}
       <td class="text-right">
         {% if object.hidden_payments %}
           {% trans "not available" %}
@@ -28,6 +43,7 @@
           {% currency_format object.total object.total_currency %}
         {% endif %}
       </td>
+      {% endcomment %}
     </tr>
   {% endfor %}
   </table>
