@@ -302,11 +302,14 @@
   }
 }
 .efa__search__form button,
-.efa__search__form input,
+.efa__search__form input[type="text"],
+.efa__search__form input[type="search"],
 .efa__search__form--small button,
-.efa__search__form--small input,
+.efa__search__form--small input[type="text"],
+.efa__search__form--small input[type="search"],
 .efa__search__form--pharma button,
-.efa__search__form--pharma input {
+.efa__search__form--pharma input[type="text"],
+.efa__search__form--pharma input[type="search"] {
   height: 60px;
   border-radius: 0;
   border: 0;
@@ -319,11 +322,14 @@
 }
 @media (min-width: 992px) {
   .efa__search__form button,
-  .efa__search__form input,
+  .efa__search__form input[type="text"],
+  .efa__search__form input[type="search"],
   .efa__search__form--small button,
-  .efa__search__form--small input,
+  .efa__search__form--small input[type="text"],
+  .efa__search__form--small input[type="search"],
   .efa__search__form--pharma button,
-  .efa__search__form--pharma input {
+  .efa__search__form--pharma input[type="text"],
+  .efa__search__form--pharma input[type="search"] {
     font-size: 24px;
     height: 72px;
   }
@@ -357,12 +363,14 @@
   padding: 30px 0;
 }
 .efa__search__form--small button,
-.efa__search__form--small input {
+.efa__search__form--small input[type="text"],
+.efa__search__form--small input[type="search"] {
   margin-bottom: 15px;
 }
 @media (min-width: 992px) {
   .efa__search__form--small button,
-  .efa__search__form--small input {
+  .efa__search__form--small input[type="text"],
+  .efa__search__form--small input[type="search"] {
     font-size: 19px;
     height: 60px;
   }
