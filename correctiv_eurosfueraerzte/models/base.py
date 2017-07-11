@@ -20,6 +20,8 @@ from ..apps import EFA_YEARS
 
 
 SEARCH_LANG = 'simple'
+# Distance in km
+SEARCH_DISTANCE = 10
 
 
 class SearchVectorStartsWith(SearchVectorExact):
@@ -457,7 +459,7 @@ class PaymentRecipientManager(models.Manager):
             qs = qs.filter(geo__dwithin=(point, D(m=distance)))
         qs = qs.annotate(distance=Distance('geo', point))
         if not include_same:
-            qs = qs.filter(geo__dwithin=(point, D(m=10000)))  # within 10 km
+            qs = qs.filter(geo__dwithin=(point, D(m=SEARCH_DISTANCE * 1000)))
             qs = qs.exclude(geo__dwithin=(point, D(m=0.0)))  # but not there
         if only_same:
             qs = qs.filter(geo__dwithin=(point, D(m=0.0)))
