@@ -102,7 +102,7 @@ class IndexView(LocaleMixin, SearchMixin, TemplateView):
 class SearchView(ListView):
     model = Drug
     search_form = SearchForm
-    paginate_by = 20
+    paginate_by = 100
     paginator_class = OptimizedPaginator
 
     def get_search_form(self):
