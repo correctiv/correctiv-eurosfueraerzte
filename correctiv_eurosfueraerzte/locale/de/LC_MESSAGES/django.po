@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-06 10:13+0200\n"
-"PO-Revision-Date: 2017-07-06 10:17+0100\n"
+"POT-Creation-Date: 2017-07-11 23:48+0200\n"
+"PO-Revision-Date: 2017-07-11 23:48+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Successfully replaced objects."
 msgstr "Erfolgreich Objekte ersetzt."
 
-#: admin/base.py:39
+#: admin/base.py:38
 msgid "Replace selected with..."
 msgstr "Ersetze Objekte mit..."
 
@@ -55,6 +55,7 @@ msgid "has no submissions"
 msgstr "hat keine Angaben"
 
 #: admin/zerodocs.py:81
+#: templates/correctiv_eurosfueraerzte/_payment_list.html:17
 msgid "Year"
 msgstr "Jahr"
 
@@ -101,10 +102,10 @@ msgctxt "in @country"
 msgid "Switzerland"
 msgstr "der Schweiz"
 
-#: apps.py:25 cms_apps.py:7 cms_plugins.py:11
+#: apps.py:36 cms_apps.py:7 cms_plugins.py:11
 #: templates/correctiv_eurosfueraerzte/_drug_search.html:8
 #: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:7
-#: views/base.py:40 views/base.py:42
+#: views/base.py:41 views/base.py:43
 msgid "Euros for Doctors"
 msgstr "Euros für Ärzte"
 
@@ -253,126 +254,126 @@ msgstr "Bitte kreuzen Sie an:"
 msgid "Submit"
 msgstr "Abschicken"
 
-#: models/base.py:199 templates/correctiv_eurosfueraerzte/drug_detail.html:28
+#: models/base.py:203 templates/correctiv_eurosfueraerzte/drug_detail.html:28
 msgid "Pharma Company"
 msgstr "Pharmaunternehmen"
 
-#: models/base.py:200
+#: models/base.py:204
 msgid "Pharma Companies"
 msgstr "Pharmaunternehmen"
 
-#: models/base.py:280
+#: models/base.py:284
 msgid "active ingredient"
 msgstr "Wirkstoff"
 
-#: models/base.py:282
+#: models/base.py:286
 msgid "medical indication"
 msgstr "Indikation"
 
-#: models/base.py:288
+#: models/base.py:292
 msgid "pharma company"
 msgstr "Pharmaunternehmen"
 
-#: models/base.py:298 models/base.py:299
+#: models/base.py:302 models/base.py:303
 msgid "Drugs"
 msgstr "Medikamente"
 
-#: models/base.py:342
+#: models/base.py:346
 msgid "drugs"
 msgstr "Medikamente"
 
-#: models/base.py:353
+#: models/base.py:357
 msgid "executing company"
 msgstr "Ausführende Firma"
 
-#: models/base.py:355
+#: models/base.py:359
 msgid "sponsor"
 msgstr "Auftraggeber"
 
-#: models/base.py:369
+#: models/base.py:373
 msgid "observational study"
 msgstr "Anwendungsbeobachtung"
 
-#: models/base.py:370 models/zerodocs.py:40
+#: models/base.py:374 models/zerodocs.py:40
 msgid "observational studies"
 msgstr "Anwendungsbeobachtungen"
 
-#: models/base.py:497 models/base.py:662
+#: models/base.py:501 models/base.py:698
 msgid "Doctors (HCP)"
 msgstr "Ärzte (HCP)"
 
-#: models/base.py:498 models/base.py:663
+#: models/base.py:502 models/base.py:699
 msgid "Organisation (HCO)"
 msgstr "Organisation (HCO)"
 
-#: models/base.py:509 models/zerodocs.py:85
+#: models/base.py:513 models/zerodocs.py:85
 msgid "Geographic location"
 msgstr "Geographischer Standort"
 
-#: models/base.py:536
+#: models/base.py:540
 msgid "payment recipient"
 msgstr "Zahlungsempfänger"
 
-#: models/base.py:537
+#: models/base.py:541
 msgid "payment recipients"
 msgstr "Zahlungsempfänger"
 
-#: models/base.py:578 models/zerodocs.py:169
+#: models/base.py:598 models/zerodocs.py:169
 #: templates/correctiv_eurosfueraerzte/_recipient_list_table.html:8
 #: templates/correctiv_eurosfueraerzte/drug_list.html:17
 #: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:125
 msgid "Name"
 msgstr "Name"
 
-#: models/base.py:599
+#: models/base.py:635
 msgid "medical doctor"
 msgstr "Arzt"
 
-#: models/base.py:600
+#: models/base.py:636
 msgid "medical doctors"
 msgstr "Ärzte"
 
-#: models/base.py:617
+#: models/base.py:653
 msgid "healthcare organisation"
 msgstr "Organisation im Gesundheitswesen"
 
-#: models/base.py:618
+#: models/base.py:654
 msgid "healthcare organisations"
 msgstr "Fachpersonal im Gesundheitswesen"
 
-#: models/base.py:633
+#: models/base.py:669
 msgid "fees"
 msgstr "Honorare"
 
-#: models/base.py:634
+#: models/base.py:670
 msgid "related expenses"
 msgstr "Spesen"
 
-#: models/base.py:636
+#: models/base.py:672
 msgid "registration fees"
 msgstr "Tagungsgebühren"
 
-#: models/base.py:637
+#: models/base.py:673
 msgid "travel & accommodation"
 msgstr "Reisekosten"
 
-#: models/base.py:639
+#: models/base.py:675
 msgid "donations and grants"
 msgstr "Spenden & Fördergelder"
 
-#: models/base.py:640
+#: models/base.py:676
 msgid "sponsorship"
 msgstr "Sponsoring"
 
-#: models/base.py:642
+#: models/base.py:678
 msgid "Research & development"
 msgstr "Forschung & Entwicklung"
 
-#: models/base.py:671
+#: models/base.py:707
 msgid "pharma payment"
 msgstr "Zahlung der Pharmaindustrie"
 
-#: models/base.py:672
+#: models/base.py:708
 msgid "pharma payments"
 msgstr "Zahlungen der Pharmaindustrie"
 
@@ -564,7 +565,7 @@ msgstr "Pharmaunternehmen"
 msgid "Payment type"
 msgstr "Zahlungstyp"
 
-#: templates/correctiv_eurosfueraerzte/_payment_list.html:17
+#: templates/correctiv_eurosfueraerzte/_payment_list.html:18
 msgid "Amount"
 msgstr "Betrag"
 
@@ -596,11 +597,7 @@ msgstr ""
 msgid "Note:"
 msgstr "Hinweis:"
 
-#: templates/correctiv_eurosfueraerzte/_recipient_list_table.html:10
-msgid "Total amount"
-msgstr "Gesamtbetrag"
-
-#: templates/correctiv_eurosfueraerzte/_recipient_list_table.html:26
+#: templates/correctiv_eurosfueraerzte/_recipient_list_table.html:32
 msgid "not available"
 msgstr "nicht verfügbar"
 
@@ -817,7 +814,7 @@ msgstr ""
 "haben.\n"
 "              "
 
-#: templates/correctiv_eurosfueraerzte/base_recipients.html:49
+#: templates/correctiv_eurosfueraerzte/base_recipients.html:50
 #, python-format
 msgid ""
 "\n"
@@ -827,6 +824,10 @@ msgstr ""
 "\n"
 "          Suche nach %(kind)s in %(country)s\n"
 "        "
+
+#: templates/correctiv_eurosfueraerzte/base_recipients.html:57
+msgid "Show only Zero Euro Docs"
+msgstr "Suche nur Null-Euro-Ärzte"
 
 #: templates/correctiv_eurosfueraerzte/ch/_about_blurb.html:4
 #: templates/correctiv_eurosfueraerzte/ch/_index_blurb.html:3
@@ -1182,29 +1183,29 @@ msgstr "Weitere Empfänger an ähnlicher Adresse"
 msgid "More doctors and organisations nearby"
 msgstr "Weitere Empfänger in der Nähe"
 
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:6
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:5
 #, python-format
 msgid "Search for „%(query)s” in %(project_title)s Database"
 msgstr "Suche nach „%(query)s“ in der „%(project_title)s“-Datenbank"
 
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:6
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:5
 #, python-format
 msgid "Search in %(project_title)s Database"
 msgstr "Suche in der „%(project_title)s“-Datenbank"
 
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:9
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:8
 msgid "The database about money flows from pharma companies to doctors."
 msgstr "Datenbank zu Zahlungen der Pharmaindustrie an Ärzte."
 
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:17
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:18
 msgid "Exact matches at this address"
 msgstr "Genaue Treffer an dieser Adresse"
 
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:21
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:22
 msgid "The following recipients were found at this address:"
 msgstr "Diese Empfänger wurden an dieser Adresse gefunden:"
 
-#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:35
+#: templates/correctiv_eurosfueraerzte/paymentrecipient_list.html:36
 msgid "Your search matched these recipients"
 msgstr "Deine Suche ergab folgende Treffer"
 
@@ -1375,7 +1376,7 @@ msgid "Zero Francs Doctor"
 msgstr "Null-Franken-Arzt"
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/ch/detail.html:12
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:14
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:30
 msgid ""
 "Since 2016 the pharma industry publishes the fees paid to individual doctors "
 "– if they agreed to the publication. The problem: doctors who don't take any "
@@ -1470,17 +1471,17 @@ msgstr[1] ""
 "        "
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/ch/detail.html:56
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:58
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:74
 msgid "Organisations and doctors at similar address"
 msgstr "Organisationen und Ärzte an ähnlicher Adresse"
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/ch/detail.html:60
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:62
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:78
 msgid "Nearby doctors and organisations"
 msgstr "Ärzte und Organisationen in der Nähe"
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/ch/detail.html:66
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:68
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:84
 msgid ""
 "\n"
 "    The disclosure according to the transparency code does not apply to "
@@ -1616,15 +1617,17 @@ msgstr ""
 "ihn ab und schicken Sie ihn uns per Post oder E-Mail (die Adresse finden Sie "
 "auf dem Brief)."
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:9
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:10
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:15
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:25
 msgid "Zero Euro Doctor"
 msgstr "Null-Euro-Ärzte"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:19
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:35
 msgid "To the Zero Euro Doctors Project"
 msgstr "Zum Projekt Null-Euro-Ärzte"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:28
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:44
 #, python-format
 msgid ""
 "\n"
@@ -1651,7 +1654,7 @@ msgstr[1] ""
 "müssen.\n"
 "        "
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:39
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:55
 #, python-format
 msgid ""
 "\n"
@@ -1676,7 +1679,7 @@ msgstr[1] ""
 "zu haben.\n"
 "        "
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:45
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:61
 #, python-format
 msgid ""
 "\n"
@@ -1925,57 +1928,57 @@ msgstr "^eintrag/(?P<slug>\\w+)/pdf/$"
 msgid "^zero-euro/"
 msgstr "^null-euro/"
 
-#: views/base.py:41
+#: views/base.py:42
 msgid "Money for Doctors"
 msgstr "Geld für Ärzte"
 
-#: views/base.py:189
+#: views/base.py:191
 #, python-format
 msgid "%(name)s does not take money from the pharma industry"
 msgstr "%(name)s nimmt kein Geld von der Pharmaindustrie an"
 
-#: views/base.py:192
+#: views/base.py:194
 #, python-format
 msgid "Details on why %(name)s doesn't take money from pharma companies."
 msgstr "Details warum %(name)s kein Geld von Pharmaunternehmen annimmt."
 
-#: views/base.py:197
+#: views/base.py:199
 #, python-format
 msgid "%(name)s and money from the pharma industry"
 msgstr "%(name)s und Geld von der Pharmaindustrie."
 
-#: views/base.py:200
+#: views/base.py:202
 #, python-format
 msgid "Details on how much money %(name)s got from pharma companies."
 msgstr "Details wieviel Geld %(name)s von der Pharmaindustrie bekommen hat."
 
-#: views/base.py:235
+#: views/base.py:237
 #, python-format
 msgid "Drug %(name)s"
 msgstr "Medikament %(name)s"
 
-#: views/base.py:236
+#: views/base.py:238
 #, python-format
 msgid "Details on how much money doctors got to prescribe %(name)s."
 msgstr ""
 "Details wieviel Geld Ärzte bekommen haben, um %(name)s zu verschreiben."
 
-#: views/base.py:255
+#: views/base.py:257
 #, python-format
 msgid "Observational Study  %(title)s"
 msgstr "Anwendungsbeobachtung %(title)s"
 
-#: views/base.py:258
+#: views/base.py:260
 #, python-format
 msgid "Details on the observational study %(title)s."
 msgstr "Details über die Anwendungsbeobachtung %(title)s."
 
-#: views/base.py:275
+#: views/base.py:277
 #, python-format
 msgid "Pharma company  %(name)s"
 msgstr "Pharmaunternehmen %(name)s"
 
-#: views/base.py:278
+#: views/base.py:280
 #, python-format
 msgid ""
 "Details on how money from %(name)s goes to doctors and observational studies."
@@ -1996,6 +1999,9 @@ msgstr ""
 #: views/zerodocs.py:70
 msgid "Please check your form input again!"
 msgstr "Bitte überprüfen Sie Ihre Eingaben!"
+
+#~ msgid "Total amount"
+#~ msgstr "Gesamtbetrag"
 
 #~ msgid ""
 #~ "/recherchen/euros-fuer-aerzte/artikel/2017/05/16/interesse-am-konflikt/"
