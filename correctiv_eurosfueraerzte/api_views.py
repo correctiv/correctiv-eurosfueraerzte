@@ -17,7 +17,7 @@ class PaymentRecipientSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('name', 'first_name',
                   'url', 'aggs',
                   'address', 'location', 'postcode',
-                  'total', 'company_count',
+                  'total', 'company_count', 'is_zerodoc'
                   )
         read_only_fields = fields
 
