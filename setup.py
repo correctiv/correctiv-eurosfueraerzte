@@ -39,7 +39,8 @@ setup(
         'python-slugify',
         'unicodecsv',
         'geocoder',
-        'reportlab'
+        'reportlab',
+        'tqdm',
     ],
     include_package_data=True,
     classifiers=[
