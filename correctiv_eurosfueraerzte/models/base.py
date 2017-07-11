@@ -63,7 +63,7 @@ class PharmaCompanyManager(models.Manager):
         return self.get(slug=slug)
 
     def _get_type_aggregation(self, obj, df, kind, max_amount):
-        type_df = df[df['recipient_kind'] == kind]
+        type_df = df.query('recipient_kind == @kind')
 
         if len(type_df) == 0:
             return {
@@ -75,8 +75,8 @@ class PharmaCompanyManager(models.Manager):
                 'labels': []
             }
 
-        label_amounts = (type_df.groupby(['individual_recipient', 'label'])['amount']
-                                .sum().unstack().iteritems())
+        label_amounts = type_df.pivot_table(index='individual_recipient', columns='label',
+                            values='amount', aggfunc='sum', dropna=False).iteritems()
         labels = [
             {
                 'total': val_row.sum(),
