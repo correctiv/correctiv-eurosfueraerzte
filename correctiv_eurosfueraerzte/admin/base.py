@@ -96,8 +96,13 @@ class PaymentRecipientAdmin(ReplacementMixin, LeafletGeoAdmin):
 
     def compute_total(self, request, queryset):
         for obj in queryset:
-            obj.compute_total()
+            try:
+                obj.compute_total()
+            except ValueError as e:
+                self.message_user(request, e)
+                break
             obj.save()
+        self.message_user(request, _("Successfully computed totals."))
 
     def update_search_vector(self, request, queryset):
         queryset.update(

@@ -581,6 +581,15 @@ class PaymentRecipient(models.Model):
             self.aggs['total_euro_%s' % year] = float(year_euro)
             self.aggs['company_count_%s' % year] = year_agg['company_count']
 
+        if self.is_zerodoc:
+            efpia_years = self.zerodoctor.get_confirmed_efpia_years()
+            for year in efpia_years:
+                year_key = 'total_%s' % year
+                if self.aggs.get(year_key):
+                    raise ValueError('Conflict detected at %s' % self.pk)
+                self.aggs[year_key] = 0
+                self.aggs['total_euro_%s' % year] = 0
+
         self.total_euro = total_euro
 
     def distance_is_zero(self):
