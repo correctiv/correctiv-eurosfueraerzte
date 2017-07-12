@@ -531,7 +531,7 @@ class PaymentRecipient(models.Model):
     company_count = models.SmallIntegerField(blank=True, null=True)
     aggs = JSONField(default=dict, blank=True)
 
-    is_zerodoc = models.BooleanField(default=False)
+    is_zerodoc = models.BooleanField(default=False, db_index=True)
     search_vector = SearchVectorField(default='')
 
     objects = PaymentRecipientManager()
