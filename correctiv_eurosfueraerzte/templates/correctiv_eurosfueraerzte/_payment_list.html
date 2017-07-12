@@ -14,34 +14,41 @@
         <tr>
           <th>{% trans "Company" %}</th>
           <th>{% trans "Payment type" %}</th>
-          <th>{% trans "Year" %}</th>
-          <th class="text-right">{% trans "Amount" %}</th>
+          {% for year in efa_years %}
+            <th class="text-right hidden-xs">
+              {{ year }}
+            </th>
+          {% endfor %}
         </tr>
       </thead>
       <tfoot>
         <tr>
-          <td colspan="3" class="text-right">
+          <td colspan="2" class="text-right">
             <strong>{% trans "Total" %}</strong>
           </td>
-          <td class="text-right">
-            <strong>
-              {% currency_format aggs.payments_total aggs.payments_total_currency %}
-            </strong>
-          </td>
+          {% for amount in object.get_amounts_for_years %}
+            <td class="text-right">
+              {% if amount %}
+              <strong>
+                {% currency_format amount object.total_currency %}
+              </strong>
+              {% endif %}
+            </td>
+          {% endfor %}
        </tr>
      </tfoot>
       <tbody>
       {% for payment in payments %}
         <tr>
           <td>
-            {% if payment.pharma_company %}
-              <a href="{{ payment.pharma_company.get_absolute_url }}">
-                {{ payment.pharma_company.name }}
+            {% if payment.pharma_company_name %}
+              <a href="{{ payment.pharma_company_url }}">
+                {{ payment.pharma_company_name }}
               </a>
             {% endif %}
           </td>
           <td>
-            {{ payment.get_label_display }}
+            {{ payment.label }}
             {% if payment.recipient_detail %}
               <br/>
               <small>
@@ -49,10 +56,15 @@
               </small>
             {% endif %}
           </td>
-          <td> {{ payment.date.year }} </td>
-          <td class="text-right">
-            {% currency_format payment.amount payment.currency %}
-          </td>
+          {% for year_amount in payment.years %}
+            <td class="text-right">
+              {% if year_amount.amount %}
+                {% currency_format year_amount.amount year_amount.currency %}
+              {% else %}
+                <small>–</small>
+              {% endif %}
+            </td>
+          {% endfor %}
         </tr>
       {% endfor %}
       </tbody>

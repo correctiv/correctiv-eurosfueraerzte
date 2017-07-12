@@ -15,7 +15,7 @@ from ..forms import SearchForm, PaymentRecipientSearchForm
 from ..apps import (EFA_COUNTRIES_DICT, EFA_COUNTRIES_CHOICE_DICT,
                     EFA_COUNTRIES, EFA_YEARS)
 from ..models.zerodocs import get_templates as get_zerodocs_templates
-from ..utils import OptimizedPaginator
+from ..utils import OptimizedPaginator, get_year_columns
 
 
 def get_origin_include(origin, filename):
@@ -207,7 +207,9 @@ class RecipientDetailView(LocaleMixin, SearchMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(RecipientDetailView, self).get_context_data(**kwargs)
         context['aggs'] = self.object.get_aggregates()
-        context['payments'] = self.object.get_payments()
+        payments = self.object.get_payments()
+        context['payments'] = get_year_columns(payments)
+        context['efa_years'] = EFA_YEARS
         if self.object.is_zerodoc:
             context['zerodoc'] = self.object.zerodoctor
         if self.object.geo:

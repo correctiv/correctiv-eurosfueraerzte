@@ -628,10 +628,10 @@ class PaymentRecipient(models.Model):
             yield amount
 
     def get_payments(self):
-        qs = self.pharmapayment_set.all()
+        qs = self.pharmapayment_set.all().select_related('pharma_company')
         filter_year = FILTER_YEAR.get(self.origin)
         if filter_year:
-            return qs.filter(date__year=filter_year)
+            qs = qs.filter(date__year=filter_year)
         return qs
 
 
