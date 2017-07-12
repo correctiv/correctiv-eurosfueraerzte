@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-12 10:02+0200\n"
-"PO-Revision-Date: 2017-07-12 10:03+0100\n"
+"POT-Creation-Date: 2017-07-12 10:41+0200\n"
+"PO-Revision-Date: 2017-07-12 10:41+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -757,16 +757,15 @@ msgstr ""
 "ihren jeweiligen Webseiten veröffentlicht haben."
 
 #: templates/correctiv_eurosfueraerzte/at/_search_blurb.html:3
-#: templates/correctiv_eurosfueraerzte/ch/_search_blurb.html:3
 #, python-format
 msgid ""
 "\n"
 "  How much money has your doctor received from the pharma industry "
-"<strong>in %(country_label)s</strong> in 2015?\n"
+"<strong>in %(country_label)s</strong>?\n"
 msgstr ""
 "\n"
 "  Wieviel Geld hat Dein Arzt/Heilberufler <strong>in %(country_label)s</"
-"strong> im Jahr 2015 erhalten?\n"
+"strong> erhalten?\n"
 
 #: templates/correctiv_eurosfueraerzte/at/_search_examples.html:4
 #: templates/correctiv_eurosfueraerzte/at/_search_examples.html:6
@@ -900,6 +899,17 @@ msgstr ""
 "den Pharma-Kooperations-Kodex (PKK) unterzeichnet haben. Dieses Reglement "
 "verpflichtet die Firmen dazu, ihre Angaben auf ihren Unternehmenswebseiten "
 "zu veröffentlichen."
+
+#: templates/correctiv_eurosfueraerzte/ch/_search_blurb.html:3
+#, python-format
+msgid ""
+"\n"
+"  How much money has your doctor received from the pharma industry "
+"<strong>in %(country_label)s</strong> in 2015?\n"
+msgstr ""
+"\n"
+"  Wieviel Geld hat Dein Arzt/Heilberufler <strong>in %(country_label)s</"
+"strong> im Jahr 2015 erhalten?\n"
 
 #: templates/correctiv_eurosfueraerzte/de/_about_blurb.html:4
 msgid ""
@@ -1389,7 +1399,7 @@ msgid "Zero Francs Doctor"
 msgstr "Null-Franken-Arzt"
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/ch/detail.html:12
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:30
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:33
 msgid ""
 "Since 2016 the pharma industry publishes the fees paid to individual doctors "
 "– if they agreed to the publication. The problem: doctors who don't take any "
@@ -1484,17 +1494,17 @@ msgstr[1] ""
 "        "
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/ch/detail.html:56
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:74
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:77
 msgid "Organisations and doctors at similar address"
 msgstr "Organisationen und Ärzte an ähnlicher Adresse"
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/ch/detail.html:60
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:78
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:81
 msgid "Nearby doctors and organisations"
 msgstr "Ärzte und Organisationen in der Nähe"
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/ch/detail.html:66
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:84
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:87
 msgid ""
 "\n"
 "    The disclosure according to the transparency code does not apply to "
@@ -1630,17 +1640,25 @@ msgstr ""
 "ihn ab und schicken Sie ihn uns per Post oder E-Mail (die Adresse finden Sie "
 "auf dem Brief)."
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:10
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:15
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:25
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:11
+#, python-format
+msgid "No pharma payments in %(year)s"
+msgstr "Keine Zuwendungen der Pharmaindustrie im Jahr %(year)s"
+
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:18
+#, python-format
+msgid "No obvervational studies/NIS in %(year)s"
+msgstr "Keine Anwendungsbeobachtungen im Jahr %(year)s"
+
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:28
 msgid "Zero Euro Doctor"
 msgstr "Null-Euro-Ärzte"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:35
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:38
 msgid "To the Zero Euro Doctors Project"
 msgstr "Zum Projekt Null-Euro-Ärzte"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:44
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:47
 #, python-format
 msgid ""
 "\n"
@@ -1667,7 +1685,7 @@ msgstr[1] ""
 "müssen.\n"
 "        "
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:55
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:58
 #, python-format
 msgid ""
 "\n"
@@ -1692,7 +1710,7 @@ msgstr[1] ""
 "zu haben.\n"
 "        "
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:61
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:64
 #, python-format
 msgid ""
 "\n"
