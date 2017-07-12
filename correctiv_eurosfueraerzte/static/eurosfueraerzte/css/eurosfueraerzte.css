@@ -96,7 +96,7 @@
     display: inline-block;
   }
 }
-@media (min-width: 480px) {
+@media (min-width: 768px) {
   .efa__header__main {
     padding-right: 40%;
   }
@@ -114,12 +114,6 @@
   margin: -15px;
   background: #316f89;
   color: white;
-}
-@media (min-width: 480px) {
-  .efa__header__sidebar,
-  .efa__header__sidebar--pharma {
-    padding-right: 30%;
-  }
 }
 @media (min-width: 768px) {
   .efa__header__sidebar,
@@ -139,7 +133,7 @@
 .efa__header__sidebar--pharma:after {
   pointer-events: none;
 }
-@media (min-width: 480px) {
+@media (min-width: 768px) {
   .efa__header__sidebar:after,
   .efa__header__sidebar--pharma:after {
     content: '';
@@ -192,7 +186,17 @@
   }
 }
 .efa__header__content.-zerodoc {
-  width: 45%;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .efa__header__content.-zerodoc {
+    width: 40%;
+  }
+}
+@media (min-width: 992px) {
+  .efa__header__content.-zerodoc {
+    width: 50%;
+  }
 }
 .efa__header__about {
   padding: 30px 15px;
@@ -223,18 +227,18 @@
   margin: 0;
   padding: 15px 0 0 0;
 }
-.efa__header__credentials > li {
-  display: block;
-  margin: 0;
-  padding: 0;
-}
 .efa__header__credentials-item {
-  color: #316f89;
+  position: relative;
   margin: 0;
-  padding: .5em 0 0 0;
+  padding: .6em 0 0 1.2em;
+  list-style: none;
+  color: #316f89;
 }
 .efa__header__credentials-item:before {
   content: '✓ ';
+  position: absolute;
+  left: 0;
+  font-weight: bold;
 }
 .efa__home-link {
   font-family: 'Neuzeit-Condensed', 'Arial Narrow', 'Franklin Gothic Medium', sans-serif;

@@ -54,7 +54,7 @@
 
 .efa__header__main {
 
-  @media (min-width: @screen-xs) {
+  @media (min-width: @screen-sm) {
     padding-right: 40%;
   }
 
@@ -70,10 +70,6 @@
   margin: -15px;
   background: @efa-blue-dark;
   color: white;
-
-  @media (min-width: @screen-xs) {
-    padding-right: 30%;
-  }
 
   @media (min-width: @screen-sm) {
     float: right;
@@ -92,7 +88,7 @@
 .efa__header__sidebar:after {
   pointer-events: none;
 
-  @media (min-width: @screen-xs) {
+  @media (min-width: @screen-sm) {
     content: '';
     position: absolute;
     z-index: 1;
@@ -147,7 +143,15 @@
 }
 
 .efa__header__content.-zerodoc {
-  width: 45%;
+  width: 100%;
+
+  @media (min-width: @screen-sm) {
+    width: 40%;
+  }
+
+  @media (min-width: @screen-md) {
+    width: 50%;
+  }
 }
 
 .efa__header__about {
@@ -180,20 +184,19 @@
   display: block;
   margin: 0;
   padding: 15px 0 0 0;
-
-  > li {
-    display: block;
-    margin: 0;
-    padding: 0;
-  }
 }
 
 .efa__header__credentials-item {
-  color: @efa-blue-dark;
+  position: relative;
   margin: 0;
-  padding: .5em 0 0 0;
+  padding: .6em 0 0 1.2em;
+  list-style: none;
+  color: @efa-blue-dark;
 
   &:before{
     content: '✓ ';
+    position: absolute;
+    left: 0;
+    font-weight: bold;
   }
 }

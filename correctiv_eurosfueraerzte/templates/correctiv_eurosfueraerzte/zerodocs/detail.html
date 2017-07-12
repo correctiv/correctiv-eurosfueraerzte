@@ -6,17 +6,13 @@
 {% block header_content %}
   <ul class="efa__header__credentials">
     {% for year in zerodoc.get_confirmed_efpia_years %}
-      <li>
-        <h2 class="efa__header__credentials-item">
-          {% blocktrans with year=year %}No pharma payments in {{ year}}{% endblocktrans %}
-        </h2>
+      <li class="efa__header__credentials-item">
+        {% blocktrans with year=year %}No pharma payments in {{ year}}{% endblocktrans %}
       </li>
     {% endfor %}
     {% for year in zerodoc.get_confirmed_observational_years %}
-    <li>
-      <h2 class="efa__header__credentials-item">
-        {% blocktrans with year=year %}No obvervational studies/NIS in {{ year}}{% endblocktrans %}
-      </h2>
+    <li class="efa__header__credentials-item">
+      {% blocktrans with year=year %}No obvervational studies/NIS in {{ year}}{% endblocktrans %}
     </li>
     {% endfor %}
   </ul>
