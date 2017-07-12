@@ -155,6 +155,12 @@ class ZeroDoctor(models.Model):
     has_submissions.boolean = True
     has_submissions.short_description = _('Submitted')
 
+    def get_name(self):
+        return u'{first_name} {last_name}'.format(
+            first_name=self.first_name,
+            last_name=self.last_name,
+        )
+
     def get_gender_title(self):
         if self.title:
             return self.title
