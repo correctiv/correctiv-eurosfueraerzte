@@ -1213,11 +1213,14 @@
   position: relative;
   background: #f5f5f5;
 }
+.efa__map .leaflet-popup-content-wrapper {
+  border-radius: 0;
+}
 .efa__map .marker-cluster {
   background-color: rgba(49, 111, 137, 0.5);
 }
 .efa__map .marker-cluster div {
-  background-color: rgba(49, 111, 137, 0.9);
+  background-color: rgba(49, 111, 137, 0.8);
   color: white;
 }
 .efa__map .marker-cluster {
