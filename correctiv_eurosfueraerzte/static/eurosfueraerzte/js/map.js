@@ -11,9 +11,8 @@ const initializeMap = ({ center, places }) => {
   const map = new Map(CONTAINER, {
     center: center,
     scrollWheelZoom: false,
-    zoom: 11,
-    maxZoom: 15,
-    minZoom: 9
+    zoom: 15,
+    minZoom: 13
   });
 
   const tiles = tileLayer(TILES_URL, {
@@ -21,7 +20,8 @@ const initializeMap = ({ center, places }) => {
   });
 
   const markers = L.markerClusterGroup({
-    singleMarkerMode: true
+    singleMarkerMode: false,
+    maxClusterRadius: 40
   });
 
   // TODO: Initialize with JSON (to be passed through from initialization)

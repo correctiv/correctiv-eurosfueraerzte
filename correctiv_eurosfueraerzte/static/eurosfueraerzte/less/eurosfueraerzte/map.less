@@ -1,9 +1,36 @@
 @import (inline) '@{node_modules}/leaflet/dist/leaflet.css';
 @import (inline) '@{node_modules}/leaflet.markercluster/dist/MarkerCluster.css';
-@import (inline) '@{node_modules}/leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 .efa__map {
   height: 360px;
   position: relative;
   background: @gray-lighter;
+
+
+  .marker-cluster {
+    background-color: fade(@efa-blue-dark, 50);
+  }
+
+  .marker-cluster div {
+    background-color: fade(@efa-blue-dark, 90);
+    color: white;
+  }
+
+  .marker-cluster {
+    background-clip: padding-box;
+    border-radius: 20px;
+  }
+
+  .marker-cluster div {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-top: 5px;
+    text-align: center;
+    border-radius: 50%;
+  }
+
+  .marker-cluster span {
+    line-height: 30px;
+  }
 }
