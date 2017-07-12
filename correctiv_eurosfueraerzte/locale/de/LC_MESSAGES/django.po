@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 23:48+0200\n"
-"PO-Revision-Date: 2017-07-11 23:48+0100\n"
+"POT-Creation-Date: 2017-07-12 10:02+0200\n"
+"PO-Revision-Date: 2017-07-12 10:03+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -25,6 +25,10 @@ msgstr "Erfolgreich Objekte ersetzt."
 #: admin/base.py:38
 msgid "Replace selected with..."
 msgstr "Ersetze Objekte mit..."
+
+#: admin/base.py:105
+msgid "Successfully computed totals."
+msgstr "Summen erfolgreich berechnet."
 
 #: admin/zerodocs.py:22
 msgid "Has value"
@@ -298,11 +302,11 @@ msgstr "Anwendungsbeobachtung"
 msgid "observational studies"
 msgstr "Anwendungsbeobachtungen"
 
-#: models/base.py:501 models/base.py:698
+#: models/base.py:501 models/base.py:707
 msgid "Doctors (HCP)"
 msgstr "Ärzte (HCP)"
 
-#: models/base.py:502 models/base.py:699
+#: models/base.py:502 models/base.py:708
 msgid "Organisation (HCO)"
 msgstr "Organisation (HCO)"
 
@@ -318,62 +322,62 @@ msgstr "Zahlungsempfänger"
 msgid "payment recipients"
 msgstr "Zahlungsempfänger"
 
-#: models/base.py:598 models/zerodocs.py:169
+#: models/base.py:607 models/zerodocs.py:169
 #: templates/correctiv_eurosfueraerzte/_recipient_list_table.html:8
 #: templates/correctiv_eurosfueraerzte/drug_list.html:17
 #: templates/correctiv_eurosfueraerzte/pharmacompany_detail.html:125
 msgid "Name"
 msgstr "Name"
 
-#: models/base.py:635
+#: models/base.py:644
 msgid "medical doctor"
 msgstr "Arzt"
 
-#: models/base.py:636
+#: models/base.py:645
 msgid "medical doctors"
 msgstr "Ärzte"
 
-#: models/base.py:653
+#: models/base.py:662
 msgid "healthcare organisation"
 msgstr "Organisation im Gesundheitswesen"
 
-#: models/base.py:654
+#: models/base.py:663
 msgid "healthcare organisations"
 msgstr "Fachpersonal im Gesundheitswesen"
 
-#: models/base.py:669
+#: models/base.py:678
 msgid "fees"
 msgstr "Honorare"
 
-#: models/base.py:670
+#: models/base.py:679
 msgid "related expenses"
 msgstr "Spesen"
 
-#: models/base.py:672
+#: models/base.py:681
 msgid "registration fees"
 msgstr "Tagungsgebühren"
 
-#: models/base.py:673
+#: models/base.py:682
 msgid "travel & accommodation"
 msgstr "Reisekosten"
 
-#: models/base.py:675
+#: models/base.py:684
 msgid "donations and grants"
 msgstr "Spenden & Fördergelder"
 
-#: models/base.py:676
+#: models/base.py:685
 msgid "sponsorship"
 msgstr "Sponsoring"
 
-#: models/base.py:678
+#: models/base.py:687
 msgid "Research & development"
 msgstr "Forschung & Entwicklung"
 
-#: models/base.py:707
+#: models/base.py:716
 msgid "pharma payment"
 msgstr "Zahlung der Pharmaindustrie"
 
-#: models/base.py:708
+#: models/base.py:717
 msgid "pharma payments"
 msgstr "Zahlungen der Pharmaindustrie"
 
@@ -660,7 +664,6 @@ msgid "Replace selected objects with this object"
 msgstr "Ersetze ausgewählte Objekte mit diesem Objekt"
 
 #: templates/correctiv_eurosfueraerzte/at/_about_blurb.html:4
-#: templates/correctiv_eurosfueraerzte/at/_index_blurb.html:3
 msgctxt "AT"
 msgid ""
 "In 2016, pharma companies in Austria published information about their "
@@ -701,6 +704,16 @@ msgstr ""
 "Beispielsweise von Studien und Anwendungsbeobachtungen (AWB) "
 "veröffentlicht.\n"
 
+#: templates/correctiv_eurosfueraerzte/at/_index_blurb.html:3
+msgctxt "AT"
+msgid ""
+"Pharma companies in Austria publish information about their payments to "
+"doctors and other health care professionals and organisations from the last "
+"year."
+msgstr ""
+"Pharma-Unternehmen in Österreich veröffentlichen Geldzahlungen, die sie im "
+"vergangenen Jahr an Ärzte, Fachkreisangehörige und Kliniken geleistet haben."
+
 #: templates/correctiv_eurosfueraerzte/at/_index_blurb.html:6
 #: templates/correctiv_eurosfueraerzte/ch/_index_blurb.html:6
 #: templates/correctiv_eurosfueraerzte/de/_index_blurb.html:6
@@ -710,17 +723,17 @@ msgstr "Zum Hintergrundartikel"
 #: templates/correctiv_eurosfueraerzte/at/_recipient_main.html:3
 msgctxt "AT"
 msgid ""
-"Only around 18 percent of the amount paid to doctors and health care "
+"Only around 19 percent of the amount paid to doctors and health care "
 "professionals for fees and conference and travel expenses was published on "
-"an individual basis. The remaining amount was only published as an aggregate "
-"sum. For organizations, 57 percent of the total amount was attributed to "
-"individual organizations."
+"an individual basis in 2016. The remaining amount was only published as an "
+"aggregate sum. For organizations, 62 percent of the total amount was "
+"attributed to individual organizations."
 msgstr ""
-"Nur rund 18 Prozent der Summe, die Ärzte und Fachleute für Tagungsgebühren "
-"und Reisespesen/Übernachtungskosten erhalten haben, kann einzelnen Ärzten "
-"zugeordnet werden. Der Rest wurde nur als Gesamtsumme veröffentlicht. Bei "
-"den Organisationen sind immerhin die Empfänger von 57 Prozent des "
-"Gesamtvolumens nachvollziehbar."
+"Nur rund 19 Prozent der Summe, die Ärzte und Fachleute für Tagungsgebühren "
+"und Reisespesen/Übernachtungskosten im Jahr 2016 erhalten haben, kann "
+"einzelnen Ärzten zugeordnet werden. Der Rest wurde nur als Gesamtsumme "
+"veröffentlicht. Bei den Organisationen sind immerhin die Empfänger von 62 "
+"Prozent des Gesamtvolumens nachvollziehbar."
 
 #: templates/correctiv_eurosfueraerzte/at/_recipient_main.html:6
 msgctxt "AT"
