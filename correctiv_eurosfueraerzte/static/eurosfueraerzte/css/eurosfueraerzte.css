@@ -271,6 +271,7 @@
 }
 .efa__search {
   background: #a8d0e0;
+  padding-bottom: 0px !important;
 }
 .efa__search__title {
   color: black;
