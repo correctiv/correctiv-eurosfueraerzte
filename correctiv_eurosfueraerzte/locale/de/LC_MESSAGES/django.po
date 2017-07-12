@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-12 10:41+0200\n"
-"PO-Revision-Date: 2017-07-12 10:41+0100\n"
+"POT-Creation-Date: 2017-07-12 16:19+0200\n"
+"PO-Revision-Date: 2017-07-12 16:05+0200\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.8.12\n"
 
 #: admin/base.py:24
 msgid "Successfully replaced objects."
@@ -547,7 +547,9 @@ msgstr "Finde Dein Medikament"
 
 #: templates/correctiv_eurosfueraerzte/_drug_search.html:16
 msgid "Find out what drugs are pushed by the pharma industry."
-msgstr "Finde heraus, für welche Medikamente es Anwendungsbeobachtungen gibt."
+msgstr ""
+"Finde heraus, für welche Medikamente es von 2009 bis 2015 "
+"Anwendungsbeobachtungen gab."
 
 #: templates/correctiv_eurosfueraerzte/_payment_list.html:7
 #, python-format
@@ -557,7 +559,7 @@ msgid ""
 "  "
 msgstr ""
 "\n"
-"        %(name)s hat der Veröffentlichung dieser Zahlungen zugestimmt:\n"
+"        %(name)s hat der Veröffentlichung folgender Zahlungen zugestimmt:\n"
 "       "
 
 #: templates/correctiv_eurosfueraerzte/_payment_list.html:15
@@ -618,8 +620,8 @@ msgstr "Finde Deinen Arzt"
 msgid ""
 "How much money has your doctor received from the pharma industry last year?"
 msgstr ""
-"Wieviel Geld hat Dein Arzt/Heilberufler im vergangenen Jahr von der "
-"Pharmaindustrie erhalten?"
+"Wieviel Geld hat Dein Arzt/Heilberufler im vergangenen Jahr von Pharmafirmen "
+"erhalten?"
 
 #: templates/correctiv_eurosfueraerzte/_recipient_search.html:31
 msgid "Examples:"
@@ -717,6 +719,7 @@ msgstr ""
 #: templates/correctiv_eurosfueraerzte/at/_index_blurb.html:6
 #: templates/correctiv_eurosfueraerzte/ch/_index_blurb.html:6
 #: templates/correctiv_eurosfueraerzte/de/_index_blurb.html:6
+#: templates/correctiv_eurosfueraerzte/index.html:103
 msgid "Read the background article"
 msgstr "Zum Hintergrundartikel"
 
@@ -847,9 +850,9 @@ msgid ""
 "59 pharma companies in Switzerland published their payments to doctors and "
 "other health care professionals and organisations from the last year."
 msgstr ""
-"59 Pharma-Unternehmen in der Schweiz veröffentlichen im Jahr 2016 erstmals "
-"alle Geldzahlungen, die sie im vergangenen Jahr an Ärzte, Fachleute  und "
-"Spitäler geleistet haben."
+"59 Pharma-Unternehmen in der Schweiz veröffentlichen seit 2016 alle "
+"Geldzahlungen, die sie im vergangenen Jahr an Ärzte, Fachleute und Spitäler "
+"geleistet haben."
 
 #: templates/correctiv_eurosfueraerzte/ch/_company_blurb.html:4
 #: templates/correctiv_eurosfueraerzte/de/_company_blurb.html:4
@@ -871,23 +874,21 @@ msgstr ""
 #: templates/correctiv_eurosfueraerzte/ch/_recipient_main.html:3
 msgctxt "CH"
 msgid ""
-"Only around 30 percent of doctors and health care professionals agreed to "
-"the publication of their fees and conference and travel expenses."
+"Only around a quarter of doctors and health care professionals agreed to the "
+"publication of their fees and conference and travel expenses."
 msgstr ""
-"Nur knapp 30 Prozent der Ärzte und Fachleute haben den Firmen ihr "
-"Einverständnis gegeben, dass ihre Vortrags- und Beratungshonorare, "
-"Tagungsgebühren und Reisespesen/Übernachtungskosten veröffentlicht werden "
-"dürfen."
+"Nur ein Viertel der Ärzte und Fachleute sind einverstanden, dass ihre "
+"Vortrags- und Beratungshonorare, Tagungsgebühren und Reisespesen/"
+"Übernachtungskosten veröffentlicht werden."
 
 #: templates/correctiv_eurosfueraerzte/ch/_recipient_main.html:6
 msgctxt "CH"
 msgid ""
-"Detailed payments to doctors related to studies and non-interventional "
-"studies are not published by the pharma companies."
+"Payments to individual doctors related to studies and non-interventional "
+"studies are generally not published by the pharma companies."
 msgstr ""
-"Die Zahlungen an Ärzte und Organisationen für Forschung und Entwicklung "
-"wollen die Pharmaunternehmen grundsätzlich nicht personenbezogen "
-"veröffentlichen."
+"Die Zahlungen an einzelne Ärzte und Organisationen für Forschung und "
+"Entwicklung wollen die Firmen grundsätzlich nicht veröffentlichen."
 
 #: templates/correctiv_eurosfueraerzte/ch/_recipient_sidebar.html:3
 msgid ""
@@ -913,12 +914,12 @@ msgstr ""
 
 #: templates/correctiv_eurosfueraerzte/de/_about_blurb.html:4
 msgid ""
-"In 2016 the 54 biggest pharma companies in Germany published their payments "
-"to doctors and other health care professionals and organisations from the "
-"last year."
+"Since 2016, the 54 biggest pharma companies in Germany have published their "
+"payments to doctors and other health care professionals and organisations "
+"from the previous year."
 msgstr ""
-"Die 54 größten Pharma-Unternehmen in Deutschland veröffentlichen im Jahr "
-"2016 erstmals alle Geldzahlungen, die sie im vergangenen Jahr an Ärzte, "
+"Die 54 größten Pharma-Unternehmen in Deutschland veröffentlichen seit 2016 "
+"alle Geldzahlungen, die sie im vergangenen Jahr an Ärzte, "
 "Fachkreisangehörige und Kliniken geleistet haben."
 
 #: templates/correctiv_eurosfueraerzte/de/_about_blurb.html:6
@@ -932,24 +933,24 @@ msgstr ""
 
 #: templates/correctiv_eurosfueraerzte/de/_index_blurb.html:3
 msgid ""
-"Only recently the biggest pharma companies in Germany started publishing "
+"Since 2016, the biggest pharma companies in Germany have been publishing "
 "payments of travel costs, registration and speaking fees to doctors and "
 "other health care professionals, given they agreed to the publication."
 msgstr ""
-"Die größten Pharma-Unternehmen in Deutschland veröffentlichen neuerdings "
+"Die größten Pharma-Unternehmen in Deutschland veröffentlichen seit 2016 "
 "Fortbildungskosten, Reisespesen und Vortragshonorare, die sie im vergangenen "
-"Jahr an Ärzte und Fachkreisangehörige geleistet haben. Voraussetzung ist, "
-"dass die Empfänger mit der Veröffentlichung einverstanden sind."
+"Jahr an Ärzte und Fachkreisangehörige geleistet haben. Nur ein kleiner Teil "
+"der Empfänger ist mit der Veröffentlichung einverstanden."
 
 #: templates/correctiv_eurosfueraerzte/de/_recipient_main.html:3
 msgctxt "DE"
 msgid ""
-"Only around 30 percent of doctors and health care professionals agreed to "
-"the publication of their fees and conference and travel expenses."
+"Only around a quarter of doctors and health care professionals agreed to the "
+"publication of their fees and conference and travel expenses."
 msgstr ""
-"Nur knapp 30 Prozent der Ärzte und Fachkreisangehörigen haben den Firmen ihr "
-"Einverständnis gegeben, dass ihre Vortrags- und Beratungshonorare, "
-"Tagungsgebühren und Reisespesen veröffentlicht werden dürfen."
+"Nur knapp ein Viertel der Ärzte und Fachkreisangehörigen sind damit "
+"einverstanden, dass ihre Vortrags- und Beratungshonorare, Tagungsgebühren "
+"und Reisespesen von den Pharmafirmen veröffentlicht werden."
 
 #: templates/correctiv_eurosfueraerzte/de/_recipient_main.html:6
 msgctxt "DE"
@@ -989,13 +990,13 @@ msgstr "Null-Euro-Ärzte"
 #: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:6
 msgid ""
 "\n"
-"    All doctors that have not received payments from the pharma industry in "
-"the last year can register here.\n"
+"    All doctors who have not accepted money from the pharmaceutical industry "
+"can register here.\n"
 "  "
 msgstr ""
 "\n"
-"   Hier können sich alle Ärzte eintragen, die im vergangenen Jahr kein Geld "
-"oder geldwerte Leistungen von Pharmafirmen angenommen haben.\n"
+"   Hier können sich alle Ärzte eintragen, die kein Geld oder geldwerte "
+"Leistungen von Pharmafirmen angenommen haben.\n"
 "  "
 
 #: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:11
@@ -1120,10 +1121,6 @@ msgstr ""
 "Euro – pro Patient. Diese Datenbank zeigt erstmals, welches Ausmaß die "
 "umstrittenen Studien erreicht haben – und welche Präparate vor allem in den "
 "Markt gedrückt werden."
-
-#: templates/correctiv_eurosfueraerzte/index.html:103
-msgid "Read this for more"
-msgstr "Zum Hintergrundartikel"
 
 #: templates/correctiv_eurosfueraerzte/index.html:113
 msgid "Top drugs by study patients"
@@ -1399,7 +1396,6 @@ msgid "Zero Francs Doctor"
 msgstr "Null-Franken-Arzt"
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/ch/detail.html:12
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:33
 msgid ""
 "Since 2016 the pharma industry publishes the fees paid to individual doctors "
 "– if they agreed to the publication. The problem: doctors who don't take any "
@@ -1494,17 +1490,17 @@ msgstr[1] ""
 "        "
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/ch/detail.html:56
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:77
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:73
 msgid "Organisations and doctors at similar address"
 msgstr "Organisationen und Ärzte an ähnlicher Adresse"
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/ch/detail.html:60
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:81
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:77
 msgid "Nearby doctors and organisations"
 msgstr "Ärzte und Organisationen in der Nähe"
 
 #: templates/correctiv_eurosfueraerzte/zerodocs/ch/detail.html:66
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:87
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:83
 msgid ""
 "\n"
 "    The disclosure according to the transparency code does not apply to "
@@ -1640,25 +1636,36 @@ msgstr ""
 "ihn ab und schicken Sie ihn uns per Post oder E-Mail (die Adresse finden Sie "
 "auf dem Brief)."
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:11
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:10
 #, python-format
 msgid "No pharma payments in %(year)s"
 msgstr "Keine Zuwendungen der Pharmaindustrie im Jahr %(year)s"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:18
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:15
 #, python-format
 msgid "No obvervational studies/NIS in %(year)s"
 msgstr "Keine Anwendungsbeobachtungen im Jahr %(year)s"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:28
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:25
 msgid "Zero Euro Doctor"
 msgstr "Null-Euro-Ärzte"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:38
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:30
+msgid ""
+"Doctors who do not accept money from pharmaceutical companies are invisible "
+"in the official FSA transparency reports. To change this, CORRECTIV "
+"publishes names from doctors who refuse payments from the industry."
+msgstr ""
+"Ärzte, die kein Geld von Pharma&shy;konzernen angenommen haben, bleiben bei "
+"der FSA-Transparenzinitiative unsichtbar. Das will CORRECTIV ändern. Deshalb "
+"veröffentlichen wir die Namen von Medizinern, die bewusst auf Zuwendungen "
+"der Industrie verzichten."
+
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:34
 msgid "To the Zero Euro Doctors Project"
 msgstr "Zum Projekt Null-Euro-Ärzte"
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:47
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:43
 #, python-format
 msgid ""
 "\n"
@@ -1685,7 +1692,7 @@ msgstr[1] ""
 "müssen.\n"
 "        "
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:58
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:54
 #, python-format
 msgid ""
 "\n"
@@ -1700,17 +1707,17 @@ msgid_plural ""
 msgstr[0] ""
 "\n"
 "          %(name)s versichert außerdem, im Jahr %(year_list)s kein Honorar "
-"für die Durchführung von Anwendungs&shy;beobachtungen/NIS erhalten zu "
-"haben.\n"
+"für die Durchführung von <a href=\"https://correctiv.org/"
+"a/981\">Anwendungs&shy;beobachtungen</a> erhalten zu haben.\n"
 "        "
 msgstr[1] ""
 "\n"
-"          %(name)s versichert außerdem, in den Jahren %(year_list)s kein "
-"Honorar für die Durchführung von Anwendungs&shy;beobachtungen/NIS erhalten "
-"zu haben.\n"
+"          %(name)s versichert außerdem, im Jahr %(year_list)s kein Honorar "
+"für die Durchführung von <a href=\"https://correctiv.org/"
+"a/981\">Anwendungs&shy;beobachtungen</a> erhalten zu haben.\n"
 "        "
 
-#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:64
+#: templates/correctiv_eurosfueraerzte/zerodocs/detail.html:60
 #, python-format
 msgid ""
 "\n"
@@ -2030,6 +2037,9 @@ msgstr ""
 #: views/zerodocs.py:70
 msgid "Please check your form input again!"
 msgstr "Bitte überprüfen Sie Ihre Eingaben!"
+
+#~ msgid "Read this for more"
+#~ msgstr "Zum Hintergrundartikel"
 
 #~ msgid "Total amount"
 #~ msgstr "Gesamtbetrag"
