@@ -11,5 +11,10 @@ django-leaflet==0.18.1
 gunicorn
 pandas
 reportlab
-gunicorn
 whitenoise
+slugify
+django-debug-toolbar
+django-crispy-forms
+geocoder
+tqdm
+unicodecsv
