@@ -11,3 +11,5 @@ django-leaflet==0.18.1
 gunicorn
 pandas
 reportlab
+gunicorn
+whitenoise
