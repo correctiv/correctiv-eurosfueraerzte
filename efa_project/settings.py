@@ -317,5 +317,5 @@ try:
 except ImportError:
     pass
 
-if DEBUG:
-    INSTALLED_APPS += ['debug_toolbar']
+# if DEBUG:
+#     INSTALLED_APPS += ['debug_toolbar']
