@@ -8,12 +8,12 @@ const TILES_ATTRIBUTION = `
   © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,
   © <a href="https://carto.com/attribution">CARTO</a>`;
 
-const initializeMap = ({ center, places }) => {
+const initializeMap = ({ center, places, zoom, minZoom }) => {
   const map = new Map(CONTAINER, {
     center: center,
     scrollWheelZoom: false,
-    zoom: 15,
-    minZoom: 13
+    zoom: zoom || 15,
+    minZoom: minZoom || 13
   });
 
   const tiles = tileLayer(TILES_URL, {

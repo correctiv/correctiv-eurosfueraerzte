@@ -2,11 +2,15 @@ from django.conf.urls import url, include
 from django.utils.translation import ugettext_lazy as _
 
 from ..views.zerodocs import (ZeroDocsIndexView, login, EmailSentView,
-                              ZeroDocsEntryView, get_zerodocs_pdf)
+                              ZeroDocsEntryView, ZeroDocsMapView,
+                              get_zerodocs_pdf)
 
 
 zerodocs_patterns = [
-    url(r'^$', ZeroDocsIndexView.as_view(), name='eurosfueraerzte-zerodocs_index'),
+    url(r'^$', ZeroDocsIndexView.as_view(),
+        name='eurosfueraerzte-zerodocs_index'),
+    url(_(r'^map/$'), ZeroDocsMapView.as_view(),
+        name='eurosfueraerzte-zerodocs_map'),
     # Translators: url slug
     url(_(r'^login/$'), login, name='eurosfueraerzte-zerodocs_login'),
     # Translators: url slug

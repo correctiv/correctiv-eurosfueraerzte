@@ -18,6 +18,7 @@ from django.utils import timezone
 from ..forms.zerodocs import ZeroDocLoginForm, ZeroDocSubmitForm
 from ..models.zerodocs import ZeroDoctor, LETTER_FILENAME, get_templates
 from ..zerodocs import generate_pdf
+from ..models import PaymentRecipient
 from ..apps import EFA_COUNTRIES_DICT
 
 
@@ -100,6 +101,16 @@ class ZeroDocsEntryView(CountryMixin, UpdateView):
         return super(ZeroDocsEntryView, self).render_to_response(
             context, **response_kwargs
         )
+
+
+class ZeroDocsMapView(TemplateView):
+    template_name = 'correctiv_eurosfueraerzte/zerodocs/map.html'
+
+    def get_context_data(self):
+        context = super(ZeroDocsMapView, self).get_context_data()
+        context['object_list'] = PaymentRecipient.objects.filter(
+            is_zerodoc=True, geo__isnull=False)
+        return context
 
 
 def get_zerodocs_pdf(request, slug=None):

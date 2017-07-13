@@ -1,0 +1,34 @@
+{% extends "correctiv_eurosfueraerzte/zerodocs/base.html" %}
+
+{% load i18n static sekizai_tags %}
+
+{% block content %}
+
+<div class="page__row">
+  <div class="efa__content">
+    <h2>{% trans "Map of Zero Euro Doctors" %}</h2>
+    <div id="efa__map" class="efa__map" style="height: 600px;"></div>
+  </div>
+</div>
+
+  {% addtoblock "js" %}
+    <script src="{% static 'eurosfueraerzte/dist/map.js' %}"></script>
+    <script>
+      eurosfueraerzte.initializeMap({
+        center: [51.165, 10.455278],
+        zoom: 6,
+        minZoom: 5,
+        places: [
+          {% for place in object_list %}
+            {
+              geo: [{{ place.geo.y|safe }}, {{ place.geo.x|safe }}],
+              name: "{{ place.get_full_name|escapejs }}",
+              url: "{{ place.get_absolute_url|escapejs }}"
+            }{% if not forloop.last %},{% endif %}
+          {% endfor %}
+        ]
+      });
+    </script>
+  {% endaddtoblock %}
+
+{% endblock %}
