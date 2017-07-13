@@ -141,6 +141,7 @@ class ZeroDoctorAdmin(LeafletGeoAdmin):
                 'address', 'postcode', 'location', 'country',
                 'address_type', 'geo', 'specialisation', 'web',
                 'confirmed_on', 'get_absolute_domain_url',
+                'get_absolute_recipient_url'
         )
         filename = timezone.now().strftime('zerodocs_%Y%m%d-%H%M.csv')
         return export_csv_response(queryset, fields, name=filename)

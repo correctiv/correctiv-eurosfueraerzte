@@ -106,6 +106,11 @@ class ZeroDoctor(models.Model):
         return ('eurosfueraerzte:eurosfueraerzte-zerodocs_pdf', (),
                 {'slug': self.secret})
 
+    def get_absolute_recipient_url(self):
+        if self.recipient is None:
+            return ''
+        return self.recipient.get_absolute_url()
+
     def get_absolute_domain_url(self):
         return settings.SITE_URL + self.get_absolute_url()
 
