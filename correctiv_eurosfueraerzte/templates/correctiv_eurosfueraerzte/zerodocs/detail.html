@@ -4,6 +4,8 @@
 {% load number_utils %}
 
 {% block header_content %}
+  {{ block.super }}
+
   <ul class="efa__header__credentials">
     {% for year in zerodoc.get_confirmed_efpia_years %}
       <li class="efa__header__credentials-item">
