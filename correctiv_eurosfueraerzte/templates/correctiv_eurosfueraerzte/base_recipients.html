@@ -7,7 +7,7 @@
 
 <section class="efa__search">
   <div class="page__container">
-    <form id="efa-search-form" class="efa__search__form--small -{{ country|lower }}" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}" method="get">
+    <form id="efa-search-form" class="efa__search__form--small -{{ country|lower }} {% if recipient_form.zeroeuro.value %}-zerodoc{% endif %}" action="{% url 'eurosfueraerzte:eurosfueraerzte-recipientsearch' %}" method="get">
 
         {% include "correctiv_eurosfueraerzte/_home_links.html" %}
 

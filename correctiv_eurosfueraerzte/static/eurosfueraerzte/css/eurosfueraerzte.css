@@ -409,6 +409,11 @@
     bottom: 0;
   }
 }
+.efa__search__form.-zerodoc:after,
+.efa__search__form--small.-zerodoc:after,
+.efa__search__form--pharma.-zerodoc:after {
+  background-image: none;
+}
 @media (min-width: 768px) {
   .efa__search__form--pharma {
     left: 41.66666667%;
