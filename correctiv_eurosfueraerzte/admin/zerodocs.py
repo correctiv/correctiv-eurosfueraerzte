@@ -92,7 +92,7 @@ class ZeroDoctorAdmin(LeafletGeoAdmin):
     raw_id_fields = ('recipient',)
     save_on_top = True
 
-    actions = ['export_csv']
+    actions = ['export_csv', 'confirm_all']
 
     def get_urls(self):
         urls = super(ZeroDoctorAdmin, self).get_urls()
@@ -132,6 +132,25 @@ class ZeroDoctorAdmin(LeafletGeoAdmin):
             messages.add_message(request, messages.SUCCESS,
                 _('Successfully confirmed!'))
         return redirect('admin:correctiv_eurosfueraerzte_zerodoctor_changelist')
+
+    def confirm_all(self, request, queryset):
+        if not self.has_change_permission(request):
+            raise PermissionDenied
+
+        failed = []
+        for obj in queryset:
+            sub_ids = [x.pk for x in obj.get_all_submissions()]
+            try:
+                obj.confirm_submissions(sub_ids)
+            except ValueError as e:
+                failed.append(str(e))
+        if failed:
+            failed_message = u', '.join(failed)
+            messages.add_message(request, messages.ERROR, _('Failed on these:') + failed_message)
+        else:
+            messages.add_message(request, messages.SUCCESS,
+                _('All successfully confirmed!'))
+    confirm_all.short_description = _("Confirm all submissions")
 
     def export_csv(self, request, queryset):
         from correctiv_community.helpers.csv_utils import export_csv_response
