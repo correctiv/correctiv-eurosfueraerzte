@@ -481,8 +481,10 @@ class PaymentRecipientManager(models.Manager):
         return functools.reduce(lambda a, b: a + b,
             [SearchVector(f, weight=w, config=SEARCH_LANG) for f, w in fields])
 
-    def update_search_index(self):
-        PaymentRecipient.objects.update(search_vector=self.get_search_vector())
+    def update_search_index(self, qs=None):
+        if qs is None:
+            qs = PaymentRecipient.objects.all()
+        qs.update(search_vector=self.get_search_vector())
 
 
 @python_2_unicode_compatible
@@ -633,6 +635,10 @@ class PaymentRecipient(models.Model):
         if filter_year:
             qs = qs.filter(date__year=filter_year)
         return qs
+
+    def update_search_index(self):
+        own_qs = PaymentRecipient.objects.filter(pk=self.pk)
+        return PaymentRecipient.objects.update_search_index(own_qs)
 
 
 @python_2_unicode_compatible

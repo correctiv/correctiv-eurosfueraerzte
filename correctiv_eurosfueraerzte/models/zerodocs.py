@@ -274,10 +274,9 @@ class ZeroDoctor(models.Model):
         }
         if self.recipient is None:
             if PaymentRecipient.objects.filter(slug=kwargs['slug']).exists():
-                raise ValueError('Recipient with slug already exists')
+                raise ValueError('Recipient with slug "%s" already exists' % kwargs['slug'])
             pr = PaymentRecipient.objects.create(**kwargs)
             pr.search_vector = PaymentRecipient.objects.get_search_vector()
-            pr.compute_total()
             pr.save()
             self.recipient = pr
             self.save()
@@ -285,6 +284,9 @@ class ZeroDoctor(models.Model):
             PaymentRecipient.objects.filter(pk=self.recipient_id).update(
                 **kwargs
             )
+        self.recipient.zerodoctor = self
+        self.recipient.compute_total()
+        self.recipient.update_search_index()
 
 
 class ZeroDocSubmission(models.Model):
