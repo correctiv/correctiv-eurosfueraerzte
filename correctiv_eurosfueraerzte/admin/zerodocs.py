@@ -83,7 +83,7 @@ class ZeroDocSubmissionAdmin(admin.ModelAdmin):
 
 class ZeroDoctorAdmin(LeafletGeoAdmin):
     display_raw = True  # raw geo field
-    list_display = ('get_full_name', 'email', 'has_submissions',
+    list_display = ('get_full_name', 'email', 'num_unconfirmed_submissions',
                     'all_submissions_confirmed', 'get_full_address',)
     list_filter = ('country', RecipientNullFilterSpec, HasSubmissionsListFilter,
                     LastLoginNullFilterSpec)
@@ -113,6 +113,10 @@ class ZeroDoctorAdmin(LeafletGeoAdmin):
             country=obj.country
         )
     get_full_address.short_description = _('Address')
+
+    def num_unconfirmed_submissions(self, obj):
+        return len(obj.all_submissions_unconfirmed())
+    num_unconfirmed_submissions.short_description = _('new submissions')
 
     def confirm_zerodoc_submission(self, request):
         if not request.method == 'POST':

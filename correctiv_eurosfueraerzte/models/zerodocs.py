@@ -146,8 +146,11 @@ class ZeroDoctor(models.Model):
         ]
 
     def has_unconfirmed_submissions(self):
-        return any(not x.confirmed for x in self.get_all_submissions())
+        return bool(self.all_submissions_unconfirmed())
     has_unconfirmed_submissions.boolean = True
+
+    def all_submissions_unconfirmed(self):
+        return [x for x in self.get_all_submissions() if not x.confirmed]
 
     def all_submissions_confirmed(self):
         return self.has_submissions() and all(
