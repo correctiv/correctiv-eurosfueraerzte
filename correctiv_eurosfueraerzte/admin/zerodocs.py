@@ -84,7 +84,7 @@ class ZeroDocSubmissionAdmin(admin.ModelAdmin):
 class ZeroDoctorAdmin(LeafletGeoAdmin):
     display_raw = True  # raw geo field
     list_display = ('get_full_name', 'email', 'num_unconfirmed_submissions',
-                    'all_submissions_confirmed', 'get_full_address',)
+                    'all_submissions_confirmed', 'get_full_address', 'last_name')
     list_filter = ('country', RecipientNullFilterSpec, HasSubmissionsListFilter,
                     LastLoginNullFilterSpec)
     search_fields = ('first_name', 'last_name', 'email', 'location', 'address',
