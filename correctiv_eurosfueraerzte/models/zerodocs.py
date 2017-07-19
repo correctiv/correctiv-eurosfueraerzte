@@ -290,6 +290,7 @@ class ZeroDoctor(models.Model):
         self.recipient.zerodoctor = self
         self.recipient.compute_total()
         self.recipient.update_search_index()
+        self.recipient.save()
 
 
 class ZeroDocSubmission(models.Model):
