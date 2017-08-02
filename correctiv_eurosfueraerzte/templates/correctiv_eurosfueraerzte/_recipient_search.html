@@ -33,9 +33,7 @@
         <br/>
         {% trans "Data also available for:" %}
         {% for country_code, country_name in countries %}
-          {% if country_code != country %}
-              <a href="{% url 'eurosfueraerzte:eurosfueraerzte-country_index' country=country_code|lower %}">{{ country_name }}</a>{% if not forloop.last %},{% endif %}
-          {% endif %}
+          <a href="{% url 'eurosfueraerzte:eurosfueraerzte-country_index' country=country_code|lower %}">{{ country_name }}</a>{% if not forloop.last %},{% endif %}
         {% endfor %}
       </div>
     </form>

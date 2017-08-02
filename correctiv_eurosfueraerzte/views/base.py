@@ -52,7 +52,7 @@ class LocaleMixin(object):
             fallback_country = self.DEFAULT_LOCALE
         country_lower = fallback_country.lower()
         context['country'] = country
-        context['countries'] = EFA_COUNTRIES
+        context['countries'] = [x for x in EFA_COUNTRIES if x[0] != country]
         context['country_label'] = EFA_COUNTRIES_DICT.get(country)
         context['country_label_choice'] = EFA_COUNTRIES_CHOICE_DICT.get(country)
         context['filter_country'] = self.get_country()
