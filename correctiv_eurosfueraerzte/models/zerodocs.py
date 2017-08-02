@@ -188,6 +188,8 @@ class ZeroDoctor(models.Model):
         self.save()
 
         if not sub_ids:
+            self.recipient.compute_total()
+            self.recipient.save()
             return
 
         sub_ids = set(sub_ids)
@@ -197,6 +199,8 @@ class ZeroDoctor(models.Model):
                 confirmed=True, confirmed_on=timezone.now())
 
         self._submissions = None
+        self.recipient.compute_total()
+        self.recipient.save()
         self.send_confirmed_email()
 
     def send_login_email(self):
@@ -275,6 +279,7 @@ class ZeroDoctor(models.Model):
             'gender': self.gender,
             'is_zerodoc': True
         }
+
         if self.recipient is None:
             if PaymentRecipient.objects.filter(slug=kwargs['slug']).exists():
                 raise ValueError('Recipient with slug "%s" already exists' % kwargs['slug'])
@@ -292,7 +297,6 @@ class ZeroDoctor(models.Model):
 
         self.recipient.zerodoctor = self
         self.recipient.update_search_index()
-        self.recipient.compute_total()
         self.recipient.save()
 
 
