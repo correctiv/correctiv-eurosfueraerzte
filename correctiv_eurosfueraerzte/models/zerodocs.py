@@ -284,12 +284,15 @@ class ZeroDoctor(models.Model):
             self.recipient = pr
             self.save()
         else:
-            PaymentRecipient.objects.filter(pk=self.recipient_id).update(
-                **kwargs
-            )
+            # Don't filter().update() directly!
+            # Set attributes on self.recipient, so compute_total picks up
+            # on new is_zerodoc value in later step
+            for k, v in kwargs.items():
+                setattr(self.recipient, k, v)
+
         self.recipient.zerodoctor = self
-        self.recipient.compute_total()
         self.recipient.update_search_index()
+        self.recipient.compute_total()
         self.recipient.save()
 
 
