@@ -188,18 +188,18 @@ class RecipientDetailView(LocaleMixin, SearchMixin, DetailView):
     def get_meta_info(self, context):
         if self.object.is_zerodoc and not context['payments']:
             return {
-                'title': _('%(name)s does not take money from the pharma industry') % {
+                'title': _('%(name)s does not receive benefits from the pharma industry') % {
                     'name': self.object.get_full_name()
                 },
-                'description': _("Details on why %(name)s doesn't take money from pharma companies.") % {
+                'description': _("Details on how %(name)s doesn't receive benefits from pharma companies.") % {
                     'name': self.object.get_full_name()
                 }
             }
         return {
-            'title': _('%(name)s and money from the pharma industry') % {
+            'title': _('%(name)s and benefits from the pharma industry') % {
                 'name': self.object.get_full_name()
             },
-            'description': _('Details on how much money %(name)s got from pharma companies.') % {
+            'description': _('Details on what benefits %(name)s got from pharma companies.') % {
                 'name': self.object.get_full_name()
             }
         }
