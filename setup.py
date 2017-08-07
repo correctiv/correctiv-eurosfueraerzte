@@ -38,7 +38,7 @@ setup(
         'pandas',
         'python-slugify',
         'unicodecsv',
-        'geocoder<1.24.0',
+        'geocoder',
         'reportlab',
         'tqdm',
     ],
