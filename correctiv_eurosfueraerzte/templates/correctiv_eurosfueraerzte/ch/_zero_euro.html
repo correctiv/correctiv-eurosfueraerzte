@@ -1,14 +1,14 @@
 {% load i18n %}
 
 <div class="efa__zero-euro-info">
-<h3>{% trans "Zero Euro Doctors" %}</h3>
+<h3>{% trans "Zero Francs Doctors" %}</h3>
 <p>
   {% blocktrans %}
     All doctors who have not accepted money from the pharmaceutical industry can register here.
   {% endblocktrans %}
 </p>
 <p>
-  <a class="efa__button--primary" href="{% url 'eurosfueraerzte:eurosfueraerzte-zerodocs_index' %}">{% trans "Register" %}</a>
+  <a class="efa__button--primary" href="{% url 'eurosfueraerzte:eurosfueraerzte-zerodocs_index' %}?country=ch">{% trans "Register" %}</a>
   <a class="efa__button" href="{% trans "https://correctiv.org/a/1739" %}">{% trans "background article" %}</a>
   <a class="efa__button" href="{% url 'eurosfueraerzte:eurosfueraerzte-zerodocs_map' %}">{% trans "map" %}</a>
 </p>
