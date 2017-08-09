@@ -42,7 +42,7 @@ class LocaleMixin(object):
         'ch': _('Money for Doctors'),
         'at': _('Euros for Doctors'),
     }
-    SUBLOCALE = {'de': {'ch', 'at'}}
+    SUBLOCALE = {'de': {'CH', 'AT'}}
 
     def get_context_data(self, **kwargs):
         context = super(LocaleMixin, self).get_context_data(**kwargs)
