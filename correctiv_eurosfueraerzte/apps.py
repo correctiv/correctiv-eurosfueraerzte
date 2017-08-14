@@ -22,12 +22,12 @@ EFA_YEARS = [2015, 2016]
 CURRENT_YEAR = {
     'AT': 2016,
     'DE': 2016,
-    'CH': 2015,
+    'CH': 2016,
 }
 FILTER_YEAR = {
     'AT': None,
     'DE': None,
-    'CH': 2015,
+    'CH': None,
 }
 
 
