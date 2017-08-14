@@ -11,6 +11,7 @@ from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
 from ..models import Drug, ObservationalStudy, PharmaCompany, PaymentRecipient
+from ..models.zerodocs import PROJECT_NAME as ZERO_PROJECT_NAME
 from ..forms import SearchForm, PaymentRecipientSearchForm
 from ..apps import (EFA_COUNTRIES_DICT, EFA_COUNTRIES_CHOICE_DICT,
                     EFA_COUNTRIES, EFA_YEARS)
@@ -64,6 +65,9 @@ class LocaleMixin(object):
             context['locale'] = current_lang
 
         context['project_title'] = self.TITLES.get(country_lower)
+        zero_project = ZERO_PROJECT_NAME.get(country)
+        context['zeroeuro_project_name'] = zero_project
+        context['zeroeuro_form_label'] = _('Show only {}').format(zero_project)
         context['includes'] = LocaleIncludeDict(country_lower)
         context['has_aggregates'] = self.HAS_AGGREGATES.get(country)
         return context

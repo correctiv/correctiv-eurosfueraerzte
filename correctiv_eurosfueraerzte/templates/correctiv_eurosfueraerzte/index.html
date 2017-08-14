@@ -43,7 +43,7 @@
     <div class="col-md-6">
       <table class="efa__table table table-striped">
         <thead>
-          <th colspan="2">{% trans "Latest entries for 'Zero Euro Doctors'" %}</th>
+          <th colspan="2">{% blocktrans with name=zeroeuro_project_name %}Latest entries for '{{ name }}'{% endblocktrans %}</th>
         </thead>
         <tbody>
         {% for doctor in latest_zerodocs %}
