@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-03 11:58+0200\n"
-"PO-Revision-Date: 2017-08-03 12:00+0100\n"
+"POT-Creation-Date: 2017-08-14 17:29+0200\n"
+"PO-Revision-Date: 2017-08-14 17:30+0100\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -124,7 +124,7 @@ msgstr "der Schweiz"
 #: apps.py:36 cms_apps.py:7 cms_plugins.py:11
 #: templates/correctiv_eurosfueraerzte/_drug_search.html:8
 #: templates/correctiv_eurosfueraerzte/plugins/search_tile.html:7
-#: views/base.py:41 views/base.py:43
+#: views/base.py:42 views/base.py:44
 msgid "Euros for Doctors"
 msgstr "Euros für Ärzte"
 
@@ -406,6 +406,8 @@ msgid "Zero Swiss Francs Doctors"
 msgstr "Null-Franken-Ärzte"
 
 #: models/zerodocs.py:29 models/zerodocs.py:30
+#: templates/correctiv_eurosfueraerzte/at/_zero_euro.html:4
+#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:4
 msgid "Zero Euro Doctors"
 msgstr "Null-Euro-Ärzte"
 
@@ -730,7 +732,7 @@ msgstr ""
 #: templates/correctiv_eurosfueraerzte/at/_index_blurb.html:6
 #: templates/correctiv_eurosfueraerzte/ch/_index_blurb.html:6
 #: templates/correctiv_eurosfueraerzte/de/_index_blurb.html:6
-#: templates/correctiv_eurosfueraerzte/index.html:103
+#: templates/correctiv_eurosfueraerzte/index.html:101
 msgid "Read the background article"
 msgstr "Zum Hintergrundartikel"
 
@@ -771,6 +773,7 @@ msgstr ""
 "ihren jeweiligen Webseiten veröffentlicht haben."
 
 #: templates/correctiv_eurosfueraerzte/at/_search_blurb.html:3
+#: templates/correctiv_eurosfueraerzte/ch/_search_blurb.html:3
 #, python-format
 msgid ""
 "\n"
@@ -789,6 +792,44 @@ msgstr ""
 #: templates/correctiv_eurosfueraerzte/de/_search_examples.html:6
 msgid "or"
 msgstr "oder"
+
+#: templates/correctiv_eurosfueraerzte/at/_zero_euro.html:6
+#: templates/correctiv_eurosfueraerzte/ch/_zero_euro.html:6
+#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:6
+msgid ""
+"\n"
+"    All doctors who have not accepted money from the pharmaceutical industry "
+"can register here.\n"
+"  "
+msgstr ""
+"\n"
+"   Hier können sich alle Ärzte eintragen, die kein Geld oder geldwerte "
+"Leistungen von Pharmafirmen angenommen haben.\n"
+"  "
+
+#: templates/correctiv_eurosfueraerzte/at/_zero_euro.html:11
+#: templates/correctiv_eurosfueraerzte/ch/_zero_euro.html:11
+#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:11
+msgid "Register"
+msgstr "Eintragen"
+
+#: templates/correctiv_eurosfueraerzte/at/_zero_euro.html:12
+#: templates/correctiv_eurosfueraerzte/ch/_zero_euro.html:12
+#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:12
+msgid "https://correctiv.org/a/1739"
+msgstr "https://correctiv.org/a/1739"
+
+#: templates/correctiv_eurosfueraerzte/at/_zero_euro.html:12
+#: templates/correctiv_eurosfueraerzte/ch/_zero_euro.html:12
+#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:12
+msgid "background article"
+msgstr "Zum Hintergrund"
+
+#: templates/correctiv_eurosfueraerzte/at/_zero_euro.html:13
+#: templates/correctiv_eurosfueraerzte/ch/_zero_euro.html:13
+#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:13
+msgid "map"
+msgstr "Karte"
 
 #: templates/correctiv_eurosfueraerzte/base.html:9
 msgid "Database „Euros for Doctors“"
@@ -851,17 +892,13 @@ msgstr ""
 "          Suche nach %(kind)s in %(country)s\n"
 "        "
 
-#: templates/correctiv_eurosfueraerzte/base_recipients.html:57
-msgid "Show only Zero Euro Docs"
-msgstr "Suche nur Null-Euro-Ärzte"
-
 #: templates/correctiv_eurosfueraerzte/ch/_about_blurb.html:4
-#: templates/correctiv_eurosfueraerzte/ch/_index_blurb.html:3
+msgctxt "CH"
 msgid ""
-"59 pharma companies in Switzerland published their payments to doctors and "
-"other health care professionals and organisations from the last year."
+"Every year since 2016, pharma companies in Switzerland publish their "
+"payments to doctors and other health care professionals and organisations."
 msgstr ""
-"59 Pharma-Unternehmen in der Schweiz veröffentlichen seit 2016 alle "
+"Seit 2016 veröffentlichen die Pharmaunternehmen in der Schweiz alle "
 "Geldzahlungen, die sie im vergangenen Jahr an Ärzte, Fachleute und Spitäler "
 "geleistet haben."
 
@@ -882,15 +919,23 @@ msgstr ""
 "angegeben. Grundsätzlich nur zusammengefasst werden die Zahlungen im Rahmen "
 "von Studien und Anwendungsbeobachtungen (AWB) veröffentlicht.\n"
 
+#: templates/correctiv_eurosfueraerzte/ch/_index_blurb.html:3
+msgid ""
+"Pharma companies in Switzerland publish their payments to doctors and other "
+"health care professionals and organisations from the last year."
+msgstr ""
+"In der Schweiz veröffentlichen Pharmaunternehmen seit 2016 alle "
+"Geldzahlungen, die sie jährlich an Ärzte, Fachleute und Spitäler leisten."
+
 #: templates/correctiv_eurosfueraerzte/ch/_recipient_main.html:3
 msgctxt "CH"
 msgid ""
-"Only around a quarter of doctors and health care professionals agreed to the "
-"publication of their fees and conference and travel expenses."
+"Doctors and other health care professionals have to agree to the publication "
+"of their fees and conference and travel expenses."
 msgstr ""
-"Nur ein Viertel der Ärzte und Fachleute sind einverstanden, dass ihre "
-"Vortrags- und Beratungshonorare, Tagungsgebühren und Reisespesen/"
-"Übernachtungskosten veröffentlicht werden."
+"Ärzte und andere Fachleute des Gesundheitswesens müssen ihr Einverständnis "
+"geben für die Publikation ihrer Vortrags- und Beratungshonorare, von "
+"Tagungsgebühren,  Reisespesen und Übernachtungskosten."
 
 #: templates/correctiv_eurosfueraerzte/ch/_recipient_main.html:6
 msgctxt "CH"
@@ -903,25 +948,18 @@ msgstr ""
 
 #: templates/correctiv_eurosfueraerzte/ch/_recipient_sidebar.html:3
 msgid ""
-"The information on this page come from the 59 pharma companies that signed "
-"the Pharma Cooperation Codex. This codex determine that the companies have "
-"to publish their payments on their websites."
+"The information on this page come from the pharma companies in Switzerland "
+"that signed the Pharma Cooperation Codex. This codex determine that the "
+"companies have to publish their payments on their websites."
 msgstr ""
-"Die Informationen auf dieser Seite stammen von den 59 Pharmaunternehmen, die "
-"den Pharma-Kooperations-Kodex (PKK) unterzeichnet haben. Dieses Reglement "
-"verpflichtet die Firmen dazu, ihre Angaben auf ihren Unternehmenswebseiten "
-"zu veröffentlichen."
+"Die Informationen auf dieser Seite stammen von den Pharmaunternehmen in der "
+"Schweiz, die den Pharma-Kooperations-Kodex (PKK) unterzeichnet haben. Dieses "
+"Reglement verpflichtet die Firmen dazu, ihre Angaben auf ihren "
+"Unternehmenswebseiten zu veröffentlichen."
 
-#: templates/correctiv_eurosfueraerzte/ch/_search_blurb.html:3
-#, python-format
-msgid ""
-"\n"
-"  How much money has your doctor received from the pharma industry "
-"<strong>in %(country_label)s</strong> in 2015?\n"
-msgstr ""
-"\n"
-"  Wieviel Geld hat Dein Arzt/Heilberufler <strong>in %(country_label)s</"
-"strong> im Jahr 2015 erhalten?\n"
+#: templates/correctiv_eurosfueraerzte/ch/_zero_euro.html:4
+msgid "Zero Francs Doctors"
+msgstr "Null-Franken-Ärzte"
 
 #: templates/correctiv_eurosfueraerzte/de/_about_blurb.html:4
 msgid ""
@@ -994,38 +1032,6 @@ msgstr ""
 "  Hat Dein Arzt/Heilberufler <strong>in %(country_label)s</strong> Geld von "
 "Pharmafirmen erhalten?\n"
 
-#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:4
-msgid "Zero-Euro-Doctors"
-msgstr "Null-Euro-Ärzte"
-
-#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:6
-msgid ""
-"\n"
-"    All doctors who have not accepted money from the pharmaceutical industry "
-"can register here.\n"
-"  "
-msgstr ""
-"\n"
-"   Hier können sich alle Ärzte eintragen, die kein Geld oder geldwerte "
-"Leistungen von Pharmafirmen angenommen haben.\n"
-"  "
-
-#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:11
-msgid "Register"
-msgstr "Eintragen"
-
-#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:12
-msgid "https://correctiv.org/a/1739"
-msgstr "https://correctiv.org/a/1739"
-
-#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:12
-msgid "background article"
-msgstr "Zum Hintergrund"
-
-#: templates/correctiv_eurosfueraerzte/de/_zero_euro.html:13
-msgid "map"
-msgstr "Karte"
-
 #: templates/correctiv_eurosfueraerzte/drug_detail.html:20
 msgid "Active ingredient"
 msgstr "Wirkstoff"
@@ -1060,7 +1066,7 @@ msgid "Total Number of Patients"
 msgstr "Gesamtanzahl Patienten"
 
 #: templates/correctiv_eurosfueraerzte/drug_detail.html:46
-#: templates/correctiv_eurosfueraerzte/index.html:124
+#: templates/correctiv_eurosfueraerzte/index.html:122
 #, python-format
 msgid "%(count)s patients"
 msgstr "%(count)s Patienten"
@@ -1070,7 +1076,7 @@ msgid "Total minimum fees planned"
 msgstr "Geplante Gesamtausgaben"
 
 #: templates/correctiv_eurosfueraerzte/drug_detail.html:54
-#: templates/correctiv_eurosfueraerzte/index.html:146
+#: templates/correctiv_eurosfueraerzte/index.html:144
 #, python-format
 msgid "%(fee)s&nbsp;€"
 msgstr "%(fee)s&nbsp;€"
@@ -1115,15 +1121,16 @@ msgstr "Anzahl der AWBs"
 msgid "Your search did not give any results"
 msgstr "Deine Suche brachte keine Ergebnisse."
 
-#: templates/correctiv_eurosfueraerzte/index.html:28
+#: templates/correctiv_eurosfueraerzte/index.html:26
 msgid "Doctors with highest payments"
 msgstr "Ärzte mit den höchsten Zahlungen"
 
-#: templates/correctiv_eurosfueraerzte/index.html:48
-msgid "Latest entries for 'Zero Euro Doctors'"
-msgstr "Neueste Einträge bei „Null-Euro-Ärzte“"
+#: templates/correctiv_eurosfueraerzte/index.html:46
+#, python-format
+msgid "Latest entries for '%(name)s'"
+msgstr "Neueste Einträge bei „%(name)s“"
 
-#: templates/correctiv_eurosfueraerzte/index.html:102
+#: templates/correctiv_eurosfueraerzte/index.html:100
 msgid ""
 "Pharma companies pay doctors to observe how well patients tolerate certain "
 "drugs. These ”observational studies” are useless for science. But doctors "
@@ -1137,11 +1144,11 @@ msgstr ""
 "umstrittenen Studien erreicht haben – und welche Präparate vor allem in den "
 "Markt gedrückt werden."
 
-#: templates/correctiv_eurosfueraerzte/index.html:113
+#: templates/correctiv_eurosfueraerzte/index.html:111
 msgid "Top drugs by study patients"
 msgstr "AWBs mit den meisten Patienten"
 
-#: templates/correctiv_eurosfueraerzte/index.html:135
+#: templates/correctiv_eurosfueraerzte/index.html:133
 msgid "Top studies by fees per patient"
 msgstr "AWBs mit dem höchsten Honorar"
 
@@ -1989,58 +1996,62 @@ msgstr "^eintrag/(?P<slug>\\w+)/pdf/$"
 msgid "^zero-euro/"
 msgstr "^null-euro/"
 
-#: views/base.py:42
+#: views/base.py:43
 msgid "Money for Doctors"
 msgstr "Geld für Ärzte"
 
-#: views/base.py:191
+#: views/base.py:70
+msgid "Show only {}"
+msgstr "Zeige nur {}"
+
+#: views/base.py:195
 #, python-format
 msgid "%(name)s does not receive benefits from the pharma industry"
 msgstr "%(name)s gibt an keine Zuwendungen von der Pharmaindustrie anzunehmen."
 
-#: views/base.py:194
+#: views/base.py:198
 #, python-format
 msgid "Details on how %(name)s doesn't receive benefits from pharma companies."
 msgstr "%(name)s gibt an keine Zuwendungen von Pharmaunternehmen anzunehmen."
 
-#: views/base.py:199
+#: views/base.py:203
 #, python-format
 msgid "%(name)s and benefits from the pharma industry"
 msgstr "%(name)s und Zuwendungen von der Pharmaindustrie."
 
-#: views/base.py:202
+#: views/base.py:206
 #, python-format
 msgid "Details on what benefits %(name)s got from pharma companies."
 msgstr ""
 "Details welche Zuwendungen %(name)s von der Pharmaindustrie erhalten hat."
 
-#: views/base.py:239
+#: views/base.py:243
 #, python-format
 msgid "Drug %(name)s"
 msgstr "Medikament %(name)s"
 
-#: views/base.py:240
+#: views/base.py:244
 #, python-format
 msgid "Details on how much money doctors got to prescribe %(name)s."
 msgstr ""
 "Details wieviel Geld Ärzte bekommen haben, um %(name)s zu verschreiben."
 
-#: views/base.py:259
+#: views/base.py:263
 #, python-format
 msgid "Observational Study  %(title)s"
 msgstr "Anwendungsbeobachtung %(title)s"
 
-#: views/base.py:262
+#: views/base.py:266
 #, python-format
 msgid "Details on the observational study %(title)s."
 msgstr "Details über die Anwendungsbeobachtung %(title)s."
 
-#: views/base.py:279
+#: views/base.py:283
 #, python-format
 msgid "Pharma company  %(name)s"
 msgstr "Pharmaunternehmen %(name)s"
 
-#: views/base.py:282
+#: views/base.py:286
 #, python-format
 msgid ""
 "Details on how money from %(name)s goes to doctors and observational studies."
@@ -2061,6 +2072,21 @@ msgstr ""
 #: views/zerodocs.py:71
 msgid "Please check your form input again!"
 msgstr "Bitte überprüfen Sie Ihre Eingaben!"
+
+#~ msgid "Show only Zero Euro Docs"
+#~ msgstr "Suche nur Null-Euro-Ärzte"
+
+#~ msgid ""
+#~ "\n"
+#~ "  How much money has your doctor received from the pharma industry "
+#~ "<strong>in %(country_label)s</strong> in 2015?\n"
+#~ msgstr ""
+#~ "\n"
+#~ "  Wieviel Geld hat Dein Arzt/Heilberufler <strong>in %(country_label)s</"
+#~ "strong> im Jahr 2015 erhalten?\n"
+
+#~ msgid "Zero-Euro-Doctors"
+#~ msgstr "Null-Euro-Ärzte"
 
 #~ msgid "Amount"
 #~ msgstr "Betrag"
