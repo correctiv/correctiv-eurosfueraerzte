@@ -1,0 +1,16 @@
+{% extends "correctiv_eurosfueraerzte/zerodocs/base.html" %}
+
+{% load i18n static sekizai_tags %}
+
+{% block title %}{% trans "Map of Zero Euro Doctors" %}{% endblock %}
+
+{% block content %}
+
+<div class="page__row">
+  <div class="efa__content">
+    <h2>{% trans "Map of Zero Euro Doctors" %}</h2>
+    {% block map_content %}{% endblock %}
+  </div>
+</div>
+
+{% endblock %}

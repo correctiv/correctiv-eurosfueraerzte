@@ -2,8 +2,6 @@
 @import (inline) '@{node_modules}/leaflet.markercluster/dist/MarkerCluster.css';
 
 .efa__map {
-  height: 360px;
-  position: relative;
   background: @gray-lighter;
 
   .leaflet-popup-content-wrapper {
@@ -36,4 +34,14 @@
   .marker-cluster span {
     line-height: 30px;
   }
+}
+
+.efa__mapcredits {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 800;
+  padding: 0 5px;
+  font-size: 12px;
+  background-color: #fff;
 }

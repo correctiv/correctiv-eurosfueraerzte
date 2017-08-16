@@ -1,0 +1,12 @@
+{% extends "embed_base.html" %}
+
+{% load static %}
+{% load sekizai_tags %}
+
+{% block main %}
+
+{% addtoblock "css" %}
+  <link rel="stylesheet" href="{% static "eurosfueraerzte/css/eurosfueraerzte.css" %}" media="screen" charset="utf-8">
+{% endaddtoblock %}
+
+{% endblock %}

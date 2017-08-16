@@ -5,8 +5,8 @@ const CONTAINER = 'efa__map';
 const ICON_URL = '/static/eurosfueraerzte/img/map-marker.svg';
 const TILES_URL = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png';
 const TILES_ATTRIBUTION = `
-  © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,
-  © <a href="https://carto.com/attribution">CARTO</a>`;
+  © <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>,
+  © <a href="https://carto.com/attribution" target="_blank">CARTO</a>`;
 
 const initializeMap = ({ center, places, zoom, minZoom }) => {
   const map = new Map(CONTAINER, {
@@ -34,7 +34,7 @@ const initializeMap = ({ center, places, zoom, minZoom }) => {
         iconSize: [20, 30],
         iconAnchor: [10, 5]
       })
-    }).bindPopup(`<a href="${c.url}">${c.name}</a>`));
+    }).bindPopup(`<a href="${c.url}" target="_blank">${c.name}</a>`));
   });
 
   map.addLayer(tiles)

@@ -1,22 +1,36 @@
-{% extends "correctiv_eurosfueraerzte/zerodocs/base.html" %}
+{% extends base_template %}
 
 {% load i18n static sekizai_tags %}
 
-{% block content %}
+{% block title %}{% trans "Map of Zero Euro Doctors" %}{% endblock %}
 
-<div class="page__row">
-  <div class="efa__content">
-    <h2>{% trans "Map of Zero Euro Doctors" %}</h2>
-    <div id="efa__map" class="efa__map" style="height: 600px;"></div>
-  </div>
-</div>
+{% block map_content %}
 
-  {% addtoblock "js" %}
-    <script src="{% static 'eurosfueraerzte/dist/map.js' %}"></script>
-    <script>
+<div id="efa__map" class="efa__map" style="height: 600px;"></div>
+
+{% addtoblock "js" %}
+  <script src="{% static 'eurosfueraerzte/dist/map.js' %}"></script>
+{% endaddtoblock %}
+{% addtoblock "js" %}
+  <script>
+    (function(){
+      function getQueryString() {
+        var result = {}, queryString = location.search.slice(1),
+            re = /([^&=]+)=([^&]*)/g, m;
+
+        while (m = re.exec(queryString)) {
+          result[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+        }
+
+        return result;
+      }
+      var qs = getQueryString();
+      if (qs.embed) {
+        document.getElementById('efa__map').style.height = window.innerHeight + 'px';
+      }
       eurosfueraerzte.initializeMap({
-        center: [51.165, 10.455278],
-        zoom: 6,
+        center: [+qs.lat || 51.165, +qs.lng || 10.455278],
+        zoom: +qs.zoom || 6,
         minZoom: 5,
         places: [
           {% for place in object_list %}
@@ -28,7 +42,8 @@
           {% endfor %}
         ]
       });
-    </script>
-  {% endaddtoblock %}
+    }());
+  </script>
+{% endaddtoblock %}
 
 {% endblock %}

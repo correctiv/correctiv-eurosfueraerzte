@@ -108,6 +108,10 @@ class ZeroDocsMapView(TemplateView):
 
     def get_context_data(self):
         context = super(ZeroDocsMapView, self).get_context_data()
+        base_template = 'correctiv_eurosfueraerzte/zerodocs/base_map.html'
+        if self.request.GET.get('embed'):
+            base_template = 'correctiv_eurosfueraerzte/zerodocs/embed_map.html'
+        context['base_template'] = base_template
         context['object_list'] = PaymentRecipient.objects.filter(
             is_zerodoc=True, geo__isnull=False)
         return context

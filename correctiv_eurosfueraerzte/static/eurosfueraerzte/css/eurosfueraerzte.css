@@ -1215,8 +1215,6 @@
 }
 
 .efa__map {
-  height: 360px;
-  position: relative;
   background: #f5f5f5;
 }
 .efa__map .leaflet-popup-content-wrapper {
@@ -1243,4 +1241,13 @@
 }
 .efa__map .marker-cluster span {
   line-height: 30px;
+}
+.efa__mapcredits {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 800;
+  padding: 0 5px;
+  font-size: 12px;
+  background-color: #fff;
 }
