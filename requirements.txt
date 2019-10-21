@@ -12,7 +12,7 @@ django-crispy-forms==1.6.1
 django-debug-toolbar==1.8
 django-leaflet==0.22.0
 django-sekizai==0.10.0
-djangorestframework==3.6.3
+djangorestframework==3.9.1
 geocoder==1.23.2
 gunicorn==19.7.1
 idna==2.5
