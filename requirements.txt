@@ -31,5 +31,5 @@ slugify==0.0.1
 sqlparse==0.2.3
 tqdm==4.14.0
 unicodecsv==0.14.1
-urllib3==1.21.1
+urllib3==1.26.5
 whitenoise==3.3.0
