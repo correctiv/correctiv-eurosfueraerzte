@@ -4,7 +4,7 @@ chardet==3.0.4
 click==6.7
 decorator==4.0.11
 dj-database-url==0.4.2
-Django==1.10.7
+Django==2.2.24
 django-cache-url==2.0.0
 django-classy-tags==0.8.0
 django-cors-headers==2.1.0
