@@ -19,7 +19,7 @@ idna==2.5
 numpy==1.13.1
 olefile==0.44
 pandas==0.20.3
-Pillow==4.2.1
+Pillow==9.0.1
 psycopg2==2.7.1
 python-dateutil==2.6.1
 pytz==2017.2
