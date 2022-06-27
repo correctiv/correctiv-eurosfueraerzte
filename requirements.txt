@@ -24,7 +24,7 @@ psycopg2==2.7.1
 python-dateutil==2.6.1
 pytz==2017.2
 ratelim==0.1.6
-reportlab==3.4.0
+reportlab==3.5.55
 requests==2.18.1
 six==1.10.0
 slugify==0.0.1
